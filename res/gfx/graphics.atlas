@@ -1,12 +1,12 @@
 
 graphics.png
-size: 476,53
+size: 455,52
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button1
   rotate: false
-  xy: 20, 4
+  xy: 38, 4
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -14,7 +14,7 @@ button1
   index: -1
 button1_pressed
   rotate: false
-  xy: 462, 39
+  xy: 441, 38
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -29,28 +29,28 @@ canteen1
   index: -1
 empty
   rotate: false
-  xy: 41, 21
+  xy: 2, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 floor1
   rotate: false
-  xy: 75, 21
+  xy: 36, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 floor2
   rotate: false
-  xy: 109, 21
+  xy: 70, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 inv_slot
   rotate: false
-  xy: 143, 21
+  xy: 104, 20
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -58,70 +58,77 @@ inv_slot
   index: -1
 player_idle1
   rotate: false
-  xy: 177, 21
+  xy: 138, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk1
   rotate: false
-  xy: 211, 21
+  xy: 172, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk2
   rotate: false
-  xy: 245, 21
+  xy: 206, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk3
   rotate: false
-  xy: 279, 21
+  xy: 240, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk4
   rotate: false
-  xy: 313, 21
+  xy: 274, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 rations1
   rotate: false
-  xy: 444, 37
+  xy: 405, 36
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrap1
   rotate: false
-  xy: 2, 20
-  size: 37, 33
-  orig: 37, 33
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+scrap1_icon
+  rotate: false
+  xy: 423, 36
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 wall1
   rotate: false
-  xy: 347, 21
+  xy: 308, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 381, 21
+  xy: 342, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 415, 25
+  xy: 376, 24
   size: 27, 28
   split: 4, 3, 16, 3
   orig: 27, 28

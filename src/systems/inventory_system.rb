@@ -8,7 +8,6 @@ class InventorySystem < System
 		@mgr = mgr
 		@inv_slots = @mgr.ui.inv_slots
 
-
 	end
 
 
