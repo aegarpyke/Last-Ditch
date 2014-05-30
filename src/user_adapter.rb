@@ -15,18 +15,24 @@ class UserAdapter < InputAdapter
 		case keycode
 
 			when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
+				
 				@shift = true
+				return true
 
 			when Keys::ESCAPE
+				
 				Gdx.app.exit
+				return true
 
 			when Keys::TAB
+				
 				@mgr.ui.update = true
 				@mgr.paused = !@mgr.paused
 				@mgr.ui.active = @mgr.paused
+				return true
 
 			when Keys::F
-				
+
 				if @shift
 					puts 'pick specific item with mouse'
 				else
@@ -36,20 +42,19 @@ class UserAdapter < InputAdapter
 
 					item = @mgr.map.get_nearest_item(pos_comp.x, pos_comp.y)
 
-					if item 
-						if inv_comp.add_item(item)
-							@mgr.map.remove_item(item)
-						end
+					if item && inv_comp.add_item(item)
+						@mgr.map.remove_item(item)
 					end
 
 				end
 
+				return true
+
 			when Keys::C
 				puts 'take cover'
+				return true
 					
 		end
-
-		true
 
 	end
 
@@ -60,10 +65,9 @@ class UserAdapter < InputAdapter
 
 			when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
 				@shift = false
+				return true
 
 		end
-
-		true
 
 	end
 

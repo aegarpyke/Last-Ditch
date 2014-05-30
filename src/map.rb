@@ -68,10 +68,13 @@ class Map
 
 			check = Random.rand
 			if check < 0.33
+				@mgr.add_component(item, Type.new('canteen1'))
 				@mgr.add_component(item, Render.new('canteen1'))
 			elsif check < 0.66
+				@mgr.add_component(item, Type.new('rations1'))
 				@mgr.add_component(item, Render.new('rations1'))
 			else
+				@mgr.add_component(item, Type.new('scrap1'))
 				@mgr.add_component(item, Render.new('scrap1'))
 			end
 
@@ -90,6 +93,7 @@ class Map
 		@mgr.remove_component(item, render_comp)
 
 		@items.delete(item)
+		@mgr.ui.inventory.update = true
 
 	end
 

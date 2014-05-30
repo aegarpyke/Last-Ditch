@@ -1,6 +1,7 @@
 class UI
 
-	attr_accessor :stage
+	attr_accessor :stage, :inv_slots
+	attr_accessor :actions, :inventory, :equipment, :status
 	attr_accessor :active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :update, :inv_update, :actions_update, :equip_update, :status_update
 
@@ -18,11 +19,7 @@ class UI
 		@stage = Stage.new
 		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
 
-		# UI Systems
-		@actions = ActionsSystem.new(@mgr)
-		@inventory = InventorySystem.new(@mgr)
-		@equipment = EquipmentSystem.new(@mgr)
-		@status = StatusSystem.new(@mgr)
+		
 
 		@table = Table.new(@skin)
 		@table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
@@ -134,6 +131,14 @@ class UI
 			@status_window.debug
 			@equip_window.debug
 		end
+
+		##############
+		# UI Systems #
+		##############
+		@actions = ActionsSystem.new(@mgr)
+		@inventory = InventorySystem.new(@mgr)
+		@equipment = EquipmentSystem.new(@mgr)
+		@status = StatusSystem.new(@mgr)
 
 	end
 

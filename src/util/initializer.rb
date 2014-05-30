@@ -56,6 +56,7 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.Window
 java_import com.badlogic.gdx.scenes.scene2d.ui.Window::WindowStyle
 java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align
+java_import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 java_import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 java_import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 java_import com.badlogic.gdx.tools.texturepacker.TexturePacker
@@ -84,6 +85,7 @@ require_relative '../systems/inventory_system'
 require_relative '../systems/equipment_system'
 require_relative '../systems/status_system'
 require_relative '../components/component'
+require_relative '../components/type'
 require_relative '../components/position'
 require_relative '../components/velocity'
 require_relative '../components/rotation'
