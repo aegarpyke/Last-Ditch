@@ -1,11 +1,24 @@
 class Inventory < Component
 
-	attr_accessor :items
+	attr_accessor :size, :items
 
 	def initialize(size)
 
 		super()
-		@items = Array.new(size)
+		@size = size
+		@items = Array.new
+
+	end
+
+
+	def add_item(item)
+
+		if(@items.size < @size)
+			@items << item
+			return true
+		else
+			return false
+		end
 
 	end
 

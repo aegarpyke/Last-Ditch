@@ -4,7 +4,7 @@ class LastDitch < Game
 	
 	def create
 
-		TexturePacker.process('res', 'res', 'graphics')
+		TexturePacker.process('res/gfx', 'res/gfx', 'graphics')
 
 		@mgr = EntityManager.new
 		@game_screen = GameScreen.new(@mgr)

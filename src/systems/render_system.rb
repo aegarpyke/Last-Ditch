@@ -71,7 +71,7 @@ class RenderSystem < System
 
 				vel = col_comp.body.linear_velocity
 
-				if vel.x.abs < 0.01 && vel.y.abs < 0.01 || @mgr.paused
+				if @mgr.paused || vel.x.abs < 0.01 && vel.y.abs < 0.01
 					anim_comp.cur = 'player_idle'
 				elsif anim_comp.cur != 'player_walk'
 					anim_comp.cur = 'player_walk'
@@ -94,6 +94,5 @@ class RenderSystem < System
 		end
 
 	end
-
 
 end

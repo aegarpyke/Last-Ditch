@@ -6,13 +6,14 @@ class GameScreen < ScreenAdapter
 
 		@mgr = mgr
 		@batch = SpriteBatch.new
-		@atlas = TextureAtlas.new(Gdx.files.internal('res/graphics.atlas'))
+		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 
 		@player = @mgr.create_tagged_entity('player')
 		@mgr.add_component(@player, Position.new(3.0, 3.0))
 		@mgr.add_component(@player, Velocity.new(0.0))
 		@mgr.add_component(@player, Rotation.new(0.0))
 		@mgr.add_component(@player, Collision.new)
+		@mgr.add_component(@player, Inventory.new(30))
 		@mgr.add_component(@player, Animation.new(
 			{'player_idle' => ['player_idle1'], 
 	     'player_walk' => ['player_idle1',
@@ -35,7 +36,7 @@ class GameScreen < ScreenAdapter
 		@lighting = LightingSystem.new(
 			@mgr, @physics.world, 
 			@mgr.get_component(@player, Collision).body)
-		@ui = UI.new(@mgr)
+		@ui = UI.new(@mgr, @player)
 
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)

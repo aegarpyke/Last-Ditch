@@ -4,18 +4,25 @@ class UI
 	attr_accessor :active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :update, :inv_update, :actions_update, :equip_update, :status_update
 
-	def initialize(mgr)
+	def initialize(mgr, player)
 
-		debug = false
+		debug = true
 		@tmp_counter = 0
 
  		@active = false
  		@update = true
 		@mgr = mgr
+		@player = player
 		@mgr.ui = self
 		@atlas = mgr.atlas
 		@stage = Stage.new
 		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
+
+		# UI Systems
+		@actions = ActionsSystem.new(@mgr)
+		@inventory = InventorySystem.new(@mgr)
+		@equipment = EquipmentSystem.new(@mgr)
+		@status = StatusSystem.new(@mgr)
 
 		@table = Table.new(@skin)
 		@table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
@@ -36,7 +43,7 @@ class UI
 			end.new(@mgr))
 
 		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
-		@actions_window.set_position(Gdx.graphics.width / 2 - 78, Gdx.graphics.height / 2 + 68)
+		@actions_window.set_position(340, 400)
 		@actions_window.padTop(9)
 
 		@equip_active = false
@@ -55,7 +62,7 @@ class UI
 			end.new(@mgr))
 
 		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
-		@equip_window.set_position(Gdx.graphics.width / 2 + 150, Gdx.graphics.height / 2 - 80)
+		@equip_window.set_position(12, 260)
 		@equip_window.padTop(9)
 
 		@inv_active = false
@@ -74,8 +81,27 @@ class UI
 			end.new(@mgr))
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
-		@inv_window.set_position(Gdx.graphics.width / 2 - 310, Gdx.graphics.height / 2 - 80)
+		@inv_window.set_position(280, 4)
+		@inv_window.set_size(288, 230)
 		@inv_window.padTop(9)
+
+		@inv_item_name = Label.new("Name", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_name).colspan(8).align(Align::left).row
+
+		@inv_item_desc = Label.new("Description: ", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_desc).colspan(8).align(Align::left).row
+
+		@inv_slots = []
+		for i in 1...C::INVENTORY_SLOTS+1
+			
+			@inv_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
+			if i % 8 == 0
+				@inv_window.add(@inv_slots.last).pad(1).row
+			else
+				@inv_window.add(@inv_slots.last).pad(1)
+			end
+		
+		end
 
 		@status_active = false
 		@status_button = TextButton.new("Status", @skin.get(TextButtonStyle.java_class))
@@ -93,13 +119,13 @@ class UI
 			end.new(@mgr))
 
 		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
-		@status_window.set_position(Gdx.graphics.width / 2 - 78, Gdx.graphics.height / 2 - 220)
+		@status_window.set_position(400, 260)
 		@status_window.padTop(9)
 
 		@table.add(@actions_button).width(90).height(14).colspan(2).row
-		@table.add(@inv_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
-		@table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).row
-		@table.add(@status_button).width(90).height(14).colspan(2)
+		@table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
+		@table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
+		@table.add(@inv_button).width(90).height(14).colspan(2)
 
 		if debug
 			@table.debug
@@ -173,15 +199,21 @@ class UI
 			@stage.act
 		end
 
+		@actions.tick(delta) if @actions_active
+		@inventory.tick(delta) if @inv_active
+		@equipment.tick(delta) if @equipment_active
+		@status.tick(delta) if @status_active
+
 	end
 
 
 	def render(batch)
 
 		if @active
-			Table.draw_debug(@stage)
 
 			@stage.draw
+
+			Table.draw_debug(@stage)
 
 		else
 

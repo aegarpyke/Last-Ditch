@@ -28,6 +28,8 @@ java_import com.badlogic.gdx.graphics.Color
 java_import com.badlogic.gdx.graphics.g2d.SpriteBatch
 java_import com.badlogic.gdx.graphics.g2d.TextureAtlas
 java_import com.badlogic.gdx.graphics.g2d.TextureRegion
+java_import com.badlogic.gdx.graphics.g2d.BitmapFont
+java_import com.badlogic.gdx.graphics.g2d.BitmapFont::TextBounds
 java_import com.badlogic.gdx.physics.box2d.World
 java_import com.badlogic.gdx.physics.box2d.Body
 java_import com.badlogic.gdx.physics.box2d.BodyDef
@@ -42,6 +44,10 @@ java_import com.badlogic.gdx.scenes.scene2d.InputEvent
 java_import com.badlogic.gdx.scenes.scene2d.Stage
 java_import com.badlogic.gdx.scenes.scene2d.ui.Skin
 java_import com.badlogic.gdx.scenes.scene2d.ui.Table
+java_import com.badlogic.gdx.scenes.scene2d.ui.Button
+java_import com.badlogic.gdx.scenes.scene2d.ui.Button::ButtonStyle
+java_import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
+java_import com.badlogic.gdx.scenes.scene2d.ui.ImageButton::ImageButtonStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 java_import com.badlogic.gdx.scenes.scene2d.ui.TextButton::TextButtonStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.Label
@@ -61,10 +67,10 @@ java_import 'box2dLight.ConeLight'
 java_import 'box2dLight.DirectionalLight'
 
 require_relative 'c'
-require_relative '../map'
-require_relative '../chunk'
-require_relative '../room'
 require_relative '../ui'
+require_relative '../map'
+require_relative '../room'
+require_relative '../chunk'
 require_relative '../user_adapter'
 require_relative '../game_screen'
 require_relative '../entity_manager'
@@ -73,6 +79,10 @@ require_relative '../systems/input_system'
 require_relative '../systems/physics_system'
 require_relative '../systems/render_system'
 require_relative '../systems/lighting_system'
+require_relative '../systems/actions_system'
+require_relative '../systems/inventory_system'
+require_relative '../systems/equipment_system'
+require_relative '../systems/status_system'
 require_relative '../components/component'
 require_relative '../components/position'
 require_relative '../components/velocity'

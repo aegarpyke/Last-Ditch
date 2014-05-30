@@ -1,8 +1,13 @@
 {
-	com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt } },
+	com.badlogic.gdx.graphics.g2d.BitmapFont: 
+	{ 
+		default-font: { file: default.fnt },
+		droidsans14: { file: res/fonts/droidsans14.fnt },
+		garuda12: { file: res/fonts/garuda12.fnt },
+	},
 	
-	com.badlogic.gdx.graphics.Color: {
-
+	com.badlogic.gdx.graphics.Color: 
+	{
 		green: { a: 1, b: 0, g: 1, r: 0 },
 		white: { a: 1, b: 1, g: 1, r: 1 },
 		red: { a: 1, b: 0, g: 0, r: 1 },
@@ -10,30 +15,42 @@
 
 	},
 
-	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-    	
-    	default: { 
-    		background: button1, 
+	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: 
+	{
+    	default: 
+    	{ 
     		font: default-font, fontColor: white 
-    	}
-	
+    	},
+
+    	inv_slot:
+    	{
+    		font: garuda12, fontColor: white
+    	},
 	},
 
-	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-		
-		default: {
+	com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle:
+	{
+		default:
+		{
+			up:inv_slot
+		},
+	},
+
+	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: 
+	{
+		default: 
+		{
 			up: button1, down: button1_pressed, 
 			font: default-font, fontColor: white
 		},
-		
 	},
 
-	com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
-
-		default: {
+	com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: 
+	{
+		default: 
+		{
 			background: window1,
 			titleFont: default-font, titleFontColor: white
-		}
+		},
 	}
-
 }

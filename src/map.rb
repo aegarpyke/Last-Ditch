@@ -75,6 +75,45 @@ class Map
 				@mgr.add_component(item, Render.new('scrap1'))
 			end
 
+			@items << item
+
+		end
+
+	end
+
+
+	def remove_item(item)
+
+		render_comp = @mgr.get_component(item, Render)
+		@mgr.remove_component(item, render_comp)
+
+		@items.delete_at(@items.index(item) || @items.length)
+
+	end
+
+	def get_nearest_item(x, y)
+
+		item_choice = nil
+		dist = 1000000
+
+		entities = @mgr.get_all_entities_with(Item)
+		entities.each do |entity|
+
+			pos_comp = @mgr.get_component(entity, Position)
+
+			tmp_dist = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
+
+			if tmp_dist < dist
+				dist = tmp_dist
+				item_choice = entity
+			end
+		
+		end
+
+		if dist < 1.6
+			return item_choice
+		else
+			return nil
 		end
 
 	end

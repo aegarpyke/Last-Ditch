@@ -14,10 +14,10 @@ class InputSystem < System
 	def tick(delta)
 
 		unless @mgr.paused
-
-			input_comp = @mgr.get_component(@player, UserInput)
+			
 			vel_comp = @mgr.get_component(@player, Velocity)
 			rot_comp = @mgr.get_component(@player, Rotation)
+			input_comp = @mgr.get_component(@player, UserInput)
 
 			if Gdx.input.is_key_pressed(Keys::W) && input_comp.responsive_keys.include?(Keys::W)
 
