@@ -57,9 +57,8 @@ class GameScreen < ScreenAdapter
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 
 		@input.tick(delta)
-
 		@physics.tick(delta)
-			
+
 		@map.update
 
 		@batch.begin

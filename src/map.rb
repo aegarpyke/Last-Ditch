@@ -84,10 +84,12 @@ class Map
 
 	def remove_item(item)
 
+		pos_comp = @mgr.get_component(item, Position)
+		@mgr.remove_component(item, pos_comp)
 		render_comp = @mgr.get_component(item, Render)
 		@mgr.remove_component(item, render_comp)
 
-		@items.delete_at(@items.index(item) || @items.length)
+		@items.delete(item)
 
 	end
 
@@ -99,15 +101,18 @@ class Map
 		entities = @mgr.get_all_entities_with(Item)
 		entities.each do |entity|
 
-			pos_comp = @mgr.get_component(entity, Position)
+			if @items.include?(entity)
+				
+				pos_comp = @mgr.get_component(entity, Position)
+				tmp_dist = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
 
-			tmp_dist = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
+				if tmp_dist < dist
+					dist = tmp_dist
+					item_choice = entity
+				end
 
-			if tmp_dist < dist
-				dist = tmp_dist
-				item_choice = entity
 			end
-		
+
 		end
 
 		if dist < 1.6

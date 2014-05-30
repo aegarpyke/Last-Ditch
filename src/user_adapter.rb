@@ -26,6 +26,7 @@ class UserAdapter < InputAdapter
 				@mgr.ui.active = @mgr.paused
 
 			when Keys::F
+				
 				if @shift
 					puts 'pick specific item with mouse'
 				else
@@ -35,16 +36,20 @@ class UserAdapter < InputAdapter
 
 					item = @mgr.map.get_nearest_item(pos_comp.x, pos_comp.y)
 
-					@mgr.map.remove_item(item)
-					inv_comp.add_item(item) if item
+					if item 
+						if inv_comp.add_item(item)
+							@mgr.map.remove_item(item)
+						end
+					end
 
 				end
 
 			when Keys::C
 				puts 'take cover'
-				
 					
 		end
+
+		true
 
 	end
 
@@ -57,6 +62,8 @@ class UserAdapter < InputAdapter
 				@shift = false
 
 		end
+
+		true
 
 	end
 
