@@ -1,7 +1,7 @@
 class UI
 
-	attr_accessor :stage, :inv_slots
-	attr_accessor :actions, :inventory, :equipment, :status
+	attr_accessor :stage, :inv_slots, :player
+	attr_accessor :actions, :inventory, :equipment, :status, :inv_selection
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
 
@@ -133,13 +133,62 @@ class UI
 		for i in 1..C::INVENTORY_SLOTS
 			
 			@inv_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
+			@inv_slots[-1].add_listener(
+				Class.new(ClickListener) do
+					def initialize(mgr, slot)
+						super()
+						@slot = slot
+						@mgr = mgr
+					end
+
+					def clicked(event, x, y)
+
+						if @slot == @mgr.ui.inv_selection
+
+							# Use item in slot
+
+							inv_comp = @mgr.get_component(@mgr.ui.player, Inventory)
+
+							index = @mgr.ui.inv_slots.index(@slot)
+							item = inv_comp.items[index]
+
+							type_comp = @mgr.get_component(item, Type)
+							
+							if type_comp
+								puts type_comp.type
+							else
+								puts "empty"
+							end
+
+						else
+						
+							style = ImageButtonStyle.new(@mgr.ui.inv_selection.style)
+							style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_slot'))
+							@mgr.ui.inv_selection.style = style
+
+							@mgr.ui.inv_selection = @slot
+
+							style = ImageButtonStyle.new(@mgr.ui.inv_selection.style)
+							style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_selection'))
+							@mgr.ui.inv_selection.style = style
+
+						end
+
+					end
+				end.new(@mgr, @inv_slots.last))
+
 			if i % 8 == 0
 				@inv_window.add(@inv_slots.last).pad(1).row
 			else
 				@inv_window.add(@inv_slots.last).pad(1)
 			end
-		
+
 		end
+
+		@inv_selection = @inv_slots[0]
+		style = ImageButtonStyle.new(@inv_selection.style)
+		style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_selection'))
+		@inv_selection.style = style
 
 		@status_active = false
 		@status_button = TextButton.new("Status", @skin.get(TextButtonStyle.java_class))

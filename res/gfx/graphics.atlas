@@ -1,6 +1,6 @@
 
 graphics.png
-size: 455,52
+size: 489,52
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -14,7 +14,7 @@ button1
   index: -1
 button1_pressed
   rotate: false
-  xy: 441, 38
+  xy: 475, 38
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -48,7 +48,7 @@ floor2
   orig: 32, 32
   offset: 0, 0
   index: -1
-inv_slot
+inv_selection
   rotate: false
   xy: 104, 20
   size: 32, 32
@@ -56,44 +56,52 @@ inv_slot
   orig: 32, 32
   offset: 0, 0
   index: -1
-player_idle1
+inv_slot
   rotate: false
   xy: 138, 20
   size: 32, 32
+  split: 4, 4, 4, 4
   orig: 32, 32
   offset: 0, 0
   index: -1
-player_walk1
+player_idle1
   rotate: false
   xy: 172, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-player_walk2
+player_walk1
   rotate: false
   xy: 206, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-player_walk3
+player_walk2
   rotate: false
   xy: 240, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-player_walk4
+player_walk3
   rotate: false
   xy: 274, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
+player_walk4
+  rotate: false
+  xy: 308, 20
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 rations1
   rotate: false
-  xy: 405, 36
+  xy: 439, 36
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -107,19 +115,12 @@ scrap1
   index: -1
 scrap1_icon
   rotate: false
-  xy: 423, 36
+  xy: 457, 36
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 wall1
-  rotate: false
-  xy: 308, 20
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-window1
   rotate: false
   xy: 342, 20
   size: 32, 32
@@ -128,7 +129,14 @@ window1
   index: -1
 window1
   rotate: false
-  xy: 376, 24
+  xy: 376, 20
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+window1
+  rotate: false
+  xy: 410, 24
   size: 27, 28
   split: 4, 3, 16, 3
   orig: 27, 28

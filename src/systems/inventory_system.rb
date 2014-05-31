@@ -4,8 +4,8 @@ class InventorySystem < System
 
 	def initialize(mgr)
 		super()
-		@update = true
 		@mgr = mgr
+		@update = true
 		@inv_slots = @mgr.ui.inv_slots
 
 	end
@@ -42,10 +42,6 @@ class InventorySystem < System
 
 				end
 
-			end
-
-			@inv_slots.each do |slot|
-				puts slot.style.imageUp
 			end
 
 		end
