@@ -13,7 +13,7 @@ class GameScreen < ScreenAdapter
 		@mgr.add_component(@player, Velocity.new(0.0))
 		@mgr.add_component(@player, Rotation.new(0.0))
 		@mgr.add_component(@player, Collision.new)
-		@mgr.add_component(@player, Inventory.new(30))
+		@mgr.add_component(@player, Inventory.new(32))
 		@mgr.add_component(@player, Animation.new(
 			{'player_idle' => ['player_idle1'], 
 	     'player_walk' => ['player_idle1',

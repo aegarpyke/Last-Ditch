@@ -18,15 +18,22 @@ class UserAdapter < InputAdapter
 			when 0
 				
 				if @shift
-
+					# Pickup specific item with shift-left click
 					pos_comp = @mgr.get_component(@player, Position)
+					inv_comp = @mgr.get_component(@player, Inventory)
 
-					puts @mgr.map.get_item(
-						screenX * C::WTB + pos_comp.x - Gdx.graphics.width/2 * C::WTB, 
-						screenY * C::WTB + pos_comp.y - Gdx.graphics.height/2 * C::WTB)					
+					world_x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
+					world_y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
+
+					item = @mgr.map.get_item(world_x, world_y)					
+					dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
+
+					if item && dist < 1.4 && inv_comp.add_item(item)
+						@mgr.map.remove_item(item)
+					end
 
 				else
-				
+					# Pickup nearest item with left click
 					pos_comp = @mgr.get_component(@player, Position)
 					inv_comp = @mgr.get_component(@player, Inventory)
 
@@ -87,17 +94,8 @@ class UserAdapter < InputAdapter
 			when Keys::F
 
 				if @shift
-					puts 'pick specific item with mouse'
+
 				else
-
-					pos_comp = @mgr.get_component(@player, Position)
-					inv_comp = @mgr.get_component(@player, Inventory)
-
-					item = @mgr.map.get_nearest_item(pos_comp.x, pos_comp.y)
-
-					if item && inv_comp.add_item(item)
-						@mgr.map.remove_item(item)
-					end
 
 				end
 

@@ -118,10 +118,6 @@ class UI
 			@inv_desc_lines << ""
 		end
 
-		@inv_desc_lines.each do |line|
-			puts line
-		end
-
 		@inv_item_desc1 = Label.new(@inv_desc_lines[0], @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc1).align(Align::left).padLeft(8).colspan(8).height(12).row
 		@inv_item_desc2 = Label.new(@inv_desc_lines[1], @skin.get("inv_slot", LabelStyle.java_class))
@@ -134,7 +130,7 @@ class UI
 		@inv_window.add(@inv_item_desc5).align(Align::left).padLeft(5).colspan(8).padBottom(4).height(12).row
 
 		@inv_slots = []
-		for i in 1...C::INVENTORY_SLOTS+1
+		for i in 1..C::INVENTORY_SLOTS
 			
 			@inv_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
 			if i % 8 == 0
@@ -215,8 +211,8 @@ class UI
 			if @main_active
 
 				@stage.add_actor(@main_table)
-				@stage.add_actor(@inv_window) if @inv_active
 				@stage.add_actor(@actions_window) if @actions_active
+				@stage.add_actor(@inv_window) if @inv_active
 				@stage.add_actor(@equip_window) if @equip_active
 				@stage.add_actor(@status_window) if @status_active
 			
@@ -227,7 +223,7 @@ class UI
 				@inv_window.remove
 				@equip_window.remove
 				@status_window.remove
-			
+
 			end
 		
 		end

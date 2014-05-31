@@ -109,19 +109,16 @@ class Map
 				render_comp = @mgr.get_component(entity, Render)
 				rot_comp = @mgr.get_component(entity, Rotation)
 
-				px = pos_comp.x + render_comp.width * C::WTB / 2
-				py = pos_comp.y + render_comp.height * C::WTB / 2
-
 				c = Math.cos(-rot_comp.angle * Math::PI/180)
 				s = Math.sin(-rot_comp.angle * Math::PI/180)
 
-				rot_x = px + c * (x - px) - s * (y - py)
-				rot_y = py + s * (x - px) + c * (y - py)
+				rot_x = pos_comp.x + c * (x - pos_comp.x) - s * (y - pos_comp.y)
+				rot_y = pos_comp.y + s * (x - pos_comp.x) + c * (y - pos_comp.y)
 
-				left = px - render_comp.width * C::WTB / 2
-				right = px + render_comp.width * C::WTB / 2
-				top = py - render_comp.height * C::WTB / 2
-				bottom = py + render_comp.height * C::WTB / 2
+				left = pos_comp.x - render_comp.width * C::WTB / 2
+				right = pos_comp.x + render_comp.width * C::WTB / 2
+				top = pos_comp.y - render_comp.height * C::WTB / 2
+				bottom = pos_comp.y + render_comp.height * C::WTB / 2
 
 				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
 					return entity

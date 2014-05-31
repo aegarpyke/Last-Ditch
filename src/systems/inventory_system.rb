@@ -28,13 +28,13 @@ class InventorySystem < System
 
 					if type_comp.nil?
 
-						style = @inv_slots[i].style
+						style = ImageButtonStyle.new(@inv_slots[i].style)
 						style.imageUp = nil
 						@inv_slots[i].style = style
 
 					else
 
-						style = @inv_slots[i].style
+						style = ImageButtonStyle.new(@inv_slots[i].style)
 						style.imageUp = TextureRegionDrawable.new(@mgr.atlas.find_region(type_comp.type))
 						@inv_slots[i].style = style
 
@@ -42,6 +42,10 @@ class InventorySystem < System
 
 				end
 
+			end
+
+			@inv_slots.each do |slot|
+				puts slot.style.imageUp
 			end
 
 		end
