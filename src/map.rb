@@ -37,7 +37,7 @@ class Map
 
 		@chunks = []
 
-		@chunks << Chunk.new(self, 8, 8, 40, 40)
+		# @chunks << Chunk.new(self, 8, 8, 40, 40)
 		# @chunks << Chunk.new(self, 8, 60, 40, 40)
 		# @chunks << Chunk.new(self, 60, 8, 40, 40)
 		# @chunks << Chunk.new(self, 60, 60, 40, 40)
@@ -96,6 +96,45 @@ class Map
 		@mgr.ui.inventory.update = true
 
 	end
+
+
+	def get_item(x, y)
+
+		entities = @mgr.get_all_entities_with(Item)
+		entities.each do |entity|
+
+			if @items.include?(entity)
+
+				pos_comp = @mgr.get_component(entity, Position)
+				render_comp = @mgr.get_component(entity, Render)
+				rot_comp = @mgr.get_component(entity, Rotation)
+
+				px = pos_comp.x + render_comp.width * C::WTB / 2
+				py = pos_comp.y + render_comp.height * C::WTB / 2
+
+				c = Math.cos(-rot_comp.angle * Math::PI/180)
+				s = Math.sin(-rot_comp.angle * Math::PI/180)
+
+				rot_x = px + c * (x - px) - s * (y - py)
+				rot_y = py + s * (x - px) + c * (y - py)
+
+				left = px - render_comp.width * C::WTB / 2
+				right = px + render_comp.width * C::WTB / 2
+				top = py - render_comp.height * C::WTB / 2
+				bottom = py + render_comp.height * C::WTB / 2
+
+				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
+					return entity
+				end
+
+			end
+
+		end
+
+		return nil
+
+	end
+
 
 	def get_nearest_item(x, y)
 

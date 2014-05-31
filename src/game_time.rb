@@ -6,8 +6,8 @@ class GameTime
 
 		@rate = 1.0
 		@duration = 0.0
-		@hour, @minute = 8, 50
-		@day, @month, @year = 22, 10, 3124
+		@hour, @minute = 23, 50
+		@day, @month, @year = 30, 12, 3124
 
 	end
 
@@ -55,7 +55,7 @@ class GameTime
 		@minute += @rate * delta
 		@duration += @rate * delta
 
-		if @minute > 59
+		if @minute > 60
 			@minute = 0
 			@hour += 1
 

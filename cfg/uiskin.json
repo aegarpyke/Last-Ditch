@@ -11,7 +11,7 @@
 		green: { a: 1, b: 0, g: 1, r: 0 },
 		white: { a: 1, b: 1, g: 1, r: 1 },
 		red: { a: 1, b: 0, g: 0, r: 1 },
-		black: { a: 1, b: 0, g: 0, r: 0 }
+		black: { a: 1, b: 0, g: 0, r: 0 },
 
 	},
 
@@ -23,6 +23,11 @@
     	},
 
     	inv_slot:
+    	{
+    		font: garuda12, fontColor: white
+    	},
+
+    	base_ui:
     	{
     		font: garuda12, fontColor: white
     	},

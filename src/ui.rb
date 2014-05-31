@@ -7,7 +7,7 @@ class UI
 
 	def initialize(mgr, player)
 
-		debug = false
+		debug = 0
 		@tmp_counter = 0
 
 		@base_active = true
@@ -26,15 +26,16 @@ class UI
 		###########
 
 		@base_table = Table.new(@skin)
-		@base_table.set_bounds(0, Gdx.graphics.height - 40, Gdx.graphics.width, 40)
+		@base_table.set_bounds(-2, Gdx.graphics.height - 38, Gdx.graphics.width, 38)
 
-		@base_time = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@base_date = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@base_money = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@base_time = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
+		@base_date = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
+		@base_money = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
+		@base_money.color = Color.new(0.75, 0.9, 0.70, 1.0)
 
-		@base_table.add(@base_date).align(Align::left).row
-		@base_table.add(@base_time).align(Align::left).row
-		@base_table.add(@base_money).align(Align::left)
+		@base_table.add(@base_date).align(Align::left).padRight(730).height(12).row
+		@base_table.add(@base_time).align(Align::left).padRight(730).height(12).row
+		@base_table.add(@base_money).align(Align::left).padRight(730).height(12)
 
 		###########
 		# Main UI #
@@ -98,14 +99,39 @@ class UI
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
 		@inv_window.set_position(280, 4)
-		@inv_window.set_size(288, 230)
+		@inv_window.set_size(288, 236)
 		@inv_window.padTop(9)
 
-		@inv_item_name = Label.new("Name", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_name).colspan(8).align(Align::left).row
+		@inv_item_name = Label.new("Rations", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_name).colspan(8).align(Align::left).padLeft(2).padTop(8).padBottom(2).height(12).row
 
-		@inv_item_desc = Label.new("Description: ", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_desc).colspan(8).align(Align::left).row
+		@inv_desc = "This is a rather long string. It's just way too long "\
+								"- longer than any reasonable string ever should be. I"\
+								" mean, it just doesn't stop. Running around extending "\
+								"words and stuff."
+
+		@inv_desc_lines = @inv_desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
+		@inv_desc_lines[-2] += "."
+		@inv_desc_lines[-1] = ""
+
+		while @inv_desc_lines.size < 5
+			@inv_desc_lines << ""
+		end
+
+		@inv_desc_lines.each do |line|
+			puts line
+		end
+
+		@inv_item_desc1 = Label.new(@inv_desc_lines[0], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_desc1).align(Align::left).padLeft(8).colspan(8).height(12).row
+		@inv_item_desc2 = Label.new(@inv_desc_lines[1], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_desc2).align(Align::left).padLeft(5).colspan(8).height(12).row
+		@inv_item_desc3 = Label.new(@inv_desc_lines[2], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_desc3).align(Align::left).padLeft(5).colspan(8).height(12).row
+		@inv_item_desc4 = Label.new(@inv_desc_lines[3], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_desc4).align(Align::left).padLeft(5).colspan(8).height(12).row
+		@inv_item_desc5 = Label.new(@inv_desc_lines[4], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_desc5).align(Align::left).padLeft(5).colspan(8).padBottom(4).height(12).row
 
 		@inv_slots = []
 		for i in 1...C::INVENTORY_SLOTS+1
@@ -135,7 +161,7 @@ class UI
 			end.new(@mgr))
 
 		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
-		@status_window.set_position(400, 260)
+		@status_window.set_position(500, 260)
 		@status_window.padTop(9)
 
 		@main_table.add(@actions_button).width(90).height(14).colspan(2).row
@@ -143,7 +169,7 @@ class UI
 		@main_table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
 		@main_table.add(@inv_button).width(90).height(14).colspan(2)
 
-		if debug
+		if debug != 0
 			@main_table.debug
 			@base_table.debug
 			@inv_window.debug

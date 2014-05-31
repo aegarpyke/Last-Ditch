@@ -11,6 +11,43 @@ class UserAdapter < InputAdapter
 	end
 
 
+	def touchDown(screenX, screenY, pointer, button)
+
+		case button
+
+			when 0
+				
+				if @shift
+
+					pos_comp = @mgr.get_component(@player, Position)
+
+					puts @mgr.map.get_item(
+						screenX * C::WTB + pos_comp.x - Gdx.graphics.width/2 * C::WTB, 
+						screenY * C::WTB + pos_comp.y - Gdx.graphics.height/2 * C::WTB)					
+
+				else
+				
+					pos_comp = @mgr.get_component(@player, Position)
+					inv_comp = @mgr.get_component(@player, Inventory)
+
+					item = @mgr.map.get_nearest_item(pos_comp.x, pos_comp.y)
+
+					if item && inv_comp.add_item(item)
+						@mgr.map.remove_item(item)
+					end
+				
+				end
+
+			when 1
+				puts "right?"
+
+		end
+
+		return true
+
+	end
+
+
 	def keyDown(keycode)
 
 		case keycode
@@ -35,7 +72,7 @@ class UserAdapter < InputAdapter
 				if @ctrl
 
 					@mgr.ui.base_update = true
-					@mgr.ui.base_active = @mgr.ui.base_active
+					@mgr.ui.base_active = !@mgr.ui.base_active
 
 				else
 
