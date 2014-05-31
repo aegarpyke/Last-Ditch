@@ -4,6 +4,7 @@ class UserAdapter < InputAdapter
 
 		super()
 		@mgr = mgr
+		@ctrl = false
 		@shift = false
 		@player = player
 
@@ -13,6 +14,11 @@ class UserAdapter < InputAdapter
 	def keyDown(keycode)
 
 		case keycode
+
+			when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
+
+				@ctrl = true
+				return true
 
 			when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
 				
@@ -26,9 +32,19 @@ class UserAdapter < InputAdapter
 
 			when Keys::TAB
 				
-				@mgr.ui.update = true
-				@mgr.paused = !@mgr.paused
-				@mgr.ui.active = @mgr.paused
+				if @ctrl
+
+					@mgr.ui.base_update = true
+					@mgr.ui.base_active = @mgr.ui.base_active
+
+				else
+
+					@mgr.paused = !@mgr.paused
+					@mgr.ui.main_update = true
+					@mgr.ui.main_active = @mgr.paused
+					
+				end
+
 				return true
 
 			when Keys::F
@@ -63,7 +79,13 @@ class UserAdapter < InputAdapter
 
 		case keycode
 
+			when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
+
+				@ctrl = false
+				return true
+
 			when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
+
 				@shift = false
 				return true
 

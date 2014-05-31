@@ -29,6 +29,7 @@ class GameScreen < ScreenAdapter
 		@mgr.atlas = @atlas
 		@mgr.map = @map = Map.new(@mgr, C::MAP_WIDTH, C::MAP_HEIGHT)
 		@map.focus = @mgr.get_component(@player, Position)
+		@mgr.game_time = GameTime.new
 
 		@input = InputSystem.new(@mgr, @player)
 		@physics = PhysicsSystem.new(@mgr)
@@ -55,6 +56,8 @@ class GameScreen < ScreenAdapter
 	def render(delta)
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
+
+		@mgr.game_time.tick(delta) unless @mgr.paused
 
 		@input.tick(delta)
 		@physics.tick(delta)

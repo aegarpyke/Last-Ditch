@@ -2,16 +2,18 @@ class UI
 
 	attr_accessor :stage, :inv_slots
 	attr_accessor :actions, :inventory, :equipment, :status
-	attr_accessor :active, :inv_active, :actions_active, :equip_active, :status_active
-	attr_accessor :update, :inv_update, :actions_update, :equip_update, :status_update
+	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
+	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
 
 	def initialize(mgr, player)
 
-		debug = true
+		debug = false
 		@tmp_counter = 0
 
- 		@active = false
- 		@update = true
+		@base_active = true
+ 		@main_active = false
+ 		@main_update = true
+ 		@base_update = true
 		@mgr = mgr
 		@player = player
 		@mgr.ui = self
@@ -19,10 +21,27 @@ class UI
 		@stage = Stage.new
 		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
 
-		
+		###########
+		# Base UI #
+		###########
 
-		@table = Table.new(@skin)
-		@table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
+		@base_table = Table.new(@skin)
+		@base_table.set_bounds(0, Gdx.graphics.height - 40, Gdx.graphics.width, 40)
+
+		@base_time = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@base_date = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@base_money = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+
+		@base_table.add(@base_date).align(Align::left).row
+		@base_table.add(@base_time).align(Align::left).row
+		@base_table.add(@base_money).align(Align::left)
+
+		###########
+		# Main UI #
+		###########
+
+		@main_table = Table.new(@skin)
+		@main_table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
 
 		@actions_active = false
 		@actions_button = TextButton.new("Actions", @skin.get(TextButtonStyle.java_class))
@@ -119,13 +138,14 @@ class UI
 		@status_window.set_position(400, 260)
 		@status_window.padTop(9)
 
-		@table.add(@actions_button).width(90).height(14).colspan(2).row
-		@table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
-		@table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
-		@table.add(@inv_button).width(90).height(14).colspan(2)
+		@main_table.add(@actions_button).width(90).height(14).colspan(2).row
+		@main_table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
+		@main_table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
+		@main_table.add(@inv_button).width(90).height(14).colspan(2)
 
 		if debug
-			@table.debug
+			@main_table.debug
+			@base_table.debug
 			@inv_window.debug
 			@actions_window.debug
 			@status_window.debug
@@ -145,13 +165,43 @@ class UI
 
 	def update(delta)
 
-		if @update
-			@update = false
+		if @base_active
 
-			if @active
-				@stage.add_actor(@table)
+			@base_time.text = @mgr.game_time.time
+			@base_date.text = @mgr.game_time.date
+			@base_money.text = "$%.2f" % [@mgr.get_component(@player, Inventory).money]
+
+		end
+
+		if @base_update
+			@base_update = false
+
+			if @base_active
+				@stage.add_actor(@base_table)
 			else
-				@table.remove
+				@base_table.remove
+			end
+		end
+
+		if @main_update
+			@main_update = false
+
+			if @main_active
+
+				@stage.add_actor(@main_table)
+				@stage.add_actor(@inv_window) if @inv_active
+				@stage.add_actor(@actions_window) if @actions_active
+				@stage.add_actor(@equip_window) if @equip_active
+				@stage.add_actor(@status_window) if @status_active
+			
+			else
+			
+				@main_table.remove
+				@actions_window.remove
+				@inv_window.remove
+				@equip_window.remove
+				@status_window.remove
+			
 			end
 		
 		end
@@ -200,7 +250,7 @@ class UI
 
 		end
 
-		if @active
+		if @main_active || @base_active
 			@stage.act
 		end
 
@@ -214,13 +264,11 @@ class UI
 
 	def render(batch)
 
-		if @active
+		if @main_active || @base_active
 
 			@stage.draw
 
 			Table.draw_debug(@stage)
-
-		else
 
 		end
 
