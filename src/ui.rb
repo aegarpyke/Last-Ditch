@@ -17,11 +17,6 @@ class UI
 		setup_base
 		setup_main
 
-		setup_actions
-		setup_equipment
-		setup_status
-		setup_inventory
-
 		@actions = ActionsSystem.new(@mgr)
 		@inventory = InventorySystem.new(@mgr)
 		@equipment = EquipmentSystem.new(@mgr)
@@ -84,6 +79,11 @@ class UI
 
 		@main_table = Table.new(@skin)
 		@main_table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
+
+		setup_actions
+		setup_equipment
+		setup_status
+		setup_inventory
 
 	end
 
