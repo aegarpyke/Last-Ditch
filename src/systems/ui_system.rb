@@ -1,4 +1,4 @@
-class UI
+class UISystem < System
 
 	attr_accessor :stage, :inv_slots, :player
 	attr_accessor :actions, :inventory, :equipment, :status, :inv_selection
@@ -7,6 +7,7 @@ class UI
 
 	def initialize(mgr, player)
 
+		super()
 		@mgr = mgr
 		@mgr.ui = self
 		@atlas = mgr.atlas
@@ -279,7 +280,7 @@ class UI
 	end
 
 
-	def update(delta)
+	def tick(delta, batch)
 
 		if @base_active
 
@@ -383,11 +384,6 @@ class UI
 		@inventory.tick(delta)
 		@equipment.tick(delta)
 		@status.tick(delta)
-
-	end
-
-
-	def render(batch)
 
 		if @main_active || @base_active
 

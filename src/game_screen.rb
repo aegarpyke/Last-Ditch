@@ -28,7 +28,7 @@ class GameScreen < ScreenAdapter
 		@mgr.add_component(@player, UserInput.new([Keys::W, Keys::A, Keys::S, Keys::D]))
 		
 		@mgr.atlas = @atlas
-		@mgr.map = @map = Map.new(@mgr, C::MAP_WIDTH, C::MAP_HEIGHT)
+		@mgr.map = @map = MapSystem.new(@mgr, C::MAP_WIDTH, C::MAP_HEIGHT)
 		@map.focus = @mgr.get_component(@player, Position)
 		@mgr.game_time = GameTime.new
 
@@ -38,7 +38,7 @@ class GameScreen < ScreenAdapter
 		@lighting = LightingSystem.new(
 			@mgr, @physics.world, 
 			@mgr.get_component(@player, Collision).body)
-		@ui = UI.new(@mgr, @player)
+		@ui = UISystem.new(@mgr, @player)
 
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)
@@ -59,25 +59,12 @@ class GameScreen < ScreenAdapter
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 
 		@mgr.game_time.tick(delta)
-
 		@input.tick(delta)
 		@physics.tick(delta)
-
-		@map.update
-
-		@batch.begin
-			@map.render(@batch)
-			@render.tick(delta, @batch)
-		@batch.end
-
+		@map.tick(delta, @batch)
+		@render.tick(delta, @batch)
 		@lighting.tick(@map.cam.combined)
-		
-		@ui.update(delta)
-		@ui.render(@batch)
-
-		#########
-		# Debug #
-		#########
+		@ui.tick(delta, @batch)
 
 		# @fps.log
 		# @debug.render(@physics.world, @map.cam.combined)

@@ -1,4 +1,4 @@
-class Map
+class MapSystem < System
 
 	attr_accessor :width, :height
 	attr_accessor :cam, :bodies, :items, :focus, :atlas
@@ -6,6 +6,7 @@ class Map
 
 	def initialize(mgr, width, height)
 
+		super()
 		@mgr = mgr
 		@atlas = mgr.atlas
 
@@ -164,7 +165,7 @@ class Map
 	end
 
 
-	def update
+	def tick(delta, batch)
 
 		@start_x = [@focus.x - 13, 0].max.to_i
 		@start_y = [@focus.y - 10, 0].max.to_i
@@ -175,12 +176,9 @@ class Map
 
 		@cam.update
 
-	end
-
-
-	def render(batch)
-
 		batch.set_projection_matrix(@cam::combined)
+
+		batch.begin
 
 		for x in @start_x..@end_x
 			for y in @start_y..@end_y
@@ -195,6 +193,8 @@ class Map
 
 			end
 		end
+
+		batch.end
 
 	end
 

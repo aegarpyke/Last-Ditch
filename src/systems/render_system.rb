@@ -36,6 +36,8 @@ class RenderSystem < System
 
 	def tick(delta, batch)
 
+		batch.begin
+
 		entities = @mgr.get_all_entities_with(Render)
 		entities.each do |entity|
 
@@ -92,6 +94,8 @@ class RenderSystem < System
 				rot_comp.angle)
 
 		end
+
+		batch.end
 
 	end
 
