@@ -65,31 +65,79 @@ class MapSystem < System
 
 		@rooms.each do |room|
 
-			for rx in room.x1...room.x2
-				for ry in room.y1...room.y2
+			if room.width > 3 && room.height > 3
+				
+				for rx in room.x1...room.x2
+					for ry in room.y1...room.y2
 
-					if rx == room.x1 || rx == room.x2-1
+						if rx == room.x1 || rx == room.x2-1
 
-						@solid[rx][ry] = true
-						@sight[rx][ry] = false
-						@rot[rx][ry]   = 0.0
-						@tiles[rx][ry] = @atlas.find_region('wall1')
+							@solid[rx][ry] = true
+							@sight[rx][ry] = false
+							@rot[rx][ry]   = 0.0
+							@tiles[rx][ry] = @atlas.find_region('wall1')
 
-					elsif ry == room.y1 || ry == room.y2-1
+						elsif ry == room.y1 || ry == room.y2-1
 
-						@solid[rx][ry] = true
-						@sight[rx][ry] = false
-						@rot[rx][ry]   = 0.0
-						@tiles[rx][ry] = @atlas.find_region('wall1')
+							@solid[rx][ry] = true
+							@sight[rx][ry] = false
+							@rot[rx][ry]   = 0.0
+							@tiles[rx][ry] = @atlas.find_region('wall1')
 
-					else
+						else
 
-						@solid[rx][ry] = false
-						@sight[rx][ry] = true
-						@rot[rx][ry]   = 0.0
-						@tiles[rx][ry] = @atlas.find_region('floor2')
+							@solid[rx][ry] = false
+							@sight[rx][ry] = true
+							@rot[rx][ry]   = 0.0
+							@tiles[rx][ry] = @atlas.find_region('floor2')
+
+						end
 
 					end
+
+				end
+
+				if room.x2 - room.x1 > 3
+
+					dx = Random.rand(room.x1 + 1...room.x2 - 2)
+
+					if Random.rand(2) == 0
+						dy = room.y1
+					else
+						dy = room.y2 - 1
+					end
+
+					@solid[dx][dy] = false
+					@sight[dx][dy] = true
+					@rot[dx][dy]   = 0.0
+					@tiles[dx][dy] = @atlas.find_region('floor2')
+
+					@solid[dx + 1][dy] = false
+					@sight[dx + 1][dy] = true
+					@rot[dx + 1][dy]   = 0.0
+					@tiles[dx + 1][dy] = @atlas.find_region('floor2')
+
+				end
+
+				if room.y2 - room.y1 > 3
+
+					dy = Random.rand(room.y1 + 1...room.y2 - 2)
+
+					if Random.rand(2) == 0
+						dx = room.x1
+					else
+						dx = room.x2 - 1
+					end
+
+					@solid[dx][dy] = false
+					@sight[dx][dy] = true
+					@rot[dx][dy]   = 0.0
+					@tiles[dx][dy] = @atlas.find_region('floor2')
+
+					@solid[dx][dy + 1] = false
+					@sight[dx][dy + 1] = true
+					@rot[dx][dy + 1]   = 0.0
+					@tiles[dx][dy + 1] = @atlas.find_region('floor2')
 
 				end
 
