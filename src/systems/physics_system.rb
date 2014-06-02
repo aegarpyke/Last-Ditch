@@ -2,9 +2,9 @@ class PhysicsSystem < System
 
 	DRAG = 0.93
 
-	attr_accessor :world
+	attr_accessor :world, :player_body
 
-	def initialize(mgr)
+	def initialize(mgr, map)
 
 		@mgr = mgr
 
@@ -32,6 +32,7 @@ class PhysicsSystem < System
 			fixture_def.filter.categoryBits = C::BIT_PLAYER
 
 			col_comp.body = @world.create_body(body_def)
+			@player_body = col_comp.body
 
 			col_comp.body.create_fixture(fixture_def)
 			col_comp.body.linear_damping = 7.0
@@ -40,10 +41,10 @@ class PhysicsSystem < System
 
 		end
 
-		for x in 0...@mgr.map.width
-			for y in 0...@mgr.map.height
+		for x in 0...map.width
+			for y in 0...map.height
 
-				if @mgr.map.solid[x][y]
+				if map.solid[x][y]
 					
 					body_def = BodyDef.new
 					body_def.position.set(x + 0.5, y + 0.5)
@@ -54,14 +55,14 @@ class PhysicsSystem < System
 					fixture_def = FixtureDef.new
 					fixture_def.shape = shape
 
-					if @mgr.map.sight[x][y]
+					if map.sight[x][y]
 						fixture_def.filter.categoryBits = C::BIT_WINDOW
 					else
 						fixture_def.filter.categoryBits = C::BIT_WALL
 					end
 
 					body = @world.create_body(body_def)
-					@mgr.map.bodies << body
+					map.bodies << body
 
 					body.create_fixture(fixture_def)
 					body.user_data = [x, y]

@@ -1,6 +1,6 @@
 class RenderSystem < System
 
-	def initialize(mgr)
+	def initialize(mgr, atlas)
 
 		@mgr = mgr
 
@@ -8,7 +8,7 @@ class RenderSystem < System
 		entities.each do |entity|
 
 			render_comp = @mgr.get_component(entity, Render)
-			render_comp.region = @mgr.atlas.find_region(render_comp.region_name)
+			render_comp.region = atlas.find_region(render_comp.region_name)
 
 		end
 
@@ -21,7 +21,7 @@ class RenderSystem < System
 				frame_list = []
 
 				frames.each do |frame|
-					frame_list << @mgr.atlas.find_region(frame)
+					frame_list << atlas.find_region(frame)
 				end
 
 				frame_list = frame_list.to_java(TextureRegion)

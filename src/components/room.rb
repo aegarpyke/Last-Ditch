@@ -1,9 +1,10 @@
-class Room
+class Room < Component
 
 	attr_accessor :x, :y, :x1, :y1, :x2, :y2, :width, :height
 
 	def initialize(x, y, width, height)
 
+		super()
 		@width, @height = width, height
 
 		@x1 = @x = x

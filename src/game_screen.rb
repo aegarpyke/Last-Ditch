@@ -26,29 +26,27 @@ class GameScreen < ScreenAdapter
 	                       'player_walk4', 
 	                       'player_walk3']}))
 		@mgr.add_component(@player, UserInput.new([Keys::W, Keys::A, Keys::S, Keys::D]))
-		
-		@mgr.atlas = @atlas
-		@mgr.map = @map = MapSystem.new(@mgr, C::MAP_WIDTH, C::MAP_HEIGHT)
-		@map.focus = @mgr.get_component(@player, Position)
-		@mgr.game_time = GameTime.new
 
+		@time = TimeSystem.new
 		@input = InputSystem.new(@mgr, @player)
-		@physics = PhysicsSystem.new(@mgr)
-		@render = RenderSystem.new(@mgr)
-		@lighting = LightingSystem.new(
-			@mgr, @physics.world, 
-			@mgr.get_component(@player, Collision).body)
-		@ui = UISystem.new(@mgr, @player)
+		@map = MapSystem.new(@mgr, @player, @atlas)
+		@physics = PhysicsSystem.new(@mgr, @map)
+		@render = RenderSystem.new(@mgr, @atlas)
+		@lighting = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
+		@ui = UISystem.new(@mgr, @player, @atlas)
 
+		@mgr.map = @map
+		@mgr.time = @time
+		@mgr.atlas = @atlas
+
+		@fps = FPSLogger.new
+		@debug = Box2DDebugRenderer.new
+		
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)
 		@multiplexer.add_processor(@input.user_adapter)
 
 		Gdx.input.input_processor = @multiplexer
-
-		@fps = FPSLogger.new
-		@debug = Box2DDebugRenderer.new
-
 		Gdx.gl.gl_clear_color(0, 0, 0, 1)
 
 	end
@@ -58,10 +56,10 @@ class GameScreen < ScreenAdapter
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 
-		@mgr.game_time.tick(delta)
+		@time.tick(delta)
 		@input.tick(delta)
-		@physics.tick(delta)
 		@map.tick(delta, @batch)
+		@physics.tick(delta)
 		@render.tick(delta, @batch)
 		@lighting.tick(@map.cam.combined)
 		@ui.tick(delta, @batch)
@@ -75,10 +73,13 @@ class GameScreen < ScreenAdapter
 	def dispose
 
 		@batch.dispose
+		@time.dispose
 		@input.dispose
 		@physics.dispose
+		@map.dispose
 		@render.dispose
 		@lighting.dispose
+		@ui.dispose
 
 	end
 

@@ -5,12 +5,12 @@ class UISystem < System
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
 
-	def initialize(mgr, player)
+	def initialize(mgr, player, atlas)
 
 		super()
 		@mgr = mgr
 		@mgr.ui = self
-		@atlas = mgr.atlas
+		@atlas = atlas
 		@player = player
 		@stage = Stage.new
 		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
@@ -222,10 +222,11 @@ class UISystem < System
 			@inv_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
 			@inv_slots.last.add_listener(
 				Class.new(ClickListener) do
-					def initialize(mgr, slot)
+					def initialize(mgr, slot, atlas)
 						super()
-						@slot = slot
 						@mgr = mgr
+						@slot = slot
+						@atlas = atlas
 					end
 
 					def clicked(event, x, y)
@@ -248,19 +249,19 @@ class UISystem < System
 						else
 						
 							style = ImageButtonStyle.new(@mgr.ui.inv_selection.style)
-							style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_slot'))
+							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
 							@mgr.ui.inv_selection.style = style
 
 							@mgr.ui.inv_selection = @slot
 
 							style = ImageButtonStyle.new(@mgr.ui.inv_selection.style)
-							style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_selection'))
+							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_selection'))
 							@mgr.ui.inv_selection.style = style
 
 						end
 
 					end
-				end.new(@mgr, @inv_slots.last))
+				end.new(@mgr, @inv_slots.last, @atlas))
 
 			if i % 8 == 0
 				@inv_window.add(@inv_slots.last).pad(1).row
@@ -272,7 +273,7 @@ class UISystem < System
 
 		@inv_selection = @inv_slots[0]
 		style = ImageButtonStyle.new(@inv_selection.style)
-		style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_selection'))
+		style.up = TextureRegionDrawable.new(@atlas.find_region('inv_selection'))
 		@inv_selection.style = style
 
 		@main_table.add(@inv_button).width(90).height(14).colspan(2)
@@ -282,10 +283,15 @@ class UISystem < System
 
 	def tick(delta, batch)
 
+		@actions.tick(delta)
+		@inventory.tick(delta)
+		@equipment.tick(delta)
+		@status.tick(delta)
+
 		if @base_active
 
-			@base_time.text = @mgr.game_time.time
-			@base_date.text = @mgr.game_time.date
+			@base_time.text = @mgr.time.time
+			@base_date.text = @mgr.time.date
 			@base_money.text = "$%.2f" % [@mgr.get_component(@player, Inventory).money]
 
 			needs_comp = @mgr.get_component(@player, Needs)
@@ -377,15 +383,8 @@ class UISystem < System
 		end
 
 		if @main_active || @base_active
+			
 			@stage.act
-		end
-
-		@actions.tick(delta)
-		@inventory.tick(delta)
-		@equipment.tick(delta)
-		@status.tick(delta)
-
-		if @main_active || @base_active
 
 			@stage.draw
 

@@ -1,7 +1,7 @@
 class EntityManager
 
 	attr_reader :id 
-	attr_accessor :map, :atlas, :ui, :game_time, :paused
+	attr_accessor :map, :atlas, :ui, :time, :paused
 
 	def initialize
 

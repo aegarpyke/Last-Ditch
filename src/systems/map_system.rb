@@ -4,31 +4,33 @@ class MapSystem < System
 	attr_accessor :cam, :bodies, :items, :focus, :atlas
 	attr_accessor :tiles, :solid, :sight, :rot
 
-	def initialize(mgr, width, height)
+	def initialize(mgr, player, atlas)
 
 		super()
 		@mgr = mgr
-		@atlas = mgr.atlas
-
-		@tiles = Array.new(width) {|i| Array.new(height) {|i| @mgr.atlas.find_region('floor1')}}
-		@solid = Array.new(width) {|i| Array.new(height) {|i| false }}
-		@sight = Array.new(width) {|i| Array.new(height) {|i| true }}
-		@rot   = Array.new(width) {|i| Array.new(height) {|i| 0.0}}
-
-		@items, @bodies = [], []		
-		@width, @height = width, height
-
+		@atlas = atlas
 		@cam = OrthographicCamera.new
 		@cam.set_to_ortho(false, C::WIDTH, C::HEIGHT)
+		@width, @height = C::MAP_WIDTH, C::MAP_HEIGHT
+		@focus = @mgr.get_component(player, Position)
+		
+		@iterations = 300
+		@rooms, @items, @bodies = [], [], []
+		@num_of_rooms, @num_of_items = 40, 1000
+
+		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
+		@sight = Array.new(@width) {|i| Array.new(@height) {|i| true }}
+		@rot   = Array.new(@width) {|i| Array.new(@height) {|i| 0.0}}
+		@tiles = Array.new(@width) {|i| Array.new(@height) {|i| @atlas.find_region('floor1')}}
 
 		for x in 0...@width
 			for y in 0...@height
 
 				if x == 0 || y == 0 || x == @width-1 || y == @height-1
-
-					@tiles[x][y] = @atlas.find_region('empty')
+					
 					@solid[x][y] = true
 					@sight[x][y] = true
+					@tiles[x][y] = @atlas.find_region('empty')
 
 				end
 
@@ -36,34 +38,146 @@ class MapSystem < System
 
 		end
 
-		@chunks = []
-
-		# @chunks << Chunk.new(self, 8, 8, 40, 40)
-		# @chunks << Chunk.new(self, 8, 60, 40, 40)
-		# @chunks << Chunk.new(self, 60, 8, 40, 40)
-		# @chunks << Chunk.new(self, 60, 60, 40, 40)
-
+		generate_rooms
 		generate_items
 
 	end
 
 
+	def generate_rooms
+		
+		room_x, room_y = 0, 0
+		@master = Room.new(10, 10, C::MAP_WIDTH - 10, C::MAP_HEIGHT - 10)
+
+		for i in 0...@num_of_rooms
+		  room_x = Random.rand(@master.x1...@master.x2)
+		  room_y = Random.rand(@master.y1...@master.y2)
+		  @rooms << Room.new(room_x, room_y, 1, 1)
+		end
+
+		for i in 0...@iterations
+
+			@rooms.each do |room|
+				expand(room)
+			end
+
+		end
+
+		@rooms.each do |room|
+
+			for rx in room.x1...room.x2
+				for ry in room.y1...room.y2
+
+					if rx == room.x1 || rx == room.x2-1
+
+						@solid[rx][ry] = true
+						@sight[rx][ry] = false
+						@rot[rx][ry]   = 0.0
+						@tiles[rx][ry] = @atlas.find_region('wall1')
+
+					elsif ry == room.y1 || ry == room.y2-1
+
+						@solid[rx][ry] = true
+						@sight[rx][ry] = false
+						@rot[rx][ry]   = 0.0
+						@tiles[rx][ry] = @atlas.find_region('wall1')
+
+					else
+
+						@solid[rx][ry] = false
+						@sight[rx][ry] = true
+						@rot[rx][ry]   = 0.0
+						@tiles[rx][ry] = @atlas.find_region('floor2')
+
+					end
+
+				end
+
+			end
+
+		end
+
+	end
+
+
+	def expand(test_room)
+
+		direction = Random.rand(4)
+
+		case direction
+
+			when 0
+				test_room.x1 -= 2 if test_room.x1 - 2 > @master.x1
+			when 1
+				test_room.y1 -= 2 if test_room.y1 - 2 > @master.y1
+			when 2
+				test_room.x2 += 2 if test_room.x2 + 2 < @master.x2
+			when 3
+				test_room.y2 += 2 if test_room.y2 + 2 < @master.y2
+
+		end
+
+		check = false
+
+		@rooms.each do |room|
+
+			next if room == test_room
+
+			if intersects(room, test_room)
+
+				check = true
+
+				case direction
+					when 0
+						test_room.x1 += 2
+					when 1
+						test_room.y1 += 2
+					when 2
+						test_room.x2 -= 2
+					when 3
+						test_room.y2 -= 2
+				end
+
+			end
+
+		end
+
+		if !check
+			case direction
+				when 0
+					test_room.x1 += 1
+				when 1
+					test_room.y1 += 1
+				when 2
+					test_room.x2 -= 1
+				when 3
+					test_room.y2 -= 1
+			end
+		end
+
+	end
+
+
+	def intersects(room1, room2)
+		!(room1.x2 < room2.x1 || room2.x2 < room1.x1 || room1.y2 < room2.y1 || room2.y2 < room1.y1)
+	end
+
+
 	def generate_items
 
-		rx, ry = 0, 0
-		num_of_items = 1000
+		item_x, item_y = 0, 0
 
-		for i in 0...num_of_items
+		for i in 0...@num_of_items
 
 			loop do
-				rx = Random.rand(10.0...@width-10)
-				ry = Random.rand(10.0...@height-10)
+				item_x = Random.rand(10.0...@width-10)
+				item_y = Random.rand(10.0...@height-10)
 				
-				break if !@solid[rx.to_i][ry.to_i]
+				break if !@solid[item_x.to_i][item_y.to_i]
 			end
 
 			item = @mgr.create_basic_entity
-			@mgr.add_component(item, Position.new(rx, ry))
+			@mgr.add_component(item, Position.new(item_x, item_y))
 			@mgr.add_component(item, Rotation.new(Random.rand(360)))
 			@mgr.add_component(item, Item.new)
 

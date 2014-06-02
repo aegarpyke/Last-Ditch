@@ -1,9 +1,10 @@
-class GameTime
+class TimeSystem < System
 
 	attr_accessor :active, :game_delta, :duration, :rate, :minute, :hour, :day, :month, :year
 
 	def initialize
 
+		super()
 		@rate = 1.0
 		@active = true
 		@duration = 0.0

@@ -12,7 +12,7 @@ class StatusSystem < System
 		entities = @mgr.get_all_entities_with(Needs)
 		entities.each do |entity|
 
-			gd = @mgr.game_time.game_delta
+			gd = @mgr.time.game_delta
 
 			need_comp = @mgr.get_component(entity, Needs)
 
