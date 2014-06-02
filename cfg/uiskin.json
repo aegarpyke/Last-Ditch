@@ -37,8 +37,13 @@
 	{
 		default:
 		{
-			up:inv_slot
+			up: inv_slot
 		},
+
+		status_bars:
+		{
+			up: status_bar
+		}
 	},
 
 	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: 

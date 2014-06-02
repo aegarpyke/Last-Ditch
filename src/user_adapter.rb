@@ -84,6 +84,7 @@ class UserAdapter < InputAdapter
 				else
 
 					@mgr.paused = !@mgr.paused
+					@mgr.game_time.active = !@mgr.game_time.active
 					@mgr.ui.main_update = true
 					@mgr.ui.main_active = @mgr.paused
 					

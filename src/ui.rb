@@ -27,9 +27,10 @@ class UI
 		@equipment = EquipmentSystem.new(@mgr)
 		@status = StatusSystem.new(@mgr)
 
-		if true
+		if 1 == 0
 			@main_table.debug
 			@base_table.debug
+			@base_table_needs.debug
 			@inv_window.debug
 			@actions_window.debug
 			@status_window.debug
@@ -45,16 +46,33 @@ class UI
 		@base_update = true
 
 		@base_table = Table.new(@skin)
-		@base_table.set_bounds(-2, Gdx.graphics.height - 38, Gdx.graphics.width, 38)
+		@base_table.set_bounds(Gdx.graphics.width - 66, Gdx.graphics.height - 36, 66, 36)
 
 		@base_time = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_date = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_money = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_money.color = Color.new(0.75, 0.82, 0.70, 1.0)
 
-		@base_table.add(@base_date).align(Align::left).padRight(730).height(12).row
-		@base_table.add(@base_time).align(Align::left).padRight(730).height(12).row
-		@base_table.add(@base_money).align(Align::left).padRight(730).height(12)
+		@base_table.add(@base_date).align(Align::right).height(11).row
+		@base_table.add(@base_time).align(Align::right).height(11).row
+		@base_table.add(@base_money).align(Align::right).height(11)
+
+		@base_table_needs = Table.new(@skin)
+		@base_table_needs.set_bounds(-2, Gdx.graphics.height - 32, 106, 32)
+
+		@base_hunger = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1.0)
+		@base_thirst = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_thirst.color = Color.new(0.45, 0.68, 0.89, 1.0)
+		@base_energy = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_energy.color = Color.new(0.88, 0.85, 0.34, 1.0)
+		@base_sanity = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_sanity.color = Color.new(0.77, 0.45, 0.67, 1.0)
+
+		@base_table_needs.add(@base_hunger).width(106).padTop(-2).height(8).row
+		@base_table_needs.add(@base_thirst).width(106).padTop(-2).height(8).row
+		@base_table_needs.add(@base_energy).width(106).padTop(-2).height(8).row
+		@base_table_needs.add(@base_sanity).width(106).padTop(-2).height(8)
 
 	end
 
@@ -269,6 +287,13 @@ class UI
 			@base_date.text = @mgr.game_time.date
 			@base_money.text = "$%.2f" % [@mgr.get_component(@player, Inventory).money]
 
+			needs_comp = @mgr.get_component(@player, Needs)
+
+			@base_hunger.width = (needs_comp.hunger * 100 + 4).to_i
+			@base_thirst.width = (needs_comp.thirst * 100 + 4).to_i
+			@base_energy.width = (needs_comp.energy * 100 + 4).to_i
+			@base_sanity.width = (needs_comp.sanity * 100 + 4).to_i
+
 		end
 
 		if @base_update
@@ -276,8 +301,10 @@ class UI
 
 			if @base_active
 				@stage.add_actor(@base_table)
+				@stage.add_actor(@base_table_needs)
 			else
 				@base_table.remove
+				@base_table_needs.remove
 			end
 		end
 
@@ -352,10 +379,10 @@ class UI
 			@stage.act
 		end
 
-		@actions.tick(delta) if @actions_active
-		@inventory.tick(delta) if @inv_active
-		@equipment.tick(delta) if @equipment_active
-		@status.tick(delta) if @status_active
+		@actions.tick(delta)
+		@inventory.tick(delta)
+		@equipment.tick(delta)
+		@status.tick(delta)
 
 	end
 

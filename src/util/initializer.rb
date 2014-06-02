@@ -29,6 +29,7 @@ java_import com.badlogic.gdx.graphics.g2d.SpriteBatch
 java_import com.badlogic.gdx.graphics.g2d.TextureAtlas
 java_import com.badlogic.gdx.graphics.g2d.TextureRegion
 java_import com.badlogic.gdx.graphics.g2d.BitmapFont
+java_import com.badlogic.gdx.graphics.g2d.NinePatch
 java_import com.badlogic.gdx.graphics.g2d.BitmapFont::TextBounds
 java_import com.badlogic.gdx.physics.box2d.World
 java_import com.badlogic.gdx.physics.box2d.Body
@@ -46,6 +47,7 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.Skin
 java_import com.badlogic.gdx.scenes.scene2d.ui.Table
 java_import com.badlogic.gdx.scenes.scene2d.ui.Button
 java_import com.badlogic.gdx.scenes.scene2d.ui.Button::ButtonStyle
+java_import com.badlogic.gdx.scenes.scene2d.ui.Image
 java_import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 java_import com.badlogic.gdx.scenes.scene2d.ui.ImageButton::ImageButtonStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.TextButton
@@ -56,7 +58,9 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.Window
 java_import com.badlogic.gdx.scenes.scene2d.ui.Window::WindowStyle
 java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align
+java_import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 java_import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+
 java_import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 java_import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 java_import com.badlogic.gdx.tools.texturepacker.TexturePacker
@@ -96,3 +100,6 @@ require_relative '../components/collision'
 require_relative '../components/user_input'
 require_relative '../components/item'
 require_relative '../components/inventory'
+require_relative '../components/needs'
+require_relative '../components/skills'
+require_relative '../components/attributes'

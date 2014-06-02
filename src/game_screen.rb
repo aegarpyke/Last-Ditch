@@ -14,6 +14,7 @@ class GameScreen < ScreenAdapter
 		@mgr.add_component(@player, Rotation.new(0.0))
 		@mgr.add_component(@player, Collision.new)
 		@mgr.add_component(@player, Inventory.new(32))
+		@mgr.add_component(@player, Needs.new)
 		@mgr.add_component(@player, Animation.new(
 			{'player_idle' => ['player_idle1'], 
 	     'player_walk' => ['player_idle1',
@@ -57,7 +58,7 @@ class GameScreen < ScreenAdapter
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 
-		@mgr.game_time.tick(delta) unless @mgr.paused
+		@mgr.game_time.tick(delta)
 
 		@input.tick(delta)
 		@physics.tick(delta)
