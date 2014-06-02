@@ -91,6 +91,46 @@ class UserAdapter < InputAdapter
 
 				return true
 
+			when Keys::W
+
+				if @mgr.ui.main_active
+
+					@mgr.ui.actions_update = true
+					@mgr.ui.actions_active = !@mgr.ui.actions_active
+					return true
+
+				end
+
+			when Keys::A
+
+				if @mgr.ui.main_active
+
+					@mgr.ui.equip_update = true
+					@mgr.ui.equip_active = !@mgr.ui.equip_active
+					return true
+
+				end
+
+			when Keys::D
+
+				if @mgr.ui.main_active
+
+					@mgr.ui.status_update = true
+					@mgr.ui.status_active = !@mgr.ui.status_active
+					return true
+
+				end
+
+			when Keys::S
+				
+				if @mgr.ui.main_active
+
+					@mgr.ui.inv_update = true
+					@mgr.ui.inv_active = !@mgr.ui.inv_active
+					return true
+
+				end
+
 			when Keys::F
 
 				if @shift

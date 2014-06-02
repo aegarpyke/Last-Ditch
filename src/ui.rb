@@ -8,17 +8,16 @@ class UI
 	def initialize(mgr, player)
 
 		debug = 0
-		@tmp_counter = 0
 
+		@mgr = mgr
+		@mgr.ui = self
+		@atlas = mgr.atlas
+		@player = player
+		@stage = Stage.new
 		@base_active = true
  		@main_active = false
  		@main_update = true
  		@base_update = true
-		@mgr = mgr
-		@player = player
-		@mgr.ui = self
-		@atlas = mgr.atlas
-		@stage = Stage.new
 		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
 
 		###########
@@ -44,6 +43,8 @@ class UI
 		@main_table = Table.new(@skin)
 		@main_table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
 
+		# Actions
+
 		@actions_active = false
 		@actions_button = TextButton.new("Actions", @skin.get(TextButtonStyle.java_class))
 		@actions_button.add_listener(
@@ -63,6 +64,8 @@ class UI
 		@actions_window.set_position(340, 400)
 		@actions_window.padTop(9)
 
+		# Equipment
+
 		@equip_active = false
 		@equip_button = TextButton.new("Equipment", @skin.get(TextButtonStyle.java_class))
 		@equip_button.add_listener(
@@ -81,6 +84,8 @@ class UI
 		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
 		@equip_window.set_position(12, 260)
 		@equip_window.padTop(9)
+
+		# Inventory
 
 		@inv_active = false
 		@inv_button = TextButton.new("Inventory", @skin.get(TextButtonStyle.java_class))
@@ -107,8 +112,8 @@ class UI
 
 		@inv_desc = "This is a rather long string. It's just way too long "\
 								"- longer than any reasonable string ever should be. I"\
-								" mean, it just doesn't stop. Running around extending "\
-								"words and stuff."
+								" mean, it just doesn't stop. I would say that"\
+								" it is the longest thing there is."
 
 		@inv_desc_lines = @inv_desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
 		@inv_desc_lines[-2] += "."
@@ -133,7 +138,7 @@ class UI
 		for i in 1..C::INVENTORY_SLOTS
 			
 			@inv_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
-			@inv_slots[-1].add_listener(
+			@inv_slots.last.add_listener(
 				Class.new(ClickListener) do
 					def initialize(mgr, slot)
 						super()
@@ -144,8 +149,6 @@ class UI
 					def clicked(event, x, y)
 
 						if @slot == @mgr.ui.inv_selection
-
-							# Use item in slot
 
 							inv_comp = @mgr.get_component(@mgr.ui.player, Inventory)
 
@@ -189,6 +192,8 @@ class UI
 		style = ImageButtonStyle.new(@inv_selection.style)
 		style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_selection'))
 		@inv_selection.style = style
+
+		# Status
 
 		@status_active = false
 		@status_button = TextButton.new("Status", @skin.get(TextButtonStyle.java_class))
