@@ -33,7 +33,12 @@ class Inventory < Component
 
 	def remove_money(amount)
 
-		@money -= amount
+		if @money > 0
+			@money -= amount
+			return true
+		else
+			return false
+		end
 
 	end
 

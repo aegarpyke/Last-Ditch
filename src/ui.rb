@@ -7,22 +7,42 @@ class UI
 
 	def initialize(mgr, player)
 
-		debug = 0
-
 		@mgr = mgr
 		@mgr.ui = self
 		@atlas = mgr.atlas
 		@player = player
 		@stage = Stage.new
-		@base_active = true
- 		@main_active = false
- 		@main_update = true
- 		@base_update = true
 		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
 
-		###########
-		# Base UI #
-		###########
+		setup_base
+		setup_main
+
+		setup_actions
+		setup_equipment
+		setup_status
+		setup_inventory
+
+		@actions = ActionsSystem.new(@mgr)
+		@inventory = InventorySystem.new(@mgr)
+		@equipment = EquipmentSystem.new(@mgr)
+		@status = StatusSystem.new(@mgr)
+
+		if true
+			@main_table.debug
+			@base_table.debug
+			@inv_window.debug
+			@actions_window.debug
+			@status_window.debug
+			@equip_window.debug
+		end
+
+	end
+
+
+	def setup_base
+
+		@base_active = true
+		@base_update = true
 
 		@base_table = Table.new(@skin)
 		@base_table.set_bounds(-2, Gdx.graphics.height - 38, Gdx.graphics.width, 38)
@@ -30,20 +50,27 @@ class UI
 		@base_time = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_date = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_money = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
-		@base_money.color = Color.new(0.75, 0.9, 0.70, 1.0)
+		@base_money.color = Color.new(0.75, 0.82, 0.70, 1.0)
 
 		@base_table.add(@base_date).align(Align::left).padRight(730).height(12).row
 		@base_table.add(@base_time).align(Align::left).padRight(730).height(12).row
 		@base_table.add(@base_money).align(Align::left).padRight(730).height(12)
 
-		###########
-		# Main UI #
-		###########
+	end
+
+
+	def setup_main
+
+		@main_active = false
+		@main_update = true
 
 		@main_table = Table.new(@skin)
 		@main_table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
 
-		# Actions
+	end
+
+
+	def setup_actions
 
 		@actions_active = false
 		@actions_button = TextButton.new("Actions", @skin.get(TextButtonStyle.java_class))
@@ -64,7 +91,12 @@ class UI
 		@actions_window.set_position(340, 400)
 		@actions_window.padTop(9)
 
-		# Equipment
+		@main_table.add(@actions_button).width(90).height(14).colspan(2).row
+
+	end
+
+
+	def setup_equipment
 
 		@equip_active = false
 		@equip_button = TextButton.new("Equipment", @skin.get(TextButtonStyle.java_class))
@@ -85,7 +117,38 @@ class UI
 		@equip_window.set_position(12, 260)
 		@equip_window.padTop(9)
 
-		# Inventory
+		@main_table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
+
+	end
+
+
+	def setup_status
+
+		@status_active = false
+		@status_button = TextButton.new("Status", @skin.get(TextButtonStyle.java_class))
+		@status_button.add_listener(
+			Class.new(ClickListener) do
+				def initialize(mgr)
+					super()
+					@mgr = mgr
+				end
+
+				def clicked(event, x, y)
+					@mgr.ui.status_update = true
+					@mgr.ui.status_active = !@mgr.ui.status_active
+				end
+			end.new(@mgr))
+
+		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
+		@status_window.set_position(500, 260)
+		@status_window.padTop(9)
+
+		@main_table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
+
+	end
+
+
+	def setup_inventory
 
 		@inv_active = false
 		@inv_button = TextButton.new("Inventory", @skin.get(TextButtonStyle.java_class))
@@ -193,48 +256,7 @@ class UI
 		style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_selection'))
 		@inv_selection.style = style
 
-		# Status
-
-		@status_active = false
-		@status_button = TextButton.new("Status", @skin.get(TextButtonStyle.java_class))
-		@status_button.add_listener(
-			Class.new(ClickListener) do
-				def initialize(mgr)
-					super()
-					@mgr = mgr
-				end
-
-				def clicked(event, x, y)
-					@mgr.ui.status_update = true
-					@mgr.ui.status_active = !@mgr.ui.status_active
-				end
-			end.new(@mgr))
-
-		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
-		@status_window.set_position(500, 260)
-		@status_window.padTop(9)
-
-		@main_table.add(@actions_button).width(90).height(14).colspan(2).row
-		@main_table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
-		@main_table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
 		@main_table.add(@inv_button).width(90).height(14).colspan(2)
-
-		if debug != 0
-			@main_table.debug
-			@base_table.debug
-			@inv_window.debug
-			@actions_window.debug
-			@status_window.debug
-			@equip_window.debug
-		end
-
-		##############
-		# UI Systems #
-		##############
-		@actions = ActionsSystem.new(@mgr)
-		@inventory = InventorySystem.new(@mgr)
-		@equipment = EquipmentSystem.new(@mgr)
-		@status = StatusSystem.new(@mgr)
 
 	end
 
