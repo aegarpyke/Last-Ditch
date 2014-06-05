@@ -11,6 +11,4 @@ class Info < Component
 
 	end
 
-	
-
 end

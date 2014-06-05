@@ -12,10 +12,12 @@ class GameScreen < ScreenAdapter
 		@mgr.add_component(@player, Position.new(40, 40))
 		@mgr.add_component(@player, Velocity.new(0, 0))
 		@mgr.add_component(@player, Rotation.new(0))
-		@mgr.add_component(@player, Collision.new)
-		@mgr.add_component(@player, Needs.new)
-		@mgr.add_component(@player, UserInput.new)
 		@mgr.add_component(@player, Inventory.new(C::INVENTORY_SLOTS))
+		@mgr.add_component(@player, Needs.new)
+		@mgr.add_component(@player, Attributes.new)
+		@mgr.add_component(@player, Skills.new)
+		@mgr.add_component(@player, UserInput.new)
+		@mgr.add_component(@player, Collision.new)
 		@mgr.add_component(@player, Animation.new(
 			{'player_idle' => ['player_idle1'], 
 	     'player_walk' => ['player_idle1',

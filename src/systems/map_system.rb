@@ -232,12 +232,21 @@ class MapSystem < System
 			check = Random.rand
 			if check < 0.33
 				@mgr.add_component(item, Type.new('canteen1'))
+				@mgr.add_component(item, Info.new(
+					'Canteen 1',
+					"This is a drinking canteen."))
 				@mgr.add_component(item, Render.new('canteen1'))
 			elsif check < 0.66
 				@mgr.add_component(item, Type.new('rations1'))
+				@mgr.add_component(item, Info.new(
+					'Rations 1',
+					"This is rations container."))
 				@mgr.add_component(item, Render.new('rations1'))
 			else
 				@mgr.add_component(item, Type.new('scrap1'))
+				@mgr.add_component(item, Info.new(
+					'Scrap 1',
+					"This is a piece of scrap material."))
 				@mgr.add_component(item, Render.new('scrap1'))
 			end
 

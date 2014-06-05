@@ -199,32 +199,23 @@ class UISystem < System
 		@inv_window.set_size(288, 236)
 		@inv_window.padTop(9)
 
-		@inv_item_name = Label.new("Rations", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_name).colspan(8).align(Align::left).padLeft(2).padTop(8).padBottom(2).height(12).row
 
-		@inv_desc = "This is a rather long string. It's just way too long "\
-								"- longer than any reasonable string ever should be. I"\
-								" mean, it just doesn't stop. I would say that"\
-								" it is the longest thing there is."
+		@inv_desc = ""
 
-		@inv_desc_lines = @inv_desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
-		@inv_desc_lines[-2] += "."
-		@inv_desc_lines[-1] = ""
-
-		while @inv_desc_lines.size < 5
-			@inv_desc_lines << ""
-		end
-
-		@inv_item_desc1 = Label.new(@inv_desc_lines[0], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_desc1 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc1).align(Align::left).padLeft(8).colspan(8).height(12).row
-		@inv_item_desc2 = Label.new(@inv_desc_lines[1], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_desc2 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc2).align(Align::left).padLeft(5).colspan(8).height(12).row
-		@inv_item_desc3 = Label.new(@inv_desc_lines[2], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_desc3 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc3).align(Align::left).padLeft(5).colspan(8).height(12).row
-		@inv_item_desc4 = Label.new(@inv_desc_lines[3], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_desc4 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc4).align(Align::left).padLeft(5).colspan(8).height(12).row
-		@inv_item_desc5 = Label.new(@inv_desc_lines[4], @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_desc5 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc5).align(Align::left).padLeft(5).colspan(8).padBottom(4).height(12).row
+
+		set_inventory_desc(@inv_desc)
 
 		@inv_slots = []
 		for i in 1..C::INVENTORY_SLOTS
@@ -298,20 +289,55 @@ class UISystem < System
 	end
 
 
+	def set_inventory_desc(desc)
+
+		@inv_desc_lines = desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
+
+		while @inv_desc_lines.size < 5
+			@inv_desc_lines << ""
+		end
+
+		@inv_item_desc1.text = @inv_desc_lines[0]
+		@inv_item_desc2.text = @inv_desc_lines[1]
+		@inv_item_desc3.text = @inv_desc_lines[2]
+		@inv_item_desc4.text = @inv_desc_lines[3]
+		@inv_item_desc5.text = @inv_desc_lines[4]
+
+	end
+
+
 	def update(delta, batch)
 
 		if @base_active
 
+			needs_comp = @mgr.get_component(@player, Needs)
+			inv_comp = @mgr.get_component(@player, Inventory)
+
 			@base_time.text = @mgr.time.time
 			@base_date.text = @mgr.time.date
-			@base_money.text = "$%.2f" % [@mgr.get_component(@player, Inventory).money]
-
-			needs_comp = @mgr.get_component(@player, Needs)
+			@base_money.text = "$%.2f" % [inv_comp.money]
 
 			@base_hunger.width = (needs_comp.hunger * 100 + 4).to_i
 			@base_thirst.width = (needs_comp.thirst * 100 + 4).to_i
 			@base_energy.width = (needs_comp.energy * 100 + 4).to_i
 			@base_sanity.width = (needs_comp.sanity * 100 + 4).to_i
+
+			index = @inv_slots.index(@inv_selection)
+			item = inv_comp.items[index]
+			
+			if item
+
+				info_comp = @mgr.get_component(item, Info)
+
+				@inv_item_name.text = info_comp.name
+				set_inventory_desc(info_comp.description)
+
+			else
+
+				@inv_item_name.text = "Empty"
+				set_inventory_desc("")
+
+			end
 
 		end
 
