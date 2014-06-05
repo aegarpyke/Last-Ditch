@@ -1,6 +1,6 @@
 class PhysicsSystem < System
 
-	DRAG = 0.93
+	DRAG = 0.91
 
 	attr_accessor :world, :player_body
 
@@ -20,6 +20,7 @@ class PhysicsSystem < System
 
 			body_def = BodyDef.new
 			body_def.type = BodyType::DynamicBody
+			body_def.linearDamping = 20.0
 			body_def.position.set(pos_comp.x + 0.5, pos_comp.y + 0.5)
 
 			shape = CircleShape.new
@@ -35,7 +36,6 @@ class PhysicsSystem < System
 			@player_body = col_comp.body
 
 			col_comp.body.create_fixture(fixture_def)
-			col_comp.body.linear_damping = 7.0
 			col_comp.body.fixed_rotation = true
 			col_comp.body.user_data = entity
 
@@ -90,17 +90,23 @@ class PhysicsSystem < System
 
 				if vel_comp.spd != 0
 
+					vel_vec = Vector2.new(
+						delta * vel_comp.spd * rot_comp.x, 
+						delta * vel_comp.spd * rot_comp.y)
+
 					col_comp.body.apply_linear_impulse(
-						Vector2.new(vel_comp.spd * rot_comp.x, vel_comp.spd * rot_comp.y), 
-						col_comp.body.get_world_center, 
+						vel_vec, 
+						col_comp.body.world_center, 
 						true)
 
 				end
 
+				rot_comp.rotate(vel_comp.ang_spd)
+
 			end
 
 			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
-		
+
 		end
 
 	end

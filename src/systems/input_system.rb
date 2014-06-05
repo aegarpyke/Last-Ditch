@@ -15,28 +15,6 @@ class InputSystem < System
 
 	def update(delta)
 
-		unless @mgr.paused
-			
-			vel_comp = @mgr.get_component(@player, Velocity)
-			rot_comp = @mgr.get_component(@player, Rotation)
-			input_comp = @mgr.get_component(@player, UserInput)
-
-			if Gdx.input.is_key_pressed(Keys::W)
-				vel_comp.spd = delta * C::PLAYER_SPD
-			elsif Gdx.input.is_key_pressed(Keys::S)
-				vel_comp.spd = -delta * C::PLAYER_SPD * 0.5
-			else
-				vel_comp.spd = 0.0
-			end
-
-			if Gdx.input.is_key_pressed(Keys::A)
-				rot_comp.rotate(delta * C::PLAYER_ROT_SPD)
-			elsif Gdx.input.is_key_pressed(Keys::D)
-				rot_comp.rotate(-delta * C::PLAYER_ROT_SPD)
-			end
-
-		end
-
 	end
 
 
@@ -79,7 +57,7 @@ class InputSystem < System
 
 		end
 
-		return true
+		true
 
 	end
 
@@ -91,17 +69,14 @@ class InputSystem < System
 			when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
 
 				@ctrl = true
-				return true
 
 			when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
 				
 				@shift = true
-				return true
 
 			when Keys::ESCAPE
 				
 				Gdx.app.exit
-				return true
 
 			when Keys::TAB
 				
@@ -112,6 +87,10 @@ class InputSystem < System
 
 				else
 
+					vel_comp = @mgr.get_component(@player, Velocity)
+					vel_comp.spd = 0
+					vel_comp.ang_spd = 0
+
 					@mgr.paused = !@mgr.paused
 					@mgr.time.active = !@mgr.time.active
 					@mgr.ui.main_update = true
@@ -119,48 +98,63 @@ class InputSystem < System
 					
 				end
 
-				return true
-
-			when Keys::W
+			when Keys::W, Keys::UP
 
 				if @mgr.ui.main_active
 
 					@mgr.ui.actions_update = true
 					@mgr.ui.actions_active = !@mgr.ui.actions_active
-					return true
+
+				else
+
+					vel_comp = @mgr.get_component(@player, Velocity)
+					vel_comp.spd = C::PLAYER_SPD
 
 				end
 
-			when Keys::A
-
-				if @mgr.ui.main_active
-
-					@mgr.ui.equip_update = true
-					@mgr.ui.equip_active = !@mgr.ui.equip_active
-					return true
-
-				end
-
-			when Keys::D
-
-				if @mgr.ui.main_active
-
-					@mgr.ui.status_update = true
-					@mgr.ui.status_active = !@mgr.ui.status_active
-					return true
-
-				end
-
-			when Keys::S
+			when Keys::S, Keys::DOWN
 				
 				if @mgr.ui.main_active
 
 					@mgr.ui.inv_update = true
 					@mgr.ui.inv_active = !@mgr.ui.inv_active
-					return true
+
+				else
+
+					vel_comp = @mgr.get_component(@player, Velocity)
+					vel_comp.spd = -C::PLAYER_SPD * 0.5
 
 				end
 
+			when Keys::A, Keys::LEFT
+
+				if @mgr.ui.main_active
+
+					@mgr.ui.equip_update = true
+					@mgr.ui.equip_active = !@mgr.ui.equip_active
+
+				else
+
+					vel_comp = @mgr.get_component(@player, Velocity)
+					vel_comp.ang_spd = C::PLAYER_ROT_SPD
+
+				end
+
+			when Keys::D, Keys::RIGHT
+
+				if @mgr.ui.main_active
+
+					@mgr.ui.status_update = true
+					@mgr.ui.status_active = !@mgr.ui.status_active
+
+				else
+
+					vel_comp = @mgr.get_component(@player, Velocity)
+					vel_comp.ang_spd = -C::PLAYER_ROT_SPD
+
+				end
+
+			
 			when Keys::F
 
 				if @shift
@@ -169,13 +163,12 @@ class InputSystem < System
 
 				end
 
-				return true
-
 			when Keys::C
 				puts 'take cover'
-				return true
 					
 		end
+
+		true
 
 	end
 
@@ -185,16 +178,34 @@ class InputSystem < System
 		case keycode
 
 			when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
-
+				
 				@ctrl = false
-				return true
-
+			
 			when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
-
+				
 				@shift = false
-				return true
+
+			when Keys::W, Keys::S, Keys::UP, Keys::DOWN
+
+				unless @mgr.ui.main_active
+
+					vel_comp = @mgr.get_component(@player, Velocity)
+					vel_comp.spd = 0
+
+				end
+
+			when Keys::A, Keys::D, Keys::LEFT, Keys::RIGHT
+
+				unless @mgr.ui.main_active
+
+					vel_comp = @mgr.get_component(@player, Velocity)
+					vel_comp.ang_spd = 0
+
+				end
 
 		end
+
+		true
 
 	end
 

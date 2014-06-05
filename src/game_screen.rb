@@ -10,8 +10,8 @@ class GameScreen < ScreenAdapter
 
 		@player = @mgr.create_tagged_entity('player')
 		@mgr.add_component(@player, Position.new(40, 40))
-		@mgr.add_component(@player, Velocity.new(0.0))
-		@mgr.add_component(@player, Rotation.new(0.0))
+		@mgr.add_component(@player, Velocity.new(0, 0))
+		@mgr.add_component(@player, Rotation.new(0))
 		@mgr.add_component(@player, Collision.new)
 		@mgr.add_component(@player, Needs.new)
 		@mgr.add_component(@player, UserInput.new)
