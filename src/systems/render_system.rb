@@ -34,7 +34,7 @@ class RenderSystem < System
 	end
 
 
-	def tick(delta, batch)
+	def update(delta, batch)
 
 		batch.begin
 

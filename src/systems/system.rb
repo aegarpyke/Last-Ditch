@@ -1,7 +1,7 @@
 class System
 
-	def tick
-		raise RuntimeError('Systems must override process_tick')
+	def update
+		raise RuntimeError('Systems must override update')
 	end
 
 end

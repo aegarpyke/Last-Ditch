@@ -8,7 +8,7 @@ class ActionsSystem < System
 	end
 
 
-	def tick(delta)
+	def update(delta)
 
 
 	end

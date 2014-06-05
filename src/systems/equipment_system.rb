@@ -8,7 +8,7 @@ class EquipmentSystem < System
 	end
 
 
-	def tick(delta)
+	def update(delta)
 
 
 	end

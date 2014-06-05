@@ -327,7 +327,7 @@ class MapSystem < System
 	end
 
 
-	def tick(delta, batch)
+	def update(delta, batch)
 
 		@start_x = [@focus.x - 13, 0].max.to_i
 		@start_y = [@focus.y - 10, 0].max.to_i

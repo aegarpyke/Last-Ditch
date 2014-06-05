@@ -18,7 +18,7 @@ class LightingSystem < System
 	end
 
 
-	def tick(matrix)
+	def update(matrix)
 
 		@handler.set_combined_matrix(matrix.scl(C::BTW))
 

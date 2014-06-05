@@ -7,7 +7,7 @@ class StatusSystem < System
 	end
 
 
-	def tick(delta)
+	def update(delta)
 
 		entities = @mgr.get_all_entities_with(Needs)
 		entities.each do |entity|

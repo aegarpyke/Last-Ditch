@@ -56,13 +56,13 @@ class GameScreen < ScreenAdapter
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 
-		@time.tick(delta)
-		@input.tick(delta)
-		@map.tick(delta, @batch)
-		@physics.tick(delta)
-		@render.tick(delta, @batch)
-		@lighting.tick(@map.cam.combined)
-		@ui.tick(delta, @batch)
+		@time.update(delta)
+		@input.update(delta)
+		@map.update(delta, @batch)
+		@physics.update(delta)
+		@render.update(delta, @batch)
+		@lighting.update(@map.cam.combined)
+		@ui.update(delta, @batch)
 
 		# @fps.log
 		# @debug.render(@physics.world, @map.cam.combined)

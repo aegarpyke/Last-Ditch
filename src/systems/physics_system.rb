@@ -76,7 +76,7 @@ class PhysicsSystem < System
 	end
 
 
-	def tick(delta)
+	def update(delta)
 
 		unless @mgr.paused
 

@@ -11,7 +11,7 @@ class InventorySystem < System
 	end
 
 
-	def tick(delta)
+	def update(delta)
 
 		if @update
 

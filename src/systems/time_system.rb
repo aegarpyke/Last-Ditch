@@ -61,7 +61,7 @@ class TimeSystem < System
 	end
 
 
-	def tick(delta)
+	def update(delta)
 
 		if @active
 

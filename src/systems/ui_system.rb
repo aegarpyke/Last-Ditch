@@ -304,12 +304,12 @@ class UISystem < System
 	end
 
 
-	def tick(delta, batch)
+	def update(delta, batch)
 
-		@actions.tick(delta)
-		@inventory.tick(delta)
-		@equipment.tick(delta)
-		@status.tick(delta)
+		@actions.update(delta)
+		@inventory.update(delta)
+		@equipment.update(delta)
+		@status.update(delta)
 
 		if @base_active
 
