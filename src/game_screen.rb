@@ -27,17 +27,25 @@ class GameScreen < ScreenAdapter
 	                       'player_walk4', 
 	                       'player_walk3']}))
 
-		@time     = TimeSystem.new
-		@input    = InputSystem.new(@mgr, @player)
-		@map      = MapSystem.new(@mgr, @player, @atlas)
-		@physics  = PhysicsSystem.new(@mgr, @map)
-		@render   = RenderSystem.new(@mgr, @atlas)
-		@lighting = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
-		@ui       = UISystem.new(@mgr, @player, @atlas)
+		@time      = TimeSystem.new
+		@input     = InputSystem.new(@mgr)
+		@map       = MapSystem.new(@mgr, @player, @atlas)
+		@physics   = PhysicsSystem.new(@mgr, @map)
+		@render    = RenderSystem.new(@mgr, @atlas)
+		@lighting  = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
+		@ui        = UISystem.new(@mgr, @player, @atlas)
+		@actions   = ActionsSystem.new(@mgr)
+		@inventory = InventorySystem.new(@mgr)
+		@equipment = EquipmentSystem.new(@mgr)
+		@status    = StatusSystem.new(@mgr)
 
-		@mgr.map = @map
-		@mgr.time = @time
-		@mgr.atlas = @atlas
+		@mgr.map       = @map
+		@mgr.time      = @time
+		@mgr.atlas     = @atlas
+		@mgr.actions   = @actions
+		@mgr.inventory = @inventory
+		@mgr.equipment = @equipment
+		@mgr.status    = @status
 
 		@fps = FPSLogger.new
 		@debug = Box2DDebugRenderer.new
@@ -63,6 +71,10 @@ class GameScreen < ScreenAdapter
 		@render.update(delta, @batch)
 		@lighting.update(@map.cam.combined)
 		@ui.update(delta, @batch)
+		@actions.update(delta)
+		@inventory.update(delta)
+		@equipment.update(delta)
+		@status.update(delta)
 
 		# @fps.log
 		# @debug.render(@physics.world, @map.cam.combined)
@@ -80,6 +92,10 @@ class GameScreen < ScreenAdapter
 		@render.dispose
 		@lighting.dispose
 		@ui.dispose
+		@actions.dispose
+		@inventory.dispose
+		@equipment.dispose
+		@status.dispose
 
 	end
 

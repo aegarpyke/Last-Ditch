@@ -1,6 +1,7 @@
 class EntityManager
 
-	attr_reader :id 
+	attr_reader :id
+	attr_accessor :actions, :inventory, :equipment, :status
 	attr_accessor :map, :atlas, :ui, :time, :paused
 
 	def initialize
@@ -98,7 +99,7 @@ class EntityManager
       end
     end
 
-    if @ids_to_tags.delete(entity)==nil
+    if @ids_to_tags.delete(entity) == nil
       return false
     else
       return true

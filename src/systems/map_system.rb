@@ -256,7 +256,7 @@ class MapSystem < System
 		@mgr.remove_component(item, render_comp)
 
 		@items.delete(item)
-		@mgr.ui.inventory.update = true
+		@mgr.inventory.update = true
 
 	end
 

@@ -1,7 +1,6 @@
 class UISystem < System
 
-	attr_accessor :stage, :inv_slots, :player
-	attr_accessor :actions, :inventory, :equipment, :status, :inv_selection
+	attr_accessor :stage, :inv_slots, :player, :inv_selection
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
 
@@ -17,11 +16,6 @@ class UISystem < System
 
 		setup_base
 		setup_main
-
-		@actions = ActionsSystem.new(@mgr)
-		@inventory = InventorySystem.new(@mgr)
-		@equipment = EquipmentSystem.new(@mgr)
-		@status = StatusSystem.new(@mgr)
 
 		if 1 == 0
 			@main_table.debug
@@ -54,7 +48,7 @@ class UISystem < System
 		@base_table.add(@base_money).align(Align::right).height(11)
 
 		@base_table_needs = Table.new(@skin)
-		@base_table_needs.set_bounds(-2, Gdx.graphics.height - 32, 106, 32)
+		@base_table_needs.set_bounds(-2, Gdx.graphics.height - 30, 106, 30)
 
 		@base_hunger = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
 		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1.0)
@@ -305,11 +299,6 @@ class UISystem < System
 
 
 	def update(delta, batch)
-
-		@actions.update(delta)
-		@inventory.update(delta)
-		@equipment.update(delta)
-		@status.update(delta)
 
 		if @base_active
 
