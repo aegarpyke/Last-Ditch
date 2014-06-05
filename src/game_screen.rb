@@ -30,14 +30,14 @@ class GameScreen < ScreenAdapter
 		@time      = TimeSystem.new
 		@input     = InputSystem.new(@mgr)
 		@map       = MapSystem.new(@mgr, @player, @atlas)
-		@physics   = PhysicsSystem.new(@mgr, @map)
-		@render    = RenderSystem.new(@mgr, @atlas)
-		@lighting  = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
 		@ui        = UISystem.new(@mgr, @player, @atlas)
 		@actions   = ActionsSystem.new(@mgr)
 		@inventory = InventorySystem.new(@mgr)
 		@equipment = EquipmentSystem.new(@mgr)
 		@status    = StatusSystem.new(@mgr)
+		@physics   = PhysicsSystem.new(@mgr, @map)
+		@render    = RenderSystem.new(@mgr, @atlas)
+		@lighting  = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
 
 		@mgr.map       = @map
 		@mgr.time      = @time
@@ -67,14 +67,14 @@ class GameScreen < ScreenAdapter
 		@time.update(delta)
 		@input.update(delta)
 		@map.update(delta, @batch)
-		@physics.update(delta)
-		@render.update(delta, @batch)
-		@lighting.update(@map.cam.combined)
-		@ui.update(delta, @batch)
 		@actions.update(delta)
 		@inventory.update(delta)
 		@equipment.update(delta)
 		@status.update(delta)
+		@physics.update(delta)
+		@render.update(delta, @batch)
+		@lighting.update(@map.cam.combined)
+		@ui.update(delta, @batch)
 
 		# @fps.log
 		# @debug.render(@physics.world, @map.cam.combined)
@@ -87,15 +87,15 @@ class GameScreen < ScreenAdapter
 		@batch.dispose
 		@time.dispose
 		@input.dispose
-		@physics.dispose
-		@map.dispose
-		@render.dispose
-		@lighting.dispose
 		@ui.dispose
 		@actions.dispose
 		@inventory.dispose
 		@equipment.dispose
 		@status.dispose
+		@physics.dispose
+		@map.dispose
+		@render.dispose
+		@lighting.dispose
 
 	end
 
