@@ -1,6 +1,6 @@
 class UISystem < System
 
-	attr_accessor :stage, :inv_slots, :player, :inv_selection
+	attr_accessor :stage, :inv_slots, :player, :inv_selection, :prev_selection
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
 
@@ -322,22 +322,28 @@ class UISystem < System
 			@base_energy.width = (needs_comp.energy * 100 + 4).to_i
 			@base_sanity.width = (needs_comp.sanity * 100 + 4).to_i
 
-			index = @inv_slots.index(@inv_selection)
-			item = inv_comp.items[index]
-			
-			if item
+			unless @inv_selection == @prev_selection
 
-				info_comp = @mgr.get_component(item, Info)
+				index = @inv_slots.index(@inv_selection)
+				item = inv_comp.items[index]
+				
+				if item
 
-				@inv_item_name.text = info_comp.name
-				set_inventory_desc(info_comp.description)
+					info_comp = @mgr.get_component(item, Info)
 
-			else
+					@inv_item_name.text = info_comp.name
+					set_inventory_desc(info_comp.description)
 
-				@inv_item_name.text = "Empty"
-				set_inventory_desc("")
+				else
+
+					@inv_item_name.text = "Empty"
+					set_inventory_desc("")
+
+				end
 
 			end
+
+			@prev_selection = @inv_selection
 
 		end
 
