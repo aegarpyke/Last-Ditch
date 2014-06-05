@@ -14,9 +14,9 @@ class MapSystem < System
 		@width, @height = C::MAP_WIDTH, C::MAP_HEIGHT
 		@focus = @mgr.get_component(player, Position)
 		
-		@iterations = 300
+		@iterations = 120
 		@rooms, @items, @bodies = [], [], []
-		@num_of_rooms, @num_of_items = 40, 1000
+		@num_of_rooms, @num_of_items = 80, 600
 
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
 		@sight = Array.new(@width) {|i| Array.new(@height) {|i| true }}
@@ -35,7 +35,6 @@ class MapSystem < System
 				end
 
 			end
-
 		end
 
 		generate_rooms
@@ -56,11 +55,9 @@ class MapSystem < System
 		end
 
 		for i in 0...@iterations
-
 			@rooms.each do |room|
 				expand(room)
 			end
-
 		end
 
 		@rooms.each do |room|
@@ -94,7 +91,6 @@ class MapSystem < System
 						end
 
 					end
-
 				end
 
 				if room.x2 - room.x1 > 3
@@ -112,10 +108,10 @@ class MapSystem < System
 					@rot[dx][dy]   = 0.0
 					@tiles[dx][dy] = @atlas.find_region('floor2')
 
-					@solid[dx + 1][dy] = false
-					@sight[dx + 1][dy] = true
-					@rot[dx + 1][dy]   = 0.0
-					@tiles[dx + 1][dy] = @atlas.find_region('floor2')
+					@solid[dx+1][dy] = false
+					@sight[dx+1][dy] = true
+					@rot[dx+1][dy]   = 0.0
+					@tiles[dx+1][dy] = @atlas.find_region('floor2')
 
 				end
 
@@ -134,10 +130,10 @@ class MapSystem < System
 					@rot[dx][dy]   = 0.0
 					@tiles[dx][dy] = @atlas.find_region('floor2')
 
-					@solid[dx][dy + 1] = false
-					@sight[dx][dy + 1] = true
-					@rot[dx][dy + 1]   = 0.0
-					@tiles[dx][dy + 1] = @atlas.find_region('floor2')
+					@solid[dx][dy+1] = false
+					@sight[dx][dy+1] = true
+					@rot[dx][dy+1]   = 0.0
+					@tiles[dx][dy+1] = @atlas.find_region('floor2')
 
 				end
 
@@ -153,7 +149,6 @@ class MapSystem < System
 		direction = Random.rand(4)
 
 		case direction
-
 			when 0
 				test_room.x1 -= 2 if test_room.x1 - 2 > @master.x1
 			when 1
@@ -162,11 +157,9 @@ class MapSystem < System
 				test_room.x2 += 2 if test_room.x2 + 2 < @master.x2
 			when 3
 				test_room.y2 += 2 if test_room.y2 + 2 < @master.y2
-
 		end
 
 		check = false
-
 		@rooms.each do |room|
 
 			next if room == test_room
@@ -174,33 +167,23 @@ class MapSystem < System
 			if intersects(room, test_room)
 
 				check = true
-
-				case direction
-					when 0
-						test_room.x1 += 2
-					when 1
-						test_room.y1 += 2
-					when 2
-						test_room.x2 -= 2
-					when 3
-						test_room.y2 -= 2
-				end
+				break
 
 			end
 
 		end
 
-		if !check
-			case direction
-				when 0
-					test_room.x1 += 1
-				when 1
-					test_room.y1 += 1
-				when 2
-					test_room.x2 -= 1
-				when 3
-					test_room.y2 -= 1
-			end
+		fix = check ? 2 : 1
+
+		case direction
+			when 0
+				test_room.x1 += fix
+			when 1
+				test_room.y1 += fix
+			when 2
+				test_room.x2 -= fix
+			when 3
+				test_room.y2 -= fix
 		end
 
 	end
@@ -231,23 +214,29 @@ class MapSystem < System
 
 			check = Random.rand
 			if check < 0.33
+
 				@mgr.add_component(item, Type.new('canteen1'))
+				@mgr.add_component(item, Render.new('canteen1'))
 				@mgr.add_component(item, Info.new(
 					'Canteen 1',
 					"This is a drinking canteen."))
-				@mgr.add_component(item, Render.new('canteen1'))
+				
 			elsif check < 0.66
+
 				@mgr.add_component(item, Type.new('rations1'))
+				@mgr.add_component(item, Render.new('rations1'))
 				@mgr.add_component(item, Info.new(
 					'Rations 1',
 					"This is rations container."))
-				@mgr.add_component(item, Render.new('rations1'))
+
 			else
+
 				@mgr.add_component(item, Type.new('scrap1'))
+				@mgr.add_component(item, Render.new('scrap1'))
 				@mgr.add_component(item, Info.new(
 					'Scrap 1',
 					"This is a piece of scrap material."))
-				@mgr.add_component(item, Render.new('scrap1'))
+
 			end
 
 			@items << item
@@ -260,8 +249,9 @@ class MapSystem < System
 	def remove_item(item)
 
 		pos_comp = @mgr.get_component(item, Position)
-		@mgr.remove_component(item, pos_comp)
 		render_comp = @mgr.get_component(item, Render)
+
+		@mgr.remove_component(item, pos_comp)
 		@mgr.remove_component(item, render_comp)
 
 		@items.delete(item)
@@ -284,12 +274,13 @@ class MapSystem < System
 				c = Math.cos(-rot_comp.angle * Math::PI/180)
 				s = Math.sin(-rot_comp.angle * Math::PI/180)
 
+				# Transform coordinates to axis-aligned frame
 				rot_x = pos_comp.x + c * (x - pos_comp.x) - s * (y - pos_comp.y)
 				rot_y = pos_comp.y + s * (x - pos_comp.x) + c * (y - pos_comp.y)
 
-				left = pos_comp.x - render_comp.width * C::WTB / 2
-				right = pos_comp.x + render_comp.width * C::WTB / 2
-				top = pos_comp.y - render_comp.height * C::WTB / 2
+				left   = pos_comp.x - render_comp.width * C::WTB / 2
+				right  = pos_comp.x + render_comp.width * C::WTB / 2
+				top    = pos_comp.y - render_comp.height * C::WTB / 2
 				bottom = pos_comp.y + render_comp.height * C::WTB / 2
 
 				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
@@ -300,15 +291,15 @@ class MapSystem < System
 
 		end
 
-		return nil
+		nil
 
 	end
 
 
 	def get_nearest_item(x, y)
 
+		dist = 1.6
 		item_choice = nil
-		dist = 1000000
 
 		entities = @mgr.get_all_entities_with(Item)
 		entities.each do |entity|
@@ -327,11 +318,7 @@ class MapSystem < System
 
 		end
 
-		if dist < 1.6
-			return item_choice
-		else
-			return nil
-		end
+		item_choice
 
 	end
 
@@ -344,10 +331,9 @@ class MapSystem < System
 		@end_y   = [@focus.y + 10, C::MAP_HEIGHT-1].min.to_i
 
 		@cam.position.set(@focus.x * C::BTW, @focus.y * C::BTW, 0)
-
 		@cam.update
 
-		batch.set_projection_matrix(@cam::combined)
+		batch.projection_matrix = @cam::combined
 
 		batch.begin
 
@@ -359,7 +345,7 @@ class MapSystem < System
 					x * C::BTW, y * C::BTW,
 					C::BTW/2, C::BTW/2, 
 					C::BTW, C::BTW,
-					1.0, 1.0,
+					1, 1,
 					@rot[x][y])
 
 			end
