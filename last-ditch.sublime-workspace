@@ -1,0 +1,1161 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sc",
+				"screenY"
+			],
+			[
+				"sce",
+				"screenX"
+			],
+			[
+				"input",
+				"input_system"
+			],
+			[
+				"inpt",
+				"input_system"
+			],
+			[
+				"scr",
+				"screenY"
+			],
+			[
+				"wolr",
+				"world_y"
+			],
+			[
+				"screen",
+				"screenX"
+			],
+			[
+				"worl",
+				"world_y"
+			],
+			[
+				"world",
+				"world_x"
+			],
+			[
+				"rne",
+				"render_comp"
+			],
+			[
+				"get",
+				"get_component"
+			],
+			[
+				"invdes",
+				"inv_desc_lines"
+			],
+			[
+				"invd",
+				"inv_desc_lines"
+			],
+			[
+				"inv",
+				"inv_window"
+			],
+			[
+				"gra",
+				"garuda12"
+			],
+			[
+				"max",
+				"maxHeight"
+			],
+			[
+				"base",
+				"base_time"
+			],
+			[
+				"action",
+				"actions_active"
+			],
+			[
+				"equip",
+				"equip_window"
+			],
+			[
+				"bas",
+				"base_time"
+			],
+			[
+				"min",
+				"minute"
+			],
+			[
+				"mi",
+				"minute"
+			],
+			[
+				"Lab",
+				"LabelStyle"
+			],
+			[
+				"Con",
+				"CONTROL_RIGHT"
+			],
+			[
+				"CO",
+				"CONTROL_LEFT"
+			],
+			[
+				"type",
+				"type_comp"
+			],
+			[
+				"render",
+				"render_comp"
+			],
+			[
+				"remove",
+				"remove_component"
+			],
+			[
+				"font",
+				"fontColor"
+			],
+			[
+				"scene",
+				"scene2d"
+			],
+			[
+				"scen",
+				"scene2d"
+			],
+			[
+				"JAVA",
+				"java_import"
+			],
+			[
+				"actions",
+				"actions_active"
+			],
+			[
+				"item",
+				"item_choice"
+			],
+			[
+				"region",
+				"region_name"
+			],
+			[
+				"status",
+				"status_window"
+			],
+			[
+				"defu",
+				"default-font"
+			],
+			[
+				"secn",
+				"scene2d"
+			],
+			[
+				"eqip",
+				"equip_active"
+			],
+			[
+				"equip_",
+				"equip_active"
+			],
+			[
+				"add",
+				"add_actor"
+			],
+			[
+				"inv_",
+				"inv_listener"
+			],
+			[
+				"liste",
+				"listener_for"
+			],
+			[
+				"col",
+				"colspan"
+			],
+			[
+				"sta",
+				"status_button"
+			],
+			[
+				"tex",
+				"TextButtonStyle"
+			],
+			[
+				"Tex",
+				"TextButtonStyle"
+			],
+			[
+				"Text",
+				"TextButton"
+			],
+			[
+				"default",
+				"default-font"
+			],
+			[
+				"scne",
+				"scene2d"
+			],
+			[
+				"fin",
+				"find_region"
+			],
+			[
+				"dir",
+				"direction"
+			],
+			[
+				"BIT",
+				"BIT_PLAYER"
+			],
+			[
+				"box",
+				"box2dLight"
+			],
+			[
+				"end",
+				"end_x"
+			],
+			[
+				"start",
+				"start_y"
+			],
+			[
+				"frame",
+				"frame_list"
+			],
+			[
+				"syst",
+				"systems"
+			],
+			[
+				"rq",
+				"require_relative"
+			],
+			[
+				"G",
+				"GL20"
+			],
+			[
+				"pos",
+				"pos_comp"
+			],
+			[
+				"Body",
+				"BodyType"
+			],
+			[
+				"crea",
+				"create_body"
+			],
+			[
+				"creat",
+				"create_fixture"
+			],
+			[
+				"Bo",
+				"BodyDef"
+			],
+			[
+				"vel",
+				"vel_comp"
+			],
+			[
+				"rot",
+				"rot_comp"
+			],
+			[
+				"app",
+				"apply_torque"
+			],
+			[
+				"body",
+				"body_def"
+			],
+			[
+				"get_",
+				"get_all_entities_with_components"
+			],
+			[
+				"gr",
+				"gravity"
+			],
+			[
+				"shi",
+				"shift_y"
+			],
+			[
+				"map",
+				"map_x"
+			],
+			[
+				"shif",
+				"shift_x"
+			],
+			[
+				"cir",
+				"circ_pos_y"
+			],
+			[
+				"circ",
+				"circ_pos_y"
+			],
+			[
+				"cr",
+				"circ_dist_y"
+			],
+			[
+				"ma",
+				"map_x"
+			],
+			[
+				"ci",
+				"circ_pos_x"
+			],
+			[
+				"new",
+				"new_y"
+			],
+			[
+				"lim",
+				"lim_y1"
+			],
+			[
+				"star",
+				"start_y"
+			],
+			[
+				"tile",
+				"tileset"
+			],
+			[
+				"st",
+				"start_y"
+			],
+			[
+				"tmp",
+				"tmp_blocks_sight"
+			],
+			[
+				"ain",
+				"anim_comp"
+			],
+			[
+				"pla",
+				"player_walk"
+			],
+			[
+				"anim",
+				"anim_comp"
+			],
+			[
+				"java",
+				"java_import"
+			],
+			[
+				"comp",
+				"components"
+			],
+			[
+				"each",
+				"each_key"
+			],
+			[
+				"jav",
+				"java_import"
+			],
+			[
+				"all",
+				"all_entities"
+			],
+			[
+				"Forw",
+				"Forwardable"
+			],
+			[
+				"require",
+				"require_relative"
+			],
+			[
+				"P1_ROT",
+				"P1_ROTR"
+			],
+			[
+				"inpu",
+				"input_comp"
+			],
+			[
+				"P1",
+				"P1_THRUST"
+			],
+			[
+				"image",
+				"image_fn"
+			],
+			[
+				"imag",
+				"image_fn"
+			],
+			[
+				"enti",
+				"entity_mgr"
+			],
+			[
+				"component",
+				"component_class"
+			],
+			[
+				"com",
+				"component_class"
+			],
+			[
+				"compo",
+				"component"
+			],
+			[
+				"compt",
+				"component_stores"
+			],
+			[
+				"ran",
+				"randomUUID"
+			],
+			[
+				"_tuir",
+				"_turn_limit"
+			],
+			[
+				"ent",
+				"entity"
+			],
+			[
+				"gam",
+				"game_delta"
+			],
+			[
+				"game",
+				"gametime"
+			],
+			[
+				"_gam",
+				"_game_delta"
+			],
+			[
+				"_tur",
+				"_turn_limit"
+			],
+			[
+				"tur",
+				"_turn_timer"
+			],
+			[
+				"_tunr",
+				"_turn_timer"
+			],
+			[
+				"_in",
+				"_minute"
+			],
+			[
+				"_game",
+				"_game_time"
+			],
+			[
+				"pac",
+				"place_windows"
+			],
+			[
+				"plac",
+				"place_doors"
+			],
+			[
+				"bloc",
+				"block_sight"
+			],
+			[
+				"has_",
+				"has_window"
+			],
+			[
+				"targ",
+				"target_y"
+			],
+			[
+				"block",
+				"block_sight"
+			],
+			[
+				"items",
+				"items_to_remove"
+			],
+			[
+				"skillf",
+				"skills_focus_build_label"
+			],
+			[
+				"blo",
+				"block_sight"
+			],
+			[
+				"upd",
+				"update_available_skills"
+			],
+			[
+				"upt",
+				"update_available_skills"
+			],
+			[
+				"up",
+				"update_available_skills"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/systems/input_system.rb",
+			"settings":
+			{
+				"buffer_size": 3391,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "bash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ PS1=\"->\"\n->ls\nchangelog.txt\ncrash_reporter\nIcon\nPackages\nplugin_host\npython3.3.zip\nsublime_plugin.py\nsublime.py\nsublime_text\nsublime_text.desktop\n->cd /home/kabbotta/workspace/jruby/last-ditch\n->ls\nabrt_checker_13138.log\ncfg\nhs_err_pid25718.log\nlast-ditch.rb\nlast_ditch.sublime-project\nlast_ditch.sublime-workspace\nlib\nREADME.md\nres\nsrc\n->jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n->",
+			"settings":
+			{
+				"buffer_size": 491,
+				"line_ending": "Unix",
+				"name": "*REPL* [shell]",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 72.0,
+		"selected_items":
+		[
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/kabbotta/workspace/jruby/last-ditch/src/components/needs.rb",
+		"/home/kabbotta/workspace/jruby/last-ditch/src/systems/time_system.rb",
+		"/home/kabbotta/workspace/jruby/last-ditch/src/game_screen.rb",
+		"/home/kabbotta/workspace/jruby/last-ditch/src/systems/ui_system.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/util/c.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/systems/ui_system.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/game_screen.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/systems/input_system.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/util/user_adapter.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/components/user_input.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/cfg/uiskin.json",
+		"/home/kabbotta/.config/sublime-text-3/Packages/User/Ruby.sublime-settings",
+		"/home/kabbotta/.config/sublime-text-2/Packages/User/Ruby.sublime-settings",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/systems/inventory_system.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/components/inventory.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/components/rotation.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/systems/render_system.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/entity_manager.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/util/initializer.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/map.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/ui.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/game_time.rb",
+		"/home/kabbotta/workspace/java/jruby/last-ditch/src/user_adapter.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/res/fonts/garuda12.fnt",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/components/type.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/README.md",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/entity_manager.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/game_screen.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/user_adapter.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/ui.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/map.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/systems/inventory_system.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/systems/render_system.rb",
+		"/home/kabbotta/workspace/java/libgdx/last_ditch/src/listener.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/util/c.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/entity_manager.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/util/initializer.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/components/item.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/components/inventory.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/map.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/user_adapter.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/input_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/cfg/uiskin.json",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/status_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/inventory_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/equipment_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/actions_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/ui.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/render_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/last_ditch.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/game_screen.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/equip_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/inv_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/chunk.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/systems/physics_system.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/components/animation.rb",
+		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/components/render.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/listener.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/user_adapter.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/ld_adapter.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/Menu.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/LightingManager.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/GameScreen.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/Callback.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/Listener.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/user_input.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/entity_manager.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/assets/json/skin.json",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/collision.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/render_system.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/lighting_system.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/physics_system.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/EntityContactListener.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/PlayerListener.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/input_system.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/rotation.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/room.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/chunk.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/cfg/uiskin.json",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/ui.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/map.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/last_ditch.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/game_screen.rb",
+		"/home/kabbotta/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/kabbotta/.config/sublime-text-3/Packages/Colorsublime-Themes/Kabbotta.tmTheme",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/velocity.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/HUD.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/res/graphics.atlas",
+		"/home/kabbotta/workspace/libGDX/last_ditch/res/uiskin.atlas",
+		"/home/kabbotta/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/kabbotta/.config/sublime-text-3/Packages/User/JSON.sublime-settings",
+		"/home/kabbotta/workspace/libGDX/last_ditch/cfg/uiskin.atlas",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/json/uiskin.json",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/util/ld_rectangle.rb",
+		"/home/kabbotta/workspace/python/Pyglet/lastditch/src/game/room.py",
+		"/home/kabbotta/workspace/python/Pyglet/lastditch/src/game/chunk.py",
+		"/home/kabbotta/workspace/slick/last_ditch/src/c.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/src/initializer.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/src/components/collision.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/src/systems/physics_system.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/src/systems/input_system.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/util/c.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/position.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/system.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/util/initializer.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/render.rb",
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/animation.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/game.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/src/components/animation.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/src/systems/rendering_system.rb",
+		"/home/kabbotta/workspace/slick/last_ditch/src/components/input.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/util/Initializer.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/last_ditch.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/util/c.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/util/initializer.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/entity_manager.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/map.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/game_screen.rb",
+		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/LastDitchPrototype/LastDitch-Game.12/src/logic/GameScreen.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/systems/map_system.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/game.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/components/component.rb",
+		"/home/kabbotta/workspace/LibGDX/last_ditch/src/map_system.rb",
+		"/home/kabbotta/workspace/Slick/last_ditch/src/entity_manager.rb",
+		"/home/kabbotta/workspace/LibGDX/bare_test/src/game.rb",
+		"/home/kabbotta/workspace/LibGDX/bare_test/game.rb",
+		"/home/kabbotta/workspace/LibGDX/bare_test/src/util/initializer.rb",
+		"/home/kabbotta/workspace/LibGDX/bare_test/src/launcher.rb"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"py",
+			"px",
+			"@table",
+			"@update_main",
+			"@update",
+			"active",
+			"@active",
+			"@items",
+			"get_all_entities_with_components",
+			"all_entities",
+			"Label",
+			"map.mgr.atlas",
+			"add",
+			"char ",
+			"int ",
+			"boolean ",
+			"font",
+			"\"r\"",
+			"\"g\"",
+			"\"b\"",
+			"\"a\"",
+			"uiskin",
+			")\n",
+			"box2d.physics",
+			".png",
+			"res/",
+			"import",
+			"get_component_of_type",
+			"mgr",
+			"'\n",
+			"p1_lander",
+			"entity_mgr",
+			"entity_uuid",
+			"get_all_entities_with_component_of_type",
+			"location_component",
+			"entity_mgr",
+			",)",
+			"Ivory",
+			"')\n",
+			"recipe",
+			"Recipe",
+			"recipe",
+			"master_room",
+			"'Skills'",
+			"door",
+			"num_of_items",
+			"remove",
+			"glScissor",
+			"self.skills_focus_build_label",
+			"self.skills_focus_build_label.text",
+			"self.skills_focus_build_label.color",
+			"Build",
+			"hit_test",
+			"cur_pos",
+			"msg",
+			"def msg",
+			"msg",
+			"self.inv_scrollpane.base_pos + self.inv_scrollpane.cur_pos",
+			"math",
+			"msg",
+			"self._profs",
+			"self._reqs",
+			"smooth_floor",
+			"street_below2",
+			"street_below1",
+			"description",
+			"'interior_floor'",
+			"'street_below2'",
+			"interior_floor",
+			"smooth_floor",
+			"'street below2'",
+			"'street_below1'",
+			"Button",
+			"Element",
+			"door",
+			"chunk.doors",
+			"door",
+			"name",
+			"_",
+			"self.skills_cur_action",
+			"7.354646921157837",
+			"info",
+			"1\\.0",
+			"1.0",
+			"1",
+			"@",
+			"cur_action",
+			"value",
+			"SkillTest",
+			")\n",
+			"title",
+			"/",
+			"skills_actions",
+			"skills_actions_batch",
+			"skills_action",
+			"skills_actions",
+			"skills actions",
+			"status_skills_list_batch",
+			"status skills list",
+			"print",
+			"element",
+			"capitalize",
+			"was",
+			"was placed",
+			"was plaed",
+			"msg",
+			"self.skills_update",
+			"msg",
+			"cur_available_actions",
+			"print",
+			"skills_actions_cur_list_size",
+			"skills_actions_cur_list_size\\",
+			"skills_actions_cur_list_size",
+			"check",
+			"inv_scrollpane.base_pos",
+			"self.inv_scrollpane.base_pos",
+			"scroll",
+			"self.inv_cur_pos",
+			"inventory",
+			"self.status_button",
+			"self.skills_button",
+			"self.inv_button",
+			"self.inv_cur_len",
+			"self.skills_actions_info",
+			"wrap",
+			"self.skills_actions_info_reqs",
+			"self.skills_actions_info_description_body",
+			"wordwrap"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"pos_comp.y",
+			"pos_comp.x",
+			"@main_table",
+			"@main_update",
+			"@update_main",
+			"@main_active",
+			"map.atlas",
+			"",
+			"def",
+			"r",
+			"g",
+			"b",
+			"a",
+			"\na",
+			"physics.box2d",
+			"",
+			"java_import",
+			"get_component",
+			"@mgr",
+			"player",
+			"mgr",
+			"entity",
+			"spatial_component",
+			"mgr",
+			"Action",
+			"action",
+			"self.master_room",
+			"index",
+			"self.profs",
+			"self.reqs",
+			"street below2",
+			"street below1",
+			"'interior floor'",
+			"'street below2'",
+			"interior floor",
+			"smooth floor",
+			"'street below2'",
+			"'street below1'",
+			"type",
+			" ",
+			"self.",
+			"value_rate",
+			"skills",
+			"skills_batch",
+			"skills",
+			"status_skills_batch",
+			"player",
+			"test",
+			"self.status_label",
+			"self.skills_label",
+			"self.inv_label",
+			"self.skills_actions_info",
+			"self.skills_actions_info_reqs",
+			"skills_actions_",
+			"skills_cur_available_actions",
+			"skill_list",
+			"self.map.target_y",
+			"self.map.target_x",
+			",",
+			"",
+			"self.skills['",
+			"",
+			", 0.0)",
+			"Skill(",
+			"_tech",
+			"_design",
+			" = 0.0",
+			"skills",
+			"skill_scroll",
+			"window",
+			"master_room",
+			"self.tex_pos",
+			"self.rooms",
+			"y",
+			"INV_LIST_SIZE",
+			"height",
+			"width",
+			"self.target_y",
+			"self.target_x",
+			"inv_next_slot",
+			"self.inv_base_pos",
+			"'",
+			"value_weight",
+			"name",
+			"inv_labels",
+			"player.num_of_items",
+			"_thirst",
+			"player.facing",
+			"floor"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/systems/input_system.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								218,
+								218
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 491,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								491,
+								491
+							]
+						],
+						"settings":
+						{
+							"auto_complete": true,
+							"auto_indent": false,
+							"detect_indentation": false,
+							"gutter": false,
+							"history_arrows": true,
+							"indent_subsequent_lines": false,
+							"line_numbers": false,
+							"repl": true,
+							"repl_external_id": "shell",
+							"repl_id": "cd296f44c06743a0826e9665f4d2c3c7",
+							"repl_restart_args":
+							{
+								"cmd":
+								{
+									"linux":
+									[
+										"bash",
+										"-i"
+									],
+									"osx":
+									[
+										"bash",
+										"-i"
+									],
+									"windows":
+									[
+										"cmd.exe"
+									]
+								},
+								"cmd_postfix": "\n",
+								"cwd": "$file_path",
+								"encoding":
+								{
+									"linux": "utf-8",
+									"osx": "utf-8",
+									"windows": "$win_cmd_encoding"
+								},
+								"env":
+								{
+								},
+								"external_id": "shell",
+								"suppress_echo": true,
+								"syntax": "Packages/Text/Plain text.tmLanguage",
+								"type": "subprocess"
+							},
+							"repl_sublime2": false,
+							"smart_indent": false,
+							"spell_check": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 378.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				0,
+				1,
+				1,
+				2
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			0.837078651685,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "last-ditch.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": false,
+	"side_bar_visible": true,
+	"side_bar_width": 139.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

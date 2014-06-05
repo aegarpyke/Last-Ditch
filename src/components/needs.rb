@@ -7,13 +7,13 @@ class Needs < Component
 	
 		super()
 		@hunger = 1.0
-		@hunger_rate = -0.006
+		@hunger_rate = -0.0003
 		@thirst = 1.0
-		@thirst_rate = -0.01
+		@thirst_rate = -0.0006
 		@energy = 1.0
-		@energy_rate = -0.02
+		@energy_rate = -0.0004
 		@sanity = 1.0
-		@sanity_rate = -0.001
+		@sanity_rate = -0.00001
 
 	end
 

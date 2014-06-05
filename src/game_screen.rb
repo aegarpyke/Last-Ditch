@@ -9,12 +9,13 @@ class GameScreen < ScreenAdapter
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 
 		@player = @mgr.create_tagged_entity('player')
-		@mgr.add_component(@player, Position.new(3.0, 3.0))
+		@mgr.add_component(@player, Position.new(40, 40))
 		@mgr.add_component(@player, Velocity.new(0.0))
 		@mgr.add_component(@player, Rotation.new(0.0))
 		@mgr.add_component(@player, Collision.new)
-		@mgr.add_component(@player, Inventory.new(32))
 		@mgr.add_component(@player, Needs.new)
+		@mgr.add_component(@player, UserInput.new)
+		@mgr.add_component(@player, Inventory.new(C::INVENTORY_SLOTS))
 		@mgr.add_component(@player, Animation.new(
 			{'player_idle' => ['player_idle1'], 
 	     'player_walk' => ['player_idle1',
@@ -25,15 +26,14 @@ class GameScreen < ScreenAdapter
 	                       'player_walk3', 
 	                       'player_walk4', 
 	                       'player_walk3']}))
-		@mgr.add_component(@player, UserInput.new([Keys::W, Keys::A, Keys::S, Keys::D]))
 
-		@time = TimeSystem.new
-		@input = InputSystem.new(@mgr, @player)
-		@map = MapSystem.new(@mgr, @player, @atlas)
-		@physics = PhysicsSystem.new(@mgr, @map)
-		@render = RenderSystem.new(@mgr, @atlas)
+		@time     = TimeSystem.new
+		@input    = InputSystem.new(@mgr, @player)
+		@map      = MapSystem.new(@mgr, @player, @atlas)
+		@physics  = PhysicsSystem.new(@mgr, @map)
+		@render   = RenderSystem.new(@mgr, @atlas)
 		@lighting = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
-		@ui = UISystem.new(@mgr, @player, @atlas)
+		@ui       = UISystem.new(@mgr, @player, @atlas)
 
 		@mgr.map = @map
 		@mgr.time = @time

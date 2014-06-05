@@ -42,7 +42,7 @@ class UISystem < System
 		@base_update = true
 
 		@base_table = Table.new(@skin)
-		@base_table.set_bounds(Gdx.graphics.width - 66, Gdx.graphics.height - 36, 66, 36)
+		@base_table.set_bounds(Gdx.graphics.width - 66, Gdx.graphics.height - 32, 66, 32)
 
 		@base_time = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_date = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
@@ -59,11 +59,11 @@ class UISystem < System
 		@base_hunger = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
 		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1.0)
 		@base_thirst = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
-		@base_thirst.color = Color.new(0.45, 0.68, 0.89, 1.0)
+		@base_thirst.color = Color.new(0.07, 0.86, 0.86, 1.0)
 		@base_energy = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
-		@base_energy.color = Color.new(0.88, 0.85, 0.34, 1.0)
+		@base_energy.color = Color.new(0.98, 0.98, 0.04, 1.0)
 		@base_sanity = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
-		@base_sanity.color = Color.new(0.77, 0.45, 0.67, 1.0)
+		@base_sanity.color = Color.new(0.77, 0.10, 0.87, 1.0)
 
 		@base_table_needs.add(@base_hunger).width(106).padTop(-2).height(8).row
 		@base_table_needs.add(@base_thirst).width(106).padTop(-2).height(8).row
@@ -94,17 +94,21 @@ class UISystem < System
 		@actions_active = false
 		@actions_button = TextButton.new("Actions", @skin.get(TextButtonStyle.java_class))
 		@actions_button.add_listener(
+
 			Class.new(ClickListener) do
-				def initialize(mgr)
+
+				def initialize(mgr, ui)
 					super()
+					@ui = ui
 					@mgr = mgr
 				end
 
 				def clicked(event, x, y)
-					@mgr.ui.actions_update = true
-					@mgr.ui.actions_active = !@mgr.ui.actions_active
+					@ui.actions_update = true
+					@ui.actions_active = !@ui.actions_active
 				end
-			end.new(@mgr))
+
+			end.new(@mgr, self))
 
 		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
 		@actions_window.set_position(340, 400)
@@ -120,17 +124,21 @@ class UISystem < System
 		@equip_active = false
 		@equip_button = TextButton.new("Equipment", @skin.get(TextButtonStyle.java_class))
 		@equip_button.add_listener(
+
 			Class.new(ClickListener) do
-				def initialize(mgr)
+			
+				def initialize(mgr, ui)
 					super()
+					@ui = ui
 					@mgr = mgr
 				end
 
 				def clicked(event, x, y)
-					@mgr.ui.equip_update = true
-					@mgr.ui.equip_active = !@mgr.ui.equip_active
+					@ui.equip_update = true
+					@ui.equip_active = !@ui.equip_active
 				end
-			end.new(@mgr))
+		
+			end.new(@mgr, self))
 
 		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
 		@equip_window.set_position(12, 260)
@@ -146,17 +154,21 @@ class UISystem < System
 		@status_active = false
 		@status_button = TextButton.new("Status", @skin.get(TextButtonStyle.java_class))
 		@status_button.add_listener(
+
 			Class.new(ClickListener) do
-				def initialize(mgr)
+			
+				def initialize(mgr, ui)
 					super()
+					@ui = ui
 					@mgr = mgr
 				end
 
 				def clicked(event, x, y)
-					@mgr.ui.status_update = true
-					@mgr.ui.status_active = !@mgr.ui.status_active
+					@ui.status_update = true
+					@ui.status_active = !@ui.status_active
 				end
-			end.new(@mgr))
+
+			end.new(@mgr, self))
 
 		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
 		@status_window.set_position(500, 260)
@@ -172,17 +184,21 @@ class UISystem < System
 		@inv_active = false
 		@inv_button = TextButton.new("Inventory", @skin.get(TextButtonStyle.java_class))
 		@inv_listener = @inv_button.add_listener(
+
 			Class.new(ClickListener) do
-				def initialize(mgr)
+			
+				def initialize(mgr, ui)
 					super()
+					@ui = ui
 					@mgr = mgr
 				end
 
 				def clicked(event, x, y)
-					@mgr.ui.inv_update = true
-					@mgr.ui.inv_active = !@mgr.ui.inv_active
+					@ui.inv_update = true
+					@ui.inv_active = !@ui.inv_active
 				end
-			end.new(@mgr))
+
+			end.new(@mgr, self))
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
 		@inv_window.set_position(280, 4)
@@ -221,21 +237,27 @@ class UISystem < System
 			
 			@inv_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
 			@inv_slots.last.add_listener(
+
 				Class.new(ClickListener) do
-					def initialize(mgr, slot, atlas)
+				
+					def initialize(mgr, slot, atlas, ui)
+
 						super()
+						@ui = ui
 						@mgr = mgr
 						@slot = slot
 						@atlas = atlas
+					
 					end
 
+				
 					def clicked(event, x, y)
 
-						if @slot == @mgr.ui.inv_selection
+						if @slot == @ui.inv_selection
 
-							inv_comp = @mgr.get_component(@mgr.ui.player, Inventory)
+							inv_comp = @mgr.get_component(@ui.player, Inventory)
 
-							index = @mgr.ui.inv_slots.index(@slot)
+							index = @ui.inv_slots.index(@slot)
 							item = inv_comp.items[index]
 
 							type_comp = @mgr.get_component(item, Type)
@@ -248,20 +270,21 @@ class UISystem < System
 
 						else
 						
-							style = ImageButtonStyle.new(@mgr.ui.inv_selection.style)
+							style = ImageButtonStyle.new(@ui.inv_selection.style)
 							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
-							@mgr.ui.inv_selection.style = style
+							@ui.inv_selection.style = style
 
-							@mgr.ui.inv_selection = @slot
+							@ui.inv_selection = @slot
 
-							style = ImageButtonStyle.new(@mgr.ui.inv_selection.style)
+							style = ImageButtonStyle.new(@ui.inv_selection.style)
 							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_selection'))
-							@mgr.ui.inv_selection.style = style
+							@ui.inv_selection.style = style
 
 						end
 
 					end
-				end.new(@mgr, @inv_slots.last, @atlas))
+
+				end.new(@mgr, @inv_slots.last, @atlas, self))
 
 			if i % 8 == 0
 				@inv_window.add(@inv_slots.last).pad(1).row

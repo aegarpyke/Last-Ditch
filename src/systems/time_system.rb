@@ -9,8 +9,9 @@ class TimeSystem < System
 		@active = true
 		@duration = 0.0
 		@game_delta = 0.0
-		@hour, @minute = 23, 50
-		@day, @month, @year = 30, 12, 3124
+
+		@hour, @minute = 8, 50
+		@day, @month, @year = 12, 8, 3127
 
 	end
 

@@ -1,11 +1,8 @@
 class UserInput < Component
 
-	attr_reader :responsive_keys
-
-	def initialize(keys)
+	def initialize
 
 		super()
-		@responsive_keys = keys
 
 	end
 
