@@ -4,7 +4,9 @@ Last-Ditch
 Premise
 -------
 
-It's 3257. Earth now has a number of massive sprawling cities. Thickets of skyscrapers for acres that reach hundreds of stories into the air. For hundreds of years, the rich have been building higher and higher. There are now large abandonded sections left in their wake. Sections that are too large to be worth heavily policing. They are the perfect place for anyone who doesn't want to be seen doing whatever it is they're doing...
+There are massive sprawling cities across Earth. They are filled with skyscrapers that reach hundreds of stories into the air. For hundreds of years, the rich have been building away from the less fortunate on the lower levels. There are now large abandonded sections left in their wake. These have become the perfect place for anyone who doesn't want to be seen anymore.
+
+And it's your new home...
 
 Credits
 -------
