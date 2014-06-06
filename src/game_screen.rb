@@ -29,6 +29,8 @@ class GameScreen < ScreenAdapter
 	                       'player_walk4', 
 	                       'player_walk3']}))
 
+		@mgr.player = @player
+
 		@time      = TimeSystem.new
 		@input     = InputSystem.new(@mgr)
 		@map       = MapSystem.new(@mgr, @player, @atlas)
@@ -48,6 +50,7 @@ class GameScreen < ScreenAdapter
 		@mgr.inventory = @inventory
 		@mgr.equipment = @equipment
 		@mgr.status    = @status
+		@mgr.render    = @render
 
 		@fps = FPSLogger.new
 		@debug = Box2DDebugRenderer.new

@@ -45,13 +45,13 @@ class MapSystem < System
 
 	def generate_rooms
 		
-		room_x, room_y = 0, 0
+		x, y = 0, 0
 		@master = Room.new(10, 10, C::MAP_WIDTH - 10, C::MAP_HEIGHT - 10)
 
 		for i in 0...@num_of_rooms
-		  room_x = Random.rand(@master.x1...@master.x2)
-		  room_y = Random.rand(@master.y1...@master.y2)
-		  @rooms << Room.new(room_x, room_y, 1, 1)
+		  x = Random.rand(@master.x1...@master.x2)
+		  y = Random.rand(@master.y1...@master.y2)
+		  @rooms << Room.new(x, y, 1, 1)
 		end
 
 		for i in 0...@iterations
@@ -64,29 +64,29 @@ class MapSystem < System
 
 			if room.width > 3 && room.height > 3
 				
-				for rx in room.x1...room.x2
-					for ry in room.y1...room.y2
+				for x in room.x1...room.x2
+					for y in room.y1...room.y2
 
-						if rx == room.x1 || rx == room.x2-1
+						if x == room.x1 || x == room.x2-1
 
-							@solid[rx][ry] = true
-							@sight[rx][ry] = false
-							@rot[rx][ry]   = 0.0
-							@tiles[rx][ry] = @atlas.find_region('wall1')
+							@solid[x][y] = true
+							@sight[x][y] = false
+							@rot[x][y]   = 0.0
+							@tiles[x][y] = @atlas.find_region('wall1')
 
-						elsif ry == room.y1 || ry == room.y2-1
+						elsif y == room.y1 || y == room.y2-1
 
-							@solid[rx][ry] = true
-							@sight[rx][ry] = false
-							@rot[rx][ry]   = 0.0
-							@tiles[rx][ry] = @atlas.find_region('wall1')
+							@solid[x][y] = true
+							@sight[x][y] = false
+							@rot[x][y]   = 0.0
+							@tiles[x][y] = @atlas.find_region('wall1')
 
 						else
 
-							@solid[rx][ry] = false
-							@sight[rx][ry] = true
-							@rot[rx][ry]   = 0.0
-							@tiles[rx][ry] = @atlas.find_region('floor2')
+							@solid[x][y] = false
+							@sight[x][y] = true
+							@rot[x][y]   = 0.0
+							@tiles[x][y] = @atlas.find_region('floor2')
 
 						end
 
@@ -95,45 +95,45 @@ class MapSystem < System
 
 				if room.x2 - room.x1 > 3
 
-					dx = Random.rand(room.x1 + 1...room.x2 - 2)
+					x = Random.rand(room.x1 + 1...room.x2 - 2)
 
 					if Random.rand(2) == 0
-						dy = room.y1
+						y = room.y1
 					else
-						dy = room.y2 - 1
+						y = room.y2 - 1
 					end
 
-					@solid[dx][dy] = false
-					@sight[dx][dy] = true
-					@rot[dx][dy]   = 0.0
-					@tiles[dx][dy] = @atlas.find_region('floor2')
+					@solid[x][y] = false
+					@sight[x][y] = true
+					@rot[x][y]   = 0.0
+					@tiles[x][y] = @atlas.find_region('floor2')
 
-					@solid[dx+1][dy] = false
-					@sight[dx+1][dy] = true
-					@rot[dx+1][dy]   = 0.0
-					@tiles[dx+1][dy] = @atlas.find_region('floor2')
+					@solid[x+1][y] = false
+					@sight[x+1][y] = true
+					@rot[x+1][y]   = 0.0
+					@tiles[x+1][y] = @atlas.find_region('floor2')
 
 				end
 
 				if room.y2 - room.y1 > 3
 
-					dy = Random.rand(room.y1 + 1...room.y2 - 2)
+					y = Random.rand(room.y1 + 1...room.y2 - 2)
 
 					if Random.rand(2) == 0
-						dx = room.x1
+						x = room.x1
 					else
-						dx = room.x2 - 1
+						x = room.x2 - 1
 					end
 
-					@solid[dx][dy] = false
-					@sight[dx][dy] = true
-					@rot[dx][dy]   = 0.0
-					@tiles[dx][dy] = @atlas.find_region('floor2')
+					@solid[x][y] = false
+					@sight[x][y] = true
+					@rot[x][y]   = 0.0
+					@tiles[x][y] = @atlas.find_region('floor2')
 
-					@solid[dx][dy+1] = false
-					@sight[dx][dy+1] = true
-					@rot[dx][dy+1]   = 0.0
-					@tiles[dx][dy+1] = @atlas.find_region('floor2')
+					@solid[x][y+1] = false
+					@sight[x][y+1] = true
+					@rot[x][y+1]   = 0.0
+					@tiles[x][y+1] = @atlas.find_region('floor2')
 
 				end
 
@@ -196,25 +196,25 @@ class MapSystem < System
 
 	def generate_items
 
-		item_x, item_y = 0, 0
+		x, y = 0, 0
 
 		for i in 0...@num_of_items
 
 			loop do
-				item_x = Random.rand(10.0...@width-10)
-				item_y = Random.rand(10.0...@height-10)
+				x = Random.rand(10.0...@width-10)
+				y = Random.rand(10.0...@height-10)
 				
-				break if !@solid[item_x.to_i][item_y.to_i]
+				break if !@solid[x.to_i][y.to_i]
 			end
 
 			item = @mgr.create_basic_entity
 
-			@mgr.add_component(item, Position.new(item_x, item_y))
+			@mgr.add_component(item, Position.new(x, y))
 			@mgr.add_component(item, Rotation.new(Random.rand(360)))
 			@mgr.add_component(item, Item.new)
 
 			check = Random.rand
-			if check < 0.33
+			if check < 0.23
 
 				@mgr.add_component(item, Type.new('canteen1'))
 				@mgr.add_component(item, Render.new('canteen1'))
@@ -222,7 +222,7 @@ class MapSystem < System
 					'Canteen 1',
 					"This is a drinking canteen."))
 				
-			elsif check < 0.66
+			elsif check < 0.46
 
 				@mgr.add_component(item, Type.new('rations1'))
 				@mgr.add_component(item, Render.new('rations1'))
@@ -230,7 +230,7 @@ class MapSystem < System
 					'Rations 1',
 					"This is rations container."))
 
-			elsif check < 0.88
+			elsif check < 0.78
 
 				@mgr.add_component(item, Type.new('overgrowth1'))
 				@mgr.add_component(item, Render.new('overgrowth1'))
@@ -238,12 +238,17 @@ class MapSystem < System
 					'Overgrowth 1',
 					"The root of some overgrowth."))
 
-				6.times do
+				8.times do
 
+					xx, yy = 0, 0
 					sub_item = @mgr.create_basic_entity
 
-					xx = Random.rand(item_x - 1.2..item_x + 1.2)
-					yy = Random.rand(item_y - 1.2..item_y + 1.2)
+					loop do
+						xx = Random.rand(x - 1.2..x + 1.2)
+						yy = Random.rand(y - 1.2..y + 1.2)
+						
+						break if !@solid[xx.to_i][yy.to_i]
+					end
 
 					@mgr.add_component(sub_item, Position.new(xx, yy))
 					@mgr.add_component(sub_item, Rotation.new(Random.rand(360)))
@@ -292,8 +297,7 @@ class MapSystem < System
 
 	def get_item(x, y)
 
-		entities = @mgr.get_all_entities_with(Item)
-		entities.each do |entity|
+		@mgr.render.visible_entities.each do |entity|
 
 			if @items.include?(entity)
 
@@ -301,10 +305,9 @@ class MapSystem < System
 				render_comp = @mgr.get_component(entity, Render)
 				rot_comp = @mgr.get_component(entity, Rotation)
 
+				# Transform coordinates to axis-aligned frame
 				c = Math.cos(-rot_comp.angle * Math::PI/180)
 				s = Math.sin(-rot_comp.angle * Math::PI/180)
-
-				# Transform coordinates to axis-aligned frame
 				rot_x = pos_comp.x + c * (x - pos_comp.x) - s * (y - pos_comp.y)
 				rot_y = pos_comp.y + s * (x - pos_comp.x) + c * (y - pos_comp.y)
 
@@ -331,8 +334,7 @@ class MapSystem < System
 		dist = 1.6
 		item_choice = nil
 
-		entities = @mgr.get_all_entities_with(Item)
-		entities.each do |entity|
+		@mgr.render.visible_entities.each do |entity|
 
 			if @items.include?(entity)
 				
@@ -367,19 +369,19 @@ class MapSystem < System
 
 		batch.begin
 
-		for x in @start_x..@end_x
-			for y in @start_y..@end_y
+			for x in @start_x..@end_x
+				for y in @start_y..@end_y
 
-				batch.draw(
-					@tiles[x][y],
-					x * C::BTW, y * C::BTW,
-					C::BTW/2, C::BTW/2, 
-					C::BTW, C::BTW,
-					1, 1,
-					@rot[x][y])
+					batch.draw(
+						@tiles[x][y],
+						x * C::BTW, y * C::BTW,
+						C::BTW/2, C::BTW/2, 
+						C::BTW, C::BTW,
+						1, 1,
+						@rot[x][y])
 
+				end
 			end
-		end
 
 		batch.end
 
