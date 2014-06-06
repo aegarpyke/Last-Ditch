@@ -208,6 +208,7 @@ class MapSystem < System
 			end
 
 			item = @mgr.create_basic_entity
+
 			@mgr.add_component(item, Position.new(item_x, item_y))
 			@mgr.add_component(item, Rotation.new(Random.rand(360)))
 			@mgr.add_component(item, Item.new)
@@ -228,6 +229,35 @@ class MapSystem < System
 				@mgr.add_component(item, Info.new(
 					'Rations 1',
 					"This is rations container."))
+
+			elsif check < 0.88
+
+				@mgr.add_component(item, Type.new('overgrowth1'))
+				@mgr.add_component(item, Render.new('overgrowth1'))
+				@mgr.add_component(item, Info.new(
+					'Overgrowth 1',
+					"The root of some overgrowth."))
+
+				6.times do
+
+					sub_item = @mgr.create_basic_entity
+
+					xx = Random.rand(item_x - 1.2..item_x + 1.2)
+					yy = Random.rand(item_y - 1.2..item_y + 1.2)
+
+					@mgr.add_component(sub_item, Position.new(xx, yy))
+					@mgr.add_component(sub_item, Rotation.new(Random.rand(360)))
+					@mgr.add_component(sub_item, Item.new)
+
+					@mgr.add_component(sub_item, Type.new('ruffage1'))
+					@mgr.add_component(sub_item, Render.new('ruffage1'))
+					@mgr.add_component(sub_item, Info.new(
+						'Ruffage 1',
+						"Stray vines and roots."))
+
+					@items << sub_item
+
+				end
 
 			else
 
