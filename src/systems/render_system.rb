@@ -50,7 +50,8 @@ class RenderSystem < System
 
 	def update(delta, batch)
 
-		unless @limit_check > 1.6
+		# Scale limit_check based on player walking/running
+		unless @limit_check > 1.3
 
 			@limit_check += delta
 		
@@ -114,7 +115,7 @@ class RenderSystem < System
 
 					vel = col_comp.body.linear_velocity
 
-					if @mgr.paused || vel.x.abs < 0.01 && vel.y.abs < 0.01
+					if @mgr.paused || vel.x.abs < 0.02 && vel.y.abs < 0.02
 						anim_comp.cur = 'player_idle'
 					elsif anim_comp.cur != 'player_walk'
 						anim_comp.cur = 'player_walk'

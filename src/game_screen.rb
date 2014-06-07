@@ -39,7 +39,8 @@ class GameScreen < ScreenAdapter
 		@inventory = InventorySystem.new(@mgr)
 		@equipment = EquipmentSystem.new(@mgr)
 		@status    = StatusSystem.new(@mgr)
-		@physics   = PhysicsSystem.new(@mgr, @map)
+		
+		@physics   = PhysicsSystem.new(@mgr, @player, @map)
 		@render    = RenderSystem.new(@mgr, @atlas)
 		@lighting  = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
 
@@ -51,6 +52,7 @@ class GameScreen < ScreenAdapter
 		@mgr.equipment = @equipment
 		@mgr.status    = @status
 		@mgr.render    = @render
+		@mgr.physics   = @physics
 
 		@fps = FPSLogger.new
 		@debug = Box2DDebugRenderer.new
@@ -82,7 +84,7 @@ class GameScreen < ScreenAdapter
 		@ui.update(delta, @batch)
 
 		# @fps.log
-		# @debug.render(@physics.world, @map.cam.combined)
+		@debug.render(@physics.world, @map.cam.combined)
 
 	end
 

@@ -45,7 +45,7 @@ class InputSystem < System
 					else
 
 						# Pickup nearest item with left click
-						item = @mgr.map.get_nearest_item(pos_comp.x, pos_comp.y)
+						item = @mgr.map.get_near_item(pos_comp.x, pos_comp.y)
 
 						if item && inv_comp.add_item(item)
 							@mgr.map.remove_item(item)
@@ -160,7 +160,32 @@ class InputSystem < System
 
 					end
 
-				
+				when Keys::E
+
+					# Use
+
+					if @shift
+
+
+					else
+
+						# Use nearby door
+						door = @mgr.map.get_near_door(@mgr.map.focus.x, @mgr.map.focus.y)
+
+						if door
+							door_comp = @mgr.get_component(door, Door)
+
+							if !door_comp.locked
+
+								door_comp.open = !door_comp.open
+								@mgr.map.change_door(door, door_comp.open)
+
+							end
+
+						end
+
+					end
+
 				when Keys::F
 
 					if @shift

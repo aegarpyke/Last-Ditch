@@ -2,9 +2,10 @@ class Collision < Component
 
 	attr_accessor :body
 
-	def initialize
+	def initialize(body=nil)
 
 		super()
+		@body = body
 
 	end
 

@@ -1,7 +1,7 @@
 class MapSystem < System
 
 	attr_accessor :width, :height
-	attr_accessor :cam, :bodies, :items, :focus, :atlas
+	attr_accessor :cam, :items, :doors, :focus, :atlas
 	attr_accessor :tiles, :solid, :sight, :rot
 
 	def initialize(mgr, player, atlas)
@@ -15,7 +15,7 @@ class MapSystem < System
 		@focus = @mgr.get_component(player, Position)
 		
 		@iterations = 120
-		@rooms, @items, @bodies = [], [], []
+		@rooms, @items, @doors = [], [], []
 		@num_of_rooms, @num_of_items = 80, 600
 
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
@@ -39,6 +39,7 @@ class MapSystem < System
 
 		generate_rooms
 		generate_items
+		generate_doors
 
 	end
 
@@ -49,9 +50,12 @@ class MapSystem < System
 		@master = Room.new(10, 10, C::MAP_WIDTH - 10, C::MAP_HEIGHT - 10)
 
 		for i in 0...@num_of_rooms
+
 		  x = Random.rand(@master.x1...@master.x2)
 		  y = Random.rand(@master.y1...@master.y2)
+
 		  @rooms << Room.new(x, y, 1, 1)
+		
 		end
 
 		for i in 0...@iterations
@@ -60,9 +64,10 @@ class MapSystem < System
 			end
 		end
 
+		degenerate_rooms = []
 		@rooms.each do |room|
 
-			if room.width > 3 && room.height > 3
+			if room.width > 4 && room.height > 4
 				
 				for x in room.x1...room.x2
 					for y in room.y1...room.y2
@@ -93,104 +98,16 @@ class MapSystem < System
 					end
 				end
 
-				if room.x2 - room.x1 > 3
+			else
 
-					x = Random.rand(room.x1 + 1...room.x2 - 2)
-
-					if Random.rand(2) == 0
-						y = room.y1
-					else
-						y = room.y2 - 1
-					end
-
-					@solid[x][y] = false
-					@sight[x][y] = true
-					@rot[x][y]   = 0.0
-					@tiles[x][y] = @atlas.find_region('floor2')
-
-					@solid[x+1][y] = false
-					@sight[x+1][y] = true
-					@rot[x+1][y]   = 0.0
-					@tiles[x+1][y] = @atlas.find_region('floor2')
-
-				end
-
-				if room.y2 - room.y1 > 3
-
-					y = Random.rand(room.y1 + 1...room.y2 - 2)
-
-					if Random.rand(2) == 0
-						x = room.x1
-					else
-						x = room.x2 - 1
-					end
-
-					@solid[x][y] = false
-					@sight[x][y] = true
-					@rot[x][y]   = 0.0
-					@tiles[x][y] = @atlas.find_region('floor2')
-
-					@solid[x][y+1] = false
-					@sight[x][y+1] = true
-					@rot[x][y+1]   = 0.0
-					@tiles[x][y+1] = @atlas.find_region('floor2')
-
-				end
+				degenerate_rooms << room
 
 			end
 
 		end
 
-	end
+		@rooms -= degenerate_rooms
 
-
-	def expand(test_room)
-
-		direction = Random.rand(4)
-
-		case direction
-			when 0
-				test_room.x1 -= 2 if test_room.x1 - 2 > @master.x1
-			when 1
-				test_room.y1 -= 2 if test_room.y1 - 2 > @master.y1
-			when 2
-				test_room.x2 += 2 if test_room.x2 + 2 < @master.x2
-			when 3
-				test_room.y2 += 2 if test_room.y2 + 2 < @master.y2
-		end
-
-		check = false
-		@rooms.each do |room|
-
-			next if room == test_room
-
-			if intersects(room, test_room)
-
-				check = true
-				break
-
-			end
-
-		end
-
-		fix = check ? 2 : 1
-
-		case direction
-			when 0
-				test_room.x1 += fix
-			when 1
-				test_room.y1 += fix
-			when 2
-				test_room.x2 -= fix
-			when 3
-				test_room.y2 -= fix
-		end
-
-	end
-
-
-	def intersects(room1, room2)
-		!(room1.x2 < room2.x1 || room2.x2 < room1.x1 || room1.y2 < room2.y1 || room2.y2 < room1.y1)
 	end
 
 
@@ -281,6 +198,135 @@ class MapSystem < System
 	end
 
 
+	def generate_doors
+
+		@rooms.each do |room|
+
+			x = Random.rand(room.x1 + 1...room.x2 - 2)
+
+			if Random.rand(2) == 0
+				y = room.y1
+				rot = 0
+			else
+				y = room.y2 - 1
+				rot = 180
+			end
+
+			@solid[x][y] = false
+			@sight[x][y] = true
+			@rot[x][y]   = 0.0
+			@tiles[x][y] = @atlas.find_region('floor2')
+
+			@solid[x+1][y] = false
+			@sight[x+1][y] = true
+			@rot[x+1][y]   = 0.0
+			@tiles[x+1][y] = @atlas.find_region('floor2')
+
+			door = @mgr.create_basic_entity
+
+			render_comp = Render.new('door1', @atlas.find_region('door1'))
+			w = render_comp.width * C::WTB
+			h = render_comp.height * C::WTB
+
+			@mgr.add_component(door, render_comp)
+			@mgr.add_component(door, Position.new(x + w/2, y + h/2))
+			@mgr.add_component(door, Rotation.new(rot))
+			@mgr.add_component(door, Collision.new)
+			@mgr.add_component(door, Type.new('door1'))
+			@mgr.add_component(door, Door.new)
+
+			@doors << door
+
+			y = Random.rand(room.y1 + 1...room.y2 - 2)
+
+			if Random.rand(2) == 0
+				x = room.x1
+				rot = 90
+			else
+				x = room.x2 - 1
+				rot = -90
+			end
+
+			@solid[x][y] = false
+			@sight[x][y] = true
+			@rot[x][y]   = 0.0
+			@tiles[x][y] = @atlas.find_region('floor2')
+
+			@solid[x][y+1] = false
+			@sight[x][y+1] = true
+			@rot[x][y+1]   = 0.0
+			@tiles[x][y+1] = @atlas.find_region('floor2')
+
+			door = @mgr.create_basic_entity
+
+			render_comp = Render.new('door1', @atlas.find_region('door1'))
+			w = render_comp.width * C::WTB
+			h = render_comp.height * C::WTB
+
+			@mgr.add_component(door, render_comp)
+			@mgr.add_component(door, Position.new(x + h/2, y + w/2))
+			@mgr.add_component(door, Rotation.new(rot))
+			@mgr.add_component(door, Collision.new)
+			@mgr.add_component(door, Type.new('door1'))
+			@mgr.add_component(door, Door.new)
+
+			@doors << door
+
+		end
+
+	end
+
+
+	def expand(test_room)
+
+		direction = Random.rand(4)
+
+		case direction
+			when 0
+				test_room.x1 -= 2 if test_room.x1 - 2 > @master.x1
+			when 1
+				test_room.y1 -= 2 if test_room.y1 - 2 > @master.y1
+			when 2
+				test_room.x2 += 2 if test_room.x2 + 2 < @master.x2
+			when 3
+				test_room.y2 += 2 if test_room.y2 + 2 < @master.y2
+		end
+
+		check = false
+		@rooms.each do |room|
+
+			next if room == test_room
+
+			if intersects(room, test_room)
+
+				check = true
+				break
+
+			end
+
+		end
+
+		fix = check ? 2 : 1
+
+		case direction
+			when 0
+				test_room.x1 += fix
+			when 1
+				test_room.y1 += fix
+			when 2
+				test_room.x2 -= fix
+			when 3
+				test_room.y2 -= fix
+		end
+
+	end
+
+
+	def intersects(room1, room2)
+		!(room1.x2 < room2.x1 || room2.x2 < room1.x1 || room1.y2 < room2.y1 || room2.y2 < room1.y1)
+	end
+
+
 	def remove_item(item)
 
 		pos_comp = @mgr.get_component(item, Position)
@@ -329,28 +375,105 @@ class MapSystem < System
 	end
 
 
-	def get_nearest_item(x, y)
-
-		dist = 1.6
-		item_choice = nil
+	def get_door(x, y)
 
 		@mgr.render.visible_entities.each do |entity|
 
-			if @items.include?(entity)
-				
-				pos_comp = @mgr.get_component(entity, Position)
-				tmp_dist = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
+			if @doors.include?(entity)
 
-				if tmp_dist < dist
-					dist = tmp_dist
-					item_choice = entity
+				pos_comp = @mgr.get_component(entity, Position)
+				render_comp = @mgr.get_component(entity, Render)
+				rot_comp = @mgr.get_component(entity, Rotation)
+
+				# Transform coordinates to axis-aligned frame
+				c = Math.cos(-rot_comp.angle * Math::PI/180)
+				s = Math.sin(-rot_comp.angle * Math::PI/180)
+				rot_x = pos_comp.x + c * (x - pos_comp.x) - s * (y - pos_comp.y)
+				rot_y = pos_comp.y + s * (x - pos_comp.x) + c * (y - pos_comp.y)
+
+				left   = pos_comp.x - render_comp.width * C::WTB / 2
+				right  = pos_comp.x + render_comp.width * C::WTB / 2
+				top    = pos_comp.y - render_comp.height * C::WTB / 2
+				bottom = pos_comp.y + render_comp.height * C::WTB / 2
+
+				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
+					return entity
 				end
 
 			end
 
 		end
 
-		item_choice
+		nil
+
+	end
+
+
+	def change_door(door, open)
+
+		pos_comp = @mgr.get_component(door, Position)
+		rot_comp = @mgr.get_component(door, Rotation)
+		render_comp = @mgr.get_component(door, Render)
+		col_comp = @mgr.get_component(door, Collision)
+
+		if open
+
+			render_comp = @mgr.get_component(door, Render)
+			@mgr.remove_component(door, render_comp)
+			@mgr.physics.remove_body(col_comp.body)
+
+		else
+
+			type_comp = @mgr.get_component(door, Type)
+			body = @mgr.create_body(pos_comp.x, pos_comp.y, 2, 1)
+			body.set_transform(pos_comp.x, pos_comp.y, rot * Math::PI / 180)
+			@mgr.add_component(door, Render.new(type_comp.type))
+		
+		end
+
+	end
+
+
+	def get_near_item(x, y)
+
+		@mgr.render.visible_entities.each do |entity|
+
+			if @items.include?(entity)
+				
+				pos_comp = @mgr.get_component(entity, Position)
+				dist_sqr = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
+
+				if dist_sqr < 1.4
+					return entity
+				end
+
+			end
+
+		end
+
+		nil
+
+	end
+
+
+	def get_near_door(x, y)
+
+		@mgr.render.visible_entities.each do |entity|
+
+			if @doors.include?(entity)
+				
+				pos_comp = @mgr.get_component(entity, Position)
+				dist_sqr = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
+
+				if dist_sqr < 1.4
+					return entity
+				end
+
+			end
+
+		end
+
+		nil
 
 	end
 

@@ -1,7 +1,7 @@
 class EntityManager
 
 	attr_reader :id
-	attr_accessor :render, :actions, :inventory, :equipment, :status
+	attr_accessor :render, :physics, :actions, :inventory, :equipment, :status
 	attr_accessor :player, :map, :atlas, :ui, :time, :paused
 
 	def initialize

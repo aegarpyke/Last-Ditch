@@ -1,12 +1,12 @@
 
 graphics.png
-size: 509,52
+size: 503,52
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button1
   rotate: false
-  xy: 78, 4
+  xy: 150, 4
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -14,7 +14,7 @@ button1
   index: -1
 button1_pressed
   rotate: false
-  xy: 94, 4
+  xy: 166, 4
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -22,35 +22,42 @@ button1_pressed
   index: -1
 canteen1
   rotate: false
-  xy: 439, 36
+  xy: 42, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-empty
+door1
   rotate: false
   xy: 2, 20
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+empty
+  rotate: false
+  xy: 68, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 floor1
   rotate: false
-  xy: 36, 20
+  xy: 102, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 floor2
   rotate: false
-  xy: 70, 20
+  xy: 136, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 inv_selection
   rotate: false
-  xy: 104, 20
+  xy: 170, 20
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -58,7 +65,7 @@ inv_selection
   index: -1
 inv_slot
   rotate: false
-  xy: 138, 20
+  xy: 204, 20
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -66,70 +73,70 @@ inv_slot
   index: -1
 overgrowth1
   rotate: false
-  xy: 457, 36
+  xy: 60, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 player_idle1
   rotate: false
-  xy: 172, 20
+  xy: 238, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk1
   rotate: false
-  xy: 206, 20
+  xy: 272, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk2
   rotate: false
-  xy: 240, 20
+  xy: 306, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk3
   rotate: false
-  xy: 274, 20
+  xy: 340, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk4
   rotate: false
-  xy: 308, 20
+  xy: 374, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 rations1
   rotate: false
-  xy: 475, 36
+  xy: 78, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 ruffage1
   rotate: false
-  xy: 493, 36
+  xy: 96, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrap1
   rotate: false
-  xy: 42, 2
+  xy: 114, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrap1_icon
   rotate: false
-  xy: 60, 2
+  xy: 132, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -144,21 +151,21 @@ status_bar
   index: -1
 wall1
   rotate: false
-  xy: 342, 20
+  xy: 408, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 376, 20
+  xy: 442, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 410, 24
+  xy: 476, 24
   size: 27, 28
   split: 4, 3, 16, 3
   orig: 27, 28
