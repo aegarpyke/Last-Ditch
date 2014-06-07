@@ -60,7 +60,7 @@ class RenderSystem < System
 			@limit_check = 0
 			@visible_entities = []
 
-			entities = @mgr.get_all_entities_with(Render)
+			entities = @mgr.get_all_entities_with(Position)
 			entities.each do |entity|
 
 				pos_comp = @mgr.get_component(entity, Position)

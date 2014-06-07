@@ -93,8 +93,6 @@ class PhysicsSystem < System
 			render_comp = @mgr.get_component(door, Render)
 			col_comp = @mgr.get_component(door, Collision)
 
-			puts render_comp.region
-
 			w = render_comp.width * C::WTB
 			h = render_comp.height * C::WTB
 
@@ -107,7 +105,7 @@ class PhysicsSystem < System
 	end
 
 
-	def create_body(x, y, width, height, sight=false, angle=0)
+	def create_body(x, y, width, height, sight, angle)
 
 		body_def = BodyDef.new
 		body_def.position.set(x, y)

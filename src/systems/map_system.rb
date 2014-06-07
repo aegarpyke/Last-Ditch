@@ -67,7 +67,11 @@ class MapSystem < System
 		degenerate_rooms = []
 		@rooms.each do |room|
 
-			if room.width > 4 && room.height > 4
+			if room.width < 5 || room.height < 5
+
+				degenerate_rooms << room
+
+			else
 				
 				for x in room.x1...room.x2
 					for y in room.y1...room.y2
@@ -97,10 +101,6 @@ class MapSystem < System
 
 					end
 				end
-
-			else
-
-				degenerate_rooms << room
 
 			end
 
@@ -230,6 +230,7 @@ class MapSystem < System
 
 			@mgr.add_component(door, render_comp)
 			@mgr.add_component(door, Position.new(x + w/2, y + h/2))
+			@mgr.add_component(door, Size.new(w, h))
 			@mgr.add_component(door, Rotation.new(rot))
 			@mgr.add_component(door, Collision.new)
 			@mgr.add_component(door, Type.new('door1'))
@@ -265,6 +266,7 @@ class MapSystem < System
 
 			@mgr.add_component(door, render_comp)
 			@mgr.add_component(door, Position.new(x + h/2, y + w/2))
+			@mgr.add_component(door, Size.new(w, h))
 			@mgr.add_component(door, Rotation.new(rot))
 			@mgr.add_component(door, Collision.new)
 			@mgr.add_component(door, Type.new('door1'))
@@ -414,6 +416,7 @@ class MapSystem < System
 		pos_comp = @mgr.get_component(door, Position)
 		rot_comp = @mgr.get_component(door, Rotation)
 		render_comp = @mgr.get_component(door, Render)
+		size_comp = @mgr.get_component(door, Size)
 		col_comp = @mgr.get_component(door, Collision)
 
 		if open
@@ -424,10 +427,16 @@ class MapSystem < System
 
 		else
 
-			type_comp = @mgr.get_component(door, Type)
-			body = @mgr.create_body(pos_comp.x, pos_comp.y, 2, 1)
-			body.set_transform(pos_comp.x, pos_comp.y, rot * Math::PI / 180)
-			@mgr.add_component(door, Render.new(type_comp.type))
+			type = @mgr.get_component(door, Type).type
+
+			body = @mgr.physics.create_body(
+				pos_comp.x, pos_comp.y, 
+				size_comp.width, size_comp.height, 
+				false, rot_comp.angle)
+
+			@mgr.add_component(
+				door, 
+				Render.new(type, @atlas.find_region(type)))
 		
 		end
 
@@ -465,7 +474,7 @@ class MapSystem < System
 				pos_comp = @mgr.get_component(entity, Position)
 				dist_sqr = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
 
-				if dist_sqr < 1.4
+				if dist_sqr < 2.6
 					return entity
 				end
 

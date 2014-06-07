@@ -84,7 +84,7 @@ class GameScreen < ScreenAdapter
 		@ui.update(delta, @batch)
 
 		# @fps.log
-		@debug.render(@physics.world, @map.cam.combined)
+		# @debug.render(@physics.world, @map.cam.combined)
 
 	end
 
