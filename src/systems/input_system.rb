@@ -27,34 +27,90 @@ class InputSystem < System
 
 			case button
 
-				when 0
-					
-					if @shift
+			when 0
+				
+				if @shift
 
-						# Pickup specific item with shift-left click
-						world_x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
-						world_y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
+					world_x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
+					world_y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
 
-						item = @mgr.map.get_item(world_x, world_y)					
-						dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
+					# Check for an item
 
-						if item && dist < 1.4 && inv_comp.add_item(item)
-							@mgr.map.remove_item(item)
-						end
+					item = @mgr.map.get_item(world_x, world_y)					
+					dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
 
-					else
-
-						# Pickup nearest item with left click
-						item = @mgr.map.get_near_item(pos_comp.x, pos_comp.y)
-
-						if item && inv_comp.add_item(item)
-							@mgr.map.remove_item(item)
-						end
-					
+					if item && dist < 1.4 && inv_comp.add_item(item)
+						@mgr.map.remove_item(item)
+						return true
 					end
 
-				when 1
-					puts "right?"
+					# Check for a door
+
+					door = @mgr.map.get_door(world_x, world_y)
+					dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
+
+					if door && dist < 2.6
+
+						door_comp = @mgr.get_component(door, Door)
+
+						if !door_comp.locked
+
+							door_comp.open = !door_comp.open
+							@mgr.map.change_door(door, door_comp.open)
+
+							return true
+
+						end
+
+					end
+
+				else
+
+					# Pickup nearest item with left click
+
+					item = @mgr.map.get_near_item(pos_comp.x, pos_comp.y)
+
+					if item && inv_comp.add_item(item)
+						@mgr.map.remove_item(item)
+					end
+				
+				end
+
+			when 1
+				
+				if @shift
+
+				else
+
+					index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection)
+					item = inv_comp.items[index]
+
+					if item
+
+						p_pos_comp = @mgr.get_component(@mgr.player, Position)
+						p_rot_comp = @mgr.get_component(@mgr.player, Rotation)
+					
+						type_comp = @mgr.get_component(item, Type)
+						rot_comp = @mgr.get_component(item, Rotation)
+						pos_comp = Position.new(
+							p_pos_comp.x + p_rot_comp.x, 
+							p_pos_comp.y + p_rot_comp.y)
+						render_comp = Render.new(
+							type_comp.type, 
+							@mgr.atlas.find_region(type_comp.type))
+
+						@mgr.add_component(item, pos_comp)
+						@mgr.add_component(item, render_comp)
+						rot_comp.angle = p_rot_comp.angle
+
+						inv_comp.remove_item(item)
+						@mgr.map.items << item
+						@mgr.render.nearby_entities << item
+						@mgr.inventory.update = true
+
+					end
+
+				end
 
 			end
 
@@ -165,6 +221,7 @@ class InputSystem < System
 					# Use
 
 					if @shift
+
 
 
 					else

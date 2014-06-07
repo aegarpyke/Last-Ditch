@@ -65,6 +65,8 @@ class EntityManager
 			store[entity] = [component]
 		end
 
+		component
+
 	end
 
 

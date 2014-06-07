@@ -7,15 +7,33 @@ class Inventory < Component
 		super()
 		@size = size
 		@money = 0.00
-		@items = Array.new
+		@items = Array.new(size)
 
 	end
 
 
 	def add_item(item)
 
-		if @items.size < @size
-			@items << item
+		for i in 0...@items.size
+
+			if @items[i].nil?
+				@items[i] = item
+				return true
+			end
+
+		end
+
+		false
+
+	end
+
+
+	def remove_item(item)
+
+		index = @items.index(item)
+
+		if index
+			@items[index] = nil
 			return true
 		else
 			return false

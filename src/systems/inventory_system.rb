@@ -26,16 +26,16 @@ class InventorySystem < System
 
 					type_comp = @mgr.get_component(inv_comp.items[i], Type)
 
-					if type_comp.nil?
+					if type_comp
 
 						style = ImageButtonStyle.new(@inv_slots[i].style)
-						style.imageUp = nil
+						style.imageUp = TextureRegionDrawable.new(@mgr.atlas.find_region(type_comp.type))
 						@inv_slots[i].style = style
 
 					else
 
 						style = ImageButtonStyle.new(@inv_slots[i].style)
-						style.imageUp = TextureRegionDrawable.new(@mgr.atlas.find_region(type_comp.type))
+						style.imageUp = nil
 						@inv_slots[i].style = style
 
 					end

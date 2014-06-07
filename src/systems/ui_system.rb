@@ -238,7 +238,7 @@ class UISystem < System
 				
 					def clicked(event, x, y)
 
-						if @slot == @ui.inv_selection
+						if @slot && @slot == @ui.inv_selection
 
 							inv_comp = @mgr.get_component(@ui.player, Inventory)
 

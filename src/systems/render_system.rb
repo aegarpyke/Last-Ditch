@@ -1,12 +1,12 @@
 class RenderSystem < System
 
-	attr_accessor :visible_entities
+	attr_accessor :nearby_entities
 
 	def initialize(mgr, atlas)
 
 		@mgr = mgr
-		@limit_check = 0
-		@visible_entities = []
+		@update_timer = 0
+		@nearby_entities = []
 
 		entities = @mgr.get_all_entities_with(Render)
 		entities.each do |entity|
@@ -20,7 +20,7 @@ class RenderSystem < System
 			if (pos_comp.x - player_pos_comp.x).abs < 20 &&
 				 (pos_comp.y - player_pos_comp.y).abs < 18
 
-				@visible_entities << entity
+				@nearby_entities << entity
 
 			end
 
@@ -50,15 +50,15 @@ class RenderSystem < System
 
 	def update(delta, batch)
 
-		# Scale limit_check based on player walking/running
-		unless @limit_check > 1.3
+		# Scale update_timer based on player walking/running
+		unless @update_timer > 1.3
 
-			@limit_check += delta
+			@update_timer += delta
 		
 		else
 
-			@limit_check = 0
-			@visible_entities = []
+			@update_timer = 0
+			@nearby_entities = []
 
 			entities = @mgr.get_all_entities_with(Position)
 			entities.each do |entity|
@@ -69,7 +69,7 @@ class RenderSystem < System
 				if (pos_comp.x - player_pos_comp.x).abs < 20 &&
 					 (pos_comp.y - player_pos_comp.y).abs < 18
 
-					@visible_entities << entity
+					@nearby_entities << entity
 
 				end
 
@@ -79,19 +79,20 @@ class RenderSystem < System
 
 		batch.begin
 
-			@visible_entities.each do |entity|
+			@nearby_entities.each do |entity|
 
 				pos_comp = @mgr.get_component(entity, Position)
 				rot_comp = @mgr.get_component(entity, Rotation)
+				size_comp = @mgr.get_component(entity, Size)
 				render_comp = @mgr.get_component(entity, Render)
 
 				if render_comp
 					batch.draw(
 						render_comp.region,
-						C::BTW * pos_comp.x - render_comp.width/2,
-						C::BTW * pos_comp.y - render_comp.height/2,
-						render_comp.width/2, render_comp.height/2,
-						render_comp.width, render_comp.height,
+						C::BTW * (pos_comp.x - size_comp.width/2),
+						C::BTW * (pos_comp.y - size_comp.height/2),
+						C::BTW * size_comp.width/2, C::BTW * size_comp.height/2,
+						C::BTW * size_comp.width, C::BTW * size_comp.height,
 						render_comp.scale, render_comp.scale,
 						rot_comp.angle)
 				end
