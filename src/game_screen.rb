@@ -6,6 +6,7 @@ class GameScreen < ScreenAdapter
 
 		@mgr = mgr
 		@batch = SpriteBatch.new
+		@debug = Box2DDebugRenderer.new
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 
 		@player = @mgr.create_tagged_entity('player')
@@ -29,8 +30,6 @@ class GameScreen < ScreenAdapter
 	                       'player_walk4', 
 	                       'player_walk3']}))
 
-		@mgr.player = @player
-
 		@time      = TimeSystem.new
 		@input     = InputSystem.new(@mgr)
 		@map       = MapSystem.new(@mgr, @player, @atlas)
@@ -39,9 +38,8 @@ class GameScreen < ScreenAdapter
 		@inventory = InventorySystem.new(@mgr)
 		@equipment = EquipmentSystem.new(@mgr)
 		@status    = StatusSystem.new(@mgr)
-		
 		@physics   = PhysicsSystem.new(@mgr, @player, @map)
-		@render    = RenderSystem.new(@mgr, @atlas)
+		@render    = RenderSystem.new(@mgr, @player, @atlas)
 		@lighting  = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
 
 		@mgr.map       = @map
@@ -54,8 +52,7 @@ class GameScreen < ScreenAdapter
 		@mgr.render    = @render
 		@mgr.physics   = @physics
 
-		@fps = FPSLogger.new
-		@debug = Box2DDebugRenderer.new
+		
 		
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)
@@ -72,7 +69,6 @@ class GameScreen < ScreenAdapter
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 
 		@time.update(delta)
-		@input.update(delta)
 		@map.update(delta, @batch)
 		@actions.update(delta)
 		@inventory.update(delta)

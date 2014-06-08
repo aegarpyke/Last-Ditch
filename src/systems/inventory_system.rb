@@ -1,11 +1,12 @@
 class InventorySystem < System
 
-	attr_accessor :update
+	attr_accessor :update_slots
 
 	def initialize(mgr)
+
 		super()
 		@mgr = mgr
-		@update = true
+		@update_slots = true
 		@inv_slots = @mgr.ui.inv_slots
 
 	end
@@ -13,9 +14,9 @@ class InventorySystem < System
 
 	def update(delta)
 
-		if @update
+		if @update_slots
 
-			@update = false
+			@update_slots = false
 
 			entities = @mgr.get_all_entities_with_components([Inventory, UserInput])
 			entities.each do |entity|
@@ -29,15 +30,23 @@ class InventorySystem < System
 					if type_comp
 
 						style = ImageButtonStyle.new(@inv_slots[i].style)
-						style.imageUp = TextureRegionDrawable.new(@mgr.atlas.find_region(type_comp.type))
-						@inv_slots[i].style = style
+						tex = TextureRegionDrawable.new(
+							@mgr.atlas.find_region(type_comp.type))
 
+						style.imageUp = tex
+
+						@inv_slots[i].style = style 
+					
 					else
-
+						
 						style = ImageButtonStyle.new(@inv_slots[i].style)
-						style.imageUp = nil
-						@inv_slots[i].style = style
+						tex = TextureRegionDrawable.new(
+							@mgr.atlas.find_region('empty'))
 
+						style.imageUp = tex
+
+						@inv_slots[i].style = style 
+					
 					end
 
 				end

@@ -12,105 +12,53 @@ class InputSystem < System
 	end
 
 
-	def update(delta)
-
-	end
-
-
 	def touch_down(screenX, screenY, pointer, button)
 
 		entities = @mgr.get_all_entities_with(UserInput)
 		entities.each do |entity|
 
-			pos_comp = @mgr.get_component(entity, Position)
-			inv_comp = @mgr.get_component(entity, Inventory)
-
 			case button
 
-			when 0
-				
-				if @shift
+				when 0
 
-					world_x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
-					world_y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
+					if !@shift
 
-					# Check for an item
+						if @mgr.ui.main_active
 
-					item = @mgr.map.get_item(world_x, world_y)					
-					dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
+						else
 
-					if item && dist < 1.4 && inv_comp.add_item(item)
-						@mgr.map.remove_item(item)
-						return true
-					end
+							pickup_item(entity)
+							
 
-					# Check for a door
+						end
 
-					door = @mgr.map.get_door(world_x, world_y)
-					dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
+					else
 
-					if door && dist < 2.6
+						if @mgr.ui.main_active
 
-						door_comp = @mgr.get_component(door, Door)
+						else
 
-						if !door_comp.locked
+							check = pickup_item_at(entity, screenX, screenY)
+							
+							if !check
+								check = use_door_at(entity, screenX, screenY)
+							end
 
-							door_comp.open = !door_comp.open
-							@mgr.map.change_door(door, door_comp.open)
-
-							return true
+							if !check
+								# Use workstation
+							end
 
 						end
 
 					end
 
-				else
+				when 1
 
-					# Pickup nearest item with left click
+					if @shift
 
-					item = @mgr.map.get_near_item(pos_comp.x, pos_comp.y)
-
-					if item && inv_comp.add_item(item)
-						@mgr.map.remove_item(item)
+					elsif @mgr.ui.main_active
+						drop_item(entity)
 					end
-				
-				end
-
-			when 1
-				
-				if @shift
-
-				else
-
-					index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection)
-					item = inv_comp.items[index]
-
-					if item
-
-						p_pos_comp = @mgr.get_component(@mgr.player, Position)
-						p_rot_comp = @mgr.get_component(@mgr.player, Rotation)
-					
-						type_comp = @mgr.get_component(item, Type)
-						rot_comp = @mgr.get_component(item, Rotation)
-						pos_comp = Position.new(
-							p_pos_comp.x + p_rot_comp.x, 
-							p_pos_comp.y + p_rot_comp.y)
-						render_comp = Render.new(
-							type_comp.type, 
-							@mgr.atlas.find_region(type_comp.type))
-
-						@mgr.add_component(item, pos_comp)
-						@mgr.add_component(item, render_comp)
-						rot_comp.angle = p_rot_comp.angle
-
-						inv_comp.remove_item(item)
-						@mgr.map.items << item
-						@mgr.render.nearby_entities << item
-						@mgr.inventory.update = true
-
-					end
-
-				end
 
 			end
 
@@ -128,17 +76,21 @@ class InputSystem < System
 
 			case keycode
 
-				when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
+				when Keys::E
 
-					@ctrl = true
+					if @shift
 
-				when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
-					
-					@shift = true
+					else
+						use_door(entity)
+					end
 
-				when Keys::ESCAPE
-					
-					Gdx.app.exit
+				when Keys::C
+
+					if @shift
+
+					else
+
+					end
 
 				when Keys::TAB
 					
@@ -153,11 +105,11 @@ class InputSystem < System
 						vel_comp.spd = 0
 						vel_comp.ang_spd = 0
 
-						@mgr.paused = !@mgr.paused
-						@mgr.time.active = !@mgr.time.active
 						@mgr.ui.main_update = true
+						@mgr.paused = !@mgr.paused
 						@mgr.ui.main_active = @mgr.paused
-						
+						@mgr.time.active = !@mgr.time.active
+							
 					end
 
 				when Keys::W, Keys::UP
@@ -216,43 +168,17 @@ class InputSystem < System
 
 					end
 
-				when Keys::E
+				when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
 
-					# Use
+					@ctrl = true
 
-					if @shift
+				when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
+					
+					@shift = true
 
-
-
-					else
-
-						# Use nearby door
-						door = @mgr.map.get_near_door(@mgr.map.focus.x, @mgr.map.focus.y)
-
-						if door
-							door_comp = @mgr.get_component(door, Door)
-
-							if !door_comp.locked
-
-								door_comp.open = !door_comp.open
-								@mgr.map.change_door(door, door_comp.open)
-
-							end
-
-						end
-
-					end
-
-				when Keys::F
-
-					if @shift
-
-					else
-
-					end
-
-				when Keys::C
-					puts 'take cover'
+				when Keys::ESCAPE
+					
+					Gdx.app.exit
 						
 			end
 
@@ -280,7 +206,9 @@ class InputSystem < System
 
 				when Keys::W, Keys::S, Keys::UP, Keys::DOWN
 
-					unless @mgr.ui.main_active
+					if @mgr.ui.main_active
+
+					else
 
 						vel_comp = @mgr.get_component(entity, Velocity)
 						vel_comp.spd = 0
@@ -289,7 +217,9 @@ class InputSystem < System
 
 				when Keys::A, Keys::D, Keys::LEFT, Keys::RIGHT
 
-					unless @mgr.ui.main_active
+					if @mgr.ui.main_active
+
+					else
 
 						vel_comp = @mgr.get_component(entity, Velocity)
 						vel_comp.ang_spd = 0
@@ -301,6 +231,125 @@ class InputSystem < System
 		end
 
 		true
+
+	end
+
+
+	def pickup_item(entity)
+
+		pos_comp = @mgr.get_component(entity, Position)
+		inv_comp = @mgr.get_component(entity, Inventory)
+
+		item = @mgr.map.get_near_item(pos_comp.x, pos_comp.y)
+
+		if item && inv_comp.add_item(item)
+
+			@mgr.ui.prev_selection = nil
+			@mgr.map.remove_item(item)
+		
+		end
+
+	end
+
+
+	def pickup_item_at(entity, screenX, screenY)
+
+		pos_comp = @mgr.get_component(entity, Position)
+		inv_comp = @mgr.get_component(entity, Inventory)
+
+		x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
+		y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
+
+		item = @mgr.map.get_item(x, y)					
+		dist = (x - pos_comp.x)**2 + (y - pos_comp.y)**2
+
+		if item && dist < 1.4 && inv_comp.add_item(item)
+
+			@mgr.ui.prev_selection = nil
+			@mgr.map.remove_item(item)
+
+		end
+
+	end
+
+
+	def drop_item(entity)
+
+		pos_comp = @mgr.get_component(entity, Position)
+		inv_comp = @mgr.get_component(entity, Inventory)
+		rot_comp = @mgr.get_component(entity, Rotation)
+
+		index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection)
+		item = inv_comp.items[index]
+
+		if item
+
+			item_type_comp = @mgr.get_component(item, Type)
+
+			item_pos_comp = Position.new(
+				pos_comp.x + rot_comp.x, 
+				pos_comp.y + rot_comp.y)
+
+			item_render_comp = Render.new(
+				item_type_comp.type,
+				@mgr.atlas.find_region(item_type_comp.type))
+
+			item_rot_comp = @mgr.get_component(item, Rotation)
+			item_rot_comp.angle = rot_comp.angle - 90
+
+			@mgr.add_component(item, item_pos_comp)
+			@mgr.add_component(item, item_render_comp)
+
+			@mgr.map.items << item
+			inv_comp.remove_item(item)
+			@mgr.render.nearby_entities << item
+			@mgr.ui.set_inventory_name("Empty")
+			@mgr.ui.set_inventory_desc("")
+			@mgr.inventory.update_slots = true
+
+		end
+
+	end
+
+
+	def use_door(entity)
+
+		pos_comp = @mgr.get_component(entity, Position)
+		inv_comp = @mgr.get_component(entity, Inventory)
+
+		door = @mgr.map.get_near_door(pos_comp.x, pos_comp.y)
+
+		if door
+
+			door_comp = @mgr.get_component(door, Door)
+
+			if !door_comp.locked
+
+				door_comp.open = !door_comp.open
+				@mgr.map.change_door(door, door_comp.open)
+
+			end
+		
+		end
+
+	end
+
+
+	def use_door_at(entity, screenX, screenY)
+
+		pos_comp = @mgr.get_component(entity, Position)
+		inv_comp = @mgr.get_component(entity, Inventory)
+
+		door = @mgr.map.get_door(world_x, world_y)
+		dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
+		door_comp = @mgr.get_component(door, Door)
+
+		if door && dist < 2.6 && !door_comp.locked
+
+			door_comp.open = !door_comp.open
+			@mgr.map.change_door(door, door_comp.open)
+
+		end
 
 	end
 

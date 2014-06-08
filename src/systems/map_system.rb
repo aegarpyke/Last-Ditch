@@ -16,7 +16,7 @@ class MapSystem < System
 		
 		@iterations = 120
 		@rooms, @items, @doors = [], [], []
-		@num_of_rooms, @num_of_items = 200, 600
+		@num_of_rooms, @num_of_items = 200, 1200
 
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
 		@sight = Array.new(@width) {|i| Array.new(@height) {|i| true }}
@@ -361,7 +361,7 @@ class MapSystem < System
 		@mgr.remove_component(item, render_comp)
 
 		@items.delete(item)
-		@mgr.inventory.update = true
+		@mgr.inventory.update_slots = true
 
 	end
 

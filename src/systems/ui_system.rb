@@ -247,12 +247,6 @@ class UISystem < System
 
 							type_comp = @mgr.get_component(item, Type)
 							
-							if type_comp
-								puts type_comp.type
-							else
-								puts "empty"
-							end
-
 						else
 						
 							style = ImageButtonStyle.new(@ui.inv_selection.style)
@@ -285,6 +279,13 @@ class UISystem < System
 		@inv_selection.style = style
 
 		@main_table.add(@inv_button).width(90).height(14).colspan(2)
+
+	end
+
+
+	def set_inventory_name(name)
+
+		@inv_item_name.text = name
 
 	end
 
@@ -322,11 +323,11 @@ class UISystem < System
 			@base_energy.width = (needs_comp.energy * 100 + 4).to_i
 			@base_sanity.width = (needs_comp.sanity * 100 + 4).to_i
 
-			unless @inv_selection == @prev_selection
+			if @inv_selection != @prev_selection
 
 				index = @inv_slots.index(@inv_selection)
 				item = inv_comp.items[index]
-				
+
 				if item
 
 					info_comp = @mgr.get_component(item, Info)
@@ -348,6 +349,7 @@ class UISystem < System
 		end
 
 		if @base_update
+
 			@base_update = false
 
 			if @base_active
@@ -360,6 +362,7 @@ class UISystem < System
 		end
 
 		if @main_update
+
 			@main_update = false
 
 			if @main_active

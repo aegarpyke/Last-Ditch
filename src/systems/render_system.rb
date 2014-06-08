@@ -2,9 +2,10 @@ class RenderSystem < System
 
 	attr_accessor :nearby_entities
 
-	def initialize(mgr, atlas)
+	def initialize(mgr, player, atlas)
 
 		@mgr = mgr
+		@player = player
 		@update_timer = 0
 		@nearby_entities = []
 
@@ -15,7 +16,7 @@ class RenderSystem < System
 			render_comp.region = atlas.find_region(render_comp.region_name)
 
 			pos_comp = @mgr.get_component(entity, Position)
-			player_pos_comp = @mgr.get_component(@mgr.player, Position)
+			player_pos_comp = @mgr.get_component(@player, Position)
 
 			if (pos_comp.x - player_pos_comp.x).abs < 20 &&
 				 (pos_comp.y - player_pos_comp.y).abs < 18
@@ -64,7 +65,7 @@ class RenderSystem < System
 			entities.each do |entity|
 
 				pos_comp = @mgr.get_component(entity, Position)
-				player_pos_comp = @mgr.get_component(@mgr.player, Position)
+				player_pos_comp = @mgr.get_component(@player, Position)
 
 				if (pos_comp.x - player_pos_comp.x).abs < 20 &&
 					 (pos_comp.y - player_pos_comp.y).abs < 18
