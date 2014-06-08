@@ -288,7 +288,7 @@ class UISystem < System
 	def set_inventory_quality_dur(quality, durability)
 		
 		unless quality == -1 && durability == -1
-			@inv_item_quality_dur.text = "%.1f/%.1f" % [quality, durability]
+			@inv_item_quality_dur.text = "%.2f/%.2f" % [quality, durability]
 		else
 			@inv_item_quality_dur.text = ""
 		end
