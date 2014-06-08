@@ -303,8 +303,9 @@ class InputSystem < System
 			@mgr.map.items << item
 			inv_comp.remove_item(item)
 			@mgr.render.nearby_entities << item
-			@mgr.ui.set_inventory_name("Empty")
+			@mgr.ui.set_inventory_name("")
 			@mgr.ui.set_inventory_desc("")
+			@mgr.ui.set_inventory_quality_dur(-1, -1)
 			@mgr.inventory.update_slots = true
 
 		end
@@ -340,8 +341,11 @@ class InputSystem < System
 		pos_comp = @mgr.get_component(entity, Position)
 		inv_comp = @mgr.get_component(entity, Inventory)
 
-		door = @mgr.map.get_door(world_x, world_y)
-		dist = (world_x - pos_comp.x)**2 + (world_y - pos_comp.y)**2
+		x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
+		y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
+
+		door = @mgr.map.get_door(x, y)
+		dist = (x - pos_comp.x)**2 + (y - pos_comp.y)**2
 		door_comp = @mgr.get_component(door, Door)
 
 		if door && dist < 2.6 && !door_comp.locked

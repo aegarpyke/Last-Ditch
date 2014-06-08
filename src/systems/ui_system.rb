@@ -200,7 +200,9 @@ class UISystem < System
 		@inv_window.padTop(9)
 
 		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_name).colspan(8).align(Align::left).padLeft(2).padTop(8).padBottom(2).height(12).row
+		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padLeft(2).padTop(8).padBottom(2).height(12)
+		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).row
 
 		@inv_desc = ""
 
@@ -283,6 +285,16 @@ class UISystem < System
 	end
 
 
+	def set_inventory_quality_dur(quality, durability)
+		
+		unless quality == -1 && durability == -1
+			@inv_item_quality_dur.text = "%.1f/%.1f" % [quality, durability]
+		else
+			@inv_item_quality_dur.text = ""
+		end
+	end
+
+
 	def set_inventory_name(name)
 
 		@inv_item_name.text = name
@@ -330,14 +342,17 @@ class UISystem < System
 
 				if item
 
+					item_comp = @mgr.get_component(item, Item)
 					info_comp = @mgr.get_component(item, Info)
 
-					@inv_item_name.text = info_comp.name
+					set_inventory_name(info_comp.name)
+					set_inventory_quality_dur(item_comp.quality, item_comp.durability)
 					set_inventory_desc(info_comp.description)
 
 				else
 
-					@inv_item_name.text = "Empty"
+					set_inventory_name("")
+					set_inventory_quality_dur(-1, -1)
 					set_inventory_desc("")
 
 				end

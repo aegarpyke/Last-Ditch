@@ -126,7 +126,8 @@ class MapSystem < System
 
 			item = @mgr.create_basic_entity
 
-			@mgr.add_component(item, Item.new)
+			dur, quality = Random.rand(0.2..1.0), Random.rand(0.1..0.9)
+			@mgr.add_component(item, Item.new(dur, quality))
 			@mgr.add_component(item, Position.new(x, y))
 			render_comp = Render.new('')
 			@mgr.add_component(item, render_comp)
@@ -202,9 +203,11 @@ class MapSystem < System
 					sub_size_comp.width = sub_render_comp.width * C::WTB
 					sub_size_comp.height = sub_render_comp.height * C::WTB
 
+					sub_quality, sub_dur = Random.rand(0.2..0.9), Random.rand(0.1..0.9)
+
 					@mgr.add_component(sub_item, Position.new(xx, yy))
 					@mgr.add_component(sub_item, Rotation.new(Random.rand(360)))
-					@mgr.add_component(sub_item, Item.new)
+					@mgr.add_component(sub_item, Item.new(sub_quality, sub_dur))
 					@mgr.add_component(sub_item, sub_render_comp)
 					@mgr.add_component(sub_item, sub_size_comp)
 					@mgr.add_component(sub_item, Type.new('ruffage1'))
