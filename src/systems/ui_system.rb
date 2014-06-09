@@ -273,10 +273,15 @@ class UISystem < System
 
 					end
 
-				
+					def touchUp(event, x, y, pointer, button)
+						
+					end
+
+
 					def clicked(event, x, y)
 
 						@mgr.ui.inv_no_exit = true
+
 						inv_comp = @mgr.get_component(@ui.player, Inventory)
 
 						index = @ui.inv_slots.index(@slot)

@@ -47,7 +47,7 @@ class InputSystem < System
 							if !check
 								# Use workstation
 							end
-
+							
 						end
 
 					end
@@ -57,7 +57,11 @@ class InputSystem < System
 					if @shift
 
 					elsif @mgr.ui.main_active
-						drop_item(entity)
+
+						if @mgr.ui.inv_selection
+							drop_item(entity)
+						end
+						
 					end
 
 			end
