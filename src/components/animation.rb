@@ -17,11 +17,23 @@ class Animation < Component
 	end
 
 	def width
-		key_frame.packedWidth
+
+		if key_frame.respond_to?('packedWidth')
+			return key_frame.packedWidth
+		else
+			return key_frame.regionWidth
+		end
+
 	end
 
 	def height
-		key_frame.packedHeight
+		
+		if key_frame.respond_to?('packedHeight')
+			return key_frame.packedHeight
+		else
+			return key_frame.regionHeight
+		end
+
 	end
 
 	def cur=(name)

@@ -60,7 +60,6 @@ java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align
 java_import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 java_import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
-
 java_import com.badlogic.gdx.backends.lwjgl.LwjglApplication
 java_import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 java_import com.badlogic.gdx.tools.texturepacker.TexturePacker
@@ -73,7 +72,6 @@ java_import 'box2dLight.DirectionalLight'
 
 require_relative 'c'
 require_relative 'user_adapter'
-
 require_relative '../game_screen'
 require_relative '../entity_manager'
 require_relative '../systems/system'

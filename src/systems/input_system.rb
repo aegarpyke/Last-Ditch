@@ -306,6 +306,8 @@ class InputSystem < System
 			@mgr.ui.set_inventory_name("")
 			@mgr.ui.set_inventory_desc("")
 			@mgr.ui.set_inventory_quality_dur(-1, -1)
+			@mgr.ui.set_inventory_value(-1)
+			@mgr.ui.set_inventory_weight(-1)
 			@mgr.inventory.update_slots = true
 
 		end

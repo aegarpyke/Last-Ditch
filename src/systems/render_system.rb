@@ -36,7 +36,20 @@ class RenderSystem < System
 				frame_list = []
 
 				frames.each do |frame|
-					frame_list << atlas.find_region(frame)
+
+					if frame.end_with?("-f")
+					
+						frame.slice!("-f")
+						region = TextureRegion.new(atlas.find_region(frame))
+						region.flip(false, true)
+						frame_list << region
+					
+					else
+					
+						frame_list << atlas.find_region(frame)
+					
+					end
+
 				end
 
 				frame_list = frame_list.to_java(TextureRegion)

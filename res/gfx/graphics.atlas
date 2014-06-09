@@ -1,12 +1,12 @@
 
 graphics.png
-size: 495,60
+size: 507,52
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button1
   rotate: false
-  xy: 176, 12
+  xy: 96, 4
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -14,7 +14,7 @@ button1
   index: -1
 button1_pressed
   rotate: false
-  xy: 192, 12
+  xy: 112, 4
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -22,49 +22,49 @@ button1_pressed
   index: -1
 canister1
   rotate: false
-  xy: 471, 36
+  xy: 403, 28
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 canteen1
   rotate: false
-  xy: 68, 10
+  xy: 455, 36
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 door1
   rotate: false
-  xy: 2, 28
+  xy: 2, 20
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 empty
   rotate: false
-  xy: 86, 10
+  xy: 473, 36
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 floor1
   rotate: false
-  xy: 68, 28
+  xy: 68, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 floor2
   rotate: false
-  xy: 102, 28
+  xy: 102, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 inv_selection
   rotate: false
-  xy: 136, 28
+  xy: 136, 20
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -72,7 +72,7 @@ inv_selection
   index: -1
 inv_slot
   rotate: false
-  xy: 170, 28
+  xy: 170, 20
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -80,77 +80,63 @@ inv_slot
   index: -1
 overgrowth1
   rotate: false
-  xy: 42, 2
+  xy: 429, 28
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 player_idle1
   rotate: false
-  xy: 204, 28
+  xy: 204, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk1
   rotate: false
-  xy: 238, 28
+  xy: 238, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk2
   rotate: false
-  xy: 272, 28
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-player_walk3
-  rotate: false
-  xy: 306, 28
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-player_walk4
-  rotate: false
-  xy: 340, 28
+  xy: 272, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 rations1
   rotate: false
-  xy: 104, 10
+  xy: 491, 36
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 ruffage1
   rotate: false
-  xy: 122, 10
+  xy: 42, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrap1
   rotate: false
-  xy: 140, 10
+  xy: 60, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrap1_icon
   rotate: false
-  xy: 158, 10
+  xy: 78, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 status_bar
   rotate: false
-  xy: 2, 12
+  xy: 2, 4
   size: 38, 14
   split: 2, 3, 3, 3
   orig: 38, 14
@@ -158,21 +144,21 @@ status_bar
   index: -1
 wall1
   rotate: false
-  xy: 374, 28
+  xy: 306, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 408, 28
+  xy: 340, 20
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 442, 32
+  xy: 374, 24
   size: 27, 28
   split: 4, 3, 16, 3
   orig: 27, 28

@@ -17,7 +17,7 @@ class UISystem < System
 		setup_base
 		setup_main
 
-		if 1 == 0
+		if 1 == 1
 			@main_table.debug
 			@base_table.debug
 			@base_table_needs.debug
@@ -202,7 +202,12 @@ class UISystem < System
 		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padLeft(2).padTop(8).padBottom(2).height(12)
 		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).row
+		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).padTop(8).height(12).row
+		@inv_item_value = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
+		@inv_window.add(@inv_item_value).colspan(8).align(Align::right).height(12)
+		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_weight).align(Align::right).height(12).row
 
 		@inv_desc = ""
 
@@ -214,8 +219,6 @@ class UISystem < System
 		@inv_window.add(@inv_item_desc3).align(Align::left).padLeft(5).colspan(8).height(12).row
 		@inv_item_desc4 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc4).align(Align::left).padLeft(5).colspan(8).height(12).row
-		@inv_item_desc5 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_desc5).align(Align::left).padLeft(5).colspan(8).padBottom(4).height(12).row
 
 		set_inventory_desc(@inv_desc)
 
@@ -288,12 +291,33 @@ class UISystem < System
 	def set_inventory_quality_dur(quality, durability)
 		
 		unless quality == -1 && durability == -1
-			@inv_item_quality_dur.text = "%.2f/%.2f" % [quality, durability]
+			@inv_item_quality_dur.text = "q: %.2f d: %.2f" % [quality, durability]
 		else
 			@inv_item_quality_dur.text = ""
 		end
 	end
 
+
+	def set_inventory_value(value)
+
+		unless value == -1
+			@inv_item_value.text = "$%.2f " % value
+		else
+			@inv_item_value.text = ""
+		end
+
+	end
+
+
+	def set_inventory_weight(weight)
+
+		unless weight == -1
+			@inv_item_weight.text = "/ %.2fkg" % weight
+		else
+			@inv_item_weight.text = ""
+		end
+
+	end
 
 	def set_inventory_name(name)
 
@@ -306,7 +330,7 @@ class UISystem < System
 
 		@inv_desc_lines = desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
 
-		while @inv_desc_lines.size < 5
+		while @inv_desc_lines.size < 4
 			@inv_desc_lines << ""
 		end
 
@@ -314,7 +338,6 @@ class UISystem < System
 		@inv_item_desc2.text = @inv_desc_lines[1]
 		@inv_item_desc3.text = @inv_desc_lines[2]
 		@inv_item_desc4.text = @inv_desc_lines[3]
-		@inv_item_desc5.text = @inv_desc_lines[4]
 
 	end
 
@@ -347,12 +370,16 @@ class UISystem < System
 
 					set_inventory_name(info_comp.name)
 					set_inventory_quality_dur(item_comp.quality, item_comp.durability)
+					set_inventory_value(item_comp.value)
+					set_inventory_weight(item_comp.weight)
 					set_inventory_desc(info_comp.description)
 
 				else
 
 					set_inventory_name("")
 					set_inventory_quality_dur(-1, -1)
+					set_inventory_value(-1)
+					set_inventory_weight(-1)
 					set_inventory_desc("")
 
 				end

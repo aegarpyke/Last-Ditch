@@ -26,9 +26,9 @@ class GameScreen < ScreenAdapter
 	                       'player_walk2',
 	                       'player_walk1',
 	                       'player_idle1', 
-	                       'player_walk3', 
-	                       'player_walk4', 
-	                       'player_walk3']}))
+	                       "player_walk1-f", 
+	                       "player_walk2-f", 
+	                       "player_walk1-f"]}))
 
 		@time      = TimeSystem.new
 		@input     = InputSystem.new(@mgr)

@@ -127,7 +127,7 @@ class MapSystem < System
 			item = @mgr.create_basic_entity
 
 			dur, quality = Random.rand(0.2..1.0), Random.rand(0.1..0.9)
-			@mgr.add_component(item, Item.new(dur, quality))
+			item_comp = @mgr.add_component(item, Item.new(quality, dur))
 			@mgr.add_component(item, Position.new(x, y))
 			render_comp = Render.new('')
 			@mgr.add_component(item, render_comp)
@@ -142,6 +142,8 @@ class MapSystem < System
 				render_comp.region = @atlas.find_region('canteen1')
 				size_comp.width = render_comp.width * C::WTB
 				size_comp.height =render_comp.height * C::WTB
+				item_comp.weight = 0.5
+				item_comp.base_value = 0.5
 
 				@mgr.add_component(item, Type.new('canteen1'))
 				@mgr.add_component(item, Info.new(
@@ -154,6 +156,8 @@ class MapSystem < System
 				render_comp.region = @atlas.find_region('canister1')
 				size_comp.width = render_comp.width * C::WTB
 				size_comp.height =render_comp.height * C::WTB
+				item_comp.weight = 1.1
+				item_comp.base_value = 1.2
 
 				@mgr.add_component(item, Type.new('canister1'))
 				@mgr.add_component(item, Info.new(
@@ -166,6 +170,8 @@ class MapSystem < System
 				render_comp.region = @atlas.find_region('rations1')
 				size_comp.width = render_comp.width * C::WTB
 				size_comp.height = render_comp.height * C::WTB
+				item_comp.weight = 0.6
+				item_comp.base_value = 0.9
 
 				@mgr.add_component(item, Type.new('rations1'))
 				@mgr.add_component(item, Info.new(
@@ -178,6 +184,8 @@ class MapSystem < System
 				render_comp.region = @atlas.find_region('overgrowth1')
 				size_comp.width = render_comp.width * C::WTB
 				size_comp.height = render_comp.height * C::WTB
+				item_comp.weight = 0.75
+				item_comp.base_value = 0.3
 
 				@mgr.add_component(item, Type.new('overgrowth1'))
 				@mgr.add_component(item, Info.new(
@@ -207,7 +215,7 @@ class MapSystem < System
 
 					@mgr.add_component(sub_item, Position.new(xx, yy))
 					@mgr.add_component(sub_item, Rotation.new(Random.rand(360)))
-					@mgr.add_component(sub_item, Item.new(sub_quality, sub_dur))
+					@mgr.add_component(sub_item, Item.new(sub_quality, sub_dur, 0.2, 0.1))
 					@mgr.add_component(sub_item, sub_render_comp)
 					@mgr.add_component(sub_item, sub_size_comp)
 					@mgr.add_component(sub_item, Type.new('ruffage1'))
@@ -225,6 +233,8 @@ class MapSystem < System
 				render_comp.region = @atlas.find_region('scrap1')
 				size_comp.width = render_comp.width * C::WTB
 				size_comp.height =render_comp.height * C::WTB
+				item_comp.weight = 0.9
+				item_comp.base_value = 0.6
 
 				@mgr.add_component(item, Type.new('scrap1'))
 				@mgr.add_component(item, Info.new(
