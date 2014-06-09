@@ -10,7 +10,7 @@ class TimeSystem < System
 		@duration = 0.0
 		@game_delta = 0.0
 
-		@hour, @minute = 8, 50
+		@hour, @minute = 0, 0
 		@day, @month, @year = 12, 8, 3127
 
 	end

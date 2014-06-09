@@ -127,12 +127,11 @@ class MapSystem < System
 			item = @mgr.create_basic_entity
 
 			dur, quality = Random.rand(0.2..1.0), Random.rand(0.1..0.9)
+
 			item_comp = @mgr.add_component(item, Item.new(quality, dur))
+			render_comp = @mgr.add_component(item, Render.new(''))
+			size_comp = @mgr.add_component(item, Size.new(0, 0))
 			@mgr.add_component(item, Position.new(x, y))
-			render_comp = Render.new('')
-			@mgr.add_component(item, render_comp)
-			size_comp = Size.new(0, 0)
-			@mgr.add_component(item, size_comp)
 			@mgr.add_component(item, Rotation.new(Random.rand(360)))
 
 			check = Random.rand

@@ -51,8 +51,6 @@ class GameScreen < ScreenAdapter
 		@mgr.status    = @status
 		@mgr.render    = @render
 		@mgr.physics   = @physics
-
-		
 		
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)

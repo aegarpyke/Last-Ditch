@@ -252,6 +252,8 @@ class UISystem < System
 						style.up = TextureRegionDrawable.new(@atlas.find_region('inv_selection'))
 						@ui.inv_selection.style = style
 
+						true
+
 					end
 
 
@@ -271,6 +273,8 @@ class UISystem < System
 
 						end
 
+						true
+
 					end
 
 					def touchUp(event, x, y, pointer, button)
@@ -288,6 +292,8 @@ class UISystem < System
 						item = inv_comp.items[index]
 
 						type_comp = @mgr.get_component(item, Type)
+
+						true
 						
 					end
 
