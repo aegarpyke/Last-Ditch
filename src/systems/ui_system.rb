@@ -1,6 +1,6 @@
 class UISystem < System
 
-	attr_accessor :stage, :inv_slots, :player, :inv_selection, :prev_selection
+	attr_accessor :stage, :inv_slots, :player, :inv_selection, :prev_selection, :inv_no_exit
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
 
@@ -17,7 +17,7 @@ class UISystem < System
 		setup_base
 		setup_main
 
-		if 1 == 1
+		if 1 == 0
 			@main_table.debug
 			@base_table.debug
 			@base_table_needs.debug
@@ -176,6 +176,8 @@ class UISystem < System
 	def setup_inventory
 
 		@inv_active = false
+		@inv_no_exit = false
+
 		@inv_button = TextButton.new("Inventory", @skin.get(TextButtonStyle.java_class))
 		@inv_listener = @inv_button.add_listener(
 
@@ -200,25 +202,26 @@ class UISystem < System
 		@inv_window.padTop(9)
 
 		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padLeft(2).padTop(8).padBottom(2).height(12)
+		@inv_window.add(@inv_item_name).colspan(8).align(Align::left).padTop(4).height(12).row
+		
 		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).padTop(8).height(12).row
+		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::left).height(12)
+		
 		@inv_item_value = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
-		@inv_window.add(@inv_item_value).colspan(8).align(Align::right).height(12)
+		@inv_window.add(@inv_item_value).colspan(2).align(Align::right).padRight(-32).height(14)
+		
 		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_weight).align(Align::right).height(12).row
+		@inv_window.add(@inv_item_weight).colspan(2).align(Align::right).height(14).row
 
 		@inv_desc = ""
 
 		@inv_item_desc1 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_desc1).align(Align::left).padLeft(8).colspan(8).height(12).row
+		@inv_window.add(@inv_item_desc1).align(Align::left).padLeft(8).padTop(6).colspan(8).height(12).row
 		@inv_item_desc2 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc2).align(Align::left).padLeft(5).colspan(8).height(12).row
 		@inv_item_desc3 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc3).align(Align::left).padLeft(5).colspan(8).height(12).row
-		@inv_item_desc4 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_desc4).align(Align::left).padLeft(5).colspan(8).height(12).row
 
 		set_inventory_desc(@inv_desc)
 
@@ -240,32 +243,47 @@ class UISystem < System
 					
 					end
 
-				
-					def clicked(event, x, y)
 
-						if @slot && @slot == @ui.inv_selection
+					def enter(event, x, y, pointer, from_actor)
 
-							inv_comp = @mgr.get_component(@ui.player, Inventory)
+						@ui.inv_selection = @slot
 
-							index = @ui.inv_slots.index(@slot)
-							item = inv_comp.items[index]
+						style = ImageButtonStyle.new(@ui.inv_selection.style)
+						style.up = TextureRegionDrawable.new(@atlas.find_region('inv_selection'))
+						@ui.inv_selection.style = style
 
-							type_comp = @mgr.get_component(item, Type)
-							
+					end
+
+
+					def exit(event, x, y, pointer, to_actor)
+
+						if @mgr.ui.inv_no_exit
+
+							@mgr.ui.inv_no_exit = false
+
 						else
-						
-							style = ImageButtonStyle.new(@ui.inv_selection.style)
+
+							@ui.inv_selection = nil
+
+							style = ImageButtonStyle.new(@slot.style)
 							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
-							@ui.inv_selection.style = style
-
-							@ui.inv_selection = @slot
-
-							style = ImageButtonStyle.new(@ui.inv_selection.style)
-							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_selection'))
-							@ui.inv_selection.style = style
+							@slot.style = style
 
 						end
 
+					end
+
+				
+					def clicked(event, x, y)
+
+						@mgr.ui.inv_no_exit = true
+						inv_comp = @mgr.get_component(@ui.player, Inventory)
+
+						index = @ui.inv_slots.index(@slot)
+						item = inv_comp.items[index]
+
+						type_comp = @mgr.get_component(item, Type)
+						
 					end
 
 				end.new(@mgr, @inv_slots.last, @atlas, self))
@@ -278,11 +296,6 @@ class UISystem < System
 
 		end
 
-		@inv_selection = @inv_slots[0]
-		style = ImageButtonStyle.new(@inv_selection.style)
-		style.up = TextureRegionDrawable.new(@atlas.find_region('inv_selection'))
-		@inv_selection.style = style
-
 		@main_table.add(@inv_button).width(90).height(14).colspan(2)
 
 	end
@@ -291,7 +304,7 @@ class UISystem < System
 	def set_inventory_quality_dur(quality, durability)
 		
 		unless quality == -1 && durability == -1
-			@inv_item_quality_dur.text = "q: %.2f d: %.2f" % [quality, durability]
+			@inv_item_quality_dur.text = "%.2f / %.2f" % [quality, durability]
 		else
 			@inv_item_quality_dur.text = ""
 		end
@@ -312,7 +325,7 @@ class UISystem < System
 	def set_inventory_weight(weight)
 
 		unless weight == -1
-			@inv_item_weight.text = "/ %.2fkg" % weight
+			@inv_item_weight.text = "/ %.1fkg" % weight
 		else
 			@inv_item_weight.text = ""
 		end
@@ -330,14 +343,13 @@ class UISystem < System
 
 		@inv_desc_lines = desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
 
-		while @inv_desc_lines.size < 4
+		while @inv_desc_lines.size < 3
 			@inv_desc_lines << ""
 		end
 
 		@inv_item_desc1.text = @inv_desc_lines[0]
 		@inv_item_desc2.text = @inv_desc_lines[1]
 		@inv_item_desc3.text = @inv_desc_lines[2]
-		@inv_item_desc4.text = @inv_desc_lines[3]
 
 	end
 
@@ -360,19 +372,31 @@ class UISystem < System
 
 			if @inv_selection != @prev_selection
 
-				index = @inv_slots.index(@inv_selection)
-				item = inv_comp.items[index]
+				if @inv_selection
 
-				if item
+					index = @inv_slots.index(@inv_selection)
+					item = inv_comp.items[index]
 
-					item_comp = @mgr.get_component(item, Item)
-					info_comp = @mgr.get_component(item, Info)
+					if item
 
-					set_inventory_name(info_comp.name)
-					set_inventory_quality_dur(item_comp.quality, item_comp.durability)
-					set_inventory_value(item_comp.value)
-					set_inventory_weight(item_comp.weight)
-					set_inventory_desc(info_comp.description)
+						item_comp = @mgr.get_component(item, Item)
+						info_comp = @mgr.get_component(item, Info)
+
+						set_inventory_name(info_comp.name)
+						set_inventory_quality_dur(item_comp.quality, item_comp.durability)
+						set_inventory_value(item_comp.value)
+						set_inventory_weight(item_comp.weight)
+						set_inventory_desc(info_comp.description)
+
+					else
+
+						set_inventory_name("")
+						set_inventory_quality_dur(-1, -1)
+						set_inventory_value(-1)
+						set_inventory_weight(-1)
+						set_inventory_desc("")
+
+					end
 
 				else
 

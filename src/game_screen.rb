@@ -79,7 +79,6 @@ class GameScreen < ScreenAdapter
 		@lighting.update(@map.cam.combined)
 		@ui.update(delta, @batch)
 
-		# @fps.log
 		# @debug.render(@physics.world, @map.cam.combined)
 
 	end

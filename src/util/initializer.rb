@@ -23,7 +23,6 @@ java_import com.badlogic.gdx.math.Rectangle
 java_import com.badlogic.gdx.graphics.GL20
 java_import com.badlogic.gdx.graphics.Texture
 java_import com.badlogic.gdx.graphics.OrthographicCamera
-java_import com.badlogic.gdx.graphics.FPSLogger
 java_import com.badlogic.gdx.graphics.Color
 java_import com.badlogic.gdx.graphics.g2d.SpriteBatch
 java_import com.badlogic.gdx.graphics.g2d.TextureAtlas
