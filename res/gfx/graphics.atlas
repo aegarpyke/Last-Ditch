@@ -6,7 +6,7 @@ filter: Nearest,Nearest
 repeat: none
 button1
   rotate: false
-  xy: 96, 4
+  xy: 78, 4
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -14,7 +14,7 @@ button1
   index: -1
 button1_pressed
   rotate: false
-  xy: 112, 4
+  xy: 94, 4
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -123,13 +123,6 @@ ruffage1
 scrap1
   rotate: false
   xy: 60, 2
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-scrap1_icon
-  rotate: false
-  xy: 78, 2
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
