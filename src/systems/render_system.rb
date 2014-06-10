@@ -64,6 +64,9 @@ class RenderSystem < System
 
 	def update(delta, batch)
 
+		
+		
+
 		# Scale update_timer based on player walking/running
 		unless @update_timer > 1.3
 
@@ -136,9 +139,6 @@ class RenderSystem < System
 						anim_comp.cur = 'player_walk'
 					end
 
-					pos_comp.x = col_comp.body.position.x
-					pos_comp.y = col_comp.body.position.y
-				
 				end
 
 				batch.draw(

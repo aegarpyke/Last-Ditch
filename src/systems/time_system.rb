@@ -93,4 +93,9 @@ class TimeSystem < System
 
 	end
 
+
+	def dispose
+
+	end
+
 end

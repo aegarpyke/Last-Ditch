@@ -57,4 +57,10 @@ class InventorySystem < System
 
 	end
 
+
+	def dispose
+
+
+	end
+
 end

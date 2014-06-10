@@ -13,4 +13,9 @@ class ActionsSystem < System
 
 	end
 
+
+	def dispose
+
+	end
+
 end

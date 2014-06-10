@@ -571,4 +571,10 @@ class MapSystem < System
 
 	end
 
+
+	def dispose
+
+
+	end
+
 end

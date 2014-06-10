@@ -10,7 +10,6 @@ require_relative '../../lib/gdx-tools.jar'
 require_relative '../../lib/box2dlights-1.3-SNAPSHOT.jar'
 
 java_import com.badlogic.gdx.Gdx
-java_import com.badlogic.gdx.Game
 java_import com.badlogic.gdx.Input
 java_import com.badlogic.gdx.Input::Keys
 java_import com.badlogic.gdx.ScreenAdapter
@@ -18,6 +17,7 @@ java_import com.badlogic.gdx.ApplicationAdapter
 java_import com.badlogic.gdx.InputAdapter
 java_import com.badlogic.gdx.InputMultiplexer
 java_import com.badlogic.gdx.InputProcessor
+java_import com.badlogic.gdx.utils.TimeUtils
 java_import com.badlogic.gdx.math.Vector2
 java_import com.badlogic.gdx.math.Rectangle
 java_import com.badlogic.gdx.graphics.GL20
@@ -71,8 +71,7 @@ java_import 'box2dLight.DirectionalLight'
 
 require_relative 'c'
 require_relative 'user_adapter'
-require_relative '../game_screen'
-require_relative '../entity_manager'
+require_relative 'entity_manager'
 require_relative '../systems/system'
 require_relative '../systems/time_system'
 require_relative '../systems/input_system'

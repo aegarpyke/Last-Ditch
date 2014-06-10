@@ -13,4 +13,9 @@ class EquipmentSystem < System
 
 	end
 
+
+	def dispose
+
+	end
+
 end

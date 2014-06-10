@@ -518,4 +518,10 @@ class UISystem < System
 
 	end
 
+
+	def dispose
+
+
+	end
+
 end

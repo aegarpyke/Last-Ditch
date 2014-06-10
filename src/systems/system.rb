@@ -4,4 +4,10 @@ class System
 		raise RuntimeError('Systems must override update')
 	end
 
+
+	def dispose
+
+
+	end
+
 end

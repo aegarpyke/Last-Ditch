@@ -42,4 +42,10 @@ class StatusSystem < System
 
 	end
 
+
+	def dispose
+
+
+	end
+
 end

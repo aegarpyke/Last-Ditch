@@ -140,14 +140,13 @@ class PhysicsSystem < System
 	end
 
 
-	def update(delta)
+	def update
 
 		unless @mgr.paused
 
 			entities = @mgr.get_all_entities_with_components([Velocity, Collision])
 			entities.each do |entity|
 
-				pos_comp = @mgr.get_component(entity, Position)
 				vel_comp = @mgr.get_component(entity, Velocity)
 				rot_comp = @mgr.get_component(entity, Rotation)
 				col_comp = @mgr.get_component(entity, Collision)
@@ -155,8 +154,8 @@ class PhysicsSystem < System
 				if vel_comp.spd != 0
 
 					vel_vec = Vector2.new(
-						delta * vel_comp.spd * rot_comp.x, 
-						delta * vel_comp.spd * rot_comp.y)
+						vel_comp.spd * rot_comp.x, 
+						vel_comp.spd * rot_comp.y)
 
 					col_comp.body.apply_linear_impulse(
 						vel_vec, 
@@ -170,6 +169,19 @@ class PhysicsSystem < System
 			end
 
 			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
+
+			entities.each do |entity|
+
+				pos_comp = @mgr.get_component(entity, Position)
+				col_comp = @mgr.get_component(entity, Collision)
+
+				pos_comp.px = pos_comp.x
+				pos_comp.py = pos_comp.y
+
+				pos_comp.x = col_comp.body.position.x
+				pos_comp.y = col_comp.body.position.y
+
+			end
 
 		end
 
