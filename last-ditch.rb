@@ -45,7 +45,7 @@ class LastDitch < ApplicationAdapter
 		@status    = StatusSystem.new(@mgr)
 		@physics   = PhysicsSystem.new(@mgr, @player, @map)
 		@render    = RenderSystem.new(@mgr, @player, @atlas)
-		@lighting  = LightingSystem.new(@mgr, @physics.world, @physics.player_body)
+		@lighting  = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
 		@mgr.map       = @map
 		@mgr.time      = @time
@@ -98,8 +98,8 @@ class LastDitch < ApplicationAdapter
 			@equipment.update
 			@status.update
 			@render.update
-			@ui.update
 			@physics.update
+			@ui.update
 
 		end
 		
@@ -107,6 +107,8 @@ class LastDitch < ApplicationAdapter
 		# @physics.interpolate(alpha)
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
+		
+		@batch.projection_matrix = @map.cam::combined
 
 		@batch.begin
 
@@ -115,7 +117,7 @@ class LastDitch < ApplicationAdapter
 
 		@batch.end
 
-		@lighting.update(@map.cam.combined)
+		@lighting.render
 		@ui.render
 
 		# @debug.render(@physics.world, @map.cam.combined)

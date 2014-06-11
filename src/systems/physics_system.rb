@@ -150,6 +150,10 @@ class PhysicsSystem < System
 			rot_comp = @mgr.get_component(@player, Rotation)
 			col_comp = @mgr.get_component(@player, Collision)
 
+			pos_comp.px = pos_comp.x
+			pos_comp.py = pos_comp.y
+			rot_comp.p_angle = rot_comp.angle
+
 			if vel_comp.spd != 0
 
 				vel_vec = Vector2.new(
@@ -169,10 +173,6 @@ class PhysicsSystem < System
 			if vel_comp.ang_spd != 0
 				rot_comp.rotate(vel_comp.ang_spd)
 			end
-
-			pos_comp.px = pos_comp.x
-			pos_comp.py = pos_comp.y
-			rot_comp.p_angle = rot_comp.angle
 
 			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
 			

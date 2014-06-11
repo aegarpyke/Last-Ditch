@@ -556,8 +556,6 @@ class MapSystem < System
 
 	def render(batch)
 
-		batch.projection_matrix = @cam::combined
-
 		for x in @start_x..@end_x
 			for y in @start_y..@end_y
 

@@ -506,14 +506,18 @@ class UISystem < System
 
 		end
 
+		if @main_active || @base_active
+
+			@stage.act
+
+		end
+
 	end
 
 
 	def render
 
 		if @main_active || @base_active
-			
-			@stage.act
 
 			@stage.draw
 
