@@ -12,7 +12,7 @@ class InventorySystem < System
 	end
 
 
-	def update(delta)
+	def update
 
 		if @update_slots
 

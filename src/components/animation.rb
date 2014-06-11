@@ -1,6 +1,6 @@
 class Animation < Component
 
-	attr_accessor :anims, :names_and_frames, :cur, :state_time, :key_frame, :scale
+	attr_accessor :anims, :names_and_frames, :cur, :cur_anim, :state_time, :key_frame, :scale
 
 	def initialize(names_and_frames)
 
@@ -10,10 +10,6 @@ class Animation < Component
 		@anims = Hash.new
 		@names_and_frames = names_and_frames
 
-	end
-
-	def key_frame
-		@cur.get_key_frame(@state_time, true)
 	end
 
 	def width
@@ -37,7 +33,11 @@ class Animation < Component
 	end
 
 	def cur=(name)
-		@cur = @anims[name]
+		@cur_anim = @anims[name]
+	end
+
+	def key_frame
+		@cur_anim.get_key_frame(@state_time, true)
 	end
 
 end

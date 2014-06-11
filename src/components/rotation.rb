@@ -1,13 +1,22 @@
 class Rotation < Component
 
-	attr_accessor :angle, :x, :y
+	attr_accessor :angle, :p_angle, :x, :y
 
 	def initialize(angle)
 
 		super()
+		@angle = @p_angle = angle
+		@x = Math.cos(angle * Math::PI / 180)
+		@y = Math.sin(angle * Math::PI / 180)
+
+	end
+
+
+	def angle=(angle)
+
 		@angle = angle
-		@x = Math.cos(angle * Math::PI / 180.0)
-		@y = Math.sin(angle * Math::PI / 180.0)
+		@x = Math.cos(angle * Math::PI / 180)
+		@y = Math.sin(angle * Math::PI / 180)
 
 	end
 
@@ -31,8 +40,8 @@ class Rotation < Component
 	def rotate(amount)
 
 		@angle += amount
-		@x = Math.cos(@angle * Math::PI / 180.0)
-		@y = Math.sin(@angle * Math::PI / 180.0)
+		@x = Math.cos(@angle * Math::PI / 180)
+		@y = Math.sin(@angle * Math::PI / 180)
 	
 	end
 

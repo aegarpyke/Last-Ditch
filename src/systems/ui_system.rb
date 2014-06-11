@@ -365,7 +365,7 @@ class UISystem < System
 	end
 
 
-	def update(delta, batch)
+	def update
 
 		if @base_active
 
@@ -505,6 +505,11 @@ class UISystem < System
 			end
 
 		end
+
+	end
+
+
+	def render
 
 		if @main_active || @base_active
 			

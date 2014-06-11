@@ -41,6 +41,8 @@ class MapSystem < System
 		generate_items
 		generate_doors
 
+		update
+
 	end
 
 
@@ -539,7 +541,7 @@ class MapSystem < System
 	end
 
 
-	def update(delta, batch)
+	def update
 
 		@start_x = [@focus.x - 13, 0].max.to_i
 		@start_y = [@focus.y - 10, 0].max.to_i
@@ -548,6 +550,11 @@ class MapSystem < System
 
 		@cam.position.set(@focus.x * C::BTW, @focus.y * C::BTW, 0)
 		@cam.update
+
+	end
+
+
+	def render(batch)
 
 		batch.projection_matrix = @cam::combined
 

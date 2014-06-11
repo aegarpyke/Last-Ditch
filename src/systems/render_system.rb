@@ -59,19 +59,19 @@ class RenderSystem < System
 
 		end
 
+		anim_comp = @mgr.get_component(@player, Animation)
+		anim_comp.cur = 'player_walk'
+
 	end
 
 
-	def update(delta, batch)
-
+	def update
 		
-		
+		unless @update_timer > 20
 
-		# Scale update_timer based on player walking/running
-		unless @update_timer > 1.3
-
-			@update_timer += delta
-		
+			# Scale update_timer based on player walking/running
+			@update_timer += 1
+			
 		else
 
 			@update_timer = 0
@@ -93,6 +93,30 @@ class RenderSystem < System
 			end
 
 		end
+
+		unless @mgr.paused
+			
+			anim_comp = @mgr.get_component(@player, Animation)
+			vel_comp = @mgr.get_component(@player, Velocity)
+			col_comp = @mgr.get_component(@player, Collision)
+			
+			anim_comp.cur = 'player_walk'
+			anim_comp.state_time += C::BOX_STEP
+
+			vel = col_comp.body.linear_velocity
+
+			if vel.x.abs < 0.02 && vel.y.abs < 0.02
+				anim_comp.cur = 'player_idle'
+			elsif anim_comp.cur != 'player_walk'
+				anim_comp.cur = 'player_walk'
+			end
+
+		end
+
+	end
+
+
+	def render(batch)
 
 		batch.begin
 
@@ -116,41 +140,18 @@ class RenderSystem < System
 
 			end
 
-			entities = @mgr.get_all_entities_with(Animation)
-			entities.each do |entity|
+			anim_comp = @mgr.get_component(@player, Animation)
+			pos_comp = @mgr.get_component(@player, Position)
+			rot_comp = @mgr.get_component(@player, Rotation)
 
-				anim_comp = @mgr.get_component(entity, Animation)
-				pos_comp = @mgr.get_component(entity, Position)
-				rot_comp = @mgr.get_component(entity, Rotation)
-
-				unless @mgr.paused
-					
-					vel_comp = @mgr.get_component(entity, Velocity)
-					col_comp = @mgr.get_component(entity, Collision)
-					
-					anim_comp.cur = 'player_walk'
-					anim_comp.state_time += delta
-
-					vel = col_comp.body.linear_velocity
-
-					if @mgr.paused || vel.x.abs < 0.02 && vel.y.abs < 0.02
-						anim_comp.cur = 'player_idle'
-					elsif anim_comp.cur != 'player_walk'
-						anim_comp.cur = 'player_walk'
-					end
-
-				end
-
-				batch.draw(
-					anim_comp.key_frame, 
-					C::BTW * pos_comp.x - anim_comp.width/2,
-					C::BTW * pos_comp.y - anim_comp.height/2,
-					anim_comp.width/2, anim_comp.height/2,
-					anim_comp.width, anim_comp.height, 
-					anim_comp.scale, anim_comp.scale, 
-					rot_comp.angle)
-
-			end
+			batch.draw(
+				anim_comp.key_frame, 
+				C::BTW * pos_comp.x - anim_comp.width/2,
+				C::BTW * pos_comp.y - anim_comp.height/2,
+				anim_comp.width/2, anim_comp.height/2,
+				anim_comp.width, anim_comp.height, 
+				anim_comp.scale, anim_comp.scale, 
+				rot_comp.angle)
 
 		batch.end
 

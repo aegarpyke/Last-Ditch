@@ -8,7 +8,7 @@ class EquipmentSystem < System
 	end
 
 
-	def update(delta)
+	def update
 
 
 	end

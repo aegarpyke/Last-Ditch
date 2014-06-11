@@ -8,7 +8,7 @@ class ActionsSystem < System
 	end
 
 
-	def update(delta)
+	def update
 
 
 	end

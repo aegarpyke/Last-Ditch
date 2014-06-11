@@ -78,22 +78,28 @@ class LastDitch < ApplicationAdapter
 
 		while (@accumulated_dt >= C::BOX_STEP)
 
+			@time.update
+			@map.update
+			@actions.update
+			@inventory.update
+			@equipment.update
+			@status.update
+			@render.update
+			@ui.update
 			@physics.update
+
 			@accumulated_dt -= C::BOX_STEP
 
 		end
 
 		alpha = @accumulated_dt / C::BOX_STEP
 
-		@time.update(delta)
-		@map.update(delta, @batch)
-		@actions.update(delta)
-		@inventory.update(delta)
-		@equipment.update(delta)
-		@status.update(delta)
-		@render.update(delta, @batch)
+		@physics.interpolate(alpha)
+
+		@map.render(@batch)
+		@render.render(@batch)
 		@lighting.update(@map.cam.combined)
-		@ui.update(delta, @batch)
+		@ui.render
 
 		# @debug.render(@physics.world, @map.cam.combined)
 

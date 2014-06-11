@@ -144,46 +144,53 @@ class PhysicsSystem < System
 
 		unless @mgr.paused
 
-			entities = @mgr.get_all_entities_with_components([Velocity, Collision])
-			entities.each do |entity|
+			pos_comp = @mgr.get_component(@player, Position)
+			vel_comp = @mgr.get_component(@player, Velocity)
+			rot_comp = @mgr.get_component(@player, Rotation)
+			col_comp = @mgr.get_component(@player, Collision)
 
-				vel_comp = @mgr.get_component(entity, Velocity)
-				rot_comp = @mgr.get_component(entity, Rotation)
-				col_comp = @mgr.get_component(entity, Collision)
+			if vel_comp.spd != 0
 
-				if vel_comp.spd != 0
+				vel_vec = Vector2.new(
+					vel_comp.spd * rot_comp.x, 
+					vel_comp.spd * rot_comp.y)
 
-					vel_vec = Vector2.new(
-						vel_comp.spd * rot_comp.x, 
-						vel_comp.spd * rot_comp.y)
-
-					col_comp.body.apply_linear_impulse(
-						vel_vec, 
-						col_comp.body.world_center, 
-						true)
-
-				end
-
-				rot_comp.rotate(vel_comp.ang_spd)
-
-			end
-
-			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
-
-			entities.each do |entity|
-
-				pos_comp = @mgr.get_component(entity, Position)
-				col_comp = @mgr.get_component(entity, Collision)
-
-				pos_comp.px = pos_comp.x
-				pos_comp.py = pos_comp.y
+				col_comp.body.apply_linear_impulse(
+					vel_vec, 
+					col_comp.body.world_center, 
+					true)
 
 				pos_comp.x = col_comp.body.position.x
 				pos_comp.y = col_comp.body.position.y
 
 			end
 
+			if vel_comp.ang_spd != 0
+				rot_comp.rotate(vel_comp.ang_spd)
+			end
+
+			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
+
+			pos_comp.px = pos_comp.x
+			pos_comp.py = pos_comp.y
+			rot_comp.p_angle = rot_comp.angle
+
 		end
+
+	end
+
+
+	def interpolate(alpha)
+
+		pos_comp = @mgr.get_component(@player, Position)
+		rot_comp = @mgr.get_component(@player, Rotation)
+		col_comp = @mgr.get_component(@player, Collision)
+
+		pos_comp.x = alpha * pos_comp.x + (1 - alpha) * pos_comp.px
+		pos_comp.y = alpha * pos_comp.y + (1 - alpha) * pos_comp.py
+		rot_comp.angle = alpha * rot_comp.angle + (1 - alpha) * rot_comp.p_angle
+
+		col_comp.body.set_transform(pos_comp.x, pos_comp.y, rot_comp.angle)
 
 	end
 
