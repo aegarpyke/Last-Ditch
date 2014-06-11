@@ -558,23 +558,19 @@ class MapSystem < System
 
 		batch.projection_matrix = @cam::combined
 
-		batch.begin
+		for x in @start_x..@end_x
+			for y in @start_y..@end_y
 
-			for x in @start_x..@end_x
-				for y in @start_y..@end_y
+				batch.draw(
+					@tiles[x][y],
+					x * C::BTW, y * C::BTW,
+					C::BTW/2, C::BTW/2, 
+					C::BTW, C::BTW,
+					1, 1,
+					@rot[x][y])
 
-					batch.draw(
-						@tiles[x][y],
-						x * C::BTW, y * C::BTW,
-						C::BTW/2, C::BTW/2, 
-						C::BTW, C::BTW,
-						1, 1,
-						@rot[x][y])
-
-				end
 			end
-
-		batch.end
+		end
 
 	end
 

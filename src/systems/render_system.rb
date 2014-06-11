@@ -67,11 +67,11 @@ class RenderSystem < System
 
 	def update
 		
-		unless @update_timer > 20
+		unless @update_timer > 100
 
 			# Scale update_timer based on player walking/running
 			@update_timer += 1
-			
+
 		else
 
 			@update_timer = 0
@@ -118,42 +118,38 @@ class RenderSystem < System
 
 	def render(batch)
 
-		batch.begin
+		@nearby_entities.each do |entity|
 
-			@nearby_entities.each do |entity|
+			pos_comp = @mgr.get_component(entity, Position)
+			rot_comp = @mgr.get_component(entity, Rotation)
+			size_comp = @mgr.get_component(entity, Size)
+			render_comp = @mgr.get_component(entity, Render)
 
-				pos_comp = @mgr.get_component(entity, Position)
-				rot_comp = @mgr.get_component(entity, Rotation)
-				size_comp = @mgr.get_component(entity, Size)
-				render_comp = @mgr.get_component(entity, Render)
-
-				if render_comp
-					batch.draw(
-						render_comp.region,
-						C::BTW * (pos_comp.x - size_comp.width/2),
-						C::BTW * (pos_comp.y - size_comp.height/2),
-						C::BTW * size_comp.width/2, C::BTW * size_comp.height/2,
-						C::BTW * size_comp.width, C::BTW * size_comp.height,
-						render_comp.scale, render_comp.scale,
-						rot_comp.angle)
-				end
-
+			if render_comp
+				batch.draw(
+					render_comp.region,
+					C::BTW * (pos_comp.x - size_comp.width/2),
+					C::BTW * (pos_comp.y - size_comp.height/2),
+					C::BTW * size_comp.width/2, C::BTW * size_comp.height/2,
+					C::BTW * size_comp.width, C::BTW * size_comp.height,
+					render_comp.scale, render_comp.scale,
+					rot_comp.angle)
 			end
 
-			anim_comp = @mgr.get_component(@player, Animation)
-			pos_comp = @mgr.get_component(@player, Position)
-			rot_comp = @mgr.get_component(@player, Rotation)
+		end
 
-			batch.draw(
-				anim_comp.key_frame, 
-				C::BTW * pos_comp.x - anim_comp.width/2,
-				C::BTW * pos_comp.y - anim_comp.height/2,
-				anim_comp.width/2, anim_comp.height/2,
-				anim_comp.width, anim_comp.height, 
-				anim_comp.scale, anim_comp.scale, 
-				rot_comp.angle)
+		anim_comp = @mgr.get_component(@player, Animation)
+		pos_comp = @mgr.get_component(@player, Position)
+		rot_comp = @mgr.get_component(@player, Rotation)
 
-		batch.end
+		batch.draw(
+			anim_comp.key_frame, 
+			C::BTW * pos_comp.x - anim_comp.width/2,
+			C::BTW * pos_comp.y - anim_comp.height/2,
+			anim_comp.width/2, anim_comp.height/2,
+			anim_comp.width, anim_comp.height, 
+			anim_comp.scale, anim_comp.scale, 
+			rot_comp.angle)
 
 	end
 

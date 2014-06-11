@@ -67,16 +67,29 @@ class LastDitch < ApplicationAdapter
 	end
 
 
+	def set_step
+
+
+	end
+
+
 	def render
 
 		delta = Gdx.graphics.get_delta_time
 
-		delta = 0.25 if delta > 0.25
 		@accumulated_dt += delta
 
-		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
+		n_steps = (@accumulated_dt / C::BOX_STEP).floor
 
-		while (@accumulated_dt >= C::BOX_STEP)
+		if n_steps > 0
+			@accumulated_dt -= n_steps * C::BOX_STEP
+		end
+
+		alpha = @accumulated_dt / C::BOX_STEP
+
+		n_steps = [n_steps, C::MAX_STEPS].min
+
+		n_steps.times do
 
 			@time.update
 			@map.update
@@ -88,16 +101,20 @@ class LastDitch < ApplicationAdapter
 			@ui.update
 			@physics.update
 
-			@accumulated_dt -= C::BOX_STEP
-
 		end
+		
+		@physics.world.clear_forces
+		# @physics.interpolate(alpha)
 
-		alpha = @accumulated_dt / C::BOX_STEP
+		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 
-		@physics.interpolate(alpha)
+		@batch.begin
 
 		@map.render(@batch)
 		@render.render(@batch)
+
+		@batch.end
+
 		@lighting.update(@map.cam.combined)
 		@ui.render
 

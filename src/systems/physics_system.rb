@@ -12,6 +12,7 @@ class PhysicsSystem < System
 		@player = player
 		@gravity = Vector2.new(0.0, 0.0)
 		@world = World.new(@gravity, true)
+		@world.auto_clear_forces = false
 
 		generate_player_body
 		generate_tile_bodies
@@ -169,12 +170,12 @@ class PhysicsSystem < System
 				rot_comp.rotate(vel_comp.ang_spd)
 			end
 
-			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
-
 			pos_comp.px = pos_comp.x
 			pos_comp.py = pos_comp.y
 			rot_comp.p_angle = rot_comp.angle
 
+			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
+			
 		end
 
 	end
@@ -186,11 +187,11 @@ class PhysicsSystem < System
 		rot_comp = @mgr.get_component(@player, Rotation)
 		col_comp = @mgr.get_component(@player, Collision)
 
-		pos_comp.x = alpha * pos_comp.x + (1 - alpha) * pos_comp.px
-		pos_comp.y = alpha * pos_comp.y + (1 - alpha) * pos_comp.py
-		rot_comp.angle = alpha * rot_comp.angle + (1 - alpha) * rot_comp.p_angle
+		x = alpha * pos_comp.x + (1 - alpha) * pos_comp.px
+		y = alpha * pos_comp.y + (1 - alpha) * pos_comp.py
+		angle = alpha * rot_comp.angle + (1 - alpha) * rot_comp.p_angle
 
-		col_comp.body.set_transform(pos_comp.x, pos_comp.y, rot_comp.angle)
+		col_comp.body.set_transform(x, y, angle)
 
 	end
 
