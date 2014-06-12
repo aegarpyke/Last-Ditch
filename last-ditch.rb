@@ -14,7 +14,7 @@ class LastDitch < ApplicationAdapter
 
 		@player = @mgr.create_tagged_entity('player')
 		@mgr.add_component(@player, Position.new(40, 40))
-		@mgr.add_component(@player, Velocity.new(0, 0))
+		@mgr.add_component(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
 		@mgr.add_component(@player, Rotation.new(0))
 		@mgr.add_component(@player, Inventory.new(C::INVENTORY_SLOTS))
 		@mgr.add_component(@player, Needs.new)
@@ -23,6 +23,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_component(@player, UserInput.new)
 		@mgr.add_component(@player, Collision.new)
 		@mgr.add_component(@player, Animation.new(
+			0.1,
 			{'player_idle' => ['player_idle1'], 
 	     'player_walk' => ['player_idle1',
 	                       'player_walk1', 
@@ -35,21 +36,23 @@ class LastDitch < ApplicationAdapter
 
 		@droid = @mgr.create_tagged_entity('droid 1')
 		@mgr.add_component(@droid, Position.new(42, 42))
-		@mgr.add_component(@droid, Velocity.new(0, 0))
+		@mgr.add_component(@droid, Velocity.new(0, 0, 0.8, 1))
 		@mgr.add_component(@droid, Rotation.new(0))
 		@mgr.add_component(@droid, Collision.new)
 		@mgr.add_component(@droid, AI.new('wander'))
 		@mgr.add_component(@droid, Animation.new(
+			0.3,
 			{'drone1_idle' => ['drone1_idle1',
 												 'drone1_idle2']}))
 
 		@droid2 = @mgr.create_tagged_entity('droid 2')
 		@mgr.add_component(@droid2, Position.new(44, 44))
-		@mgr.add_component(@droid2, Velocity.new(0, 0))
+		@mgr.add_component(@droid2, Velocity.new(0, 0, 1.0, 1))
 		@mgr.add_component(@droid2, Rotation.new(0))
 		@mgr.add_component(@droid2, Collision.new)
 		@mgr.add_component(@droid2, AI.new('wander'))
 		@mgr.add_component(@droid2, Animation.new(
+			0.3,
 			{'drone1_idle' => ['drone1_idle1',
 												 'drone1_idle2']}))
 
@@ -96,36 +99,37 @@ class LastDitch < ApplicationAdapter
 
 	def render
 
-		delta = Gdx.graphics.get_delta_time
+		delta = Gdx.graphics.delta_time
 
 		@accumulated_dt += delta
 		n = (@accumulated_dt / C::BOX_STEP).floor
 		@accumulated_dt -= n * C::BOX_STEP if n > 0
 
 		alpha = @accumulated_dt / C::BOX_STEP
+	
+		[n, C::MAX_STEPS].min.times do
 
-		unless @mgr.paused
-		
-			[n, C::MAX_STEPS].min.times do
+			@actions.update
+			@inventory.update
+			@equipment.update
+			@status.update
 
-					@time.update
-					@actions.update
-					@inventory.update
-					@equipment.update
-					@status.update
-					@ai.update
-					@physics.update
-					@render.update
-
+			unless @mgr.paused
+				
+				@time.update 
+				@ai.update
+				@render.update
+				@physics.update
+			
 			end
-		
+
 		end
 
 		@map.update
 		@ui.update
 
-		# @physics.world.clear_forces
-		# @physics.interpolate(alpha)
+		@physics.world.clear_forces
+		@physics.interpolate(alpha)
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 		

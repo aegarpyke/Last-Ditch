@@ -10,12 +10,12 @@ class Item < Component
 		@quality = quality
 		@durability = durability
 		@base_value = base_value
-		@value = @base_value * @quality * @durability
+		@value = @base_value * (2*@quality + 1*@durability)
 
 	end
 
 	def value
-		@value = @base_value * @quality * @durability
+		@value = @base_value * (2*@quality + 1*@durability)
 	end
 
 end

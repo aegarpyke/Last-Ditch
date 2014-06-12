@@ -180,19 +180,29 @@ class PhysicsSystem < System
 					col_comp.body.world_center, 
 					true)
 
-				pos_comp.x = col_comp.body.position.x
-				pos_comp.y = col_comp.body.position.y
-
 			end
 
 			if vel_comp.ang_spd != 0
 				rot_comp.rotate(vel_comp.ang_spd)
 			end
 
+			
+
 		end
 
 		@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
-			
+
+		entities = @mgr.get_all_entities_with(Velocity)
+		entities.each do |entity|
+
+			pos_comp = @mgr.get_component(entity, Position)
+			col_comp = @mgr.get_component(entity, Collision)
+
+			pos_comp.x = col_comp.body.position.x
+			pos_comp.y = col_comp.body.position.y
+
+		end
+
 	end
 
 
@@ -206,7 +216,11 @@ class PhysicsSystem < System
 		y = alpha * pos_comp.y + (1 - alpha) * pos_comp.py
 		angle = alpha * rot_comp.angle + (1 - alpha) * rot_comp.p_angle
 
-		col_comp.body.set_transform(x, y, angle)
+		col_comp.body.set_transform(x, y, 0)
+
+		pos_comp.x = col_comp.body.position.x
+		pos_comp.y = col_comp.body.position.y
+		rot_comp.angle = angle
 
 	end
 

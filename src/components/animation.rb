@@ -1,13 +1,14 @@
 class Animation < Component
 
-	attr_accessor :anims, :names_and_frames, :cur, :cur_anim, :state_time, :key_frame, :scale
+	attr_accessor :anims, :duration, :names_and_frames, :cur, :cur_anim, :state_time, :key_frame, :scale
 
-	def initialize(names_and_frames)
+	def initialize(duration, names_and_frames)
 
 		super()
 		@scale = 1.0
 		@state_time = 0.0
 		@anims = Hash.new
+		@duration = duration
 		@names_and_frames = names_and_frames
 
 	end

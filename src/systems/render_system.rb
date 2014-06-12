@@ -55,7 +55,8 @@ class RenderSystem < System
 				end
 
 				frame_list = frame_list.to_java(TextureRegion)
-				anim_comp.anims[name] = com.badlogic.gdx.graphics.g2d.Animation.new(0.1, frame_list)
+				anim_comp.anims[name] = com.badlogic.gdx.graphics.g2d.Animation.new(
+					anim_comp.duration, frame_list)
 
 				if first
 					first = false

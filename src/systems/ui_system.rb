@@ -204,16 +204,17 @@ class UISystem < System
 		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padTop(4).height(12)
 		
-		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_item_weight.color = Color.new(0.75, 0.75, 0.82, 1.0)
-		@inv_window.add(@inv_item_weight).colspan(2).align(Align::right).padRight(-32).height(14).padTop(4)
-
 		@inv_item_value = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
-		@inv_window.add(@inv_item_value).colspan(2).align(Align::right).padTop(4).height(14).row
-		
+		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1)
+		@inv_window.add(@inv_item_value).colspan(4).align(Align::right).padTop(4).height(14).row
+
+		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_weight.color = Color.new(0.75, 0.75, 0.82, 1)
+		@inv_window.add(@inv_item_weight).colspan(4).align(Align::left).height(14).padTop(1)
+
 		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_quality_dur).colspan(8).align(Align::right).height(12).row
+		@inv_item_quality_dur.color = Color.new(0.8, 0.8, 0.8, 1)
+		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).padTop(1).height(12).row
 
 		@inv_desc = ""
 
@@ -316,7 +317,7 @@ class UISystem < System
 	def set_inventory_quality_dur(quality, durability)
 		
 		unless quality == -1 && durability == -1
-			@inv_item_quality_dur.text = "%.2f / %.2f" % [quality, durability]
+			@inv_item_quality_dur.text = "qual: %d cond: %d" % [(quality * 100).to_i, (durability * 100).to_i]
 		else
 			@inv_item_quality_dur.text = ""
 		end
@@ -504,12 +505,6 @@ class UISystem < System
 			else
 				@equip_window.remove
 			end
-
-		end
-
-		if @main_active || @base_active
-
-			
 
 		end
 

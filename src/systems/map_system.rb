@@ -172,7 +172,7 @@ class MapSystem < System
 				size_comp.width = render_comp.width * C::WTB
 				size_comp.height = render_comp.height * C::WTB
 				item_comp.weight = 0.6
-				item_comp.base_value = 0.9
+				item_comp.base_value = 100.0
 
 				@mgr.add_component(item, Type.new('rations1'))
 				@mgr.add_component(item, Info.new(
@@ -550,7 +550,7 @@ class MapSystem < System
 
 		@cam.position.set(@focus.x * C::BTW, @focus.y * C::BTW, 0)
 		@cam.update
-
+		
 	end
 
 

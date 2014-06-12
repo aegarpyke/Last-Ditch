@@ -6,7 +6,7 @@ class TimeSystem < System
 
 		super()
 		@game_delta = 0
-		@rate = 1000.0
+		@rate = 1.0
 		@active = true
 		@duration = 0.0
 

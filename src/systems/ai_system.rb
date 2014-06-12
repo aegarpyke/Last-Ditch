@@ -25,9 +25,9 @@ class AISystem < System
 
 				check = Random.rand
 				if check < 1
-					ang_spd = Random.rand(-2..2)
+					ang_spd = Random.rand(-vel_comp.max_ang_spd..vel_comp.max_ang_spd)
 					vel_comp.ang_spd = ang_spd
-					vel_comp.spd = C::PLAYER_SPD
+					vel_comp.spd = vel_comp.max_spd
 				else
 					vel_comp.spd = 0
 					vel_comp.ang_spd = 0
