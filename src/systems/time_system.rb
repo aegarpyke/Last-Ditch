@@ -1,6 +1,6 @@
 class TimeSystem < System
 
-	attr_accessor :active, :game_delta, :duration, :rate, :minute, :hour, :day, :month, :year
+	attr_accessor :active, :game_delta, :elapsed, :rate, :minute, :hour, :day, :month, :year
 
 	def initialize
 
@@ -8,7 +8,7 @@ class TimeSystem < System
 		@game_delta = 0
 		@rate = 1.0
 		@active = true
-		@duration = 0.0
+		@elapsed = 0.0
 
 		@hour, @minute = 0, 0
 		@day, @month, @year = 1, 1, 3127
@@ -60,8 +60,7 @@ class TimeSystem < System
 
 			@game_delta = @rate * C::BOX_STEP
 			@minute += @game_delta
-			@duration += @game_delta
-			@game_delta = @game_delta
+			@elapsed += @game_delta
 
 			if @minute > 60
 				@minute = 0

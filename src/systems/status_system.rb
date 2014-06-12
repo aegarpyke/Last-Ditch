@@ -12,31 +12,31 @@ class StatusSystem < System
 		entities = @mgr.get_all_entities_with_components([Needs, Velocity])
 		entities.each do |entity|
 
-			vel_comp = @mgr.get_component(entity, Velocity)
-			need_comp = @mgr.get_component(entity, Needs)
+			vel = @mgr.get_component(entity, Velocity)
+			needs = @mgr.get_component(entity, Needs)
 
 			gd = @mgr.time.game_delta
 
-			need_comp.hunger += need_comp.hunger_rate * gd
-			need_comp.hunger = [0, need_comp.hunger, 1].sort[1]
-			need_comp.thirst += need_comp.thirst_rate * gd
-			need_comp.thirst = [0, need_comp.thirst, 1].sort[1]
+			needs.hunger += needs.hunger_rate * gd
+			needs.hunger = [0, needs.hunger, 1].sort[1]
+			needs.thirst += needs.thirst_rate * gd
+			needs.thirst = [0, needs.thirst, 1].sort[1]
 			
-			if vel_comp.spd > 0
-				need_comp.energy += need_comp.energy_usage_rate * gd
-			elsif vel_comp.spd < 0
-				need_comp.energy += need_comp.energy_usage_rate * gd * 0.4
+			if vel.spd > 0
+				needs.energy += needs.energy_usage_rate * gd
+			elsif vel.spd < 0
+				needs.energy += needs.energy_usage_rate * gd * 0.4
 			else
-				need_comp.energy += need_comp.energy_recovery_rate * gd
+				needs.energy += needs.energy_recovery_rate * gd
 			end
 			
-			need_comp.energy_max += need_comp.energy_fatigue_rate * gd
+			needs.energy_max += needs.energy_fatigue_rate * gd
 
-			need_comp.energy_max = 0 if need_comp.energy_max < 0
+			needs.energy_max = 0 if needs.energy_max < 0
 
-			need_comp.energy = [0, need_comp.energy, need_comp.energy_max].sort[1]
-			need_comp.sanity += need_comp.sanity_rate * gd
-			need_comp.sanity = [0, need_comp.sanity, 1].sort[1]
+			needs.energy = [0, needs.energy, needs.energy_max].sort[1]
+			needs.sanity += needs.sanity_rate * gd
+			needs.sanity = [0, needs.sanity, 1].sort[1]
 
 		end
 

@@ -105,9 +105,9 @@ class InputSystem < System
 
 					else
 
-						vel_comp = @mgr.get_component(entity, Velocity)
-						vel_comp.spd = 0
-						vel_comp.ang_spd = 0
+						vel = @mgr.get_component(entity, Velocity)
+						vel.spd = 0
+						vel.ang_spd = 0
 
 						@mgr.ui.main_update = true
 						@mgr.paused = !@mgr.paused
@@ -125,8 +125,8 @@ class InputSystem < System
 
 					else
 
-						vel_comp = @mgr.get_component(entity, Velocity)
-						vel_comp.spd = C::PLAYER_SPD
+						vel = @mgr.get_component(entity, Velocity)
+						vel.spd = C::PLAYER_SPD
 
 					end
 
@@ -139,8 +139,8 @@ class InputSystem < System
 
 					else
 
-						vel_comp = @mgr.get_component(entity, Velocity)
-						vel_comp.spd = -C::PLAYER_SPD * 0.5
+						vel = @mgr.get_component(entity, Velocity)
+						vel.spd = -C::PLAYER_SPD * 0.5
 
 					end
 
@@ -153,8 +153,8 @@ class InputSystem < System
 
 					else
 
-						vel_comp = @mgr.get_component(entity, Velocity)
-						vel_comp.ang_spd = C::PLAYER_ROT_SPD
+						vel = @mgr.get_component(entity, Velocity)
+						vel.ang_spd = C::PLAYER_ROT_SPD
 
 					end
 
@@ -167,8 +167,8 @@ class InputSystem < System
 
 					else
 
-						vel_comp = @mgr.get_component(entity, Velocity)
-						vel_comp.ang_spd = -C::PLAYER_ROT_SPD
+						vel = @mgr.get_component(entity, Velocity)
+						vel.ang_spd = -C::PLAYER_ROT_SPD
 
 					end
 
@@ -214,8 +214,8 @@ class InputSystem < System
 
 					else
 
-						vel_comp = @mgr.get_component(entity, Velocity)
-						vel_comp.spd = 0
+						vel = @mgr.get_component(entity, Velocity)
+						vel.spd = 0
 
 					end
 
@@ -225,8 +225,8 @@ class InputSystem < System
 
 					else
 
-						vel_comp = @mgr.get_component(entity, Velocity)
-						vel_comp.ang_spd = 0
+						vel = @mgr.get_component(entity, Velocity)
+						vel.ang_spd = 0
 
 					end
 
@@ -241,15 +241,15 @@ class InputSystem < System
 
 	def pickup_item(entity)
 
-		pos_comp = @mgr.get_component(entity, Position)
-		inv_comp = @mgr.get_component(entity, Inventory)
+		pos = @mgr.get_component(entity, Position)
+		inv = @mgr.get_component(entity, Inventory)
 
-		item = @mgr.map.get_near_item(pos_comp.x, pos_comp.y)
+		item_id = @mgr.map.get_near_item(pos.x, pos.y)
 
-		if item && inv_comp.add_item(item)
+		if item_id && inv.add_item(item_id)
 
 			@mgr.ui.prev_selection = nil
-			@mgr.map.remove_item(item)
+			@mgr.map.remove_item(item_id)
 		
 		end
 
@@ -258,19 +258,19 @@ class InputSystem < System
 
 	def pickup_item_at(entity, screenX, screenY)
 
-		pos_comp = @mgr.get_component(entity, Position)
-		inv_comp = @mgr.get_component(entity, Inventory)
+		pos = @mgr.get_component(entity, Position)
+		inv = @mgr.get_component(entity, Inventory)
 
-		x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
-		y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
+		x = pos.x + C::WTB * (screenX - Gdx.graphics.width/2)
+		y = pos.y - C::WTB * (screenY - Gdx.graphics.height/2)
 
-		item = @mgr.map.get_item(x, y)					
-		dist = (x - pos_comp.x)**2 + (y - pos_comp.y)**2
+		item_id = @mgr.map.get_item(x, y)					
+		dist2 = (x - pos.x)**2 + (y - pos.y)**2
 
-		if item && dist < 1.4 && inv_comp.add_item(item)
+		if item_id && dist2 < 1.4 && inv.add_item(item_id)
 
 			@mgr.ui.prev_selection = nil
-			@mgr.map.remove_item(item)
+			@mgr.map.remove_item(item_id)
 
 		end
 
@@ -279,34 +279,34 @@ class InputSystem < System
 
 	def drop_item(entity)
 
-		pos_comp = @mgr.get_component(entity, Position)
-		inv_comp = @mgr.get_component(entity, Inventory)
-		rot_comp = @mgr.get_component(entity, Rotation)
+		pos = @mgr.get_component(entity, Position)
+		inv = @mgr.get_component(entity, Inventory)
+		rot = @mgr.get_component(entity, Rotation)
 
 		index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection)
-		item = inv_comp.items[index]
+		item_id = inv.items[index]
 
-		if item
+		if item_id
 
-			item_type_comp = @mgr.get_component(item, Type)
+			item_type = @mgr.get_component(item_id, Type)
 
-			item_pos_comp = Position.new(
-				pos_comp.x + rot_comp.x, 
-				pos_comp.y + rot_comp.y)
+			item_pos = Position.new(
+				pos.x + rot.x, 
+				pos.y + rot.y)
 
-			item_render_comp = Render.new(
-				item_type_comp.type,
-				@mgr.atlas.find_region(item_type_comp.type))
+			item_render = Render.new(
+				item_type.type,
+				@mgr.atlas.find_region(item_type.type))
 
-			item_rot_comp = @mgr.get_component(item, Rotation)
-			item_rot_comp.angle = rot_comp.angle - 90
+			item_rot = @mgr.get_component(item_id, Rotation)
+			item_rot.angle = rot.angle - 90
 
-			@mgr.add_component(item, item_pos_comp)
-			@mgr.add_component(item, item_render_comp)
+			@mgr.add_component(item_id, item_pos)
+			@mgr.add_component(item_id, item_render)
 
-			@mgr.map.items << item
-			inv_comp.remove_item(item)
-			@mgr.render.nearby_entities << item
+			@mgr.map.items << item_id
+			inv.remove_item(item_id)
+			@mgr.render.nearby_entities << item_id
 			@mgr.ui.set_inventory_name("")
 			@mgr.ui.set_inventory_desc("")
 			@mgr.ui.set_inventory_quality_dur(-1, -1)
@@ -321,19 +321,19 @@ class InputSystem < System
 
 	def use_door(entity)
 
-		pos_comp = @mgr.get_component(entity, Position)
-		inv_comp = @mgr.get_component(entity, Inventory)
+		pos = @mgr.get_component(entity, Position)
+		inv = @mgr.get_component(entity, Inventory)
 
-		door = @mgr.map.get_near_door(pos_comp.x, pos_comp.y)
+		door_id = @mgr.map.get_near_door(pos.x, pos.y)
 
-		if door
+		if door_id
 
-			door_comp = @mgr.get_component(door, Door)
+			door = @mgr.get_component(door_id, Door)
 
-			if !door_comp.locked
+			if !door.locked
 
-				door_comp.open = !door_comp.open
-				@mgr.map.change_door(door, door_comp.open)
+				door.open = !door.open
+				@mgr.map.change_door(door_id, door.open)
 
 			end
 		
@@ -344,20 +344,20 @@ class InputSystem < System
 
 	def use_door_at(entity, screenX, screenY)
 
-		pos_comp = @mgr.get_component(entity, Position)
-		inv_comp = @mgr.get_component(entity, Inventory)
+		pos = @mgr.get_component(entity, Position)
+		inv = @mgr.get_component(entity, Inventory)
 
-		x = pos_comp.x + C::WTB * (screenX - Gdx.graphics.width/2)
-		y = pos_comp.y - C::WTB * (screenY - Gdx.graphics.height/2)
+		x = pos.x + C::WTB * (screenX - Gdx.graphics.width/2)
+		y = pos.y - C::WTB * (screenY - Gdx.graphics.height/2)
 
 		door = @mgr.map.get_door(x, y)
-		dist = (x - pos_comp.x)**2 + (y - pos_comp.y)**2
-		door_comp = @mgr.get_component(door, Door)
+		dist = (x - pos.x)**2 + (y - pos.y)**2
+		door = @mgr.get_component(door, Door)
 
-		if door && dist < 2.6 && !door_comp.locked
+		if door && dist < 2.6 && !door.locked
 
-			door_comp.open = !door_comp.open
-			@mgr.map.change_door(door, door_comp.open)
+			door.open = !door.open
+			@mgr.map.change_door(door, door.open)
 
 		end
 

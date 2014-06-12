@@ -129,16 +129,15 @@ class LastDitch < ApplicationAdapter
 		@ui.update
 
 		@physics.world.clear_forces
-		@physics.interpolate(alpha)
+		# @physics.interpolate(alpha)
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
-		
 		@batch.projection_matrix = @map.cam::combined
 
 		@batch.begin
 
-		@map.render(@batch)
-		@render.render(@batch)
+			@map.render(@batch)
+			@render.render(@batch)
 
 		@batch.end
 

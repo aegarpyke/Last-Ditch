@@ -21,17 +21,17 @@ class InventorySystem < System
 			entities = @mgr.get_all_entities_with_components([Inventory, UserInput])
 			entities.each do |entity|
 
-				inv_comp = @mgr.get_component(entity, Inventory)
+				inv = @mgr.get_component(entity, Inventory)
 				
 				for i in 0...@inv_slots.size
 
-					type_comp = @mgr.get_component(inv_comp.items[i], Type)
+					type = @mgr.get_component(inv.items[i], Type)
 
-					if type_comp
+					if type
 
 						style = ImageButtonStyle.new(@inv_slots[i].style)
 						tex = TextureRegionDrawable.new(
-							@mgr.atlas.find_region(type_comp.type))
+							@mgr.atlas.find_region(type.type))
 
 						style.imageUp = tex
 

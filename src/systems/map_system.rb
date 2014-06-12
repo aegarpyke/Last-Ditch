@@ -126,77 +126,77 @@ class MapSystem < System
 				break if !@solid[x.to_i][y.to_i]
 			end
 
-			item = @mgr.create_basic_entity
+			item_id = @mgr.create_basic_entity
 
 			dur, quality = Random.rand(0.2..1.0), Random.rand(0.1..0.9)
 
-			item_comp = @mgr.add_component(item, Item.new(quality, dur))
-			render_comp = @mgr.add_component(item, Render.new(''))
-			size_comp = @mgr.add_component(item, Size.new(0, 0))
-			@mgr.add_component(item, Position.new(x, y))
-			@mgr.add_component(item, Rotation.new(Random.rand(360)))
+			item = @mgr.add_component(item_id, Item.new(quality, dur))
+			render = @mgr.add_component(item_id, Render.new(''))
+			size = @mgr.add_component(item_id, Size.new(0, 0))
+			@mgr.add_component(item_id, Position.new(x, y))
+			@mgr.add_component(item_id, Rotation.new(Random.rand(360)))
 
 			check = Random.rand
 			if check < 0.23
 				
-				render_comp.region_name = 'canteen1'
-				render_comp.region = @atlas.find_region('canteen1')
-				size_comp.width = render_comp.width * C::WTB
-				size_comp.height =render_comp.height * C::WTB
-				item_comp.weight = 0.5
-				item_comp.base_value = 0.5
+				render.region_name = 'canteen1'
+				render.region = @atlas.find_region('canteen1')
+				size.width = render.width * C::WTB
+				size.height =render.height * C::WTB
+				item.weight = 0.5
+				item.base_value = 0.5
 
-				@mgr.add_component(item, Type.new('canteen1'))
-				@mgr.add_component(item, Info.new(
+				@mgr.add_component(item_id, Type.new('canteen1'))
+				@mgr.add_component(item_id, Info.new(
 					'Canteen 1',
 					"This is a drinking canteen"))
 				
 			elsif check < 0.32
 
-				render_comp.region_name = 'canister1'
-				render_comp.region = @atlas.find_region('canister1')
-				size_comp.width = render_comp.width * C::WTB
-				size_comp.height =render_comp.height * C::WTB
-				item_comp.weight = 1.1
-				item_comp.base_value = 1.2
+				render.region_name = 'canister1'
+				render.region = @atlas.find_region('canister1')
+				size.width = render.width * C::WTB
+				size.height =render.height * C::WTB
+				item.weight = 1.1
+				item.base_value = 1.2
 
-				@mgr.add_component(item, Type.new('canister1'))
-				@mgr.add_component(item, Info.new(
+				@mgr.add_component(item_id, Type.new('canister1'))
+				@mgr.add_component(item_id, Info.new(
 					'Canister 1',
 					"A sealed container"))
 
 			elsif check < 0.56
 
-				render_comp.region_name = 'rations1'
-				render_comp.region = @atlas.find_region('rations1')
-				size_comp.width = render_comp.width * C::WTB
-				size_comp.height = render_comp.height * C::WTB
-				item_comp.weight = 0.6
-				item_comp.base_value = 100.0
+				render.region_name = 'rations1'
+				render.region = @atlas.find_region('rations1')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 0.6
+				item.base_value = 100.0
 
-				@mgr.add_component(item, Type.new('rations1'))
-				@mgr.add_component(item, Info.new(
+				@mgr.add_component(item_id, Type.new('rations1'))
+				@mgr.add_component(item_id, Info.new(
 					'Rations 1',
 					"This is rations container"))
 
 			elsif check < 0.88
 
-				render_comp.region_name = 'overgrowth1'
-				render_comp.region = @atlas.find_region('overgrowth1')
-				size_comp.width = render_comp.width * C::WTB
-				size_comp.height = render_comp.height * C::WTB
-				item_comp.weight = 0.75
-				item_comp.base_value = 0.3
+				render.region_name = 'overgrowth1'
+				render.region = @atlas.find_region('overgrowth1')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 0.75
+				item.base_value = 0.3
 
-				@mgr.add_component(item, Type.new('overgrowth1'))
-				@mgr.add_component(item, Info.new(
+				@mgr.add_component(item_id, Type.new('overgrowth1'))
+				@mgr.add_component(item_id, Info.new(
 					'Overgrowth 1',
 					"The root of some overgrowth"))
 
 				8.times do
 
 					xx, yy = 0, 0
-					sub_item = @mgr.create_basic_entity
+					sub_item_id = @mgr.create_basic_entity
 
 					loop do
 						xx = Random.rand(x - 1.2..x + 1.2)
@@ -205,46 +205,46 @@ class MapSystem < System
 						break if !@solid[xx.to_i][yy.to_i]
 					end
 
-					sub_render_comp = Render.new('')
-					sub_size_comp = Size.new(0, 0)
-					sub_render_comp.region_name = 'ruffage1'
-					sub_render_comp.region = @atlas.find_region('ruffage1')
-					sub_size_comp.width = sub_render_comp.width * C::WTB
-					sub_size_comp.height = sub_render_comp.height * C::WTB
+					sub_render = Render.new('')
+					sub_size = Size.new(0, 0)
+					sub_render.region_name = 'ruffage1'
+					sub_render.region = @atlas.find_region('ruffage1')
+					sub_size.width = sub_render.width * C::WTB
+					sub_size.height = sub_render.height * C::WTB
 
 					sub_quality, sub_dur = Random.rand(0.2..0.9), Random.rand(0.1..0.9)
 
-					@mgr.add_component(sub_item, Position.new(xx, yy))
-					@mgr.add_component(sub_item, Rotation.new(Random.rand(360)))
-					@mgr.add_component(sub_item, Item.new(sub_quality, sub_dur, 0.2, 0.1))
-					@mgr.add_component(sub_item, sub_render_comp)
-					@mgr.add_component(sub_item, sub_size_comp)
-					@mgr.add_component(sub_item, Type.new('ruffage1'))
-					@mgr.add_component(sub_item, Info.new(
+					@mgr.add_component(sub_item_id, Position.new(xx, yy))
+					@mgr.add_component(sub_item_id, Rotation.new(Random.rand(360)))
+					@mgr.add_component(sub_item_id, Item.new(sub_quality, sub_dur, 0.2, 0.1))
+					@mgr.add_component(sub_item_id, sub_render)
+					@mgr.add_component(sub_item_id, sub_size)
+					@mgr.add_component(sub_item_id, Type.new('ruffage1'))
+					@mgr.add_component(sub_item_id, Info.new(
 						'Ruffage 1',
 						"Stray vines and roots"))
 
-					@items << sub_item
+					@items << sub_item_id
 
 				end
 
 			else
 
-				render_comp.region_name = 'scrap1'
-				render_comp.region = @atlas.find_region('scrap1')
-				size_comp.width = render_comp.width * C::WTB
-				size_comp.height =render_comp.height * C::WTB
-				item_comp.weight = 0.9
-				item_comp.base_value = 0.6
+				render.region_name = 'scrap1'
+				render.region = @atlas.find_region('scrap1')
+				size.width = render.width * C::WTB
+				size.height =render.height * C::WTB
+				item.weight = 0.9
+				item.base_value = 0.6
 
-				@mgr.add_component(item, Type.new('scrap1'))
-				@mgr.add_component(item, Info.new(
+				@mgr.add_component(item_id, Type.new('scrap1'))
+				@mgr.add_component(item_id, Info.new(
 					'Scrap 1',
 					"This is a piece of scrap material"))
 
 			end
 
-			@items << item
+			@items << item_id
 
 		end
 
@@ -275,21 +275,21 @@ class MapSystem < System
 			@rot[x+1][y]   = 0.0
 			@tiles[x+1][y] = @atlas.find_region('floor2')
 
-			door = @mgr.create_basic_entity
+			door_id = @mgr.create_basic_entity
 
-			render_comp = Render.new('door1', @atlas.find_region('door1'))
-			w = render_comp.width * C::WTB
-			h = render_comp.height * C::WTB
+			render = Render.new('door1', @atlas.find_region('door1'))
+			w = render.width * C::WTB
+			h = render.height * C::WTB
 
-			@mgr.add_component(door, render_comp)
-			@mgr.add_component(door, Position.new(x + w/2, y + h/2))
-			@mgr.add_component(door, Size.new(w, h))
-			@mgr.add_component(door, Rotation.new(rot))
-			@mgr.add_component(door, Collision.new)
-			@mgr.add_component(door, Type.new('door1'))
-			@mgr.add_component(door, Door.new)
+			@mgr.add_component(door_id, render)
+			@mgr.add_component(door_id, Position.new(x + w/2, y + h/2))
+			@mgr.add_component(door_id, Size.new(w, h))
+			@mgr.add_component(door_id, Rotation.new(rot))
+			@mgr.add_component(door_id, Collision.new)
+			@mgr.add_component(door_id, Type.new('door1'))
+			@mgr.add_component(door_id, Door.new)
 
-			@doors << door
+			@doors << door_id
 
 			y = Random.rand(room.y1 + 1...room.y2 - 2)
 
@@ -311,21 +311,23 @@ class MapSystem < System
 			@rot[x][y+1]   = 0.0
 			@tiles[x][y+1] = @atlas.find_region('floor2')
 
-			door = @mgr.create_basic_entity
+			door_id = @mgr.create_basic_entity
+			
+			@mgr.add_component(door_id, Render.new(
+				'door1', 
+				@atlas.find_region('door1')))
 
-			render_comp = Render.new('door1', @atlas.find_region('door1'))
-			w = render_comp.width * C::WTB
-			h = render_comp.height * C::WTB
+			w = render.width * C::WTB
+			h = render.height * C::WTB
 
-			@mgr.add_component(door, render_comp)
-			@mgr.add_component(door, Position.new(x + h/2, y + w/2))
-			@mgr.add_component(door, Size.new(w, h))
-			@mgr.add_component(door, Rotation.new(rot))
-			@mgr.add_component(door, Collision.new)
-			@mgr.add_component(door, Type.new('door1'))
-			@mgr.add_component(door, Door.new)
+			@mgr.add_component(door_id, Position.new(x + h/2, y + w/2))
+			@mgr.add_component(door_id, Size.new(w, h))
+			@mgr.add_component(door_id, Rotation.new(rot))
+			@mgr.add_component(door_id, Collision.new)
+			@mgr.add_component(door_id, Type.new('door1'))
+			@mgr.add_component(door_id, Door.new)
 
-			@doors << door
+			@doors << door_id
 
 		end
 
@@ -338,20 +340,20 @@ class MapSystem < System
 
 			if @items.include?(entity)
 
-				pos_comp = @mgr.get_component(entity, Position)
-				render_comp = @mgr.get_component(entity, Render)
-				rot_comp = @mgr.get_component(entity, Rotation)
+				pos = @mgr.get_component(entity, Position)
+				render = @mgr.get_component(entity, Render)
+				rot = @mgr.get_component(entity, Rotation)
 
 				# Transform coordinates to axis-aligned frame
-				c = Math.cos(-rot_comp.angle * Math::PI/180)
-				s = Math.sin(-rot_comp.angle * Math::PI/180)
-				rot_x = pos_comp.x + c * (x - pos_comp.x) - s * (y - pos_comp.y)
-				rot_y = pos_comp.y + s * (x - pos_comp.x) + c * (y - pos_comp.y)
+				c = Math.cos(-rot.angle * Math::PI/180)
+				s = Math.sin(-rot.angle * Math::PI/180)
+				rot_x = pos.x + c * (x - pos.x) - s * (y - pos.y)
+				rot_y = pos.y + s * (x - pos.x) + c * (y - pos.y)
 
-				left   = pos_comp.x - render_comp.width * C::WTB / 2
-				right  = pos_comp.x + render_comp.width * C::WTB / 2
-				top    = pos_comp.y - render_comp.height * C::WTB / 2
-				bottom = pos_comp.y + render_comp.height * C::WTB / 2
+				left   = pos.x - render.width * C::WTB / 2
+				right  = pos.x + render.width * C::WTB / 2
+				top    = pos.y - render.height * C::WTB / 2
+				bottom = pos.y + render.height * C::WTB / 2
 
 				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
 					return entity
@@ -366,15 +368,15 @@ class MapSystem < System
 	end
 
 
-	def remove_item(item)
+	def remove_item(item_id)
 
-		pos_comp = @mgr.get_component(item, Position)
-		render_comp = @mgr.get_component(item, Render)
+		pos = @mgr.get_component(item_id, Position)
+		render = @mgr.get_component(item_id, Render)
 
-		@mgr.remove_component(item, pos_comp)
-		@mgr.remove_component(item, render_comp)
+		@mgr.remove_component(item_id, pos)
+		@mgr.remove_component(item_id, render)
 
-		@items.delete(item)
+		@items.delete(item_id)
 		@mgr.inventory.update_slots = true
 
 	end
@@ -386,21 +388,21 @@ class MapSystem < System
 
 			if @doors.include?(entity)
 
-				pos_comp = @mgr.get_component(entity, Position)
-				render_comp = @mgr.get_component(entity, Render)
-				size_comp = @mgr.get_component(entity, Size)
-				rot_comp = @mgr.get_component(entity, Rotation)
+				pos = @mgr.get_component(entity, Position)
+				render = @mgr.get_component(entity, Render)
+				size = @mgr.get_component(entity, Size)
+				rot = @mgr.get_component(entity, Rotation)
 
 				# Transform coordinates to axis-aligned frame
-				c = Math.cos(-rot_comp.angle * Math::PI/180)
-				s = Math.sin(-rot_comp.angle * Math::PI/180)
-				rot_x = pos_comp.x + c * (x - pos_comp.x) - s * (y - pos_comp.y)
-				rot_y = pos_comp.y + s * (x - pos_comp.x) + c * (y - pos_comp.y)
+				c = Math.cos(-rot.angle * Math::PI/180)
+				s = Math.sin(-rot.angle * Math::PI/180)
+				rot_x = pos.x + c * (x - pos.x) - s * (y - pos.y)
+				rot_y = pos.y + s * (x - pos.x) + c * (y - pos.y)
 
-				left   = pos_comp.x - size_comp.width / 2
-				right  = pos_comp.x + size_comp.width / 2
-				top    = pos_comp.y - size_comp.height / 2
-				bottom = pos_comp.y + size_comp.height / 2
+				left   = pos.x - size.width / 2
+				right  = pos.x + size.width / 2
+				top    = pos.y - size.height / 2
+				bottom = pos.y + size.height / 2
 
 				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
 					return entity
@@ -421,8 +423,8 @@ class MapSystem < System
 
 			if @doors.include?(entity)
 				
-				pos_comp = @mgr.get_component(entity, Position)
-				dist_sqr = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
+				pos = @mgr.get_component(entity, Position)
+				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 
 				if dist_sqr < 2.6
 					return entity
@@ -437,31 +439,31 @@ class MapSystem < System
 	end
 
 
-	def change_door(door, open)
+	def change_door(door_id, open)
 
-		pos_comp = @mgr.get_component(door, Position)
-		rot_comp = @mgr.get_component(door, Rotation)
-		render_comp = @mgr.get_component(door, Render)
-		size_comp = @mgr.get_component(door, Size)
-		col_comp = @mgr.get_component(door, Collision)
+		pos = @mgr.get_component(door_id, Position)
+		rot = @mgr.get_component(door_id, Rotation)
+		render = @mgr.get_component(door_id, Render)
+		size = @mgr.get_component(door_id, Size)
+		col = @mgr.get_component(door_id, Collision)
 
 		if open
 
-			render_comp = @mgr.get_component(door, Render)
-			@mgr.remove_component(door, render_comp)
-			@mgr.physics.remove_body(col_comp.body)
+			render = @mgr.get_component(door_id, Render)
+			@mgr.remove_component(door_id, render)
+			@mgr.physics.remove_body(col.body)
 
 		else
 
-			type = @mgr.get_component(door, Type).type
+			type = @mgr.get_component(door_id, Type).type
 
 			body = @mgr.physics.create_body(
-				pos_comp.x, pos_comp.y, 
-				size_comp.width, size_comp.height, 
-				false, rot_comp.angle)
+				pos.x, pos.y, 
+				size.width, size.height, 
+				false, rot.angle)
 
 			@mgr.add_component(
-				door, 
+				door_id, 
 				Render.new(type, @atlas.find_region(type)))
 		
 		end
@@ -475,8 +477,8 @@ class MapSystem < System
 
 			if @items.include?(entity)
 				
-				pos_comp = @mgr.get_component(entity, Position)
-				dist_sqr = (pos_comp.x - x)**2 + (pos_comp.y - y)**2
+				pos = @mgr.get_component(entity, Position)
+				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 
 				if dist_sqr < 1.4
 					return entity

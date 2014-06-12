@@ -288,12 +288,12 @@ class UISystem < System
 
 						@mgr.ui.inv_no_exit = true
 
-						inv_comp = @mgr.get_component(@ui.player, Inventory)
+						inv = @mgr.get_component(@ui.player, Inventory)
 
 						index = @ui.inv_slots.index(@slot)
-						item = inv_comp.items[index]
+						item = inv.items[index]
 
-						type_comp = @mgr.get_component(item, Type)
+						type = @mgr.get_component(item, Type)
 
 						true
 						
@@ -371,35 +371,35 @@ class UISystem < System
 
 		if @base_active
 
-			needs_comp = @mgr.get_component(@player, Needs)
-			inv_comp = @mgr.get_component(@player, Inventory)
+			needs = @mgr.get_component(@player, Needs)
+			inv = @mgr.get_component(@player, Inventory)
 
 			@base_time.text = @mgr.time.time
 			@base_date.text = @mgr.time.date
-			@base_money.text = "$%.2f" % [inv_comp.money]
+			@base_money.text = "$%.2f" % [inv.money]
 
-			@base_hunger.width = (needs_comp.hunger * 100 + 4).to_i
-			@base_thirst.width = (needs_comp.thirst * 100 + 4).to_i
-			@base_energy.width = (needs_comp.energy * 100 + 4).to_i
-			@base_sanity.width = (needs_comp.sanity * 100 + 4).to_i
+			@base_hunger.width = (needs.hunger * 100 + 4).to_i
+			@base_thirst.width = (needs.thirst * 100 + 4).to_i
+			@base_energy.width = (needs.energy * 100 + 4).to_i
+			@base_sanity.width = (needs.sanity * 100 + 4).to_i
 
 			if @inv_selection != @prev_selection
 
 				if @inv_selection
 
 					index = @inv_slots.index(@inv_selection)
-					item = inv_comp.items[index]
+					item_id = inv.items[index]
 
-					if item
+					if item_id
 
-						item_comp = @mgr.get_component(item, Item)
-						info_comp = @mgr.get_component(item, Info)
+						item = @mgr.get_component(item_id, Item)
+						info = @mgr.get_component(item_id, Info)
 
-						set_inventory_name(info_comp.name)
-						set_inventory_quality_dur(item_comp.quality, item_comp.durability)
-						set_inventory_value(item_comp.value)
-						set_inventory_weight(item_comp.weight)
-						set_inventory_desc(info_comp.description)
+						set_inventory_name(info.name)
+						set_inventory_quality_dur(item.quality, item.durability)
+						set_inventory_value(item.value)
+						set_inventory_weight(item.weight)
+						set_inventory_desc(info.description)
 
 					else
 

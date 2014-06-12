@@ -24,17 +24,17 @@ class PhysicsSystem < System
 		entities = @mgr.get_all_entities_with_components([Animation, Collision])
 		entities.each do |entity|
 
-			pos_comp = @mgr.get_component(entity, Position)
-			anim_comp = @mgr.get_component(entity, Animation)
-			col_comp = @mgr.get_component(entity, Collision)
+			pos = @mgr.get_component(entity, Position)
+			anim = @mgr.get_component(entity, Animation)
+			col = @mgr.get_component(entity, Collision)
 
-			w = anim_comp.width * C::WTB
-			h = anim_comp.height * C::WTB
+			w = anim.width * C::WTB
+			h = anim.height * C::WTB
 
 			body_def = BodyDef.new
 			body_def.type = BodyType::DynamicBody
 			body_def.linearDamping = 20.0
-			body_def.position.set(pos_comp.x + w/2, pos_comp.y + h/2)
+			body_def.position.set(pos.x + w/2, pos.y + h/2)
 
 			shape = CircleShape.new
 			shape.radius = w/2 - 0.01
@@ -50,13 +50,13 @@ class PhysicsSystem < System
 				fixture_def.filter.categoryBits = C::BIT_ENTITY
 			end
 
-			col_comp.body = @world.create_body(body_def)
-			col_comp.body.create_fixture(fixture_def)
-			col_comp.body.fixed_rotation = true
-			col_comp.body.user_data = entity
+			col.body = @world.create_body(body_def)
+			col.body.create_fixture(fixture_def)
+			col.body.fixed_rotation = true
+			col.body.user_data = entity
 
 			if entity == @player
-				@player_body = col_comp.body
+				@player_body = col.body
 			end
 
 		end
@@ -103,17 +103,17 @@ class PhysicsSystem < System
 
 		@map.doors.each do |door|
 
-			pos_comp = @mgr.get_component(door, Position)
-			rot_comp = @mgr.get_component(door, Rotation)
-			render_comp = @mgr.get_component(door, Render)
-			col_comp = @mgr.get_component(door, Collision)
+			pos = @mgr.get_component(door, Position)
+			rot = @mgr.get_component(door, Rotation)
+			render = @mgr.get_component(door, Render)
+			col = @mgr.get_component(door, Collision)
 
-			w = render_comp.width * C::WTB
-			h = render_comp.height * C::WTB
+			w = render.width * C::WTB
+			h = render.height * C::WTB
 
-			col_comp.body = create_body(
-				pos_comp.x, pos_comp.y,
-				w, h, false, rot_comp.angle)
+			col.body = create_body(
+				pos.x, pos.y,
+				w, h, false, rot.angle)
 
 		end
 
@@ -160,33 +160,31 @@ class PhysicsSystem < System
 		entities = @mgr.get_all_entities_with(Velocity)
 		entities.each do |entity|
 
-			pos_comp = @mgr.get_component(entity, Position)
-			vel_comp = @mgr.get_component(entity, Velocity)
-			rot_comp = @mgr.get_component(entity, Rotation)
-			col_comp = @mgr.get_component(entity, Collision)
+			pos = @mgr.get_component(entity, Position)
+			vel = @mgr.get_component(entity, Velocity)
+			rot = @mgr.get_component(entity, Rotation)
+			col = @mgr.get_component(entity, Collision)
 
-			pos_comp.px = pos_comp.x
-			pos_comp.py = pos_comp.y
-			rot_comp.p_angle = rot_comp.angle
+			pos.px = pos.x
+			pos.py = pos.y
+			rot.p_angle = rot.angle
 
-			if vel_comp.spd != 0
+			if vel.spd != 0
 
 				vel_vec = Vector2.new(
-					vel_comp.spd * rot_comp.x, 
-					vel_comp.spd * rot_comp.y)
+					vel.spd * rot.x, 
+					vel.spd * rot.y)
 
-				col_comp.body.apply_linear_impulse(
+				col.body.apply_linear_impulse(
 					vel_vec, 
-					col_comp.body.world_center, 
+					col.body.world_center, 
 					true)
 
 			end
 
-			if vel_comp.ang_spd != 0
-				rot_comp.rotate(vel_comp.ang_spd)
+			if vel.ang_spd != 0
+				rot.rotate(vel.ang_spd)
 			end
-
-			
 
 		end
 
@@ -195,11 +193,11 @@ class PhysicsSystem < System
 		entities = @mgr.get_all_entities_with(Velocity)
 		entities.each do |entity|
 
-			pos_comp = @mgr.get_component(entity, Position)
-			col_comp = @mgr.get_component(entity, Collision)
+			pos = @mgr.get_component(entity, Position)
+			col = @mgr.get_component(entity, Collision)
 
-			pos_comp.x = col_comp.body.position.x
-			pos_comp.y = col_comp.body.position.y
+			pos.x = col.body.position.x
+			pos.y = col.body.position.y
 
 		end
 
@@ -208,19 +206,19 @@ class PhysicsSystem < System
 
 	def interpolate(alpha)
 
-		pos_comp = @mgr.get_component(@player, Position)
-		rot_comp = @mgr.get_component(@player, Rotation)
-		col_comp = @mgr.get_component(@player, Collision)
+		pos = @mgr.get_component(@player, Position)
+		rot = @mgr.get_component(@player, Rotation)
+		col = @mgr.get_component(@player, Collision)
 
-		x = alpha * pos_comp.x + (1 - alpha) * pos_comp.px
-		y = alpha * pos_comp.y + (1 - alpha) * pos_comp.py
-		angle = alpha * rot_comp.angle + (1 - alpha) * rot_comp.p_angle
+		x = alpha * pos.px + (1 - alpha) * pos.x
+		y = alpha * pos.py + (1 - alpha) * pos.y
+		angle = alpha * rot.p_angle + (1 - alpha) * rot.angle
 
-		col_comp.body.set_transform(x, y, 0)
+		col.body.set_transform(x, y, 0)
 
-		pos_comp.x = col_comp.body.position.x
-		pos_comp.y = col_comp.body.position.y
-		rot_comp.angle = angle
+		pos.x = col.body.position.x
+		pos.y = col.body.position.y
+		rot.angle = angle
 
 	end
 
