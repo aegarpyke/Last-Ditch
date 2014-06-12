@@ -33,6 +33,16 @@ class LastDitch < ApplicationAdapter
 	                       "player_walk2-f", 
 	                       "player_walk1-f"]}))
 
+		@droid = @mgr.create_tagged_entity('droid 1')
+		@mgr.add_component(@droid, Position.new(42, 42))
+		@mgr.add_component(@droid, Velocity.new(0, 0))
+		@mgr.add_component(@droid, Rotation.new(0))
+		@mgr.add_component(@droid, Collision.new)
+		@mgr.add_component(@droid, AI.new('wander'))
+		@mgr.add_component(@droid, Animation.new(
+			{'drone1_idle' => ['drone1_idle1',
+												 'drone1_idle2']}))
+
 		@accumulated_dt = 0
 
 		@time      = TimeSystem.new
@@ -43,8 +53,9 @@ class LastDitch < ApplicationAdapter
 		@inventory = InventorySystem.new(@mgr)
 		@equipment = EquipmentSystem.new(@mgr)
 		@status    = StatusSystem.new(@mgr)
-		@physics   = PhysicsSystem.new(@mgr, @player, @map)
+		@ai        = AISystem.new(@mgr)
 		@render    = RenderSystem.new(@mgr, @player, @atlas)
+		@physics   = PhysicsSystem.new(@mgr, @player, @map)
 		@lighting  = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
 		@mgr.map       = @map
@@ -78,18 +89,12 @@ class LastDitch < ApplicationAdapter
 		delta = Gdx.graphics.get_delta_time
 
 		@accumulated_dt += delta
-
-		n_steps = (@accumulated_dt / C::BOX_STEP).floor
-
-		if n_steps > 0
-			@accumulated_dt -= n_steps * C::BOX_STEP
-		end
+		n = (@accumulated_dt / C::BOX_STEP).floor
+		@accumulated_dt -= n * C::BOX_STEP if n > 0
 
 		alpha = @accumulated_dt / C::BOX_STEP
 
-		n_steps = [n_steps, C::MAX_STEPS].min
-
-		n_steps.times do
+		[n, C::MAX_STEPS].min.times do
 
 			@time.update
 			@map.update
@@ -97,6 +102,7 @@ class LastDitch < ApplicationAdapter
 			@inventory.update
 			@equipment.update
 			@status.update
+			@ai.update
 			@render.update
 			@physics.update
 			@ui.update
@@ -120,7 +126,7 @@ class LastDitch < ApplicationAdapter
 		@lighting.render
 		@ui.render
 
-		# @debug.render(@physics.world, @map.cam.combined)
+		@debug.render(@physics.world, @map.cam.combined)
 
 	end
 

@@ -1,7 +1,5 @@
 class PhysicsSystem < System
 
-	DRAG = 0.91
-
 	attr_accessor :world, :player_body, :bodies
 
 	def initialize(mgr, player, map)
@@ -14,38 +12,56 @@ class PhysicsSystem < System
 		@world = World.new(@gravity, true)
 		@world.auto_clear_forces = false
 
-		generate_player_body
+		generate_entity_bodies
 		generate_tile_bodies
 		generate_door_bodies
 
 	end
 
 
-	def generate_player_body
+	def generate_entity_bodies
 
-		pos_comp = @mgr.get_component(@player, Position)
-		col_comp = @mgr.get_component(@player, Collision)
+		entities = @mgr.get_all_entities_with_components([Animation, Collision])
+		entities.each do |entity|
 
-		body_def = BodyDef.new
-		body_def.type = BodyType::DynamicBody
-		body_def.linearDamping = 20.0
-		body_def.position.set(pos_comp.x + 0.5, pos_comp.y + 0.5)
+			pos_comp = @mgr.get_component(entity, Position)
+			anim_comp = @mgr.get_component(entity, Animation)
+			col_comp = @mgr.get_component(entity, Collision)
 
-		shape = CircleShape.new
-		shape.radius = 0.49
+			w = anim_comp.width * C::WTB
+			h = anim_comp.height * C::WTB
 
-		fixture_def = FixtureDef.new
-		fixture_def.shape = shape
-		fixture_def.friction = 0.2
-		fixture_def.density = 1.0
-		fixture_def.filter.categoryBits = C::BIT_PLAYER
+			puts w, h
 
-		col_comp.body = @world.create_body(body_def)
-		@player_body = col_comp.body
+			body_def = BodyDef.new
+			body_def.type = BodyType::DynamicBody
+			body_def.linearDamping = 20.0
+			body_def.position.set(pos_comp.x + w/2, pos_comp.y + h/2)
 
-		col_comp.body.create_fixture(fixture_def)
-		col_comp.body.fixed_rotation = true
-		col_comp.body.user_data = @player
+			shape = CircleShape.new
+			shape.radius = w/2 - 0.01
+
+			fixture_def = FixtureDef.new
+			fixture_def.shape = shape
+			fixture_def.friction = 0.2
+			fixture_def.density = 1.0
+
+			if entity == @player
+				fixture_def.filter.categoryBits = C::BIT_PLAYER
+			else
+				fixture_def.filter.categoryBits = C::BIT_ENTITY
+			end
+
+			col_comp.body = @world.create_body(body_def)
+			col_comp.body.create_fixture(fixture_def)
+			col_comp.body.fixed_rotation = true
+			col_comp.body.user_data = entity
+
+			if entity == @player
+				@player_body = col_comp.body
+			end
+
+		end
 
 	end
 
@@ -145,33 +161,38 @@ class PhysicsSystem < System
 
 		unless @mgr.paused
 
-			pos_comp = @mgr.get_component(@player, Position)
-			vel_comp = @mgr.get_component(@player, Velocity)
-			rot_comp = @mgr.get_component(@player, Rotation)
-			col_comp = @mgr.get_component(@player, Collision)
+			entities = @mgr.get_all_entities_with(Velocity)
+			entities.each do |entity|
 
-			pos_comp.px = pos_comp.x
-			pos_comp.py = pos_comp.y
-			rot_comp.p_angle = rot_comp.angle
+				pos_comp = @mgr.get_component(entity, Position)
+				vel_comp = @mgr.get_component(entity, Velocity)
+				rot_comp = @mgr.get_component(entity, Rotation)
+				col_comp = @mgr.get_component(entity, Collision)
 
-			if vel_comp.spd != 0
+				pos_comp.px = pos_comp.x
+				pos_comp.py = pos_comp.y
+				rot_comp.p_angle = rot_comp.angle
 
-				vel_vec = Vector2.new(
-					vel_comp.spd * rot_comp.x, 
-					vel_comp.spd * rot_comp.y)
+				if vel_comp.spd != 0
 
-				col_comp.body.apply_linear_impulse(
-					vel_vec, 
-					col_comp.body.world_center, 
-					true)
+					vel_vec = Vector2.new(
+						vel_comp.spd * rot_comp.x, 
+						vel_comp.spd * rot_comp.y)
 
-				pos_comp.x = col_comp.body.position.x
-				pos_comp.y = col_comp.body.position.y
+					col_comp.body.apply_linear_impulse(
+						vel_vec, 
+						col_comp.body.world_center, 
+						true)
 
-			end
+					pos_comp.x = col_comp.body.position.x
+					pos_comp.y = col_comp.body.position.y
 
-			if vel_comp.ang_spd != 0
-				rot_comp.rotate(vel_comp.ang_spd)
+				end
+
+				if vel_comp.ang_spd != 0
+					rot_comp.rotate(vel_comp.ang_spd)
+				end
+
 			end
 
 			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)

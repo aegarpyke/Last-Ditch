@@ -16,7 +16,7 @@ class Animation < Component
 
 		if key_frame.respond_to?('packedWidth')
 			return key_frame.packedWidth
-		else
+		elsif key_frame.respond_to?('regionWidth')
 			return key_frame.regionWidth
 		end
 
@@ -26,15 +26,18 @@ class Animation < Component
 		
 		if key_frame.respond_to?('packedHeight')
 			return key_frame.packedHeight
-		else
+		elsif key_frame.respond_to?('regionHeight')
 			return key_frame.regionHeight
 		end
 
 	end
 
+
 	def cur=(name)
+		@cur = name
 		@cur_anim = @anims[name]
 	end
+
 
 	def key_frame
 		@cur_anim.get_key_frame(@state_time, true)

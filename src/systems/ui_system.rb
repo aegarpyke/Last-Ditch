@@ -202,17 +202,18 @@ class UISystem < System
 		@inv_window.padTop(9)
 
 		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_name).colspan(8).align(Align::left).padTop(4).height(12).row
-		
-		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::left).height(12)
-		
-		@inv_item_value = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
-		@inv_window.add(@inv_item_value).colspan(2).align(Align::right).padRight(-32).height(14)
+		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padTop(4).height(12)
 		
 		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_weight).colspan(2).align(Align::right).height(14).row
+		@inv_item_weight.color = Color.new(0.75, 0.75, 0.82, 1.0)
+		@inv_window.add(@inv_item_weight).colspan(2).align(Align::right).padRight(-32).height(14).padTop(4)
+
+		@inv_item_value = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
+		@inv_window.add(@inv_item_value).colspan(2).align(Align::right).padTop(4).height(14).row
+		
+		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_window.add(@inv_item_quality_dur).colspan(8).align(Align::right).height(12).row
 
 		@inv_desc = ""
 
@@ -325,7 +326,7 @@ class UISystem < System
 	def set_inventory_value(value)
 
 		unless value == -1
-			@inv_item_value.text = "$%.2f " % value
+			@inv_item_value.text = "$%.2f" % value
 		else
 			@inv_item_value.text = ""
 		end
@@ -336,7 +337,7 @@ class UISystem < System
 	def set_inventory_weight(weight)
 
 		unless weight == -1
-			@inv_item_weight.text = "/ %.1fkg" % weight
+			@inv_item_weight.text = " %.1fkg" % weight
 		else
 			@inv_item_weight.text = ""
 		end

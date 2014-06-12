@@ -30,6 +30,8 @@ class RenderSystem < System
 		entities = @mgr.get_all_entities_with(Animation)
 		entities.each do |entity|
 
+			first = true
+
 			anim_comp = @mgr.get_component(entity, Animation)
 			anim_comp.names_and_frames.each do |name, frames|
 
@@ -55,12 +57,14 @@ class RenderSystem < System
 				frame_list = frame_list.to_java(TextureRegion)
 				anim_comp.anims[name] = com.badlogic.gdx.graphics.g2d.Animation.new(0.1, frame_list)
 
+				if first
+					first = false
+					anim_comp.cur = name
+				end
+
 			end
 
 		end
-
-		anim_comp = @mgr.get_component(@player, Animation)
-		anim_comp.cur = 'player_walk'
 
 	end
 
@@ -96,19 +100,25 @@ class RenderSystem < System
 
 		unless @mgr.paused
 			
-			anim_comp = @mgr.get_component(@player, Animation)
-			vel_comp = @mgr.get_component(@player, Velocity)
-			col_comp = @mgr.get_component(@player, Collision)
-			
-			anim_comp.cur = 'player_walk'
-			anim_comp.state_time += C::BOX_STEP
+			entities = @mgr.get_all_entities_with(Velocity)
+			entities.each do |entity|
 
-			vel = col_comp.body.linear_velocity
+				anim_comp = @mgr.get_component(entity, Animation)
+				vel_comp = @mgr.get_component(entity, Velocity)
+				col_comp = @mgr.get_component(entity, Collision)
 
-			if vel.x.abs < 0.02 && vel.y.abs < 0.02
-				anim_comp.cur = 'player_idle'
-			elsif anim_comp.cur != 'player_walk'
-				anim_comp.cur = 'player_walk'
+				vel = col_comp.body.linear_velocity
+
+				if entity == @player
+					
+					if vel.x.abs < 0.02 && vel.y.abs < 0.02
+						anim_comp.cur = 'player_idle'
+					elsif anim_comp.cur != 'player_walk'
+						anim_comp.cur = 'player_walk'
+					end
+				
+				end
+
 			end
 
 		end
@@ -124,8 +134,10 @@ class RenderSystem < System
 			rot_comp = @mgr.get_component(entity, Rotation)
 			size_comp = @mgr.get_component(entity, Size)
 			render_comp = @mgr.get_component(entity, Render)
+			anim_comp = @mgr.get_component(entity, Animation)
 
 			if render_comp
+			
 				batch.draw(
 					render_comp.region,
 					C::BTW * (pos_comp.x - size_comp.width/2),
@@ -134,6 +146,20 @@ class RenderSystem < System
 					C::BTW * size_comp.width, C::BTW * size_comp.height,
 					render_comp.scale, render_comp.scale,
 					rot_comp.angle)
+			
+			elsif anim_comp
+				
+				anim_comp.state_time += C::BOX_STEP
+
+				batch.draw(
+					anim_comp.key_frame, 
+					C::BTW * pos_comp.x - anim_comp.width/2,
+					C::BTW * pos_comp.y - anim_comp.height/2,
+					anim_comp.width/2, anim_comp.height/2,
+					anim_comp.width, anim_comp.height, 
+					anim_comp.scale, anim_comp.scale, 
+					rot_comp.angle)
+
 			end
 
 		end
