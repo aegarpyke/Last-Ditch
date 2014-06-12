@@ -98,27 +98,25 @@ class RenderSystem < System
 
 		end
 
-		unless @mgr.paused
-			
-			entities = @mgr.get_all_entities_with(Velocity)
-			entities.each do |entity|
+		entities = @mgr.get_all_entities_with(Velocity)
+		entities.each do |entity|
 
-				anim_comp = @mgr.get_component(entity, Animation)
-				vel_comp = @mgr.get_component(entity, Velocity)
-				col_comp = @mgr.get_component(entity, Collision)
+			anim_comp = @mgr.get_component(entity, Animation)
+			vel_comp = @mgr.get_component(entity, Velocity)
+			col_comp = @mgr.get_component(entity, Collision)
 
-				vel = col_comp.body.linear_velocity
+			anim_comp.state_time += C::BOX_STEP
 
-				if entity == @player
-					
-					if vel.x.abs < 0.02 && vel.y.abs < 0.02
-						anim_comp.cur = 'player_idle'
-					elsif anim_comp.cur != 'player_walk'
-						anim_comp.cur = 'player_walk'
-					end
+			vel = col_comp.body.linear_velocity
+
+			if entity == @player
 				
+				if vel.x.abs < 0.02 && vel.y.abs < 0.02
+					anim_comp.cur = 'player_idle'
+				elsif anim_comp.cur != 'player_walk'
+					anim_comp.cur = 'player_walk'
 				end
-
+			
 			end
 
 		end
@@ -134,7 +132,6 @@ class RenderSystem < System
 			rot_comp = @mgr.get_component(entity, Rotation)
 			size_comp = @mgr.get_component(entity, Size)
 			render_comp = @mgr.get_component(entity, Render)
-			anim_comp = @mgr.get_component(entity, Animation)
 
 			if render_comp
 			
@@ -147,9 +144,18 @@ class RenderSystem < System
 					render_comp.scale, render_comp.scale,
 					rot_comp.angle)
 			
-			elsif anim_comp
-				
-				anim_comp.state_time += C::BOX_STEP
+			end
+
+		end
+
+		@nearby_entities.each do |entity|
+
+			pos_comp = @mgr.get_component(entity, Position)
+			rot_comp = @mgr.get_component(entity, Rotation)
+			size_comp = @mgr.get_component(entity, Size)
+			anim_comp = @mgr.get_component(entity, Animation)
+
+			if anim_comp
 
 				batch.draw(
 					anim_comp.key_frame, 

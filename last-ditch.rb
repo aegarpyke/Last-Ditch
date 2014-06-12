@@ -43,6 +43,16 @@ class LastDitch < ApplicationAdapter
 			{'drone1_idle' => ['drone1_idle1',
 												 'drone1_idle2']}))
 
+		@droid2 = @mgr.create_tagged_entity('droid 2')
+		@mgr.add_component(@droid2, Position.new(44, 44))
+		@mgr.add_component(@droid2, Velocity.new(0, 0))
+		@mgr.add_component(@droid2, Rotation.new(0))
+		@mgr.add_component(@droid2, Collision.new)
+		@mgr.add_component(@droid2, AI.new('wander'))
+		@mgr.add_component(@droid2, Animation.new(
+			{'drone1_idle' => ['drone1_idle1',
+												 'drone1_idle2']}))
+
 		@accumulated_dt = 0
 
 		@time      = TimeSystem.new
@@ -94,22 +104,27 @@ class LastDitch < ApplicationAdapter
 
 		alpha = @accumulated_dt / C::BOX_STEP
 
-		[n, C::MAX_STEPS].min.times do
-
-			@time.update
-			@map.update
-			@actions.update
-			@inventory.update
-			@equipment.update
-			@status.update
-			@ai.update
-			@render.update
-			@physics.update
-			@ui.update
-
-		end
+		unless @mgr.paused
 		
-		@physics.world.clear_forces
+			[n, C::MAX_STEPS].min.times do
+
+					@time.update
+					@actions.update
+					@inventory.update
+					@equipment.update
+					@status.update
+					@ai.update
+					@physics.update
+					@render.update
+
+			end
+		
+		end
+
+		@map.update
+		@ui.update
+
+		# @physics.world.clear_forces
 		# @physics.interpolate(alpha)
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
@@ -126,7 +141,7 @@ class LastDitch < ApplicationAdapter
 		@lighting.render
 		@ui.render
 
-		@debug.render(@physics.world, @map.cam.combined)
+		# @debug.render(@physics.world, @map.cam.combined)
 
 	end
 

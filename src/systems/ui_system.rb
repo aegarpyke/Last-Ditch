@@ -48,7 +48,7 @@ class UISystem < System
 		@base_table.add(@base_money).align(Align::right).height(11)
 
 		@base_table_needs = Table.new(@skin)
-		@base_table_needs.set_bounds(-2, Gdx.graphics.height - 30, 106, 30)
+		@base_table_needs.set_bounds(-3, Gdx.graphics.height - 29, 106, 30)
 
 		@base_hunger = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
 		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1.0)
@@ -59,10 +59,10 @@ class UISystem < System
 		@base_sanity = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
 		@base_sanity.color = Color.new(0.77, 0.10, 0.87, 1.0)
 
-		@base_table_needs.add(@base_hunger).width(106).padTop(-2).height(8).row
-		@base_table_needs.add(@base_thirst).width(106).padTop(-2).height(8).row
-		@base_table_needs.add(@base_energy).width(106).padTop(-2).height(8).row
-		@base_table_needs.add(@base_sanity).width(106).padTop(-2).height(8)
+		@base_table_needs.add(@base_hunger).width(106).padTop(0).height(7).row
+		@base_table_needs.add(@base_thirst).width(106).padTop(0).height(7).row
+		@base_table_needs.add(@base_energy).width(106).padTop(0).height(7).row
+		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(7)
 
 	end
 
@@ -509,7 +509,7 @@ class UISystem < System
 
 		if @main_active || @base_active
 
-			@stage.act
+			
 
 		end
 
@@ -520,6 +520,7 @@ class UISystem < System
 
 		if @main_active || @base_active
 
+			@stage.act
 			@stage.draw
 
 			Table.draw_debug(@stage)

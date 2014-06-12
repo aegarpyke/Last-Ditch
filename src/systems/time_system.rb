@@ -1,16 +1,17 @@
 class TimeSystem < System
 
-	attr_accessor :active, :duration, :rate, :minute, :hour, :day, :month, :year
+	attr_accessor :active, :game_delta, :duration, :rate, :minute, :hour, :day, :month, :year
 
 	def initialize
 
 		super()
-		@rate = 1.0
+		@game_delta = 0
+		@rate = 1000.0
 		@active = true
 		@duration = 0.0
 
 		@hour, @minute = 0, 0
-		@day, @month, @year = 12, 8, 3127
+		@day, @month, @year = 1, 1, 3127
 
 	end
 
@@ -57,9 +58,10 @@ class TimeSystem < System
 
 		if @active
 
-			@minute += @rate * C::BOX_STEP
-			@duration += @rate * C::BOX_STEP
 			@game_delta = @rate * C::BOX_STEP
+			@minute += @game_delta
+			@duration += @game_delta
+			@game_delta = @game_delta
 
 			if @minute > 60
 				@minute = 0

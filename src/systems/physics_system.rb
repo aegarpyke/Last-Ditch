@@ -9,7 +9,7 @@ class PhysicsSystem < System
 		@bodies = []
 		@player = player
 		@gravity = Vector2.new(0.0, 0.0)
-		@world = World.new(@gravity, true)
+		@world = World.new(@gravity, false)
 		@world.auto_clear_forces = false
 
 		generate_entity_bodies
@@ -30,8 +30,6 @@ class PhysicsSystem < System
 
 			w = anim_comp.width * C::WTB
 			h = anim_comp.height * C::WTB
-
-			puts w, h
 
 			body_def = BodyDef.new
 			body_def.type = BodyType::DynamicBody
@@ -159,46 +157,42 @@ class PhysicsSystem < System
 
 	def update
 
-		unless @mgr.paused
+		entities = @mgr.get_all_entities_with(Velocity)
+		entities.each do |entity|
 
-			entities = @mgr.get_all_entities_with(Velocity)
-			entities.each do |entity|
+			pos_comp = @mgr.get_component(entity, Position)
+			vel_comp = @mgr.get_component(entity, Velocity)
+			rot_comp = @mgr.get_component(entity, Rotation)
+			col_comp = @mgr.get_component(entity, Collision)
 
-				pos_comp = @mgr.get_component(entity, Position)
-				vel_comp = @mgr.get_component(entity, Velocity)
-				rot_comp = @mgr.get_component(entity, Rotation)
-				col_comp = @mgr.get_component(entity, Collision)
+			pos_comp.px = pos_comp.x
+			pos_comp.py = pos_comp.y
+			rot_comp.p_angle = rot_comp.angle
 
-				pos_comp.px = pos_comp.x
-				pos_comp.py = pos_comp.y
-				rot_comp.p_angle = rot_comp.angle
+			if vel_comp.spd != 0
 
-				if vel_comp.spd != 0
+				vel_vec = Vector2.new(
+					vel_comp.spd * rot_comp.x, 
+					vel_comp.spd * rot_comp.y)
 
-					vel_vec = Vector2.new(
-						vel_comp.spd * rot_comp.x, 
-						vel_comp.spd * rot_comp.y)
+				col_comp.body.apply_linear_impulse(
+					vel_vec, 
+					col_comp.body.world_center, 
+					true)
 
-					col_comp.body.apply_linear_impulse(
-						vel_vec, 
-						col_comp.body.world_center, 
-						true)
-
-					pos_comp.x = col_comp.body.position.x
-					pos_comp.y = col_comp.body.position.y
-
-				end
-
-				if vel_comp.ang_spd != 0
-					rot_comp.rotate(vel_comp.ang_spd)
-				end
+				pos_comp.x = col_comp.body.position.x
+				pos_comp.y = col_comp.body.position.y
 
 			end
 
-			@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
-			
+			if vel_comp.ang_spd != 0
+				rot_comp.rotate(vel_comp.ang_spd)
+			end
+
 		end
 
+		@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
+			
 	end
 
 

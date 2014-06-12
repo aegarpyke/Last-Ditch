@@ -145,7 +145,7 @@ status_bar
   rotate: false
   xy: 2, 12
   size: 38, 14
-  split: 2, 3, 3, 3
+  split: 2, 3, 2, 2
   orig: 38, 14
   offset: 0, 0
   index: -1
