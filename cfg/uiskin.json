@@ -37,6 +37,16 @@
 	{
 		default:
 		{
+
+		},
+		
+		base_slot:
+		{
+			up: base_slot
+		},
+
+		inv_slot:
+		{
 			up: inv_slot
 		},
 

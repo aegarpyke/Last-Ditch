@@ -1,6 +1,7 @@
 class UISystem < System
 
 	attr_accessor :stage, :inv_slots, :player, :inv_selection, :prev_selection, :inv_no_exit
+	attr_accessor :base_selection, :base_no_exit
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
 
@@ -18,6 +19,7 @@ class UISystem < System
 		setup_main
 
 		if 1 == 0
+			
 			@main_table.debug
 			@base_table.debug
 			@base_table_needs.debug
@@ -26,6 +28,7 @@ class UISystem < System
 			@actions_window.debug
 			@status_window.debug
 			@equip_window.debug
+
 		end
 
 	end
@@ -71,13 +74,14 @@ class UISystem < System
 		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(7)
 
 		@base_selection = nil
+		@base_no_exit = false
 		@base_table_slots = Table.new(@skin)
 		@base_table_slots.set_bounds(0, 0, Gdx.graphics.width, 32)
 
 		@base_slots = []
 		for i in 1..C::BASE_SLOTS
 			
-			@base_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
+			@base_slots << ImageButton.new(@skin.get("base_slot", ImageButtonStyle.java_class))
 			@base_slots.last.add_listener(
 
 				Class.new(ClickListener) do
@@ -92,19 +96,52 @@ class UISystem < System
 					
 					end
 
+					def enter(event, x, y, pointer, from_actor)
+
+						@ui.base_selection = @slot
+
+						style = ImageButtonStyle.new(@ui.base_selection.style)
+						style.up = TextureRegionDrawable.new(@atlas.find_region('base_selection'))
+						@ui.base_selection.style = style
+
+						true
+
+					end
+
+
+					def exit(event, x, y, pointer, to_actor)
+
+						if @mgr.ui.base_no_exit
+
+							@mgr.ui.base_no_exit = false
+
+						else
+
+							@ui.base_selection = nil
+
+							style = ImageButtonStyle.new(@slot.style)
+							style.up = TextureRegionDrawable.new(@atlas.find_region('base_slot'))
+							@slot.style = style
+
+						end
+
+						true
+
+					end
+
+
 					def clicked(event, x, y)
 
-						puts "You clicked"
 						true
 
 					end
 
 				end.new(@mgr, @base_slots.last, @atlas, self))
 
-			if i < 7
+			if i < 9
 				@base_table_slots.add(@base_slots.last).align(Align::left)
-			elsif i == 7
-				@base_table_slots.add(@base_slots.last).align(Align::right).padLeft(416)
+			elsif i == 9
+				@base_table_slots.add(@base_slots.last).align(Align::right).padLeft(286)
 			else
 				@base_table_slots.add(@base_slots.last).align(Align::right)
 			end
@@ -115,6 +152,11 @@ class UISystem < System
 
 
 	def setup_main
+		
+		setup_actions
+		setup_equipment
+		setup_status
+		setup_inventory
 
 		@main_active = false
 		@main_update = true
@@ -122,15 +164,10 @@ class UISystem < System
 		@main_table = Table.new(@skin)
 		@main_table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
 
-		setup_actions
-		setup_equipment
-		setup_status
-		setup_inventory
-
-		@main_table.add(@actions_button).width(90).height(14).colspan(2).row
-		@main_table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
-		@main_table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
-		@main_table.add(@inv_button).width(90).height(14).colspan(2)
+		@main_table.add(@actions_button).width(90).height(14).colspan(2).padBottom(100).row
+		@main_table.add(@equip_button).width(90).height(14).padTop(24).padRight(340).padBottom(24).padRight(60)
+		@main_table.add(@status_button).width(90).height(14).padTop(24).padLeft(340).padBottom(24).row
+		@main_table.add(@inv_button).width(90).height(14).padTop(100).colspan(2)
 
 	end
 
@@ -157,10 +194,10 @@ class UISystem < System
 			end.new(@mgr, self))
 
 		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
-		@actions_window.set_position(150, 316)
-		@actions_window.set_size(530, 240)
-		@actions_window.padTop(9)
+		@actions_window.set_position(128, 352)
+		@actions_window.set_size(544, 240)
 		@actions_window.movable = false
+		@actions_window.padTop(9)
 
 	end
 
@@ -188,13 +225,45 @@ class UISystem < System
 
 		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
 		@equip_window.set_position(0, 44)
-		@equip_window.set_size(240, 290)
-		@equip_window.padTop(9)
+		@equip_window.set_size(250, 290)
 		@equip_window.movable = false
+		@equip_window.padTop(9)
 
-		@equip_model = Image.new(@atlas.find_region('equipment_model'))
-		@equip_window.add(@equip_model)
+		@equip_head = Image.new(@atlas.find_region('equip_head'))
+		@equip_l_arm = Image.new(@atlas.find_region('equip_arm'))
+		@equip_torso = Image.new(@atlas.find_region('equip_torso'))
+		r_arm_tex = TextureRegion.new(@atlas.find_region('equip_arm'))
+		r_arm_tex.flip(true, false)
+		@equip_r_arm = Image.new(r_arm_tex)
+		@equip_l_hand = Image.new(@atlas.find_region('equip_hand'))
+		@equip_belt = Image.new(@atlas.find_region('equip_belt'))
+		r_hand_tex = TextureRegion.new(@atlas.find_region('equip_hand'))
+		r_hand_tex.flip(true, false)
+		@equip_r_hand = Image.new(r_hand_tex)
+		@equip_l_leg = Image.new(@atlas.find_region('equip_leg'))
+		@equpi_leg_spacer = Image.new(@atlas.find_region('empty'))
+		r_leg_tex = TextureRegion.new(@atlas.find_region('equip_leg'))
+		r_leg_tex.flip(true, false)
+		@equip_r_leg = Image.new(r_leg_tex)
+		@equip_l_foot = Image.new(@atlas.find_region('equip_foot'))
+		@equip_foot_spacer = Image.new(@atlas.find_region('empty'))
+		r_foot_tex = TextureRegion.new(@atlas.find_region('equip_foot'))
+		r_foot_tex.flip(true, false)
+		@equip_r_foot = Image.new(r_foot_tex)
 
+		@equip_window.add(@equip_head).colspan(3).row
+		@equip_window.add(@equip_l_arm)
+		@equip_window.add(@equip_torso)
+		@equip_window.add(@equip_r_arm).row
+		@equip_window.add(@equip_l_hand)
+		@equip_window.add(@equip_belt)
+		@equip_window.add(@equip_r_hand).row
+		@equip_window.add(@equip_l_leg)
+		@equip_window.add(@equpi_leg_spacer)
+		@equip_window.add(@equip_r_leg).row
+		@equip_window.add(@equip_l_foot)
+		@equip_window.add(@equip_foot_spacer)
+		@equip_window.add(@equip_r_foot).row
 
 	end
 
@@ -222,9 +291,9 @@ class UISystem < System
 
 		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
 		@status_window.set_position(560, 44)
-		@status_window.set_size(240, 290)
-		@status_window.padTop(9)
+		@status_window.set_size(250, 290)
 		@status_window.movable = false
+		@status_window.padTop(9)
 
 		info = @mgr.comp(@player, Info)
 
@@ -260,24 +329,24 @@ class UISystem < System
 			end.new(@mgr, self))
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
-		@inv_window.set_position(254, 2)
-		@inv_window.set_size(290, 236)
-		@inv_window.padTop(9)
+		@inv_window.set_position(268, 2)
+		@inv_window.set_size(268, 236)
 		@inv_window.movable = false
+		@inv_window.padTop(9)
 
 		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padTop(4).height(12)
 		
 		@inv_item_value = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1)
+		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
 		@inv_window.add(@inv_item_value).colspan(4).align(Align::right).padTop(4).height(14).row
 
 		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_item_weight.color = Color.new(0.75, 0.75, 0.89, 1)
+		@inv_item_weight.color = Color.new(0.75, 0.75, 0.89, 1.0)
 		@inv_window.add(@inv_item_weight).colspan(4).align(Align::left).height(14).padTop(1)
 
 		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_item_quality_dur.color = Color.new(0.8, 0.8, 0.8, 1)
+		@inv_item_quality_dur.color = Color.new(0.8, 0.8, 0.8, 1.0)
 		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).padTop(1).height(12).row
 
 		@inv_desc = ""
@@ -294,7 +363,7 @@ class UISystem < System
 		@inv_slots = []
 		for i in 1..C::INVENTORY_SLOTS
 			
-			@inv_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
+			@inv_slots << ImageButton.new(@skin.get("inv_slot", ImageButtonStyle.java_class))
 			@inv_slots.last.add_listener(
 
 				Class.new(ClickListener) do
