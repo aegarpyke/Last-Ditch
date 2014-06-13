@@ -110,7 +110,7 @@ class EntityManager
   end
 
 
-  def has_component?(entity, component)
+  def comp?(entity, component)
 
 		store = @component_stores[component.class]
 
@@ -123,7 +123,7 @@ class EntityManager
 	end
 
 
-	def has_component_type?(entity, component_class)
+	def comp_type?(entity, component_class)
 
 		store = @component_stores[component_class]
 
@@ -136,7 +136,7 @@ class EntityManager
 	end
 
 
-	def get_component(entity, component_class)
+	def comp(entity, component_class)
 
 		store = @component_stores[component_class]
 		
@@ -154,7 +154,7 @@ class EntityManager
 	end
 
 
-	def get_components(entity, component_class)
+	def comps(entity, component_class)
 
 		store = @component_stores[component_class]
 
@@ -168,7 +168,7 @@ class EntityManager
 	end
 
 
-	def get_all_entities_with(component_class)
+	def entities_with(component_class)
 
 		store = @component_stores[component_class]
 
@@ -181,12 +181,12 @@ class EntityManager
 	end
 
 
-	def get_all_entities_with_components(component_classes)
+	def entities_with_components(component_classes)
 
 		entities = all_entities
 		
 		component_classes.each do |klass|
-			entities = entities & get_all_entities_with(klass)
+			entities = entities & entities_with(klass)
 		end
 
 		entities

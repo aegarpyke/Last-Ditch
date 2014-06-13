@@ -9,11 +9,11 @@ class StatusSystem < System
 
 	def update
 
-		entities = @mgr.get_all_entities_with_components([Needs, Velocity])
+		entities = @mgr.entities_with_components([Needs, Velocity])
 		entities.each do |entity|
 
-			vel = @mgr.get_component(entity, Velocity)
-			needs = @mgr.get_component(entity, Needs)
+			vel = @mgr.comp(entity, Velocity)
+			needs = @mgr.comp(entity, Needs)
 
 			gd = @mgr.time.game_delta
 

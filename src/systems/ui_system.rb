@@ -21,6 +21,7 @@ class UISystem < System
 			@main_table.debug
 			@base_table.debug
 			@base_table_needs.debug
+			@base_table_slots.debug
 			@inv_window.debug
 			@actions_window.debug
 			@status_window.debug
@@ -36,33 +37,79 @@ class UISystem < System
 		@base_update = true
 
 		@base_table = Table.new(@skin)
-		@base_table.set_bounds(Gdx.graphics.width - 66, Gdx.graphics.height - 32, 66, 32)
+		@base_table.set_bounds(Gdx.graphics.width - 62, Gdx.graphics.height - 42, 62, 42)
 
 		@base_time = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_date = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_money = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
-		@base_money.color = Color.new(0.75, 0.82, 0.70, 1.0)
+		@base_money.alignment = Align::right
+		@base_money.color = Color.new(0.75, 0.82, 0.70, 1)
+		@base_weight = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
+		@base_weight.color = Color.new(0.75, 0.75, 0.89, 1)
+		@base_weight.alignment = Align::right
 
 		@base_table.add(@base_date).align(Align::right).height(11).row
 		@base_table.add(@base_time).align(Align::right).height(11).row
+		@base_table.add(@base_weight).align(Align::right).height(11).row
 		@base_table.add(@base_money).align(Align::right).height(11)
 
 		@base_table_needs = Table.new(@skin)
 		@base_table_needs.set_bounds(-3, Gdx.graphics.height - 29, 106, 30)
 
 		@base_hunger = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
-		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1.0)
+		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1)
 		@base_thirst = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
-		@base_thirst.color = Color.new(0.07, 0.86, 0.86, 1.0)
+		@base_thirst.color = Color.new(0.07, 0.86, 0.86, 1)
 		@base_energy = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
-		@base_energy.color = Color.new(0.98, 0.98, 0.04, 1.0)
+		@base_energy.color = Color.new(0.98, 0.98, 0.04, 1)
 		@base_sanity = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
-		@base_sanity.color = Color.new(0.77, 0.10, 0.87, 1.0)
+		@base_sanity.color = Color.new(0.77, 0.10, 0.87, 1)
 
 		@base_table_needs.add(@base_hunger).width(106).padTop(0).height(7).row
 		@base_table_needs.add(@base_thirst).width(106).padTop(0).height(7).row
 		@base_table_needs.add(@base_energy).width(106).padTop(0).height(7).row
 		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(7)
+
+		@base_selection = nil
+		@base_table_slots = Table.new(@skin)
+		@base_table_slots.set_bounds(0, 0, Gdx.graphics.width, 32)
+
+		@base_slots = []
+		for i in 1..C::BASE_SLOTS
+			
+			@base_slots << ImageButton.new(@skin.get(ImageButtonStyle.java_class))
+			@base_slots.last.add_listener(
+
+				Class.new(ClickListener) do
+				
+					def initialize(mgr, slot, atlas, ui)
+
+						super()
+						@ui = ui
+						@mgr = mgr
+						@slot = slot
+						@atlas = atlas
+					
+					end
+
+					def clicked(event, x, y)
+
+						puts "You clicked"
+						true
+
+					end
+
+				end.new(@mgr, @base_slots.last, @atlas, self))
+
+			if i < 7
+				@base_table_slots.add(@base_slots.last).align(Align::left)
+			elsif i == 7
+				@base_table_slots.add(@base_slots.last).align(Align::right).padLeft(416)
+			else
+				@base_table_slots.add(@base_slots.last).align(Align::right)
+			end
+
+		end
 
 	end
 
@@ -79,6 +126,11 @@ class UISystem < System
 		setup_equipment
 		setup_status
 		setup_inventory
+
+		@main_table.add(@actions_button).width(90).height(14).colspan(2).row
+		@main_table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
+		@main_table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
+		@main_table.add(@inv_button).width(90).height(14).colspan(2)
 
 	end
 
@@ -105,10 +157,10 @@ class UISystem < System
 			end.new(@mgr, self))
 
 		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
-		@actions_window.set_position(340, 400)
+		@actions_window.set_position(150, 316)
+		@actions_window.set_size(530, 240)
 		@actions_window.padTop(9)
-
-		@main_table.add(@actions_button).width(90).height(14).colspan(2).row
+		@actions_window.movable = false
 
 	end
 
@@ -135,10 +187,14 @@ class UISystem < System
 			end.new(@mgr, self))
 
 		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
-		@equip_window.set_position(12, 260)
+		@equip_window.set_position(0, 44)
+		@equip_window.set_size(240, 290)
 		@equip_window.padTop(9)
+		@equip_window.movable = false
 
-		@main_table.add(@equip_button).width(90).height(14).padTop(24).padBottom(24).padRight(60)
+		@equip_model = Image.new(@atlas.find_region('equipment_model'))
+		@equip_window.add(@equip_model)
+
 
 	end
 
@@ -165,10 +221,17 @@ class UISystem < System
 			end.new(@mgr, self))
 
 		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
-		@status_window.set_position(500, 260)
+		@status_window.set_position(560, 44)
+		@status_window.set_size(240, 290)
 		@status_window.padTop(9)
+		@status_window.movable = false
 
-		@main_table.add(@status_button).width(90).height(14).padTop(24).padBottom(24).row
+		info = @mgr.comp(@player, Info)
+
+		@status_name = Label.new("Name: %s" % info.name, @skin.get("inv_slot", LabelStyle.java_class))
+		@status_window.add(@status_name).align(Align::left).height(14).row
+		@status_occupation = Label.new("Unemployed", @skin.get("inv_slot", LabelStyle.java_class))
+		@status_window.add(@status_occupation).align(Align::left).height(11).row
 
 	end
 
@@ -197,9 +260,10 @@ class UISystem < System
 			end.new(@mgr, self))
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
-		@inv_window.set_position(280, 4)
-		@inv_window.set_size(288, 236)
+		@inv_window.set_position(254, 2)
+		@inv_window.set_size(290, 236)
 		@inv_window.padTop(9)
+		@inv_window.movable = false
 
 		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padTop(4).height(12)
@@ -209,7 +273,7 @@ class UISystem < System
 		@inv_window.add(@inv_item_value).colspan(4).align(Align::right).padTop(4).height(14).row
 
 		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_item_weight.color = Color.new(0.75, 0.75, 0.82, 1)
+		@inv_item_weight.color = Color.new(0.75, 0.75, 0.89, 1)
 		@inv_window.add(@inv_item_weight).colspan(4).align(Align::left).height(14).padTop(1)
 
 		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
@@ -225,7 +289,7 @@ class UISystem < System
 		@inv_item_desc3 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
 		@inv_window.add(@inv_item_desc3).align(Align::left).padLeft(5).colspan(8).height(12).row
 
-		set_inventory_desc(@inv_desc)
+		set_inv_desc(@inv_desc)
 
 		@inv_slots = []
 		for i in 1..C::INVENTORY_SLOTS
@@ -288,12 +352,12 @@ class UISystem < System
 
 						@mgr.ui.inv_no_exit = true
 
-						inv = @mgr.get_component(@ui.player, Inventory)
+						inv = @mgr.comp(@ui.player, Inventory)
 
 						index = @ui.inv_slots.index(@slot)
 						item = inv.items[index]
 
-						type = @mgr.get_component(item, Type)
+						type = @mgr.comp(item, Type)
 
 						true
 						
@@ -302,29 +366,28 @@ class UISystem < System
 				end.new(@mgr, @inv_slots.last, @atlas, self))
 
 			if i % 8 == 0
-				@inv_window.add(@inv_slots.last).pad(1).row
+				@inv_window.add(@inv_slots.last).pad(0).row
 			else
-				@inv_window.add(@inv_slots.last).pad(1)
+				@inv_window.add(@inv_slots.last).pad(0)
 			end
 
 		end
 
-		@main_table.add(@inv_button).width(90).height(14).colspan(2)
 
 	end
 
 
-	def set_inventory_quality_dur(quality, durability)
+	def set_inv_qual_cond(quality, condition)
 		
-		unless quality == -1 && durability == -1
-			@inv_item_quality_dur.text = "qual: %d cond: %d" % [(quality * 100).to_i, (durability * 100).to_i]
+		unless quality == -1 && condition == -1
+			@inv_item_quality_dur.text = "Qual-%d Cond-%d" % [(quality * 100).to_i, (condition * 100).to_i]
 		else
 			@inv_item_quality_dur.text = ""
 		end
 	end
 
 
-	def set_inventory_value(value)
+	def set_inv_value(value)
 
 		unless value == -1
 			@inv_item_value.text = "$%.2f" % value
@@ -335,7 +398,7 @@ class UISystem < System
 	end
 
 
-	def set_inventory_weight(weight)
+	def set_inv_weight(weight)
 
 		unless weight == -1
 			@inv_item_weight.text = " %.1fkg" % weight
@@ -345,14 +408,14 @@ class UISystem < System
 
 	end
 
-	def set_inventory_name(name)
+	def set_inv_name(name)
 
 		@inv_item_name.text = name
 
 	end
 
 
-	def set_inventory_desc(desc)
+	def set_inv_desc(desc)
 
 		@inv_desc_lines = desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
 
@@ -371,12 +434,13 @@ class UISystem < System
 
 		if @base_active
 
-			needs = @mgr.get_component(@player, Needs)
-			inv = @mgr.get_component(@player, Inventory)
+			needs = @mgr.comp(@player, Needs)
+			inv = @mgr.comp(@player, Inventory)
 
 			@base_time.text = @mgr.time.time
 			@base_date.text = @mgr.time.date
-			@base_money.text = "$%.2f" % [inv.money]
+			@base_money.text = "$%.2f" % inv.money
+			@base_weight.text = "%.1fkg" % inv.weight
 
 			@base_hunger.width = (needs.hunger * 100 + 4).to_i
 			@base_thirst.width = (needs.thirst * 100 + 4).to_i
@@ -392,32 +456,32 @@ class UISystem < System
 
 					if item_id
 
-						item = @mgr.get_component(item_id, Item)
-						info = @mgr.get_component(item_id, Info)
+						item = @mgr.comp(item_id, Item)
+						info = @mgr.comp(item_id, Info)
 
-						set_inventory_name(info.name)
-						set_inventory_quality_dur(item.quality, item.durability)
-						set_inventory_value(item.value)
-						set_inventory_weight(item.weight)
-						set_inventory_desc(info.description)
+						set_inv_name(info.name)
+						set_inv_qual_cond(item.quality, item.condition)
+						set_inv_value(item.value)
+						set_inv_weight(item.weight)
+						set_inv_desc(info.description)
 
 					else
 
-						set_inventory_name("")
-						set_inventory_quality_dur(-1, -1)
-						set_inventory_value(-1)
-						set_inventory_weight(-1)
-						set_inventory_desc("")
+						set_inv_name("")
+						set_inv_qual_cond(-1, -1)
+						set_inv_value(-1)
+						set_inv_weight(-1)
+						set_inv_desc("")
 
 					end
 
 				else
 
-					set_inventory_name("")
-					set_inventory_quality_dur(-1, -1)
-					set_inventory_value(-1)
-					set_inventory_weight(-1)
-					set_inventory_desc("")
+					set_inv_name("")
+					set_inv_qual_cond(-1, -1)
+					set_inv_value(-1)
+					set_inv_weight(-1)
+					set_inv_desc("")
 
 				end
 
@@ -432,12 +496,19 @@ class UISystem < System
 			@base_update = false
 
 			if @base_active
+
 				@stage.add_actor(@base_table)
 				@stage.add_actor(@base_table_needs)
+				@stage.add_actor(@base_table_slots)
+			
 			else
+			
 				@base_table.remove
 				@base_table_needs.remove
+				@base_table_slots.remove
+			
 			end
+		
 		end
 
 		if @main_update

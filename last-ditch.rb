@@ -33,6 +33,9 @@ class LastDitch < ApplicationAdapter
 	                       "player_walk1-f", 
 	                       "player_walk2-f", 
 	                       "player_walk1-f"]}))
+		@mgr.add_component(@player, Info.new(
+			'Kadijah',
+			'This is the player'))
 
 		@droid = @mgr.create_tagged_entity('droid 1')
 		@mgr.add_component(@droid, Position.new(42, 42))
@@ -56,7 +59,7 @@ class LastDitch < ApplicationAdapter
 			{'drone1_idle' => ['drone1_idle1',
 												 'drone1_idle2']}))
 
-		@accumulated_dt = 0
+		@dt_sum = 0
 
 		@time      = TimeSystem.new
 		@input     = InputSystem.new(@mgr)
@@ -99,13 +102,11 @@ class LastDitch < ApplicationAdapter
 
 	def render
 
-		delta = Gdx.graphics.delta_time
+		@dt_sum += Gdx.graphics.delta_time
+		n = (@dt_sum / C::BOX_STEP).floor
+		@dt_sum -= n * C::BOX_STEP if n > 0
 
-		@accumulated_dt += delta
-		n = (@accumulated_dt / C::BOX_STEP).floor
-		@accumulated_dt -= n * C::BOX_STEP if n > 0
-
-		alpha = @accumulated_dt / C::BOX_STEP
+		alpha = @dt_sum / C::BOX_STEP
 	
 		[n, C::MAX_STEPS].min.times do
 
@@ -124,12 +125,12 @@ class LastDitch < ApplicationAdapter
 			end
 
 		end
+		
+		@physics.world.clear_forces
+		@physics.interpolate(alpha)
 
 		@map.update
 		@ui.update
-
-		@physics.world.clear_forces
-		# @physics.interpolate(alpha)
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 		@batch.projection_matrix = @map.cam::combined

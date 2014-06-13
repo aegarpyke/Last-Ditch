@@ -12,7 +12,7 @@ class MapSystem < System
 		@cam = OrthographicCamera.new
 		@cam.set_to_ortho(false, C::WIDTH, C::HEIGHT)
 		@width, @height = C::MAP_WIDTH, C::MAP_HEIGHT
-		@focus = @mgr.get_component(player, Position)
+		@focus = @mgr.comp(player, Position)
 		
 		@iterations = 120
 		@rooms, @items, @doors = [], [], []
@@ -340,9 +340,9 @@ class MapSystem < System
 
 			if @items.include?(entity)
 
-				pos = @mgr.get_component(entity, Position)
-				render = @mgr.get_component(entity, Render)
-				rot = @mgr.get_component(entity, Rotation)
+				pos = @mgr.comp(entity, Position)
+				render = @mgr.comp(entity, Render)
+				rot = @mgr.comp(entity, Rotation)
 
 				# Transform coordinates to axis-aligned frame
 				c = Math.cos(-rot.angle * Math::PI/180)
@@ -370,8 +370,8 @@ class MapSystem < System
 
 	def remove_item(item_id)
 
-		pos = @mgr.get_component(item_id, Position)
-		render = @mgr.get_component(item_id, Render)
+		pos = @mgr.comp(item_id, Position)
+		render = @mgr.comp(item_id, Render)
 
 		@mgr.remove_component(item_id, pos)
 		@mgr.remove_component(item_id, render)
@@ -388,10 +388,10 @@ class MapSystem < System
 
 			if @doors.include?(entity)
 
-				pos = @mgr.get_component(entity, Position)
-				render = @mgr.get_component(entity, Render)
-				size = @mgr.get_component(entity, Size)
-				rot = @mgr.get_component(entity, Rotation)
+				pos = @mgr.comp(entity, Position)
+				render = @mgr.comp(entity, Render)
+				size = @mgr.comp(entity, Size)
+				rot = @mgr.comp(entity, Rotation)
 
 				# Transform coordinates to axis-aligned frame
 				c = Math.cos(-rot.angle * Math::PI/180)
@@ -423,7 +423,7 @@ class MapSystem < System
 
 			if @doors.include?(entity)
 				
-				pos = @mgr.get_component(entity, Position)
+				pos = @mgr.comp(entity, Position)
 				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 
 				if dist_sqr < 2.6
@@ -441,21 +441,21 @@ class MapSystem < System
 
 	def change_door(door_id, open)
 
-		pos = @mgr.get_component(door_id, Position)
-		rot = @mgr.get_component(door_id, Rotation)
-		render = @mgr.get_component(door_id, Render)
-		size = @mgr.get_component(door_id, Size)
-		col = @mgr.get_component(door_id, Collision)
+		pos = @mgr.comp(door_id, Position)
+		rot = @mgr.comp(door_id, Rotation)
+		render = @mgr.comp(door_id, Render)
+		size = @mgr.comp(door_id, Size)
+		col = @mgr.comp(door_id, Collision)
 
 		if open
 
-			render = @mgr.get_component(door_id, Render)
+			render = @mgr.comp(door_id, Render)
 			@mgr.remove_component(door_id, render)
 			@mgr.physics.remove_body(col.body)
 
 		else
 
-			type = @mgr.get_component(door_id, Type).type
+			type = @mgr.comp(door_id, Type).type
 
 			body = @mgr.physics.create_body(
 				pos.x, pos.y, 
@@ -477,7 +477,7 @@ class MapSystem < System
 
 			if @items.include?(entity)
 				
-				pos = @mgr.get_component(entity, Position)
+				pos = @mgr.comp(entity, Position)
 				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 
 				if dist_sqr < 1.4

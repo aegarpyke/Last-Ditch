@@ -1,24 +1,27 @@
 class Inventory < Component
 
-	attr_accessor :size, :items, :money
+	attr_accessor :size, :items, :money, :weight
 
 	def initialize(size)
 
 		super()
 		@size = size
-		@money = 0.00
+		@money = 3.11
+		@weight = 0
 		@items = Array.new(size)
 
 	end
 
 
-	def add_item(item)
+	def add_item(item_id)
 
 		for i in 0...@items.size
 
 			if @items[i].nil?
-				@items[i] = item
+
+				@items[i] = item_id
 				return true
+			
 			end
 
 		end
@@ -28,9 +31,9 @@ class Inventory < Component
 	end
 
 
-	def remove_item(item)
+	def remove_item(item_id)
 
-		index = @items.index(item)
+		index = @items.index(item_id)
 
 		if index
 			@items[index] = nil

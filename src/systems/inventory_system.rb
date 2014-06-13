@@ -18,14 +18,14 @@ class InventorySystem < System
 
 			@update_slots = false
 
-			entities = @mgr.get_all_entities_with_components([Inventory, UserInput])
+			entities = @mgr.entities_with_components([Inventory, UserInput])
 			entities.each do |entity|
 
-				inv = @mgr.get_component(entity, Inventory)
+				inv = @mgr.comp(entity, Inventory)
 				
 				for i in 0...@inv_slots.size
 
-					type = @mgr.get_component(inv.items[i], Type)
+					type = @mgr.comp(inv.items[i], Type)
 
 					if type
 

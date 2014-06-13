@@ -1,12 +1,12 @@
 
 graphics.png
-size: 503,60
+size: 253,250
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 button1
   rotate: false
-  xy: 178, 12
+  xy: 229, 94
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -14,7 +14,7 @@ button1
   index: -1
 button1_pressed
   rotate: false
-  xy: 194, 12
+  xy: 42, 2
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -22,63 +22,70 @@ button1_pressed
   index: -1
 canister1
   rotate: false
-  xy: 42, 2
+  xy: 229, 226
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 canteen1
   rotate: false
-  xy: 487, 44
+  xy: 229, 182
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 door1
   rotate: false
-  xy: 2, 28
+  xy: 2, 60
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 drone1_idle1
   rotate: false
-  xy: 68, 20
+  xy: 2, 18
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 drone1_idle2
   rotate: false
-  xy: 110, 20
+  xy: 68, 52
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 empty
   rotate: false
-  xy: 68, 2
+  xy: 229, 164
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
+equipment_model
+  rotate: false
+  xy: 2, 94
+  size: 225, 156
+  orig: 225, 156
+  offset: 0, 0
+  index: -1
 floor1
   rotate: false
-  xy: 152, 28
+  xy: 110, 60
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 floor2
   rotate: false
-  xy: 186, 28
+  xy: 144, 60
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 inv_selection
   rotate: false
-  xy: 220, 28
+  xy: 178, 60
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -86,7 +93,7 @@ inv_selection
   index: -1
 inv_slot
   rotate: false
-  xy: 254, 28
+  xy: 212, 60
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -94,56 +101,56 @@ inv_slot
   index: -1
 overgrowth1
   rotate: false
-  xy: 152, 2
+  xy: 229, 200
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 player_idle1
   rotate: false
-  xy: 288, 28
+  xy: 44, 18
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk1
   rotate: false
-  xy: 322, 28
+  xy: 78, 18
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk2
   rotate: false
-  xy: 356, 28
+  xy: 112, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 rations1
   rotate: false
-  xy: 86, 2
+  xy: 229, 146
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 ruffage1
   rotate: false
-  xy: 104, 2
+  xy: 229, 128
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrap1
   rotate: false
-  xy: 122, 2
+  xy: 229, 110
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 status_bar
   rotate: false
-  xy: 2, 12
+  xy: 2, 2
   size: 38, 14
   split: 2, 3, 2, 2
   orig: 38, 14
@@ -151,21 +158,21 @@ status_bar
   index: -1
 wall1
   rotate: false
-  xy: 390, 28
+  xy: 146, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 424, 28
+  xy: 180, 26
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 458, 32
+  xy: 214, 30
   size: 27, 28
   split: 4, 3, 16, 3
   orig: 27, 28

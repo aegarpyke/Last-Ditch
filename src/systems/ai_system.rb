@@ -18,10 +18,10 @@ class AISystem < System
 
 			@tick = 0
 
-			entities = @mgr.get_all_entities_with(AI)
+			entities = @mgr.entities_with(AI)
 			entities.each do |entity|
 
-				vel = @mgr.get_component(entity, Velocity)
+				vel = @mgr.comp(entity, Velocity)
 
 				check = Random.rand
 				if check < 1

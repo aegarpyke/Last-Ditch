@@ -21,12 +21,12 @@ class PhysicsSystem < System
 
 	def generate_entity_bodies
 
-		entities = @mgr.get_all_entities_with_components([Animation, Collision])
+		entities = @mgr.entities_with_components([Animation, Collision])
 		entities.each do |entity|
 
-			pos = @mgr.get_component(entity, Position)
-			anim = @mgr.get_component(entity, Animation)
-			col = @mgr.get_component(entity, Collision)
+			pos = @mgr.comp(entity, Position)
+			anim = @mgr.comp(entity, Animation)
+			col = @mgr.comp(entity, Collision)
 
 			w = anim.width * C::WTB
 			h = anim.height * C::WTB
@@ -103,10 +103,10 @@ class PhysicsSystem < System
 
 		@map.doors.each do |door|
 
-			pos = @mgr.get_component(door, Position)
-			rot = @mgr.get_component(door, Rotation)
-			render = @mgr.get_component(door, Render)
-			col = @mgr.get_component(door, Collision)
+			pos = @mgr.comp(door, Position)
+			rot = @mgr.comp(door, Rotation)
+			render = @mgr.comp(door, Render)
+			col = @mgr.comp(door, Collision)
 
 			w = render.width * C::WTB
 			h = render.height * C::WTB
@@ -157,17 +157,16 @@ class PhysicsSystem < System
 
 	def update
 
-		entities = @mgr.get_all_entities_with(Velocity)
+		entities = @mgr.entities_with(Velocity)
 		entities.each do |entity|
 
-			pos = @mgr.get_component(entity, Position)
-			vel = @mgr.get_component(entity, Velocity)
-			rot = @mgr.get_component(entity, Rotation)
-			col = @mgr.get_component(entity, Collision)
+			pos = @mgr.comp(entity, Position)
+			vel = @mgr.comp(entity, Velocity)
+			rot = @mgr.comp(entity, Rotation)
+			col = @mgr.comp(entity, Collision)
 
 			pos.px = pos.x
 			pos.py = pos.y
-			rot.p_angle = rot.angle
 
 			if vel.spd != 0
 
@@ -182,6 +181,8 @@ class PhysicsSystem < System
 
 			end
 
+			rot.p_angle = rot.angle
+
 			if vel.ang_spd != 0
 				rot.rotate(vel.ang_spd)
 			end
@@ -190,11 +191,11 @@ class PhysicsSystem < System
 
 		@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
 
-		entities = @mgr.get_all_entities_with(Velocity)
+		entities = @mgr.entities_with(Velocity)
 		entities.each do |entity|
 
-			pos = @mgr.get_component(entity, Position)
-			col = @mgr.get_component(entity, Collision)
+			pos = @mgr.comp(entity, Position)
+			col = @mgr.comp(entity, Collision)
 
 			pos.x = col.body.position.x
 			pos.y = col.body.position.y
@@ -206,19 +207,13 @@ class PhysicsSystem < System
 
 	def interpolate(alpha)
 
-		pos = @mgr.get_component(@player, Position)
-		rot = @mgr.get_component(@player, Rotation)
-		col = @mgr.get_component(@player, Collision)
+		pos = @mgr.comp(@player, Position)
+		rot = @mgr.comp(@player, Rotation)
+		col = @mgr.comp(@player, Collision)
 
-		x = alpha * pos.px + (1 - alpha) * pos.x
-		y = alpha * pos.py + (1 - alpha) * pos.y
-		angle = alpha * rot.p_angle + (1 - alpha) * rot.angle
-
-		col.body.set_transform(x, y, 0)
-
-		pos.x = col.body.position.x
-		pos.y = col.body.position.y
-		rot.angle = angle
+		pos.x = alpha * pos.px + (1 - alpha) * pos.x
+		pos.y = alpha * pos.py + (1 - alpha) * pos.y
+		rot.angle = alpha * rot.p_angle + (1 - alpha) * rot.angle
 
 	end
 

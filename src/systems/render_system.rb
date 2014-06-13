@@ -9,14 +9,14 @@ class RenderSystem < System
 		@update_timer = 0
 		@nearby_entities = []
 
-		entities = @mgr.get_all_entities_with(Render)
+		entities = @mgr.entities_with(Render)
 		entities.each do |entity|
 
-			render = @mgr.get_component(entity, Render)
+			render = @mgr.comp(entity, Render)
 			render.region = atlas.find_region(render.region_name)
 
-			pos = @mgr.get_component(entity, Position)
-			player_pos = @mgr.get_component(@player, Position)
+			pos = @mgr.comp(entity, Position)
+			player_pos = @mgr.comp(@player, Position)
 
 			if (pos.x - player_pos.x).abs < 20 &&
 				 (pos.y - player_pos.y).abs < 18
@@ -27,12 +27,12 @@ class RenderSystem < System
 
 		end
 
-		entities = @mgr.get_all_entities_with(Animation)
+		entities = @mgr.entities_with(Animation)
 		entities.each do |entity|
 
 			first = true
 
-			anim = @mgr.get_component(entity, Animation)
+			anim = @mgr.comp(entity, Animation)
 			anim.names_and_frames.each do |name, frames|
 
 				frame_list = []
@@ -82,11 +82,11 @@ class RenderSystem < System
 			@update_timer = 0
 			@nearby_entities = []
 
-			entities = @mgr.get_all_entities_with(Position)
+			entities = @mgr.entities_with(Position)
 			entities.each do |entity|
 
-				pos = @mgr.get_component(entity, Position)
-				player_pos = @mgr.get_component(@player, Position)
+				pos = @mgr.comp(entity, Position)
+				player_pos = @mgr.comp(@player, Position)
 
 				if (pos.x - player_pos.x).abs < 20 &&
 					 (pos.y - player_pos.y).abs < 18
@@ -99,12 +99,12 @@ class RenderSystem < System
 
 		end
 
-		entities = @mgr.get_all_entities_with(Velocity)
+		entities = @mgr.entities_with(Velocity)
 		entities.each do |entity|
 
-			anim = @mgr.get_component(entity, Animation)
-			vel = @mgr.get_component(entity, Velocity)
-			col = @mgr.get_component(entity, Collision)
+			anim = @mgr.comp(entity, Animation)
+			vel = @mgr.comp(entity, Velocity)
+			col = @mgr.comp(entity, Collision)
 
 			anim.state_time += C::BOX_STEP
 
@@ -129,10 +129,10 @@ class RenderSystem < System
 
 		@nearby_entities.each do |entity|
 
-			pos = @mgr.get_component(entity, Position)
-			rot = @mgr.get_component(entity, Rotation)
-			size = @mgr.get_component(entity, Size)
-			render = @mgr.get_component(entity, Render)
+			pos = @mgr.comp(entity, Position)
+			rot = @mgr.comp(entity, Rotation)
+			size = @mgr.comp(entity, Size)
+			render = @mgr.comp(entity, Render)
 
 			if render
 			
@@ -151,10 +151,10 @@ class RenderSystem < System
 
 		@nearby_entities.each do |entity|
 
-			pos = @mgr.get_component(entity, Position)
-			rot = @mgr.get_component(entity, Rotation)
-			size = @mgr.get_component(entity, Size)
-			anim = @mgr.get_component(entity, Animation)
+			pos = @mgr.comp(entity, Position)
+			rot = @mgr.comp(entity, Rotation)
+			size = @mgr.comp(entity, Size)
+			anim = @mgr.comp(entity, Animation)
 
 			if anim
 
@@ -171,9 +171,9 @@ class RenderSystem < System
 
 		end
 
-		anim = @mgr.get_component(@player, Animation)
-		pos = @mgr.get_component(@player, Position)
-		rot = @mgr.get_component(@player, Rotation)
+		anim = @mgr.comp(@player, Animation)
+		pos = @mgr.comp(@player, Position)
+		rot = @mgr.comp(@player, Rotation)
 
 		batch.draw(
 			anim.key_frame, 
