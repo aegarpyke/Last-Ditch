@@ -144,12 +144,13 @@ class MapSystem < System
 				size.width = render.width * C::WTB
 				size.height =render.height * C::WTB
 				item.weight = 0.5
-				item.base_value = 0.5
+				item.base_value = 0.04
 
 				@mgr.add_component(item_id, Type.new('canteen1'))
 				@mgr.add_component(item_id, Info.new(
 					'Canteen 1',
-					"This is a drinking canteen"))
+					"This is a canteen that can be used to carry "\
+					"non-corrosive liquids."))
 				
 			elsif check < 0.32
 
@@ -158,12 +159,13 @@ class MapSystem < System
 				size.width = render.width * C::WTB
 				size.height =render.height * C::WTB
 				item.weight = 1.1
-				item.base_value = 1.2
+				item.base_value = 0.08
 
 				@mgr.add_component(item_id, Type.new('canister1'))
 				@mgr.add_component(item_id, Info.new(
 					'Canister 1',
-					"A sealed container"))
+					"This canister can be used to store corrosive "\
+					"or toxix materials."))
 
 			elsif check < 0.56
 
@@ -172,12 +174,26 @@ class MapSystem < System
 				size.width = render.width * C::WTB
 				size.height = render.height * C::WTB
 				item.weight = 0.6
-				item.base_value = 100.0
+				item.base_value = 0.12
 
 				@mgr.add_component(item_id, Type.new('rations1'))
 				@mgr.add_component(item_id, Info.new(
 					'Rations 1',
-					"This is rations container"))
+					"This is one serving of prepared rations."))
+
+			elsif check < 0.69
+
+				render.region_name = 'handgun1'
+				render.region = @atlas.find_region('handgun1')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 0.6
+				item.base_value = 0.34
+
+				@mgr.add_component(item_id, Type.new('handgun1'))
+				@mgr.add_component(item_id, Info.new(
+					'Handgun 1',
+					"A basic handgun with limited sighting."))
 
 			elsif check < 0.88
 
@@ -186,12 +202,12 @@ class MapSystem < System
 				size.width = render.width * C::WTB
 				size.height = render.height * C::WTB
 				item.weight = 0.75
-				item.base_value = 0.3
+				item.base_value = 0.01
 
 				@mgr.add_component(item_id, Type.new('overgrowth1'))
 				@mgr.add_component(item_id, Info.new(
 					'Overgrowth 1',
-					"The root of some overgrowth"))
+					"The base root of some overgrowth."))
 
 				8.times do
 
@@ -212,17 +228,22 @@ class MapSystem < System
 					sub_size.width = sub_render.width * C::WTB
 					sub_size.height = sub_render.height * C::WTB
 
+
 					sub_quality, sub_dur = Random.rand(0.2..0.9), Random.rand(0.1..0.9)
 
 					@mgr.add_component(sub_item_id, Position.new(xx, yy))
 					@mgr.add_component(sub_item_id, Rotation.new(Random.rand(360)))
-					@mgr.add_component(sub_item_id, Item.new(sub_quality, sub_dur, 0.2, 0.1))
+					sub_item = @mgr.add_component(sub_item_id, Item.new(sub_quality, sub_dur, 0.2, 0.1))
 					@mgr.add_component(sub_item_id, sub_render)
 					@mgr.add_component(sub_item_id, sub_size)
 					@mgr.add_component(sub_item_id, Type.new('ruffage1'))
 					@mgr.add_component(sub_item_id, Info.new(
 						'Ruffage 1',
-						"Stray vines and roots"))
+						"These are stray twigs and leaves from some "\
+						"overgrowth."))
+
+					sub_item.weight = 0.1
+					sub_item.base_value = 0.001
 
 					@items << sub_item_id
 
@@ -235,12 +256,13 @@ class MapSystem < System
 				size.width = render.width * C::WTB
 				size.height =render.height * C::WTB
 				item.weight = 0.9
-				item.base_value = 0.6
+				item.base_value = 0.09
 
 				@mgr.add_component(item_id, Type.new('scrap1'))
 				@mgr.add_component(item_id, Info.new(
 					'Scrap 1',
-					"This is a piece of scrap material"))
+					"This is a piece of scrap material containing "\
+					"pieces of metal and plastic."))
 
 			end
 

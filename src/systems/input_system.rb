@@ -153,8 +153,17 @@ class InputSystem < System
 
 					else
 
-						vel = @mgr.comp(entity, Velocity)
-						vel.ang_spd = C::PLAYER_ROT_SPD
+						if @shift
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = 0.5 * C::PLAYER_ROT_SPD
+
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = C::PLAYER_ROT_SPD
+
+						end
 
 					end
 
@@ -167,8 +176,17 @@ class InputSystem < System
 
 					else
 
-						vel = @mgr.comp(entity, Velocity)
-						vel.ang_spd = -C::PLAYER_ROT_SPD
+						if @shift
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = -0.5 * C::PLAYER_ROT_SPD
+
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = -C::PLAYER_ROT_SPD
+
+						end
 
 					end
 

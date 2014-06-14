@@ -4,6 +4,8 @@ class UISystem < System
 	attr_accessor :base_selection, :base_no_exit
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
+ 
+	Image = com.badlogic.gdx.scenes.scene2d.ui.Image
 
 	def initialize(mgr, player, atlas)
 
@@ -20,10 +22,11 @@ class UISystem < System
 
 		if 1 == 0
 			
-			@main_table.debug
+			# @main_table.debug
 			@base_table.debug
 			@base_table_needs.debug
 			@base_table_slots.debug
+			@status_table_model.debug
 			@inv_window.debug
 			@actions_window.debug
 			@status_window.debug
@@ -153,16 +156,16 @@ class UISystem < System
 
 	def setup_main
 		
-		setup_actions
-		setup_equipment
-		setup_status
-		setup_inventory
-
 		@main_active = false
 		@main_update = true
 
 		@main_table = Table.new(@skin)
 		@main_table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
+		
+		setup_actions
+		setup_equipment
+		setup_status
+		setup_inventory
 
 		@main_table.add(@actions_button).width(90).height(14).colspan(2).padBottom(100).row
 		@main_table.add(@equip_button).width(90).height(14).padTop(24).padRight(340).padBottom(24).padRight(60)
@@ -228,42 +231,43 @@ class UISystem < System
 		@equip_window.set_size(250, 290)
 		@equip_window.movable = false
 		@equip_window.padTop(9)
+		
+		@equip_l_head_label = Label.new("Endex", @skin.get("equip", LabelStyle.java_class))
+		@equip_r_head_label = Label.new("Ear piece", @skin.get("equip", LabelStyle.java_class))
+		@equip_l_arm_label  = Label.new("Empty", @skin.get("equip", LabelStyle.java_class))
+		@equip_torso_label  = Label.new("Flak jacket", @skin.get("equip", LabelStyle.java_class))
+		@equip_r_arm_label  = Label.new("GPS Device", @skin.get("equip", LabelStyle.java_class))
+		@equip_l_hand_label = Label.new("Empty", @skin.get("equip", LabelStyle.java_class))
+		@equip_belt_label   = Label.new("Engineer's belt", @skin.get("equip", LabelStyle.java_class))
+		@equip_r_hand_label = Label.new("Handgun", @skin.get("equip", LabelStyle.java_class))
+		@equip_l_leg_label  = Label.new("Kneepads", @skin.get("equip", LabelStyle.java_class))
+		@equip_r_leg_label  = Label.new("Kneepads", @skin.get("equip", LabelStyle.java_class))
+		@equip_l_foot_label = Label.new("Athletic shoes", @skin.get("equip", LabelStyle.java_class))
+		@equip_r_foot_label = Label.new("Athletic shoes", @skin.get("equip", LabelStyle.java_class))
 
-		@equip_head = Image.new(@atlas.find_region('equip_head'))
-		@equip_l_arm = Image.new(@atlas.find_region('equip_arm'))
-		@equip_torso = Image.new(@atlas.find_region('equip_torso'))
-		r_arm_tex = TextureRegion.new(@atlas.find_region('equip_arm'))
-		r_arm_tex.flip(true, false)
-		@equip_r_arm = Image.new(r_arm_tex)
-		@equip_l_hand = Image.new(@atlas.find_region('equip_hand'))
-		@equip_belt = Image.new(@atlas.find_region('equip_belt'))
-		r_hand_tex = TextureRegion.new(@atlas.find_region('equip_hand'))
-		r_hand_tex.flip(true, false)
-		@equip_r_hand = Image.new(r_hand_tex)
-		@equip_l_leg = Image.new(@atlas.find_region('equip_leg'))
-		@equpi_leg_spacer = Image.new(@atlas.find_region('empty'))
-		r_leg_tex = TextureRegion.new(@atlas.find_region('equip_leg'))
-		r_leg_tex.flip(true, false)
-		@equip_r_leg = Image.new(r_leg_tex)
-		@equip_l_foot = Image.new(@atlas.find_region('equip_foot'))
-		@equip_foot_spacer = Image.new(@atlas.find_region('empty'))
-		r_foot_tex = TextureRegion.new(@atlas.find_region('equip_foot'))
-		r_foot_tex.flip(true, false)
-		@equip_r_foot = Image.new(r_foot_tex)
+		@equip_desc = Label.new(
+			"This is a description of whatever it is that needs to "\
+			"be described. The act of describing something worth a "\
+			"description is a worthwhile act, and therefore this act "\
+			"also merits a description. This description is that description.",
+			@skin.get("equip", LabelStyle.java_class))
+		@equip_desc.wrap = true
 
-		@equip_window.add(@equip_head).colspan(3).row
-		@equip_window.add(@equip_l_arm)
-		@equip_window.add(@equip_torso)
-		@equip_window.add(@equip_r_arm).row
-		@equip_window.add(@equip_l_hand)
-		@equip_window.add(@equip_belt)
-		@equip_window.add(@equip_r_hand).row
-		@equip_window.add(@equip_l_leg)
-		@equip_window.add(@equpi_leg_spacer)
-		@equip_window.add(@equip_r_leg).row
-		@equip_window.add(@equip_l_foot)
-		@equip_window.add(@equip_foot_spacer)
-		@equip_window.add(@equip_r_foot).row
+		@equip_label_size = 120
+
+		@equip_window.add(@equip_l_head_label).width(@equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_head_label).width(@equip_label_size).row
+		@equip_window.add(@equip_l_arm_label).width(@equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_arm_label).width(@equip_label_size).row
+		@equip_window.add(@equip_torso_label).width(@equip_label_size).row
+		@equip_window.add(@equip_l_hand_label).width(@equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_hand_label).width(@equip_label_size).row
+		@equip_window.add(@equip_belt_label).width(@equip_label_size).row
+		@equip_window.add(@equip_l_leg_label).width(@equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_leg_label).width(@equip_label_size).row
+		@equip_window.add(@equip_l_foot_label).width(@equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_foot_label).width(@equip_label_size).row
+		@equip_window.add(@equip_desc).colspan(3).width(240)
 
 	end
 
@@ -295,12 +299,69 @@ class UISystem < System
 		@status_window.movable = false
 		@status_window.padTop(9)
 
+		@status_table_model = Table.new(@skin)
+
 		info = @mgr.comp(@player, Info)
 
-		@status_name = Label.new("Name: %s" % info.name, @skin.get("inv_slot", LabelStyle.java_class))
-		@status_window.add(@status_name).align(Align::left).height(14).row
-		@status_occupation = Label.new("Unemployed", @skin.get("inv_slot", LabelStyle.java_class))
-		@status_window.add(@status_occupation).align(Align::left).height(11).row
+		r_head_tex = TextureRegion.new(@atlas.find_region('status_head'))
+		r_head_tex.flip(true, false)
+		r_arm_tex = TextureRegion.new(@atlas.find_region('status_arm'))
+		r_arm_tex.flip(true, false)
+		r_hand_tex = TextureRegion.new(@atlas.find_region('status_hand'))
+		r_hand_tex.flip(true, false)
+		r_leg_tex = TextureRegion.new(@atlas.find_region('status_leg'))
+		r_leg_tex.flip(true, false)
+		r_foot_tex = TextureRegion.new(@atlas.find_region('status_foot'))
+		r_foot_tex.flip(true, false)
+
+		@status_name = Label.new(
+			"Name: %s" % info.name, 
+			@skin.get("status", LabelStyle.java_class))
+		@status_occupation = Label.new(
+			"Occupation: %s" % info.occupation, 
+			@skin.get("status", LabelStyle.java_class))
+
+		@status_l_head      = Image.new(@atlas.find_region('status_head'))
+		@status_r_head      = Image.new(r_head_tex)
+		@status_l_arm       = Image.new(@atlas.find_region('status_arm'))
+		@status_torso       = Image.new(@atlas.find_region('status_torso'))
+		@status_r_arm       = Image.new(r_arm_tex)
+		@status_l_hand      = Image.new(@atlas.find_region('status_hand'))
+		@status_r_hand      = Image.new(r_hand_tex)
+		@status_l_leg       = Image.new(@atlas.find_region('status_leg'))
+		@status_r_leg       = Image.new(r_leg_tex)
+		@status_l_foot      = Image.new(@atlas.find_region('status_foot'))
+		@status_r_foot      = Image.new(r_foot_tex)
+
+		@status_add_info = Label.new(
+			"Additional Info\n"\
+			"Additional Info\n"\
+			"Additional Info\n"\
+			"Additional Info\n"\
+			"Additional Info",
+			@skin.get("status", LabelStyle.java_class))
+		@status_add_info.wrap = true
+
+		@status_window.add(@status_name).width(246).height(14).padLeft(4).colspan(4).align(Align::left).row
+		@status_window.add(@status_occupation).height(11).colspan(4).padLeft(4).padBottom(12).align(Align::left).row
+		
+		@status_table_model.add(@status_l_head).width(13).height(34).padLeft(39).padBottom(3).colspan(2)
+		@status_table_model.add(@status_r_head).width(13).height(34).padRight(39).padBottom(3).colspan(2).row
+		@status_table_model.add(@status_l_arm).width(28).height(51).padRight(-7).padLeft(0).padTop(0).colspan(1)
+		@status_table_model.add(@status_torso).width(39).height(47).padTop(-2).colspan(2)
+		@status_table_model.add(@status_r_arm).width(28).height(51).padRight(0).padLeft(-7).padTop(0).colspan(1).row
+		@status_table_model.add(@status_l_hand).width(14).height(14).padRight(14).padTop(-5).padBottom(28).colspan(1)
+		@status_table_model.add(@status_l_leg).width(24).height(47).padRight(0).padTop(-2).colspan(1)
+		@status_table_model.add(@status_r_leg).width(24).height(47).padLeft(0).padTop(-2).colspan(1)
+		@status_table_model.add(@status_r_hand).width(14).height(14).padLeft(14).padTop(-5).padBottom(28).colspan(1).row
+		@status_table_model.add(@status_l_foot).width(24).height(13).colspan(2).padTop(2).padLeft(19).padRight(7)
+		@status_table_model.add(@status_r_foot).width(24).height(13).colspan(2).padTop(2).padLeft(7).padRight(19).row
+
+		@status_window.add(@status_table_model).width(117).height(140).padLeft(4).align(Align::left).row
+		@status_window.add(@status_add_info).width(246).padTop(8).padLeft(4)
+
+		@status_l_head.color = Color.new(0.93, 0.74, 0.65, 1.0)
+		@status_r_head.color = Color.new(0.75, 0.64, 0.89, 1.0)
 
 	end
 
@@ -334,31 +395,25 @@ class UISystem < System
 		@inv_window.movable = false
 		@inv_window.padTop(9)
 
-		@inv_item_name = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_name = Label.new("", @skin.get("inv", LabelStyle.java_class))
 		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padTop(4).height(12)
 		
-		@inv_item_value = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_value = Label.new("", @skin.get("inv", LabelStyle.java_class))
 		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
 		@inv_window.add(@inv_item_value).colspan(4).align(Align::right).padTop(4).height(14).row
 
-		@inv_item_weight = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_weight = Label.new("", @skin.get("inv", LabelStyle.java_class))
 		@inv_item_weight.color = Color.new(0.75, 0.75, 0.89, 1.0)
 		@inv_window.add(@inv_item_weight).colspan(4).align(Align::left).height(14).padTop(1)
 
-		@inv_item_quality_dur = Label.new("", @skin.get("inv_slot", LabelStyle.java_class))
+		@inv_item_quality_dur = Label.new("", @skin.get("inv", LabelStyle.java_class))
 		@inv_item_quality_dur.color = Color.new(0.8, 0.8, 0.8, 1.0)
 		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).padTop(1).height(12).row
 
-		@inv_desc = ""
-
-		@inv_item_desc1 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_desc1).align(Align::left).padLeft(8).padTop(6).colspan(8).height(12).row
-		@inv_item_desc2 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_desc2).align(Align::left).padLeft(5).colspan(8).height(12).row
-		@inv_item_desc3 = Label.new('', @skin.get("inv_slot", LabelStyle.java_class))
-		@inv_window.add(@inv_item_desc3).align(Align::left).padLeft(5).colspan(8).height(12).row
-
-		set_inv_desc(@inv_desc)
+		@inv_item_desc = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_desc.alignment = Align::top | Align::left
+		@inv_item_desc.wrap = true
+		@inv_window.add(@inv_item_desc).colspan(8).width(260).height(40).row
 
 		@inv_slots = []
 		for i in 1..C::INVENTORY_SLOTS
@@ -486,15 +541,7 @@ class UISystem < System
 
 	def set_inv_desc(desc)
 
-		@inv_desc_lines = desc.scan(/.{1,46}\b|.{1,46}/).map(&:strip)
-
-		while @inv_desc_lines.size < 3
-			@inv_desc_lines << ""
-		end
-
-		@inv_item_desc1.text = @inv_desc_lines[0]
-		@inv_item_desc2.text = @inv_desc_lines[1]
-		@inv_item_desc3.text = @inv_desc_lines[2]
+		@inv_item_desc.text = desc
 
 	end
 

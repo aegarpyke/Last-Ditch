@@ -22,15 +22,32 @@
     		font: default-font, fontColor: white 
     	},
 
-    	inv_slot:
-    	{
-    		font: garuda12, fontColor: white
-    	},
-
     	base_ui:
     	{
     		font: garuda12, fontColor: white
     	},
+
+    	equip:
+    	{
+    		font: garuda12, fontColor: white
+    	},
+
+    	status:
+    	{
+    		font: garuda12, fontColor: white
+    	},
+
+    	inv:
+    	{
+    		font: garuda12, fontColor: white
+    	},
+
+    	actions:
+    	{
+    		font: garuda12, fontColor: white
+    	},
+
+    	
 	},
 
 	com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle:

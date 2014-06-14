@@ -33,9 +33,11 @@ class LastDitch < ApplicationAdapter
 	                       "player_walk1-f", 
 	                       "player_walk2-f", 
 	                       "player_walk1-f"]}))
-		@mgr.add_component(@player, Info.new(
+		player_info = @mgr.add_component(@player, Info.new(
 			'Kadijah',
 			'This is the player'))
+		player_info.occupation = 'Unemployed'
+
 
 		@droid = @mgr.create_tagged_entity('droid 1')
 		@mgr.add_component(@droid, Position.new(42, 42))
