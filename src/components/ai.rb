@@ -7,7 +7,6 @@ class AI < Component
 		super()
 		@type = type
 
-
 	end
 
 

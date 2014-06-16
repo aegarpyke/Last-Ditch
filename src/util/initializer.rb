@@ -39,6 +39,7 @@ java_import com.badlogic.gdx.physics.box2d.BodyDef::BodyType
 java_import com.badlogic.gdx.physics.box2d.PolygonShape
 java_import com.badlogic.gdx.physics.box2d.CircleShape
 java_import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer
+java_import com.badlogic.gdx.physics.box2d.RayCastCallback
 java_import com.badlogic.gdx.scenes.scene2d.InputListener
 java_import com.badlogic.gdx.scenes.scene2d.InputEvent
 java_import com.badlogic.gdx.scenes.scene2d.Stage
@@ -72,6 +73,7 @@ java_import 'box2dLight.DirectionalLight'
 require_relative 'c'
 require_relative 'user_adapter'
 require_relative 'entity_manager'
+require_relative 'ray_cast_callback_impl'
 require_relative '../systems/system'
 require_relative '../systems/time_system'
 require_relative '../systems/input_system'
@@ -85,6 +87,7 @@ require_relative '../systems/inventory_system'
 require_relative '../systems/equipment_system'
 require_relative '../systems/status_system'
 require_relative '../systems/ai_system'
+require_relative '../systems/sound_system'
 require_relative '../components/component'
 require_relative '../components/info'
 require_relative '../components/type'

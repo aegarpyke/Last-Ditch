@@ -128,9 +128,9 @@ class MapSystem < System
 
 			item_id = @mgr.create_basic_entity
 
-			dur, quality = Random.rand(0.2..1.0), Random.rand(0.1..0.9)
+			condition, quality = Random.rand(0.2..1.0), Random.rand(0.1..0.9)
 
-			item = @mgr.add_component(item_id, Item.new(quality, dur))
+			item = @mgr.add_component(item_id, Item.new(quality, condition))
 			render = @mgr.add_component(item_id, Render.new(''))
 			size = @mgr.add_component(item_id, Size.new(0, 0))
 			@mgr.add_component(item_id, Position.new(x, y))
@@ -139,46 +139,60 @@ class MapSystem < System
 			check = Random.rand
 			if check < 0.23
 				
-				render.region_name = 'canteen1'
-				render.region = @atlas.find_region('canteen1')
+				render.region_name = 'canteen1_empty'
+				render.region = @atlas.find_region('canteen1_empty')
 				size.width = render.width * C::WTB
 				size.height =render.height * C::WTB
 				item.weight = 0.5
-				item.base_value = 0.04
+				item.base_value = 0.03
 
-				@mgr.add_component(item_id, Type.new('canteen1'))
+				@mgr.add_component(item_id, Type.new('canteen1_empty'))
 				@mgr.add_component(item_id, Info.new(
-					'Canteen 1',
-					"This is a canteen that can be used to carry "\
+					'Canteen, empty',
+					"This is an empty canteen that can be used to carry "\
 					"non-corrosive liquids."))
 				
 			elsif check < 0.32
 
-				render.region_name = 'canister1'
-				render.region = @atlas.find_region('canister1')
+				render.region_name = 'canister1_waste'
+				render.region = @atlas.find_region('canister1_waste')
 				size.width = render.width * C::WTB
 				size.height =render.height * C::WTB
 				item.weight = 1.1
 				item.base_value = 0.08
 
-				@mgr.add_component(item_id, Type.new('canister1'))
+				@mgr.add_component(item_id, Type.new('canister1_waste'))
 				@mgr.add_component(item_id, Info.new(
-					'Canister 1',
+					'Canister, waste',
 					"This canister can be used to store corrosive "\
 					"or toxix materials."))
 
+			elsif check < 0.42
+
+				render.region_name = 'canteen1_water'
+				render.region = @atlas.find_region('canteen1_water')
+				size.width = render.width * C::WTB
+				size.height =render.height * C::WTB
+				item.weight = 1.1
+				item.base_value = 0.08
+
+				@mgr.add_component(item_id, Type.new('canteen1_water'))
+				@mgr.add_component(item_id, Info.new(
+					'Canteen, water',
+					"This is a canteen filled with clean drinking water."))
+
 			elsif check < 0.56
 
-				render.region_name = 'rations1'
-				render.region = @atlas.find_region('rations1')
+				render.region_name = 'rations1_empty'
+				render.region = @atlas.find_region('rations1_empty')
 				size.width = render.width * C::WTB
 				size.height = render.height * C::WTB
 				item.weight = 0.6
 				item.base_value = 0.12
 
-				@mgr.add_component(item_id, Type.new('rations1'))
+				@mgr.add_component(item_id, Type.new('rations1_empty'))
 				@mgr.add_component(item_id, Info.new(
-					'Rations 1',
+					'Rations, empty',
 					"This is one serving of prepared rations."))
 
 			elsif check < 0.69
@@ -260,7 +274,7 @@ class MapSystem < System
 
 				@mgr.add_component(item_id, Type.new('scrap1'))
 				@mgr.add_component(item_id, Info.new(
-					'Scrap 1',
+					'Scrap',
 					"This is a piece of scrap material containing "\
 					"pieces of metal and plastic."))
 

@@ -25,10 +25,11 @@ class InputSystem < System
 
 						if @mgr.ui.main_active
 
+							use_item(entity)
+
 						else
 
 							pickup_item(entity)
-							
 
 						end
 
@@ -59,7 +60,9 @@ class InputSystem < System
 					elsif @mgr.ui.main_active
 
 						if @mgr.ui.inv_selection
+
 							drop_item(entity)
+						
 						end
 						
 					end
@@ -253,6 +256,21 @@ class InputSystem < System
 		end
 
 		true
+
+	end
+
+
+	def use_item(entity)
+
+		inv = @mgr.comp(@player, Inventory)
+
+		index = @ui.inv_slots.index(@mgr.ui.inv_selection)
+		item = inv.items[index]
+
+		type = @mgr.comp(item, Type)
+
+		puts type.type
+		puts "String"
 
 	end
 

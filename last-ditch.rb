@@ -74,6 +74,7 @@ class LastDitch < ApplicationAdapter
 		@ai        = AISystem.new(@mgr)
 		@render    = RenderSystem.new(@mgr, @player, @atlas)
 		@physics   = PhysicsSystem.new(@mgr, @player, @map)
+		@sound     = SoundSystem.new(@mgr, @map, @render, @physics.world)
 		@lighting  = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
 		@mgr.map       = @map
@@ -129,7 +130,7 @@ class LastDitch < ApplicationAdapter
 		end
 		
 		@physics.world.clear_forces
-		@physics.interpolate(alpha)
+		# @physics.interpolate(alpha)
 
 		@map.update
 		@ui.update

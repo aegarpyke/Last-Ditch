@@ -5,8 +5,6 @@ class UISystem < System
 	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
 	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
  
-	Image = com.badlogic.gdx.scenes.scene2d.ui.Image
-
 	def initialize(mgr, player, atlas)
 
 		super()
@@ -167,34 +165,12 @@ class UISystem < System
 		setup_status
 		setup_inventory
 
-		@main_table.add(@actions_button).width(90).height(14).colspan(2).padBottom(100).row
-		@main_table.add(@equip_button).width(90).height(14).padTop(24).padRight(340).padBottom(24).padRight(60)
-		@main_table.add(@status_button).width(90).height(14).padTop(24).padLeft(340).padBottom(24).row
-		@main_table.add(@inv_button).width(90).height(14).padTop(100).colspan(2)
-
 	end
 
 
 	def setup_actions
 
 		@actions_active = false
-		@actions_button = TextButton.new("Actions", @skin.get(TextButtonStyle.java_class))
-		@actions_button.add_listener(
-
-			Class.new(ClickListener) do
-
-				def initialize(mgr, ui)
-					super()
-					@ui = ui
-					@mgr = mgr
-				end
-
-				def clicked(event, x, y)
-					@ui.actions_update = true
-					@ui.actions_active = !@ui.actions_active
-				end
-
-			end.new(@mgr, self))
 
 		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
 		@actions_window.set_position(128, 352)
@@ -208,23 +184,6 @@ class UISystem < System
 	def setup_equipment
 
 		@equip_active = false
-		@equip_button = TextButton.new("Equipment", @skin.get(TextButtonStyle.java_class))
-		@equip_button.add_listener(
-
-			Class.new(ClickListener) do
-			
-				def initialize(mgr, ui)
-					super()
-					@ui = ui
-					@mgr = mgr
-				end
-
-				def clicked(event, x, y)
-					@ui.equip_update = true
-					@ui.equip_active = !@ui.equip_active
-				end
-		
-			end.new(@mgr, self))
 
 		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
 		@equip_window.set_position(0, 44)
@@ -275,23 +234,6 @@ class UISystem < System
 	def setup_status
 
 		@status_active = false
-		@status_button = TextButton.new("Status", @skin.get(TextButtonStyle.java_class))
-		@status_button.add_listener(
-
-			Class.new(ClickListener) do
-			
-				def initialize(mgr, ui)
-					super()
-					@ui = ui
-					@mgr = mgr
-				end
-
-				def clicked(event, x, y)
-					@ui.status_update = true
-					@ui.status_active = !@ui.status_active
-				end
-
-			end.new(@mgr, self))
 
 		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
 		@status_window.set_position(560, 44)
@@ -354,14 +296,23 @@ class UISystem < System
 		@status_table_model.add(@status_l_leg).width(24).height(47).padRight(0).padTop(-2).colspan(1)
 		@status_table_model.add(@status_r_leg).width(24).height(47).padLeft(0).padTop(-2).colspan(1)
 		@status_table_model.add(@status_r_hand).width(14).height(14).padLeft(14).padTop(-5).padBottom(28).colspan(1).row
-		@status_table_model.add(@status_l_foot).width(24).height(13).colspan(2).padTop(2).padLeft(19).padRight(7)
-		@status_table_model.add(@status_r_foot).width(24).height(13).colspan(2).padTop(2).padLeft(7).padRight(19).row
+		@status_table_model.add(@status_l_foot).width(24).height(13).colspan(2).padTop(2).padLeft(18).padRight(7)
+		@status_table_model.add(@status_r_foot).width(24).height(13).colspan(2).padTop(2).padLeft(7).padRight(18).row
 
 		@status_window.add(@status_table_model).width(117).height(140).padLeft(4).align(Align::left).row
 		@status_window.add(@status_add_info).width(246).padTop(8).padLeft(4)
 
-		@status_l_head.color = Color.new(0.93, 0.74, 0.65, 1.0)
-		@status_r_head.color = Color.new(0.75, 0.64, 0.89, 1.0)
+		@status_l_head.color = Color.new(1.00, 0.00, 0.00, 1.0)
+		@status_r_head.color = Color.new(0.74, 0.13, 0.13, 1.0)
+		@status_l_arm.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_torso.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_r_arm.color = Color.new(0.50, 0.25, 0.25, 1.0)
+		@status_l_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_l_leg.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_r_leg.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_r_hand.color = Color.new(0.24, 0.38, 0.38, 1.0)
+		@status_l_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_r_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
 
 	end
 
@@ -370,24 +321,6 @@ class UISystem < System
 
 		@inv_active = false
 		@inv_no_exit = false
-
-		@inv_button = TextButton.new("Inventory", @skin.get(TextButtonStyle.java_class))
-		@inv_listener = @inv_button.add_listener(
-
-			Class.new(ClickListener) do
-			
-				def initialize(mgr, ui)
-					super()
-					@ui = ui
-					@mgr = mgr
-				end
-
-				def clicked(event, x, y)
-					@ui.inv_update = true
-					@ui.inv_active = !@ui.inv_active
-				end
-
-			end.new(@mgr, self))
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
 		@inv_window.set_position(268, 2)
@@ -413,7 +346,7 @@ class UISystem < System
 		@inv_item_desc = Label.new("", @skin.get("inv", LabelStyle.java_class))
 		@inv_item_desc.alignment = Align::top | Align::left
 		@inv_item_desc.wrap = true
-		@inv_window.add(@inv_item_desc).colspan(8).width(260).height(40).row
+		@inv_window.add(@inv_item_desc).colspan(8).width(260).height(62).row
 
 		@inv_slots = []
 		for i in 1..C::INVENTORY_SLOTS
@@ -476,12 +409,7 @@ class UISystem < System
 
 						@mgr.ui.inv_no_exit = true
 
-						inv = @mgr.comp(@ui.player, Inventory)
-
-						index = @ui.inv_slots.index(@slot)
-						item = inv.items[index]
-
-						type = @mgr.comp(item, Type)
+						
 
 						true
 						
@@ -504,7 +432,7 @@ class UISystem < System
 	def set_inv_qual_cond(quality, condition)
 		
 		unless quality == -1 && condition == -1
-			@inv_item_quality_dur.text = "Qual-%d Cond-%d" % [(quality * 100).to_i, (condition * 100).to_i]
+			@inv_item_quality_dur.text = "Q-%d C-%d" % [(quality * 100).to_i, (condition * 100).to_i]
 		else
 			@inv_item_quality_dur.text = ""
 		end
