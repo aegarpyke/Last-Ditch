@@ -133,7 +133,7 @@ class UISystem < System
 
 					def clicked(event, x, y)
 
-						true
+						@mgr.ui.base_no_exit = true
 
 					end
 
@@ -170,7 +170,7 @@ class UISystem < System
 
 	def setup_actions
 
-		@actions_active = false
+		@actions_active = true
 
 		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
 		@actions_window.set_position(128, 352)
@@ -183,7 +183,7 @@ class UISystem < System
 
 	def setup_equipment
 
-		@equip_active = false
+		@equip_active = true
 
 		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
 		@equip_window.set_position(0, 44)
@@ -233,7 +233,7 @@ class UISystem < System
 
 	def setup_status
 
-		@status_active = false
+		@status_active = true
 
 		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
 		@status_window.set_position(560, 44)
@@ -304,12 +304,12 @@ class UISystem < System
 
 		@status_l_head.color = Color.new(1.00, 0.00, 0.00, 1.0)
 		@status_r_head.color = Color.new(0.74, 0.13, 0.13, 1.0)
-		@status_l_arm.color = Color.new(1.00, 1.00, 1.00, 1.0)
-		@status_torso.color = Color.new(1.00, 1.00, 1.00, 1.0)
-		@status_r_arm.color = Color.new(0.50, 0.25, 0.25, 1.0)
+		@status_l_arm.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_torso.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_r_arm.color  = Color.new(0.50, 0.25, 0.25, 1.0)
 		@status_l_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
-		@status_l_leg.color = Color.new(1.00, 1.00, 1.00, 1.0)
-		@status_r_leg.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_l_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_r_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
 		@status_r_hand.color = Color.new(0.24, 0.38, 0.38, 1.0)
 		@status_l_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
 		@status_r_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
@@ -319,7 +319,7 @@ class UISystem < System
 
 	def setup_inventory
 
-		@inv_active = false
+		@inv_active = true
 		@inv_no_exit = false
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
@@ -356,13 +356,14 @@ class UISystem < System
 
 				Class.new(ClickListener) do
 				
-					def initialize(mgr, slot, atlas, ui)
+					def initialize(mgr, slot, atlas, player, ui)
 
 						super()
 						@ui = ui
 						@mgr = mgr
 						@slot = slot
 						@atlas = atlas
+						@player = player
 					
 					end
 
@@ -400,22 +401,15 @@ class UISystem < System
 
 					end
 
-					def touchUp(event, x, y, pointer, button)
-						
-					end
-
 
 					def clicked(event, x, y)
 
 						@mgr.ui.inv_no_exit = true
+						@ui.use_item(@player)
 
-						
-
-						true
-						
 					end
 
-				end.new(@mgr, @inv_slots.last, @atlas, self))
+				end.new(@mgr, @inv_slots.last, @atlas, @player, self))
 
 			if i % 8 == 0
 				@inv_window.add(@inv_slots.last).pad(0).row
@@ -425,6 +419,35 @@ class UISystem < System
 
 		end
 
+
+	end
+
+
+	def use_item(entity)
+
+		if @inv_selection
+
+			inv = @mgr.comp(@player, Inventory)
+
+			index = @inv_slots.index(@inv_selection)
+
+			if item_id = inv.items[index]
+				
+				item = @mgr.comp(item_id, Item)
+				type = @mgr.comp(item_id, Type)
+				info = @mgr.comp(item_id, Info)
+
+				puts item.usable
+				puts "-"
+				puts info.name
+
+				return true
+
+			end
+		
+		end
+
+		false
 
 	end
 

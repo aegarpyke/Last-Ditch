@@ -142,7 +142,7 @@ class MapSystem < System
 				render.region_name = 'canteen1_empty'
 				render.region = @atlas.find_region('canteen1_empty')
 				size.width = render.width * C::WTB
-				size.height =render.height * C::WTB
+				size.height = render.height * C::WTB
 				item.weight = 0.5
 				item.base_value = 0.03
 
@@ -154,18 +154,18 @@ class MapSystem < System
 				
 			elsif check < 0.32
 
-				render.region_name = 'canister1_waste'
-				render.region = @atlas.find_region('canister1_waste')
+				render.region_name = 'rations1'
+				render.region = @atlas.find_region('rations1')
 				size.width = render.width * C::WTB
 				size.height =render.height * C::WTB
-				item.weight = 1.1
-				item.base_value = 0.08
+				item.weight = 0.7
+				item.base_value = 0.12
+				item.usable = true
 
-				@mgr.add_component(item_id, Type.new('canister1_waste'))
+				@mgr.add_component(item_id, Type.new('rations1'))
 				@mgr.add_component(item_id, Info.new(
-					'Canister, waste',
-					"This canister can be used to store corrosive "\
-					"or toxix materials."))
+					'Rations',
+					"A basic set of rations."))
 
 			elsif check < 0.42
 
@@ -175,6 +175,7 @@ class MapSystem < System
 				size.height =render.height * C::WTB
 				item.weight = 1.1
 				item.base_value = 0.08
+				item.usable = true
 
 				@mgr.add_component(item_id, Type.new('canteen1_water'))
 				@mgr.add_component(item_id, Info.new(

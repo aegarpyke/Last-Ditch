@@ -21,34 +21,32 @@ class InputSystem < System
 
 				when 0
 
-					if !@shift
+					if @shift
 
 						if @mgr.ui.main_active
 
-							use_item(entity)
+						else
+
+							pickup_item_at(entity, screenX, screenY) or
+							use_door_at(entity, screenX, screenY)
+							
+						end
+
+					else
+
+						if @mgr.ui.base_active
+							@mgr.ui.base_no_exit = true
+						else
+
+						end
+
+						if @mgr.ui.main_active
+
 
 						else
 
 							pickup_item(entity)
 
-						end
-
-					else
-
-						if @mgr.ui.main_active
-
-						else
-
-							check = pickup_item_at(entity, screenX, screenY)
-							
-							if !check
-								check = use_door_at(entity, screenX, screenY)
-							end
-
-							if !check
-								# Use workstation
-							end
-							
 						end
 
 					end
@@ -57,20 +55,27 @@ class InputSystem < System
 
 					if @shift
 
-					elsif @mgr.ui.main_active
+					else
 
-						if @mgr.ui.inv_selection
+						if @mgr.ui.base_active
+							@mgr.ui.base_no_exit = true
+						else
 
-							drop_item(entity)
-						
 						end
-						
+
+						if @mgr.ui.main_active
+
+							@mgr.ui.inv_no_exit = true
+							drop_item(entity)
+								
+						end
+
 					end
 
 			end
 
 		end
-		
+
 		true
 
 	end
@@ -88,7 +93,9 @@ class InputSystem < System
 					if @shift
 
 					else
+
 						use_door(entity)
+
 					end
 
 				when Keys::C
@@ -221,14 +228,6 @@ class InputSystem < System
 
 			case keycode
 
-				when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
-					
-					@ctrl = false
-				
-				when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
-					
-					@shift = false
-
 				when Keys::W, Keys::S, Keys::UP, Keys::DOWN
 
 					if @mgr.ui.main_active
@@ -251,6 +250,14 @@ class InputSystem < System
 
 					end
 
+				when Keys::CONTROL_LEFT, Keys::CONTROL_RIGHT
+					
+					@ctrl = false
+				
+				when Keys::SHIFT_LEFT, Keys::SHIFT_RIGHT
+					
+					@shift = false
+
 			end
 
 		end
@@ -259,20 +266,6 @@ class InputSystem < System
 
 	end
 
-
-	def use_item(entity)
-
-		inv = @mgr.comp(@player, Inventory)
-
-		index = @ui.inv_slots.index(@mgr.ui.inv_selection)
-		item = inv.items[index]
-
-		type = @mgr.comp(item, Type)
-
-		puts type.type
-		puts "String"
-
-	end
 
 
 	def pickup_item(entity)
@@ -288,8 +281,12 @@ class InputSystem < System
 			inv.weight += item.weight 
 			@mgr.ui.prev_selection = nil
 			@mgr.map.remove_item(item_id)
+
+			return true
 		
 		end
+
+		false
 
 	end
 
@@ -312,7 +309,11 @@ class InputSystem < System
 			@mgr.ui.prev_selection = nil
 			@mgr.map.remove_item(item_id)
 
+			return true
+
 		end
+
+		false
 
 	end
 
@@ -323,40 +324,48 @@ class InputSystem < System
 		inv = @mgr.comp(entity, Inventory)
 		rot = @mgr.comp(entity, Rotation)
 
-		index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection)
-		item_id = inv.items[index]
+		if @mgr.ui.inv_selection
 
-		if item_id
+			index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection)
+			item_id = inv.items[index]
 
-			item_type = @mgr.comp(item_id, Type)
+			if item_id
 
-			item_pos = Position.new(
-				pos.x + rot.x, 
-				pos.y + rot.y)
+				item_type = @mgr.comp(item_id, Type)
 
-			item_render = Render.new(
-				item_type.type,
-				@mgr.atlas.find_region(item_type.type))
+				item_pos = Position.new(
+					pos.x + rot.x, 
+					pos.y + rot.y)
 
-			item_rot = @mgr.comp(item_id, Rotation)
-			item_rot.angle = rot.angle - 90
+				item_render = Render.new(
+					item_type.type,
+					@mgr.atlas.find_region(item_type.type))
 
-			@mgr.add_component(item_id, item_pos)
-			@mgr.add_component(item_id, item_render)
+				item_rot = @mgr.comp(item_id, Rotation)
+				item_rot.angle = rot.angle - 90
 
-			@mgr.map.items << item_id
-			item = @mgr.comp(item_id, Item)
-			inv.weight -= item.weight 
-			inv.remove_item(item_id)
-			@mgr.render.nearby_entities << item_id
-			@mgr.ui.set_inv_name("")
-			@mgr.ui.set_inv_desc("")
-			@mgr.ui.set_inv_qual_cond(-1, -1)
-			@mgr.ui.set_inv_value(-1)
-			@mgr.ui.set_inv_weight(-1)
-			@mgr.inventory.update_slots = true
+				@mgr.add_component(item_id, item_pos)
+				@mgr.add_component(item_id, item_render)
+
+				@mgr.map.items << item_id
+				item = @mgr.comp(item_id, Item)
+				inv.weight -= item.weight 
+				inv.remove_item(item_id)
+				@mgr.render.nearby_entities << item_id
+				@mgr.ui.set_inv_name("")
+				@mgr.ui.set_inv_desc("")
+				@mgr.ui.set_inv_qual_cond(-1, -1)
+				@mgr.ui.set_inv_value(-1)
+				@mgr.ui.set_inv_weight(-1)
+				@mgr.inventory.update_slots = true
+
+				return true
+
+			end
 
 		end
+
+		false
 
 	end
 
@@ -377,9 +386,13 @@ class InputSystem < System
 				door.open = !door.open
 				@mgr.map.change_door(door_id, door.open)
 
+				return true
+
 			end
 		
 		end
+
+		false
 
 	end
 
@@ -401,7 +414,11 @@ class InputSystem < System
 			door.open = !door.open
 			@mgr.map.change_door(door, door.open)
 
+			return true
+
 		end
+
+		false
 
 	end
 
