@@ -279,7 +279,7 @@ class InputSystem < System
 
 			item = @mgr.comp(item_id, Item)
 			inv.weight += item.weight 
-			@mgr.ui.prev_selection = nil
+			@mgr.ui.inv_prev_selection = nil
 			@mgr.map.remove_item(item_id)
 
 			return true
@@ -306,7 +306,7 @@ class InputSystem < System
 
 			item = @mgr.comp(item_id, Item)
 			inv.weight += item.weight
-			@mgr.ui.prev_selection = nil
+			@mgr.ui.inv_prev_selection = nil
 			@mgr.map.remove_item(item_id)
 
 			return true

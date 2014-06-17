@@ -1,14 +1,14 @@
 class Info < Component
 
-	attr_accessor :name, :occupation, :description
+	attr_accessor :name, :occupation, :desc
 
-	def initialize(name, description="", occupation="Unemployed")
+	def initialize(name, desc="", occupation="Unemployed")
 
 		super()
 
 		@name = name
 		@occupation = occupation
-		@description = description
+		@desc = desc
 
 	end
 

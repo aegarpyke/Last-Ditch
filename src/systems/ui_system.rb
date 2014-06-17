@@ -1,9 +1,11 @@
 class UISystem < System
 
-	attr_accessor :stage, :inv_slots, :player, :inv_selection, :prev_selection, :inv_no_exit
-	attr_accessor :base_selection, :base_no_exit
-	attr_accessor :base_active, :main_active, :inv_active, :actions_active, :equip_active, :status_active
-	attr_accessor :base_update, :main_update, :inv_update, :actions_update, :equip_update, :status_update
+	attr_accessor :player, :stage 
+	attr_accessor :main_active, :main_update
+	attr_accessor :base_active, :base_update, :base_selection, :base_no_exit
+	attr_accessor :inv_active, :inv_update, :inv_selection, :inv_prev_selection, :inv_slots, :inv_no_exit
+	attr_accessor :actions_active, :equip_active, :status_active
+	attr_accessor :actions_update, :equip_update, :status_update
  
 	def initialize(mgr, player, atlas)
 
@@ -302,16 +304,16 @@ class UISystem < System
 		@status_window.add(@status_table_model).width(117).height(140).padLeft(4).align(Align::left).row
 		@status_window.add(@status_add_info).width(246).padTop(8).padLeft(4)
 
-		@status_l_head.color = Color.new(1.00, 0.00, 0.00, 1.0)
-		@status_r_head.color = Color.new(0.74, 0.13, 0.13, 1.0)
+		@status_l_head.color = Color.new(1.00, 0.50, 0.50, 1.0)
+		@status_r_head.color = Color.new(1.00, 1.00, 1.00, 1.0)
 		@status_l_arm.color  = Color.new(1.00, 1.00, 1.00, 1.0)
 		@status_torso.color  = Color.new(1.00, 1.00, 1.00, 1.0)
-		@status_r_arm.color  = Color.new(0.50, 0.25, 0.25, 1.0)
+		@status_r_arm.color  = Color.new(1.00, 0.40, 0.40, 1.0)
 		@status_l_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
 		@status_l_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
 		@status_r_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
-		@status_r_hand.color = Color.new(0.24, 0.38, 0.38, 1.0)
-		@status_l_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_r_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
+		@status_l_foot.color = Color.new(1.00, 0.20, 0.20, 1.0)
 		@status_r_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
 
 	end
@@ -323,8 +325,8 @@ class UISystem < System
 		@inv_no_exit = false
 
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
-		@inv_window.set_position(268, 2)
-		@inv_window.set_size(268, 236)
+		@inv_window.set_position(262, 2)
+		@inv_window.set_size(276, 236)
 		@inv_window.movable = false
 		@inv_window.padTop(9)
 
@@ -346,7 +348,7 @@ class UISystem < System
 		@inv_item_desc = Label.new("", @skin.get("inv", LabelStyle.java_class))
 		@inv_item_desc.alignment = Align::top | Align::left
 		@inv_item_desc.wrap = true
-		@inv_window.add(@inv_item_desc).colspan(8).width(260).height(62).row
+		@inv_window.add(@inv_item_desc).colspan(8).width(256).height(62).row
 
 		@inv_slots = []
 		for i in 1..C::INVENTORY_SLOTS
@@ -426,22 +428,88 @@ class UISystem < System
 	def use_item(entity)
 
 		if @inv_selection
-
+			
 			inv = @mgr.comp(@player, Inventory)
-
 			index = @inv_slots.index(@inv_selection)
 
 			if item_id = inv.items[index]
-				
+
+				needs = @mgr.comp(@player, Needs)
+
 				item = @mgr.comp(item_id, Item)
-				type = @mgr.comp(item_id, Type)
-				info = @mgr.comp(item_id, Info)
 
-				puts item.usable
-				puts "-"
-				puts info.name
+				if item.usable
 
-				return true
+					type = @mgr.comp(item_id, Type)
+					info = @mgr.comp(item_id, Info)
+
+					item.condition = 0.11
+
+					case type.type
+
+						when "rations1"
+
+							needs.hunger += 0.3
+							item.condition -= 0.12
+							
+							if item.condition < 0
+							
+								item.condition = 0
+								info.desc = "This item is junk. It can only be scrapped at this point."
+							
+							else
+
+								info.desc = "An empty rations container. It could be used as scrap."
+								
+							end
+
+						  type.type = 'rations1_empty'
+						  info.name = "Rations, empty"
+						  item.weight = 0.3
+						  item.base_value = 0.2
+						  
+						  set_inv_name(info.name)
+							set_inv_desc(info.desc)
+							set_inv_qual_cond(item.quality, item.condition)
+							set_inv_value(item.value)
+							set_inv_weight(item.weight)
+
+						when "canteen1_water"
+
+							needs.thirst += 0.3
+							item.condition -= 0.12
+
+							if item.condition < 0
+							
+								item.condition = 0
+								info.desc = "This item is junk. It can only be scrapped at this point."
+							
+							else
+
+								info.desc = 
+							  	"This is an empty canteen that can be used to " \
+							  	" carry non-corrosive liquids."
+							
+							end
+
+						  type.type = 'canteen1_empty'
+						  info.name = "Canteen, empty"
+						  item.weight = 0.4
+						  item.base_value = 0.3
+
+						  set_inv_name(info.name)
+							set_inv_desc(info.desc)
+							set_inv_qual_cond(item.quality, item.condition)
+							set_inv_value(item.value)
+							set_inv_weight(item.weight)
+
+					end
+					
+					@mgr.inventory.update_slots = true
+
+					return true
+
+				end
 
 			end
 		
@@ -514,7 +582,7 @@ class UISystem < System
 			@base_energy.width = (needs.energy * 100 + 4).to_i
 			@base_sanity.width = (needs.sanity * 100 + 4).to_i
 
-			if @inv_selection != @prev_selection
+			if @inv_selection != @inv_prev_selection
 
 				if @inv_selection
 
@@ -530,7 +598,7 @@ class UISystem < System
 						set_inv_qual_cond(item.quality, item.condition)
 						set_inv_value(item.value)
 						set_inv_weight(item.weight)
-						set_inv_desc(info.description)
+						set_inv_desc(info.desc)
 
 					else
 
@@ -554,7 +622,7 @@ class UISystem < System
 
 			end
 
-			@prev_selection = @inv_selection
+			@inv_prev_selection = @inv_selection
 
 		end
 
