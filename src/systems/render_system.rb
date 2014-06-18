@@ -18,12 +18,9 @@ class RenderSystem < System
 			pos = @mgr.comp(entity, Position)
 			player_pos = @mgr.comp(@player, Position)
 
-			if (pos.x - player_pos.x).abs < 20 &&
-				 (pos.y - player_pos.y).abs < 18
-
-				@nearby_entities << entity
-
-			end
+			(pos.x - player_pos.x).between?(-20, 20) and
+			(pos.y - player_pos.y).between?(-20, 20) and
+			@nearby_entities << entity
 
 		end
 
@@ -88,12 +85,9 @@ class RenderSystem < System
 				pos = @mgr.comp(entity, Position)
 				player_pos = @mgr.comp(@player, Position)
 
-				if (pos.x - player_pos.x).abs < 20 &&
-					 (pos.y - player_pos.y).abs < 18
-
-					@nearby_entities << entity
-
-				end
+				(pos.x - player_pos.x).between?(-20, 20) and
+				(pos.y - player_pos.y).between?(-20, 20) and
+				@nearby_entities << entity
 
 			end
 

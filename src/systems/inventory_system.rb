@@ -71,7 +71,9 @@ class InventorySystem < System
 	end
 
 
-	def use_item(item_id, type_value)
+	def use_item(entity_id, item_id, type_value)
+
+		needs = @mgr.comp(entity_id, Needs)
 
 		type = @mgr.comp(item_id, Type)
 		info = @mgr.comp(item_id, Info)
@@ -80,6 +82,8 @@ class InventorySystem < System
 		case type_value
 
 			when "rations1"
+
+				needs.hunger = [1, needs.hunger += 0.1].min
 
 				type.type = 'rations1_empty'
 			  info.name = "Rations, empty"
@@ -93,6 +97,8 @@ class InventorySystem < System
 
 			when "canteen1_water"
 
+				needs.thirst = [1, needs.thirst += 0.1].min
+
 				type.type = 'canteen1_empty'
 				info.name = 'Canteen, empty'
 				item.usable = false
@@ -102,11 +108,22 @@ class InventorySystem < System
 				info.desc = 
 			  	"This is an empty canteen. It can hold non-corrossive materials."
 
+			when "canister1_water"
+				
+				needs.thirst = [1, needs.thirst += 0.3].min
+
+				type.type = 'canister1_empty'
+				info.name = 'Canister, empty'
+				item.usable = false
+				item.weight = 0.8
+				item.base_value = 0.07
+				item.condition -= item.decay_rate
+				info.desc =
+			  	"This is an empty canteen. It can hold non-corrossive materials."
+
 		end
 
-		if item.condition < 0
-			@mgr.inventory.destroy_item(item_id)
-		end
+		@mgr.inventory.destroy_item(item_id) if item.condition < 0
 
 	end
 
@@ -178,6 +195,80 @@ class InventorySystem < System
 			  info.desc = 
 			  	"This is an empty canteen. It can be refilled " \
 			  	"or used for scrap."
+
+			when "canister1_empty"
+
+				render.region_name = 'canister1_empty'
+				render.region = @atlas.find_region('canister1_empty')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 0.8
+				item.base_value = 0.07
+				info.name = 'Canister, empty'
+			  info.desc = 
+			  	"This is an empty canister. It can hold corrosive materials."
+
+			when "canister1_water"
+
+				render.region_name = 'canister1_water'
+				render.region = @atlas.find_region('canister1_water')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.usable = true
+				item.weight = 1.4
+				item.base_value = 0.21
+				info.name = 'Canister, water'
+			  info.desc = 
+			  	"This is a canister of drinking water."
+
+			when "canister1_waste"
+
+				render.region_name = 'canister1_waste'
+				render.region = @atlas.find_region('canister1_waste')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 1.6
+				item.base_value = 0.09
+				info.name = 'Canister, waste'
+			  info.desc = 
+			  	"This is canister of waste. It can be used to produce energy, " \
+			  	"chemicals, or gases."
+
+			when "canister1_fuel"
+
+				render.region_name = 'canister1_fuel'
+				render.region = @atlas.find_region('canister1_fuel')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 1.3
+				item.base_value = 0.34
+				info.name = 'Canister, fuel'
+			  info.desc = 
+			  	"This is a canister of fuel."
+
+			when 'handgun1'
+
+				render.region_name = 'handgun1'
+				render.region = @atlas.find_region('handgun1')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 0.36
+				item.base_value = 0.54
+				info.name = 'Handgun'
+			  info.desc = 
+			  	"This is a handgun."
+
+			when 'scrap1'
+
+				render.region_name = 'scrap1'
+				render.region = @atlas.find_region('scrap1')
+				size.width = render.width * C::WTB
+				size.height = render.height * C::WTB
+				item.weight = 1.4
+				item.base_value = 0.10
+				info.name = 'Scrap'
+			  info.desc = 
+			  	"This is a piece of scrap that contains pieces of plastic and metal."			
 
 			when "overgrowth1"
 

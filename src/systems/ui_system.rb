@@ -407,7 +407,7 @@ class UISystem < System
 					def clicked(event, x, y)
 
 						@mgr.ui.inv_no_exit = true
-						@ui.use_item(@player)
+						@ui.use_item
 
 					end
 
@@ -425,7 +425,7 @@ class UISystem < System
 	end
 
 
-	def use_item(entity)
+	def use_item
 
 		@inv_selection                           and
 		index = @inv_slots.index(@inv_selection) and
@@ -433,28 +433,15 @@ class UISystem < System
 		item_id = inv.items[index]               and
 		item = @mgr.comp(item_id, Item)          and
 		item.usable                              and
+
 		Proc.new do
 
 			@mgr.inventory.update_slots = true
 
-			needs = @mgr.comp(@player, Needs)
-			
 			type = @mgr.comp(item_id, Type)
 			info = @mgr.comp(item_id, Info)
 
-			case type.type
-
-				when "rations1"
-
-					needs.hunger += 0.3
-					@mgr.inventory.use_item(item_id, type.type)
-
-				when "canteen1_water"
-
-					needs.thirst += 0.3
-				  @mgr.inventory.use_item(item_id, type.type)
-
-			end
+			@mgr.inventory.use_item(@player, item_id, type.type)
 
 			set_inv_name(info.name)
 			set_inv_desc(info.desc)
@@ -474,7 +461,7 @@ class UISystem < System
 	def set_inv_qual_cond(quality, condition)
 		
 		unless quality == -1 && condition == -1
-			@inv_item_quality_dur.text = "Q-%d C-%d" % [(quality * 100).to_i, (condition * 100).to_i]
+			@inv_item_quality_dur.text = "Q %d C %d" % [(quality * 100).to_i, (condition * 100).to_i]
 		else
 			@inv_item_quality_dur.text = ""
 		end
@@ -502,16 +489,24 @@ class UISystem < System
 
 	end
 
+
 	def set_inv_name(name)
-
 		@inv_item_name.text = name
-
 	end
 
 
 	def set_inv_desc(desc)
-
 		@inv_item_desc.text = desc
+	end
+
+
+	def reset_inv_info
+
+		set_inv_name("")
+		set_inv_qual_cond(-1, -1)
+		set_inv_value(-1)
+		set_inv_weight(-1)
+		set_inv_desc("")
 
 	end
 
@@ -538,9 +533,8 @@ class UISystem < System
 				if @inv_selection
 
 					index = @inv_slots.index(@inv_selection)
-					item_id = inv.items[index]
 
-					if item_id
+					if item_id = inv.items[index]
 
 						item = @mgr.comp(item_id, Item)
 						info = @mgr.comp(item_id, Info)
@@ -553,21 +547,13 @@ class UISystem < System
 
 					else
 
-						set_inv_name("")
-						set_inv_qual_cond(-1, -1)
-						set_inv_value(-1)
-						set_inv_weight(-1)
-						set_inv_desc("")
+						reset_inv_info
 
 					end
 
 				else
 
-					set_inv_name("")
-					set_inv_qual_cond(-1, -1)
-					set_inv_value(-1)
-					set_inv_weight(-1)
-					set_inv_desc("")
+					reset_inv_info
 
 				end
 
@@ -622,6 +608,7 @@ class UISystem < System
 		end
 
 		if @inv_update
+
 			@inv_update = false
 
 			if @inv_active
@@ -633,6 +620,7 @@ class UISystem < System
 		end
 
 		if @status_update
+
 			@status_update = false
 
 			if @status_active
@@ -644,6 +632,7 @@ class UISystem < System
 		end
 
 		if @actions_update
+
 			@actions_update = false
 
 			if @actions_active
@@ -655,6 +644,7 @@ class UISystem < System
 		end
 
 		if @equip_update
+
 			@equip_update = false
 
 			if @equip_active

@@ -14,6 +14,9 @@ class InputSystem < System
 
 	def touch_down(screen_x, screen_y, pointer, button)
 
+		@mgr.ui.inv_no_exit = true  if @mgr.ui.inv_active
+		@mgr.ui.base_no_exit = true if @mgr.ui.base_active
+
 		entities = @mgr.entities_with(UserInput)
 		entities.each do |entity|
 
@@ -21,7 +24,15 @@ class InputSystem < System
 
 				when 0
 
-					if @shift
+					if !@shift
+
+						if @mgr.ui.main_active
+
+						else
+							pickup_item(entity)
+						end
+
+					else
 
 						if @mgr.ui.main_active
 
@@ -32,43 +43,17 @@ class InputSystem < System
 							
 						end
 
-					else
-
-						if @mgr.ui.base_active
-							@mgr.ui.base_no_exit = true
-						else
-
-						end
-
-						if @mgr.ui.main_active
-
-
-						else
-
-							pickup_item(entity)
-
-						end
-
 					end
 
 				when 1
 
-					if @shift
-
-					else
-
-						if @mgr.ui.base_active
-							@mgr.ui.base_no_exit = true
-						else
-
-						end
+					if !@shift
 
 						if @mgr.ui.main_active
-
-							@mgr.ui.inv_no_exit = true
 							drop_item(entity)
-								
 						end
+
+					else
 
 					end
 
@@ -90,17 +75,22 @@ class InputSystem < System
 
 				when Keys::E
 
-					if @shift
+					if !@shift
+
+						if @mgr.ui.main_active
+
+						else
+							use_door(entity)
+						end
 
 					else
 
-						use_door(entity)
-
+						
 					end
 
 				when Keys::C
 
-					if @shift
+					if !@shift
 
 					else
 
@@ -108,65 +98,69 @@ class InputSystem < System
 
 				when Keys::TAB
 					
-					if @ctrl
+					if !@ctrl
 
-						@mgr.ui.base_update = true
-						@mgr.ui.base_active = !@mgr.ui.base_active
-
-					else
+						@mgr.ui.main_update = true
 
 						vel = @mgr.comp(entity, Velocity)
 						vel.spd = 0
 						vel.ang_spd = 0
+						
+						@mgr.paused         = !@mgr.paused
+						@mgr.ui.main_active = !@mgr.ui.main_active
+						@mgr.time.active    = !@mgr.time.active
 
-						@mgr.ui.main_update = true
-						@mgr.paused = !@mgr.paused
-						@mgr.ui.main_active = @mgr.paused
-						@mgr.time.active = !@mgr.time.active
+					else
+
+						@mgr.ui.base_update = true
+						@mgr.ui.base_active = !@mgr.ui.base_active
 							
 					end
 
 				when Keys::W, Keys::UP
 
-					if @mgr.ui.main_active
+					if !@shift
 
-						@mgr.ui.actions_update = true
-						@mgr.ui.actions_active = !@mgr.ui.actions_active
+						if @mgr.ui.main_active
 
-					else
+							@mgr.ui.actions_update = true
+							@mgr.ui.actions_active = !@mgr.ui.actions_active
 
-						vel = @mgr.comp(entity, Velocity)
-						vel.spd = C::PLAYER_SPD
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.spd = C::PLAYER_SPD
+
+						end
 
 					end
 
 				when Keys::S, Keys::DOWN
-					
-					if @mgr.ui.main_active
 
-						@mgr.ui.inv_update = true
-						@mgr.ui.inv_active = !@mgr.ui.inv_active
+					if !@shift
+						
+						if @mgr.ui.main_active
 
-					else
+							@mgr.ui.inv_update = true
+							@mgr.ui.inv_active = !@mgr.ui.inv_active
 
-						vel = @mgr.comp(entity, Velocity)
-						vel.spd = -C::PLAYER_SPD * 0.5
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.spd = -C::PLAYER_SPD * 0.5
+
+						end
 
 					end
 
 				when Keys::A, Keys::LEFT
 
-					if @mgr.ui.main_active
+					if !@shift
 
-						@mgr.ui.equip_update = true
-						@mgr.ui.equip_active = !@mgr.ui.equip_active
+						if @mgr.ui.main_active
 
-					else
-
-						if @shift
-
-							vel = @mgr.comp(entity, Velocity)
-							vel.ang_spd = 0.5 * C::PLAYER_ROT_SPD
+							@mgr.ui.equip_update = true
+							@mgr.ui.equip_active = !@mgr.ui.equip_active
 
 						else
 
@@ -174,27 +168,44 @@ class InputSystem < System
 							vel.ang_spd = C::PLAYER_ROT_SPD
 
 						end
+						
+					else
+
+						if @mgr.ui.main_active
+
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = 0.5 * C::PLAYER_ROT_SPD
+
+						end
 
 					end
 
 				when Keys::D, Keys::RIGHT
 
-					if @mgr.ui.main_active
+					if !@shift
 
-						@mgr.ui.status_update = true
-						@mgr.ui.status_active = !@mgr.ui.status_active
+						if @mgr.ui.main_active
 
-					else
-
-						if @shift
-
-							vel = @mgr.comp(entity, Velocity)
-							vel.ang_spd = -0.5 * C::PLAYER_ROT_SPD
+							@mgr.ui.status_update = true
+							@mgr.ui.status_active = !@mgr.ui.status_active
 
 						else
 
 							vel = @mgr.comp(entity, Velocity)
 							vel.ang_spd = -C::PLAYER_ROT_SPD
+						
+						end
+
+					else
+
+						if @mgr.ui.main_active
+
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = -0.5 * C::PLAYER_ROT_SPD
 
 						end
 
@@ -273,9 +284,10 @@ class InputSystem < System
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
-		item_id = @mgr.map.get_near_item(pos.x, pos.y)
+		item_id = @mgr.map.get_near_item(pos.x, pos.y) and
+		inv.add_item(item_id)													 and
 
-		if item_id && inv.add_item(item_id)
+		Proc.new do
 
 			item = @mgr.comp(item_id, Item)
 			inv.weight += item.weight 
@@ -284,7 +296,7 @@ class InputSystem < System
 
 			return true
 		
-		end
+		end.call
 
 		false
 
@@ -299,10 +311,10 @@ class InputSystem < System
 		x = pos.x + C::WTB * (screen_x - Gdx.graphics.width/2)
 		y = pos.y - C::WTB * (screen_y - Gdx.graphics.height/2)
 
-		item_id = @mgr.map.get_item(x, y)					
-		dist2 = (x - pos.x)**2 + (y - pos.y)**2
+		item_id = @mgr.map.get_item(x, y) and		
+		inv.add_item(item_id)             and
 
-		if item_id && dist2 < 1.4 && inv.add_item(item_id)
+		Proc.new do
 
 			item = @mgr.comp(item_id, Item)
 			inv.weight += item.weight
@@ -311,7 +323,7 @@ class InputSystem < System
 
 			return true
 
-		end
+		end.call
 
 		false
 
@@ -324,46 +336,43 @@ class InputSystem < System
 		inv = @mgr.comp(entity, Inventory)
 		rot = @mgr.comp(entity, Rotation)
 
-		if @mgr.ui.inv_selection
+		@mgr.ui.inv_selection                                  and
+		index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection) and
+		item_id = inv.items[index]														 and
 
-			index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection)
-			item_id = inv.items[index]
+		Proc.new do
 
-			if item_id
+			item_type = @mgr.comp(item_id, Type)
 
-				item_type = @mgr.comp(item_id, Type)
+			item_pos = Position.new(
+				pos.x + rot.x, 
+				pos.y + rot.y)
 
-				item_pos = Position.new(
-					pos.x + rot.x, 
-					pos.y + rot.y)
+			item_render = Render.new(
+				item_type.type,
+				@mgr.atlas.find_region(item_type.type))
 
-				item_render = Render.new(
-					item_type.type,
-					@mgr.atlas.find_region(item_type.type))
+			item_rot = @mgr.comp(item_id, Rotation)
+			item_rot.angle = rot.angle - 90
 
-				item_rot = @mgr.comp(item_id, Rotation)
-				item_rot.angle = rot.angle - 90
+			@mgr.add_component(item_id, item_pos)
+			@mgr.add_component(item_id, item_render)
 
-				@mgr.add_component(item_id, item_pos)
-				@mgr.add_component(item_id, item_render)
+			@mgr.map.items << item_id
+			item = @mgr.comp(item_id, Item)
+			inv.weight -= item.weight 
+			inv.remove_item(item_id)
+			@mgr.render.nearby_entities << item_id
+			@mgr.ui.set_inv_name("")
+			@mgr.ui.set_inv_desc("")
+			@mgr.ui.set_inv_qual_cond(-1, -1)
+			@mgr.ui.set_inv_value(-1)
+			@mgr.ui.set_inv_weight(-1)
+			@mgr.inventory.update_slots = true
 
-				@mgr.map.items << item_id
-				item = @mgr.comp(item_id, Item)
-				inv.weight -= item.weight 
-				inv.remove_item(item_id)
-				@mgr.render.nearby_entities << item_id
-				@mgr.ui.set_inv_name("")
-				@mgr.ui.set_inv_desc("")
-				@mgr.ui.set_inv_qual_cond(-1, -1)
-				@mgr.ui.set_inv_value(-1)
-				@mgr.ui.set_inv_weight(-1)
-				@mgr.inventory.update_slots = true
+			return true
 
-				return true
-
-			end
-
-		end
+		end.call
 
 		false
 
@@ -375,22 +384,18 @@ class InputSystem < System
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
-		door_id = @mgr.map.get_near_door(pos.x, pos.y)
+		door_id = @mgr.map.get_near_door(pos.x, pos.y) and
+		door    = @mgr.comp(door_id, Door)             and
+		!door.locked                                   and
 
-		if door_id
-
-			door = @mgr.comp(door_id, Door)
-
-			if !door.locked
-
-				door.open = !door.open
-				@mgr.map.change_door(door_id, door.open)
-
-				return true
-
-			end
+		Proc.new do
 		
-		end
+			door.open = !door.open
+			@mgr.map.change_door(door_id, door.open)
+
+			return true
+
+		end.call
 
 		false
 
@@ -405,18 +410,18 @@ class InputSystem < System
 		x = pos.x + C::WTB * (screen_x - Gdx.graphics.width/2)
 		y = pos.y - C::WTB * (screen_y - Gdx.graphics.height/2)
 
-		door_id = @mgr.map.get_door(x, y)
-		dist2 = (x - pos.x)**2 + (y - pos.y)**2
-		door = @mgr.comp(door_id, Door)
+		door_id = @mgr.map.get_door(x, y)  and
+		door    = @mgr.comp(door_id, Door) and
+		!door.locked                       and
 
-		if door_id && dist2 < 2.6 && !door.locked
+		Proc.new do
 
 			door.open = !door.open
-			@mgr.map.change_door(door, door.open)
+			@mgr.map.change_door(door_id, door.open)
 
 			return true
 
-		end
+		end.call
 
 		false
 

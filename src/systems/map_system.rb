@@ -126,7 +126,7 @@ class MapSystem < System
 				break if !@solid[x.to_i][y.to_i]
 			end
 
-			choice = ['rations1_empty', 'rations1', 'canteen1_empty', 'canteen1_water', 'overgrowth1'].sample
+			choice = C::ITEMS.sample
 
 			item_id = @mgr.inventory.create_item(choice, x, y)
 
@@ -245,25 +245,31 @@ class MapSystem < System
 
 		@mgr.render.nearby_entities.each do |entity|
 
-			if @items.include?(entity)
+			pos = @mgr.comp(entity, Position)
+			dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
+			
+			if dist_sqr < 1.4
 
-				pos = @mgr.comp(entity, Position)
-				render = @mgr.comp(entity, Render)
-				rot = @mgr.comp(entity, Rotation)
+				if @items.include?(entity)
+					
+					render = @mgr.comp(entity, Render)
+					rot = @mgr.comp(entity, Rotation)
 
-				# Transform coordinates to axis-aligned frame
-				c = Math.cos(-rot.angle * Math::PI/180)
-				s = Math.sin(-rot.angle * Math::PI/180)
-				rot_x = pos.x + c * (x - pos.x) - s * (y - pos.y)
-				rot_y = pos.y + s * (x - pos.x) + c * (y - pos.y)
+					# Transform coordinates to axis-aligned frame
+					c = Math.cos(-rot.angle * Math::PI/180)
+					s = Math.sin(-rot.angle * Math::PI/180)
+					rot_x = pos.x + c * (x - pos.x) - s * (y - pos.y)
+					rot_y = pos.y + s * (x - pos.x) + c * (y - pos.y)
 
-				left   = pos.x - render.width * C::WTB / 2
-				right  = pos.x + render.width * C::WTB / 2
-				top    = pos.y - render.height * C::WTB / 2
-				bottom = pos.y + render.height * C::WTB / 2
+					left   = pos.x - render.width * C::WTB / 2
+					right  = pos.x + render.width * C::WTB / 2
+					top    = pos.y - render.height * C::WTB / 2
+					bottom = pos.y + render.height * C::WTB / 2
 
-				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
-					return entity
+					if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
+						return entity
+					end
+
 				end
 
 			end
@@ -348,11 +354,11 @@ class MapSystem < System
 
 	def change_door(door_id, open)
 
-		pos = @mgr.comp(door_id, Position)
-		rot = @mgr.comp(door_id, Rotation)
+		pos    = @mgr.comp(door_id, Position)
+		rot    = @mgr.comp(door_id, Rotation)
 		render = @mgr.comp(door_id, Render)
-		size = @mgr.comp(door_id, Size)
-		col = @mgr.comp(door_id, Collision)
+		size   = @mgr.comp(door_id, Size)
+		col    = @mgr.comp(door_id, Collision)
 
 		if open
 
