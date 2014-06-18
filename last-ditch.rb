@@ -62,31 +62,23 @@ class LastDitch < ApplicationAdapter
 												 'drone1_idle2']}))
 
 		@dt_sum = 0
+		@mgr.atlas = @atlas
 
-		@time      = TimeSystem.new
-		@input     = InputSystem.new(@mgr)
-		@map       = MapSystem.new(@mgr, @player, @atlas)
-		@ui        = UISystem.new(@mgr, @player, @atlas)
-		@actions   = ActionsSystem.new(@mgr)
-		@inventory = InventorySystem.new(@mgr)
-		@equipment = EquipmentSystem.new(@mgr)
-		@status    = StatusSystem.new(@mgr)
-		@ai        = AISystem.new(@mgr)
-		@render    = RenderSystem.new(@mgr, @player, @atlas)
-		@physics   = PhysicsSystem.new(@mgr, @player, @map)
-		@sound     = SoundSystem.new(@mgr, @map, @render, @physics.world)
-		@lighting  = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
+		@mgr.time      = @time      = TimeSystem.new
+		@mgr.input     = @input     = InputSystem.new(@mgr)
+		@mgr.ui        = @ui        = UISystem.new(@mgr, @player, @atlas)
 
-		@mgr.map       = @map
-		@mgr.time      = @time
-		@mgr.atlas     = @atlas
-		@mgr.actions   = @actions
-		@mgr.inventory = @inventory
-		@mgr.equipment = @equipment
-		@mgr.status    = @status
-		@mgr.render    = @render
-		@mgr.physics   = @physics
-		
+		@mgr.actions   = @actions   = ActionsSystem.new(@mgr)
+		@mgr.inventory = @inventory = InventorySystem.new(@mgr, @atlas)
+		@mgr.equipment = @equipment = EquipmentSystem.new(@mgr)
+		@mgr.status    = @status    = StatusSystem.new(@mgr)
+
+		@mgr.ai        = @ai        = AISystem.new(@mgr)
+		@mgr.map       = @map       = MapSystem.new(@mgr, @player, @atlas)
+		@mgr.render    = @render    = RenderSystem.new(@mgr, @player, @atlas)
+		@mgr.physics   = @physics   = PhysicsSystem.new(@mgr, @player, @map)
+		@mgr.lighting  = @lighting  = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
+
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)
 		@multiplexer.add_processor(@input.user_adapter)

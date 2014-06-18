@@ -12,7 +12,7 @@ class InputSystem < System
 	end
 
 
-	def touch_down(screenX, screenY, pointer, button)
+	def touch_down(screen_x, screen_y, pointer, button)
 
 		entities = @mgr.entities_with(UserInput)
 		entities.each do |entity|
@@ -27,8 +27,8 @@ class InputSystem < System
 
 						else
 
-							pickup_item_at(entity, screenX, screenY) or
-							use_door_at(entity, screenX, screenY)
+							pickup_item_at(entity, screen_x, screen_y) or
+							use_door_at(entity, screen_x, screen_y)
 							
 						end
 
@@ -291,13 +291,13 @@ class InputSystem < System
 	end
 
 
-	def pickup_item_at(entity, screenX, screenY)
+	def pickup_item_at(entity, screen_x, screen_y)
 
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
-		x = pos.x + C::WTB * (screenX - Gdx.graphics.width/2)
-		y = pos.y - C::WTB * (screenY - Gdx.graphics.height/2)
+		x = pos.x + C::WTB * (screen_x - Gdx.graphics.width/2)
+		y = pos.y - C::WTB * (screen_y - Gdx.graphics.height/2)
 
 		item_id = @mgr.map.get_item(x, y)					
 		dist2 = (x - pos.x)**2 + (y - pos.y)**2
@@ -397,13 +397,13 @@ class InputSystem < System
 	end
 
 
-	def use_door_at(entity, screenX, screenY)
+	def use_door_at(entity, screen_x, screen_y)
 
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
-		x = pos.x + C::WTB * (screenX - Gdx.graphics.width/2)
-		y = pos.y - C::WTB * (screenY - Gdx.graphics.height/2)
+		x = pos.x + C::WTB * (screen_x - Gdx.graphics.width/2)
+		y = pos.y - C::WTB * (screen_y - Gdx.graphics.height/2)
 
 		door_id = @mgr.map.get_door(x, y)
 		dist2 = (x - pos.x)**2 + (y - pos.y)**2

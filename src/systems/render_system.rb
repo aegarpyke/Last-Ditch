@@ -129,9 +129,9 @@ class RenderSystem < System
 
 		@nearby_entities.each do |entity|
 
-			pos = @mgr.comp(entity, Position)
-			rot = @mgr.comp(entity, Rotation)
-			size = @mgr.comp(entity, Size)
+			pos    = @mgr.comp(entity, Position)
+			rot    = @mgr.comp(entity, Rotation)
+			size   = @mgr.comp(entity, Size)
 			render = @mgr.comp(entity, Render)
 
 			if render

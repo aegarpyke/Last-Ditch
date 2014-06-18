@@ -6,7 +6,7 @@ class Inventory < Component
 
 		super()
 		@size = size
-		@money = 3.11
+		@money = 0.34
 		@weight = 0
 		@items = Array.new(size)
 

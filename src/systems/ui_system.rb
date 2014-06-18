@@ -427,94 +427,47 @@ class UISystem < System
 
 	def use_item(entity)
 
-		if @inv_selection
+		@inv_selection and
+		index   = @inv_slots.index(@inv_selection) and
+		inv     = @mgr.comp(@player, Inventory) and
+		item_id = inv.items[index] and
+		item    = @mgr.comp(item_id, Item) and
+		item.usable and
+		check = true
+
+		if check 
+
+			@mgr.inventory.update_slots = true
+
+			needs = @mgr.comp(@player, Needs)
 			
-			inv = @mgr.comp(@player, Inventory)
-			index = @inv_slots.index(@inv_selection)
+			type = @mgr.comp(item_id, Type)
+			info = @mgr.comp(item_id, Info)
 
-			if item_id = inv.items[index]
+			case type.type
 
-				needs = @mgr.comp(@player, Needs)
+				when "rations1"
 
-				item = @mgr.comp(item_id, Item)
+					needs.hunger += 0.3
+					@mgr.inventory.use_item(item_id, type.type)
 
-				if item.usable
+				when "canteen1_water"
 
-					type = @mgr.comp(item_id, Type)
-					info = @mgr.comp(item_id, Info)
-
-					item.condition = 0.11
-
-					case type.type
-
-						when "rations1"
-
-							needs.hunger += 0.3
-							item.condition -= 0.12
-							
-							if item.condition < 0
-							
-								item.condition = 0
-								info.desc = "This item is junk. It can only be scrapped at this point."
-							
-							else
-
-								info.desc = "An empty rations container. It could be used as scrap."
-								
-							end
-
-						  type.type = 'rations1_empty'
-						  info.name = "Rations, empty"
-						  item.weight = 0.3
-						  item.base_value = 0.2
-						  
-						  set_inv_name(info.name)
-							set_inv_desc(info.desc)
-							set_inv_qual_cond(item.quality, item.condition)
-							set_inv_value(item.value)
-							set_inv_weight(item.weight)
-
-						when "canteen1_water"
-
-							needs.thirst += 0.3
-							item.condition -= 0.12
-
-							if item.condition < 0
-							
-								item.condition = 0
-								info.desc = "This item is junk. It can only be scrapped at this point."
-							
-							else
-
-								info.desc = 
-							  	"This is an empty canteen that can be used to " \
-							  	" carry non-corrosive liquids."
-							
-							end
-
-						  type.type = 'canteen1_empty'
-						  info.name = "Canteen, empty"
-						  item.weight = 0.4
-						  item.base_value = 0.3
-
-						  set_inv_name(info.name)
-							set_inv_desc(info.desc)
-							set_inv_qual_cond(item.quality, item.condition)
-							set_inv_value(item.value)
-							set_inv_weight(item.weight)
-
-					end
-					
-					@mgr.inventory.update_slots = true
-
-					return true
-
-				end
+					needs.thirst += 0.3
+				  @mgr.inventory.use_item(item_id, type.type)
 
 			end
-		
-		end
 
+			set_inv_name(info.name)
+			set_inv_desc(info.desc)
+			set_inv_qual_cond(item.quality, item.condition)
+			set_inv_value(item.value)
+			set_inv_weight(item.weight)
+
+			return true
+
+		end
+	
 		false
 
 	end

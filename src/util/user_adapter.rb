@@ -8,9 +8,9 @@ class UserAdapter < InputAdapter
 	end
 
 
-	def touchDown(screenX, screenY, pointer, button)
+	def touchDown(screen_x, screen_y, pointer, button)
 
-		@input_system.touch_down(screenX, screenY, pointer, button)
+		@input_system.touch_down(screen_x, screen_y, pointer, button)
 
 	end
 

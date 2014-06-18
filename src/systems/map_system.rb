@@ -126,108 +126,17 @@ class MapSystem < System
 				break if !@solid[x.to_i][y.to_i]
 			end
 
-			item_id = @mgr.create_basic_entity
+			choice = ['rations1_empty', 'rations1', 'canteen1_empty', 'canteen1_water', 'overgrowth1'].sample
 
-			condition, quality = Random.rand(0.2..1.0), Random.rand(0.1..0.9)
+			item_id = @mgr.inventory.create_item(choice, x, y)
 
-			item = @mgr.add_component(item_id, Item.new(quality, condition))
-			render = @mgr.add_component(item_id, Render.new(''))
-			size = @mgr.add_component(item_id, Size.new(0, 0))
-			@mgr.add_component(item_id, Position.new(x, y))
-			@mgr.add_component(item_id, Rotation.new(Random.rand(360)))
+			@items << item_id
 
-			check = Random.rand
-			if check < 0.23
-				
-				render.region_name = 'canteen1_empty'
-				render.region = @atlas.find_region('canteen1_empty')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.5
-				item.base_value = 0.03
-
-				@mgr.add_component(item_id, Type.new('canteen1_empty'))
-				@mgr.add_component(item_id, Info.new(
-					'Canteen, empty',
-					"This is an empty canteen that can be used to carry "\
-					"non-corrosive liquids."))
-				
-			elsif check < 0.32
-
-				render.region_name = 'rations1'
-				render.region = @atlas.find_region('rations1')
-				size.width = render.width * C::WTB
-				size.height =render.height * C::WTB
-				item.weight = 0.7
-				item.base_value = 0.12
-				item.usable = true
-
-				@mgr.add_component(item_id, Type.new('rations1'))
-				@mgr.add_component(item_id, Info.new(
-					'Rations',
-					"A basic set of rations."))
-
-			elsif check < 0.42
-
-				render.region_name = 'canteen1_water'
-				render.region = @atlas.find_region('canteen1_water')
-				size.width = render.width * C::WTB
-				size.height =render.height * C::WTB
-				item.weight = 1.1
-				item.base_value = 0.08
-				item.usable = true
-
-				@mgr.add_component(item_id, Type.new('canteen1_water'))
-				@mgr.add_component(item_id, Info.new(
-					'Canteen, water',
-					"This is a canteen filled with clean drinking water."))
-
-			elsif check < 0.56
-
-				render.region_name = 'rations1_empty'
-				render.region = @atlas.find_region('rations1_empty')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.6
-				item.base_value = 0.12
-
-				@mgr.add_component(item_id, Type.new('rations1_empty'))
-				@mgr.add_component(item_id, Info.new(
-					'Rations, empty',
-					"This is one serving of prepared rations."))
-
-			elsif check < 0.69
-
-				render.region_name = 'handgun1'
-				render.region = @atlas.find_region('handgun1')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.6
-				item.base_value = 0.34
-
-				@mgr.add_component(item_id, Type.new('handgun1'))
-				@mgr.add_component(item_id, Info.new(
-					'Handgun 1',
-					"A basic handgun with limited sighting."))
-
-			elsif check < 0.88
-
-				render.region_name = 'overgrowth1'
-				render.region = @atlas.find_region('overgrowth1')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.75
-				item.base_value = 0.01
-
-				@mgr.add_component(item_id, Type.new('overgrowth1'))
-				@mgr.add_component(item_id, Info.new(
-					'Overgrowth 1',
-					"The base root of some overgrowth."))
+			if choice == 'overgrowth1'
 
 				8.times do
 
 					xx, yy = 0, 0
-					sub_item_id = @mgr.create_basic_entity
 
 					loop do
 						xx = Random.rand(x - 1.2..x + 1.2)
@@ -236,52 +145,13 @@ class MapSystem < System
 						break if !@solid[xx.to_i][yy.to_i]
 					end
 
-					sub_render = Render.new('')
-					sub_size = Size.new(0, 0)
-					sub_render.region_name = 'ruffage1'
-					sub_render.region = @atlas.find_region('ruffage1')
-					sub_size.width = sub_render.width * C::WTB
-					sub_size.height = sub_render.height * C::WTB
-
-
-					sub_quality, sub_dur = Random.rand(0.2..0.9), Random.rand(0.1..0.9)
-
-					@mgr.add_component(sub_item_id, Position.new(xx, yy))
-					@mgr.add_component(sub_item_id, Rotation.new(Random.rand(360)))
-					sub_item = @mgr.add_component(sub_item_id, Item.new(sub_quality, sub_dur, 0.2, 0.1))
-					@mgr.add_component(sub_item_id, sub_render)
-					@mgr.add_component(sub_item_id, sub_size)
-					@mgr.add_component(sub_item_id, Type.new('ruffage1'))
-					@mgr.add_component(sub_item_id, Info.new(
-						'Ruffage 1',
-						"These are stray twigs and leaves from some "\
-						"overgrowth."))
-
-					sub_item.weight = 0.1
-					sub_item.base_value = 0.001
-
-					@items << sub_item_id
+					item_id = @mgr.inventory.create_item('ruffage1', xx, yy)
+					
+					@items << item_id 
 
 				end
 
-			else
-
-				render.region_name = 'scrap1'
-				render.region = @atlas.find_region('scrap1')
-				size.width = render.width * C::WTB
-				size.height =render.height * C::WTB
-				item.weight = 0.9
-				item.base_value = 0.09
-
-				@mgr.add_component(item_id, Type.new('scrap1'))
-				@mgr.add_component(item_id, Info.new(
-					'Scrap',
-					"This is a piece of scrap material containing "\
-					"pieces of metal and plastic."))
-
 			end
-
-			@items << item_id
 
 		end
 
