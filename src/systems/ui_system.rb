@@ -427,15 +427,13 @@ class UISystem < System
 
 	def use_item(entity)
 
-		@inv_selection and
-		index   = @inv_slots.index(@inv_selection) and
-		inv     = @mgr.comp(@player, Inventory) and
-		item_id = inv.items[index] and
-		item    = @mgr.comp(item_id, Item) and
-		item.usable and
-		check = true
-
-		if check 
+		@inv_selection                           and
+		index = @inv_slots.index(@inv_selection) and
+		inv = @mgr.comp(@player, Inventory)      and
+		item_id = inv.items[index]               and
+		item = @mgr.comp(item_id, Item)          and
+		item.usable                              and
+		Proc.new do
 
 			@mgr.inventory.update_slots = true
 
@@ -466,7 +464,7 @@ class UISystem < System
 
 			return true
 
-		end
+		end.call
 	
 		false
 
