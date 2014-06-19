@@ -50,7 +50,7 @@ class EntityManager
 	end
 
 
-	def add_component(entity, component)
+	def add_comp(entity, component)
 
 		store = @component_stores[component.class]
 

@@ -15,6 +15,7 @@ class PhysicsSystem < System
 		generate_entity_bodies
 		generate_tile_bodies
 		generate_door_bodies
+		generate_workstation_bodies
 
 	end
 
@@ -103,10 +104,10 @@ class PhysicsSystem < System
 
 		@map.doors.each do |door|
 
-			pos = @mgr.comp(door, Position)
-			rot = @mgr.comp(door, Rotation)
+			pos    = @mgr.comp(door, Position)
+			rot    = @mgr.comp(door, Rotation)
 			render = @mgr.comp(door, Render)
-			col = @mgr.comp(door, Collision)
+			col    = @mgr.comp(door, Collision)
 
 			w = render.width * C::WTB
 			h = render.height * C::WTB
@@ -114,6 +115,27 @@ class PhysicsSystem < System
 			col.body = create_body(
 				pos.x, pos.y,
 				w, h, false, rot.angle)
+
+		end
+
+	end
+
+
+	def generate_workstation_bodies
+
+		@map.workstations.each do |workstation|
+
+			pos    = @mgr.comp(workstation, Position)
+			rot    = @mgr.comp(workstation, Rotation)
+			render = @mgr.comp(workstation, Render)
+			col    = @mgr.comp(workstation, Collision)
+
+			w = render.width * C::WTB
+			h = render.height * C::WTB
+
+			col.body = create_body(
+				pos.x, pos.y,
+				w, h, true, rot.angle)
 
 		end
 

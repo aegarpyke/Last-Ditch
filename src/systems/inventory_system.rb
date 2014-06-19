@@ -134,13 +134,13 @@ class InventorySystem < System
 
 		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
 
-		pos    = @mgr.add_component(item_id, Position.new(x, y))
-		rot    = @mgr.add_component(item_id, Rotation.new(Random.rand(360)))
-		info   = @mgr.add_component(item_id, Info.new)
-		type   = @mgr.add_component(item_id, Type.new(type_value))
-		item   = @mgr.add_component(item_id, Item.new(quality, condition))
-		size   = @mgr.add_component(item_id, Size.new(0, 0))
-		render = @mgr.add_component(item_id, Render.new(''))
+		pos    = @mgr.add_comp(item_id, Position.new(x, y))
+		rot    = @mgr.add_comp(item_id, Rotation.new(Random.rand(360)))
+		info   = @mgr.add_comp(item_id, Info.new)
+		type   = @mgr.add_comp(item_id, Type.new(type_value))
+		item   = @mgr.add_comp(item_id, Item.new(quality, condition))
+		size   = @mgr.add_comp(item_id, Size.new(0, 0))
+		render = @mgr.add_comp(item_id, Render.new(''))
 
 		case type_value
 

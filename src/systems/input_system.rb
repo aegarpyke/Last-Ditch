@@ -14,8 +14,8 @@ class InputSystem < System
 
 	def touch_down(screen_x, screen_y, pointer, button)
 
-		@mgr.ui.inv_no_exit = true  if @mgr.ui.inv_active
-		@mgr.ui.base_no_exit = true if @mgr.ui.base_active
+		@mgr.ui.inv_active and @mgr.ui.inv_no_exit = true
+		@mgr.ui.base_active and @mgr.ui.base_no_exit = true
 
 		entities = @mgr.entities_with(UserInput)
 		entities.each do |entity|
@@ -355,8 +355,8 @@ class InputSystem < System
 			item_rot = @mgr.comp(item_id, Rotation)
 			item_rot.angle = rot.angle - 90
 
-			@mgr.add_component(item_id, item_pos)
-			@mgr.add_component(item_id, item_render)
+			@mgr.add_comp(item_id, item_pos)
+			@mgr.add_comp(item_id, item_render)
 
 			@mgr.map.items << item_id
 			item = @mgr.comp(item_id, Item)

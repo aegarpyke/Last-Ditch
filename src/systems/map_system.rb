@@ -1,7 +1,7 @@
 class MapSystem < System
 
 	attr_accessor :width, :height
-	attr_accessor :cam, :items, :doors, :focus, :atlas
+	attr_accessor :cam, :items, :doors, :workstations, :focus, :atlas
 	attr_accessor :tiles, :solid, :sight, :rot
 
 	def initialize(mgr, player, atlas)
@@ -15,7 +15,7 @@ class MapSystem < System
 		@focus = @mgr.comp(player, Position)
 		
 		@iterations = 120
-		@rooms, @items, @doors = [], [], []
+		@rooms, @items, @doors, @workstations = [], [], [], []
 		@num_of_rooms, @num_of_items = 200, 1200
 
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
@@ -40,6 +40,7 @@ class MapSystem < System
 		generate_rooms
 		generate_items
 		generate_doors
+		generate_workstations
 
 		update
 
@@ -164,7 +165,7 @@ class MapSystem < System
 
 			x = Random.rand(room.x1 + 1...room.x2 - 2)
 
-			if Random.rand(2) == 0
+			if Random.rand < 0.5
 				y = room.y1
 				rot = 0
 			else
@@ -188,13 +189,13 @@ class MapSystem < System
 			w = render.width * C::WTB
 			h = render.height * C::WTB
 
-			@mgr.add_component(door_id, render)
-			@mgr.add_component(door_id, Position.new(x + w/2, y + h/2))
-			@mgr.add_component(door_id, Size.new(w, h))
-			@mgr.add_component(door_id, Rotation.new(rot))
-			@mgr.add_component(door_id, Collision.new)
-			@mgr.add_component(door_id, Type.new('door1'))
-			@mgr.add_component(door_id, Door.new)
+			@mgr.add_comp(door_id, render)
+			@mgr.add_comp(door_id, Position.new(x + w/2, y + h/2))
+			@mgr.add_comp(door_id, Size.new(w, h))
+			@mgr.add_comp(door_id, Rotation.new(rot))
+			@mgr.add_comp(door_id, Collision.new)
+			@mgr.add_comp(door_id, Type.new('door1'))
+			@mgr.add_comp(door_id, Door.new)
 
 			@doors << door_id
 
@@ -220,21 +221,61 @@ class MapSystem < System
 
 			door_id = @mgr.create_basic_entity
 			
-			@mgr.add_component(door_id, Render.new(
+			@mgr.add_comp(door_id, Render.new(
 				'door1', 
 				@atlas.find_region('door1')))
 
 			w = render.width * C::WTB
 			h = render.height * C::WTB
 
-			@mgr.add_component(door_id, Position.new(x + h/2, y + w/2))
-			@mgr.add_component(door_id, Size.new(w, h))
-			@mgr.add_component(door_id, Rotation.new(rot))
-			@mgr.add_component(door_id, Collision.new)
-			@mgr.add_component(door_id, Type.new('door1'))
-			@mgr.add_component(door_id, Door.new)
+			@mgr.add_comp(door_id, Position.new(x + h/2, y + w/2))
+			@mgr.add_comp(door_id, Size.new(w, h))
+			@mgr.add_comp(door_id, Rotation.new(rot))
+			@mgr.add_comp(door_id, Collision.new)
+			@mgr.add_comp(door_id, Type.new('door1'))
+			@mgr.add_comp(door_id, Door.new)
 
 			@doors << door_id
+
+		end
+
+	end
+
+
+	def generate_workstations
+
+		@rooms.each do |room|
+
+			if room.x1 + 2 < room.x2 - 4 && room.y1 + 2 < room.y2 - 4
+
+				workstation_id = @mgr.create_basic_entity
+
+				rot = [0, 90, 180, 270].sample
+				workstation_type = ['incinerator', 'programming_desk'].sample
+				render = Render.new(
+					workstation_type, @atlas.find_region(workstation_type))
+				
+				w = render.width * C::WTB
+				h = render.height * C::WTB
+				x = Random.rand(room.x1 + 2...room.x2 - 4)
+				y = Random.rand(room.y1 + 2...room.y2 - 4)
+				
+				if [0, 180].include?(rot)
+					@mgr.add_comp(workstation_id, Position.new(x + w/2, y + h/2))
+				elsif [90, 270].include?(rot)
+					@mgr.add_comp(workstation_id, Position.new(x + h/2, y + w/2))
+				end
+
+				@mgr.add_comp(workstation_id, render)
+				@mgr.add_comp(workstation_id, Size.new(w, h))
+				@mgr.add_comp(workstation_id, Rotation.new(rot))
+				@mgr.add_comp(workstation_id, Collision.new)
+				@mgr.add_comp(workstation_id, Type.new('workstation'))
+				@mgr.add_comp(workstation_id, Workstation.new(workstation_type))
+
+				@workstations << workstation_id
+
+			end
 
 		end
 
@@ -252,8 +293,8 @@ class MapSystem < System
 
 				if @items.include?(entity)
 					
+					rot    = @mgr.comp(entity, Rotation)
 					render = @mgr.comp(entity, Render)
-					rot = @mgr.comp(entity, Rotation)
 
 					# Transform coordinates to axis-aligned frame
 					c = Math.cos(-rot.angle * Math::PI/180)
@@ -283,7 +324,7 @@ class MapSystem < System
 
 	def remove_item(item_id)
 
-		pos = @mgr.comp(item_id, Position)
+		pos    = @mgr.comp(item_id, Position)
 		render = @mgr.comp(item_id, Render)
 
 		@mgr.remove_component(item_id, pos)
@@ -301,10 +342,10 @@ class MapSystem < System
 
 			if @doors.include?(entity)
 
-				pos = @mgr.comp(entity, Position)
+				pos    = @mgr.comp(entity, Position)
 				render = @mgr.comp(entity, Render)
-				size = @mgr.comp(entity, Size)
-				rot = @mgr.comp(entity, Rotation)
+				size   = @mgr.comp(entity, Size)
+				rot    = @mgr.comp(entity, Rotation)
 
 				# Transform coordinates to axis-aligned frame
 				c = Math.cos(-rot.angle * Math::PI/180)
@@ -375,7 +416,7 @@ class MapSystem < System
 				size.width, size.height, 
 				false, rot.angle)
 
-			@mgr.add_component(
+			@mgr.add_comp(
 				door_id, 
 				Render.new(type, @atlas.find_region(type)))
 		

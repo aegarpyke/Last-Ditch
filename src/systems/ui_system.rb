@@ -42,8 +42,13 @@ class UISystem < System
 		@base_active = true
 		@base_update = true
 
+		base_w = 62
+		base_h = 42
 		@base_table = Table.new(@skin)
-		@base_table.set_bounds(Gdx.graphics.width - 62, Gdx.graphics.height - 42, 62, 42)
+		@base_table.set_bounds(
+			Gdx.graphics.width - base_w, 
+			Gdx.graphics.height - base_h, 
+			base_w, base_h)
 
 		@base_time = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
 		@base_date = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
@@ -461,7 +466,7 @@ class UISystem < System
 	def set_inv_qual_cond(quality, condition)
 		
 		unless quality == -1 && condition == -1
-			@inv_item_quality_dur.text = "Q %d C %d" % [(quality * 100).to_i, (condition * 100).to_i]
+			@inv_item_quality_dur.text = "Q-%d C-%d" % [(quality * 100).to_i, (condition * 100).to_i]
 		else
 			@inv_item_quality_dur.text = ""
 		end

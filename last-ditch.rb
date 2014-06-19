@@ -13,16 +13,16 @@ class LastDitch < ApplicationAdapter
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 
 		@player = @mgr.create_tagged_entity('player')
-		@mgr.add_component(@player, Position.new(40, 40))
-		@mgr.add_component(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
-		@mgr.add_component(@player, Rotation.new(0))
-		@mgr.add_component(@player, Inventory.new(C::INVENTORY_SLOTS))
-		@mgr.add_component(@player, Needs.new)
-		@mgr.add_component(@player, Attributes.new)
-		@mgr.add_component(@player, Skills.new)
-		@mgr.add_component(@player, UserInput.new)
-		@mgr.add_component(@player, Collision.new)
-		@mgr.add_component(@player, Animation.new(
+		@mgr.add_comp(@player, Position.new(40, 40))
+		@mgr.add_comp(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
+		@mgr.add_comp(@player, Rotation.new(0))
+		@mgr.add_comp(@player, Inventory.new(C::INVENTORY_SLOTS))
+		@mgr.add_comp(@player, Needs.new)
+		@mgr.add_comp(@player, Attributes.new)
+		@mgr.add_comp(@player, Skills.new)
+		@mgr.add_comp(@player, UserInput.new)
+		@mgr.add_comp(@player, Collision.new)
+		@mgr.add_comp(@player, Animation.new(
 			0.1,
 			{'player_idle' => ['player_idle1'], 
 	     'player_walk' => ['player_idle1',
@@ -33,35 +33,34 @@ class LastDitch < ApplicationAdapter
 	                       "player_walk1-f", 
 	                       "player_walk2-f", 
 	                       "player_walk1-f"]}))
-		player_info = @mgr.add_component(@player, Info.new(
+		player_info = @mgr.add_comp(@player, Info.new(
 			'Kadijah',
 			'This is the player'))
 		player_info.occupation = 'Unemployed'
 
-
-		@droid = @mgr.create_tagged_entity('droid 1')
-		@mgr.add_component(@droid, Position.new(42, 42))
-		@mgr.add_component(@droid, Velocity.new(0, 0, 0.8, 1))
-		@mgr.add_component(@droid, Rotation.new(0))
-		@mgr.add_component(@droid, Collision.new)
-		@mgr.add_component(@droid, AI.new('wander'))
-		@mgr.add_component(@droid, Animation.new(
+		@drone1 = @mgr.create_tagged_entity('drone 1')
+		@mgr.add_comp(@drone1, Position.new(42, 42))
+		@mgr.add_comp(@drone1, Velocity.new(0, 0, 0.8, 1))
+		@mgr.add_comp(@drone1, Rotation.new(0))
+		@mgr.add_comp(@drone1, Collision.new)
+		@mgr.add_comp(@drone1, AI.new('wander'))
+		@mgr.add_comp(@drone1, Animation.new(
 			0.3,
 			{'drone1_idle' => ['drone1_idle1',
 												 'drone1_idle2']}))
 
-		@droid2 = @mgr.create_tagged_entity('droid 2')
-		@mgr.add_component(@droid2, Position.new(44, 44))
-		@mgr.add_component(@droid2, Velocity.new(0, 0, 1.0, 1))
-		@mgr.add_component(@droid2, Rotation.new(0))
-		@mgr.add_component(@droid2, Collision.new)
-		@mgr.add_component(@droid2, AI.new('wander'))
-		@mgr.add_component(@droid2, Animation.new(
+		@drone2 = @mgr.create_tagged_entity('drone 2')
+		@mgr.add_comp(@drone2, Position.new(44, 44))
+		@mgr.add_comp(@drone2, Velocity.new(0, 0, 1.0, 1))
+		@mgr.add_comp(@drone2, Rotation.new(0))
+		@mgr.add_comp(@drone2, Collision.new)
+		@mgr.add_comp(@drone2, AI.new('wander'))
+		@mgr.add_comp(@drone2, Animation.new(
 			0.3,
 			{'drone1_idle' => ['drone1_idle1',
 												 'drone1_idle2']}))
 
-		@dt_sum = 0
+		@timer = 0
 		@mgr.atlas = @atlas
 
 		@mgr.time      = @time      = TimeSystem.new
@@ -97,11 +96,11 @@ class LastDitch < ApplicationAdapter
 
 	def render
 
-		@dt_sum += Gdx.graphics.delta_time
-		n = (@dt_sum / C::BOX_STEP).floor
-		@dt_sum -= n * C::BOX_STEP if n > 0
+		@timer += Gdx.graphics.delta_time
+		n = (@timer / C::BOX_STEP).floor
+		@timer -= n * C::BOX_STEP if n > 0
 
-		alpha = @dt_sum / C::BOX_STEP
+		alpha = @timer / C::BOX_STEP
 	
 		[n, C::MAX_STEPS].min.times do
 
@@ -128,7 +127,7 @@ class LastDitch < ApplicationAdapter
 		@ui.update
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
-		@batch.projection_matrix = @map.cam::combined
+		@batch.projection_matrix = @map.cam.combined
 
 		@batch.begin
 
@@ -167,4 +166,5 @@ end
 config = LwjglApplicationConfiguration.new
 config.title = C::TITLE
 config.width, config.height = C::WIDTH, C::HEIGHT
+
 LwjglApplication.new(LastDitch.new, config)
