@@ -4,6 +4,62 @@
 		"selected_items":
 		[
 			[
+				"LW",
+				"LwjglApplicationConfiguration"
+			],
+			[
+				"work",
+				"workstation_type"
+			],
+			[
+				"ger",
+				"generate_workstation_bodies"
+			],
+			[
+				"pla",
+				"player_id"
+			],
+			[
+				"can",
+				"canister1_empty"
+			],
+			[
+				"cante",
+				"canteen1_empty"
+			],
+			[
+				"sub",
+				"sub_item_id"
+			],
+			[
+				"typ",
+				"type_value"
+			],
+			[
+				"ca",
+				"canteen1_empty"
+			],
+			[
+				"item",
+				"item_id"
+			],
+			[
+				"inv",
+				"inv_selection"
+			],
+			[
+				"req",
+				"require_relative"
+			],
+			[
+				"v",
+				"Vector2"
+			],
+			[
+				"jav",
+				"java_import"
+			],
+			[
 				"PL",
 				"PLAYER_ROT_SPD"
 			],
@@ -208,20 +264,8 @@
 				"LabelStyle"
 			],
 			[
-				"sub",
-				"sub_dur"
-			],
-			[
-				"item",
-				"item_comp"
-			],
-			[
 				"invi",
 				"inv_item_quality"
-			],
-			[
-				"inv",
-				"inv_slots"
 			],
 			[
 				"sc",
@@ -262,10 +306,6 @@
 			[
 				"rend",
 				"render_comp"
-			],
-			[
-				"pla",
-				"player_pos_comp"
 			],
 			[
 				"en",
@@ -474,184 +514,32 @@
 			[
 				"syst",
 				"systems"
-			],
-			[
-				"rq",
-				"require_relative"
-			],
-			[
-				"G",
-				"GL20"
-			],
-			[
-				"Body",
-				"BodyType"
-			],
-			[
-				"crea",
-				"create_body"
-			],
-			[
-				"creat",
-				"create_fixture"
-			],
-			[
-				"Bo",
-				"BodyDef"
-			],
-			[
-				"rot",
-				"rot_comp"
-			],
-			[
-				"app",
-				"apply_torque"
-			],
-			[
-				"body",
-				"body_def"
-			],
-			[
-				"get_",
-				"get_all_entities_with_components"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "last-ditch.rb",
-			"settings":
-			{
-				"buffer_size": 4439,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/systems/input_system.rb",
-			"settings":
-			{
-				"buffer_size": 6228,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/components/ai.rb",
-			"settings":
-			{
-				"buffer_size": 123,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/systems/ai_system.rb",
-			"settings":
-			{
-				"buffer_size": 493,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/systems/render_system.rb",
-			"settings":
-			{
-				"buffer_size": 3483,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/components/animation.rb",
-			"settings":
-			{
-				"buffer_size": 804,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "src/systems/ui_system.rb",
 			"settings":
 			{
-				"buffer_size": 17833,
+				"buffer_size": 18259,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/components/info.rb",
+			"file": "src/systems/actions_system.rb",
 			"settings":
 			{
-				"buffer_size": 229,
+				"buffer_size": 127,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/util/test.rb",
+			"file": "src/systems/crafting_system.rb",
 			"settings":
 			{
-				"buffer_size": 242,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "cfg/uiskin.json",
-			"settings":
-			{
-				"buffer_size": 1417,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "res/gfx/graphics.atlas",
-			"settings":
-			{
-				"buffer_size": 3347,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/systems/physics_system.rb",
-			"settings":
-			{
-				"buffer_size": 4071,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/components/inventory.rb",
-			"settings":
-			{
-				"buffer_size": 653,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/util/entity_manager.rb",
-			"settings":
-			{
-				"buffer_size": 3324,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/systems/map_system.rb",
-			"settings":
-			{
-				"buffer_size": 12772,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/systems/inventory_system.rb",
-			"settings":
-			{
-				"buffer_size": 955,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/components/item.rb",
-			"settings":
-			{
-				"buffer_size": 415,
+				"buffer_size": 86,
 				"line_ending": "Unix"
 			}
 		},
@@ -659,57 +547,42 @@
 			"file": "src/util/initializer.rb",
 			"settings":
 			{
-				"buffer_size": 4886,
+				"buffer_size": 5133,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/systems/time_system.rb",
+			"file": "src/systems/render_system.rb",
 			"settings":
 			{
-				"buffer_size": 1261,
+				"buffer_size": 3480,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/systems/status_system.rb",
+			"file": "/run/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/java/libgdx/libGDX.34/LastDitch/src/com/gaugestructures/lastditch/SkillsTest.java",
 			"settings":
 			{
-				"buffer_size": 979,
+				"buffer_size": 2372,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/components/needs.rb",
+			"file": "last-ditch.rb",
 			"settings":
 			{
-				"buffer_size": 525,
+				"buffer_size": 4313,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/components/velocity.rb",
+			"contents": "bash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `inv_slots' for nil:NilClass\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:267)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:28)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:18)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nno string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (TypeError) cannot convert instance of class org.jruby.RubyArray to boolean\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nno string\nno string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nno string\nno string\nno string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nno string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nno string\nno string\nno string\nno string\nno string\nno string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (TypeError) cannot convert instance of class org.jruby.RubyArray to boolean\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nno string\nno string\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:44: syntax error, unexpected tRPAREN\n							puts \"Workstation\")\n                         ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:79\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nString\nString\nString\nString\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nNo string\nNo string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nNo string\nNo string\nNo string\nNo string\nNo string\nNo string\nNo string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nNo string\nNo string\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `pust' for #<InputSystem:0x3bbe7>\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:37)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:18)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `inv_slots' for nil:NilClass\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:264)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:41)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:18)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nHere\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\nHere\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nMade it\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" \nException: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread \"LWJGL Application\"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" \nException: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread \"LWJGL Application\"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" \nException: java.lang.OutOfMemoryError thrown from the UncaughtExceptionHandler in thread \"LWJGL Application\"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nString\nruffage1\nString\nruffage1\nString\nhandgun1\nString\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `type' for nil:NilClass\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:430)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:400)\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (ArgumentError) wrong number of arguments calling `use_item` (2 for 1)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:400)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `type' for nil:NilClass\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:429)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:400)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\ncanister1_waste\ncanister1_waste\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\ncanteen1_water\nhandgun1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nRations, empty\nfalse\n-\nHandgun 1\nfalse\n-\nCanteen, water\nfalse\n-\nCanteen, empty\nfalse\n-\nCanteen, water\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nHandgun 1\ntrue\n-\nRations\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nCanteen, empty\ntrue\n-\nRations\ntrue\n-\nCanteen, water\ntrue\n-\nRations\nfalse\n-\nRations, empty\nfalse\n-\nCanteen, empty\nfalse\n-\nRations, empty\nfalse\n-\nRations, empty\nfalse\n-\nRations, empty\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nScrap\nfalse\n-\nCanteen, empty\nfalse\n-\nCanteen, empty\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nRuffage 1\nfalse\n-\nOvergrowth 1\nfalse\n-\nRuffage 1\nfalse\n-\nRuffage 1\nfalse\n-\nRuffage 1\ntrue\n-\nRations\nfalse\n-\nRuffage 1\nfalse\n-\nRuffage 1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nRations, empty\n> z\nbash: z: command not found\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nHandgun 1\nfalse\n-\nRations, empty\nfalse\n-\nRations, empty\nfalse\n-\nRations, empty\nfalse\n-\nRations, empty\nfalse\n-\nHandgun 1\nfalse\n-\nHandgun 1\nfalse\n-\nRations, empty\n> bash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nfalse\n-\nRations, empty\nfalse\n-\nRuffage 1\ntrue\n-\nRations\nRations\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `inv' for #<UISystem:0x260956>\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:434)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `inv' for #<UISystem:0x154965>\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:434)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `name=' for #<Item:0x18575e4>\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:467)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `desc=' for #<Info:0x1c59408>\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:458)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `description' for #<Info:0x6dd85>\n	at UISystem.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:576)\n	at last_minus_ditch.render(last-ditch.rb:136)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `region_name=' for nil:NilClass\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:459)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/inventory_system.rb:76: syntax error, unexpected tIDENTIFIER\n	  info.name = \"Rations, empty\"\n      ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:86\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n\n\ntrue\ntrue\ntrue\ntrue\n\ntrue\ntrue\n\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n\n\n\n\n\n\n\n\n\ntrue\ntrue\ntrue\n\n\n\ntrue\ntrue\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\ntrue\ntrue\ntrue\ntrue\ntrue\n\n\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n\n\ntrue\ntrue\ntrue\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n\n\n\n\ntrue\n\n\n\n\n\n\n\n\ntrue\n\n\n\n\n\n\n\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:492: syntax error, unexpected kEND\nend\n  ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:83\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `create_item' for nil:NilClass\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:131)\n	at org.jruby.RubyRange.each(org/jruby/RubyRange.java:479)\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:120)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:41)\n	at last_minus_ditch.create(last-ditch.rb:68)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `inv_slots' for nil:NilClass\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/inventory_system.rb:11)\n	at last_minus_ditch.create(last-ditch.rb:69)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `create_item' for nil:NilClass\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:131)\n	at org.jruby.RubyRange.each(org/jruby/RubyRange.java:479)\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:120)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:41)\n	at last_minus_ditch.create(last-ditch.rb:73)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `input=' for #<EntityManager:0x2f3a2c>\n	at last_minus_ditch.create(last-ditch.rb:68)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.graphics.g2d.SpriteBatch.draw(com/badlogic/gdx/graphics/g2d/SpriteBatch.java:633)\n	at java.lang.reflect.Method.invoke(java/lang/reflect/Method.java:606)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:142)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:130)\n	at last_minus_ditch.render(last-ditch.rb:134)\n	at last_minus_ditch.render(last-ditch.rb:134)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:206)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.graphics.g2d.SpriteBatch.draw(com/badlogic/gdx/graphics/g2d/SpriteBatch.java:633)\n	at java.lang.reflect.Method.invoke(java/lang/reflect/Method.java:606)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:142)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:130)\n	at last_minus_ditch.render(last-ditch.rb:134)\n	at last_minus_ditch.render(last-ditch.rb:134)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:206)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `inv_slots' for nil:NilClass\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/inventory_system.rb:11)\n	at last_minus_ditch.create(last-ditch.rb:70)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.graphics.g2d.SpriteBatch.draw(com/badlogic/gdx/graphics/g2d/SpriteBatch.java:633)\n	at java.lang.reflect.Method.invoke(java/lang/reflect/Method.java:606)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:142)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:130)\n	at last_minus_ditch.render(last-ditch.rb:136)\n	at last_minus_ditch.render(last-ditch.rb:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:206)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nhere\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\nhere\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nhere\nhere\nhere\nhere\nhere\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> PS1=\"> \"\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:440: syntax error, unexpected tIDENTIFIER\n			check ? puts check : puts \"No check\"\n                    ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:440: syntax error, unexpected ':'\n			check : puts check ? puts \"No check\"\n         ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:440: syntax error, unexpected ':'\n			check : puts check ? puts \"No check\"\n         ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:440: syntax error, unexpected tIDENTIFIER\n			check ? puts check : puts \"No check\"\n                    ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:440: syntax error, unexpected tIDENTIFIER\n			check ? puts check : puts \"No check\"\n                    ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n\n\n\n\ntrue\n\n\n\n\n\n\n\n\n\n\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `type' for nil:NilClass\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:449)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `inv' for #<UISystem:0xa5bd4c>\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:430)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `inv' for #<UISystem:0x193a105>\n	at RUBY.use_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:430)\n	at RUBY.clicked(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:410)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:436: syntax error, unexpected kDO_BLOCK\n		do\n   ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:438: syntax error, unexpected '\\n'\n\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ jruby last-ditch.rb\nError opening script file: /opt/sublime_text_3/last-ditch.rb (No such file or directory)\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (ArgumentError) bad value for range\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:21)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:13)\n	at last_minus_ditch.create(last-ditch.rb:78)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `set_inv_name' for #<UISystem:0x104c78e>\n	at UISystem.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:536)\n	at last_minus_ditch.render(last-ditch.rb:128)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:53: syntax error, unexpected kWHEN\n				when 1\n       ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:79\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `type' for nil:NilClass\n	at RUBY.change_door(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:365)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:423)\n	at org.jruby.RubyProc.call(org/jruby/RubyProc.java:271)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:416)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:41)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:21)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `text=' for nil:NilClass\n	at RUBY.set_inv_name(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:508)\n	at UISystem.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:546)\n	at last_minus_ditch.render(last-ditch.rb:128)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `body' for nil:NilClass\n	at RUBY.change_door(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:361)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:424)\n	at org.jruby.RubyProc.call(org/jruby/RubyProc.java:271)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:416)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:41)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:21)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `type' for nil:NilClass\n	at RUBY.change_door(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:365)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:423)\n	at org.jruby.RubyProc.call(org/jruby/RubyProc.java:271)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:416)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:41)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:21)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `body' for nil:NilClass\n	at RUBY.change_door(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:361)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:421)\n	at org.jruby.RubyProc.call(org/jruby/RubyProc.java:271)\n	at RUBY.use_door_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:415)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:41)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:21)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `pos' for #<MapSystem:0x17fbfb9>\n	at RUBY.get_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:248)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.get_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:246)\n	at RUBY.pickup_item_at(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:314)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:41)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:21)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.graphics.g2d.SpriteBatch.draw(com/badlogic/gdx/graphics/g2d/SpriteBatch.java:633)\n	at java.lang.reflect.Method.invoke(java/lang/reflect/Method.java:606)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:136)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:124)\n	at last_minus_ditch.render(last-ditch.rb:136)\n	at last_minus_ditch.render(last-ditch.rb:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:206)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.graphics.g2d.SpriteBatch.draw(com/badlogic/gdx/graphics/g2d/SpriteBatch.java:633)\n	at java.lang.reflect.Method.invoke(java/lang/reflect/Method.java:606)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:136)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb:124)\n	at last_minus_ditch.render(last-ditch.rb:136)\n	at last_minus_ditch.render(last-ditch.rb:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:206)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/c.rb:26: syntax error, unexpected tSTRING_BEG\n		'rations1_empty', 'rations1', \n  ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:73\n            (root) at last-ditch.rb:1\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\ncanister1_water\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) uninitialized constant MapSystem::Workstation\n	at org.jruby.RubyModule.const_missing(org/jruby/RubyModule.java:2690)\n	at RUBY.generate_workstations(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:267)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.generate_workstations(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:247)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:43)\n	at last_minus_ditch.create(last-ditch.rb:76)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (ArgumentError) invalid argument - 196...195\n	at org.jruby.RubyRandom.rand(org/jruby/RubyRandom.java:261)\n	at RUBY.generate_workstations(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:252)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.generate_workstations(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:247)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:43)\n	at last_minus_ditch.create(last-ditch.rb:76)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> bash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ ls\nabstract\ncfg\nlast-ditch.rb\nlast-ditch.sublime-project\nlast-ditch.sublime-workspace\nlib\nREADME.md\nres\nsrc\n[kabbotta@localhost last-ditch]$ PS1=\">\"\n>PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n-> cd /home/kabbotta/workspace/jruby/libgdx/last-ditch\n-> ls\nabstract\ncfg\nlast-ditch.rb\nlast-ditch.sublime-project\nlast-ditch.sublime-workspace\nlib\nREADME.md\nres\nsrc\n-> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n-> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n-> cd /home/kabbotta/workspace/jruby/libgdx/last-ditch\n-> jruby last-ditch.rb\n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n-> cd /home/kabbotta/workspace/jruby/libgdx/last-ditch\n-> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n-> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n-> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n-> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n-> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:215: syntax error, unexpected null\n			\"This is a description of whatever it is that needs to be described.\" \\ \n                                                                         ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n-> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:215: syntax error, unexpected null\n			\"This is a description of whatever it is that needs to be described. \" \\ \n                                                                          ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:84\n            (root) at last-ditch.rb:1\n-> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `/' for #<String:0x45283d>\n	at RUBY.setup_equipment(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:214)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:171)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:21)\n	at last_minus_ditch.create(last-ditch.rb:68)\n-> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n-> ls\nabstract\ncfg\nlast-ditch.rb\nlast-ditch.sublime-project\nlast-ditch.sublime-workspace\nlib\nREADME.md\nres\nsrc\n-> jruby src/util/particle_editor.rb\nNameError: missing class or uppercase package name (`com.badlogic.gdx.tools.particleeditor.ParticleEditor'), caused by (NameError) cannot link Java class com.badlogic.gdx.tools.particleeditor.ParticleEditor, probable missing dependency: com/badlogic/gdx/ApplicationListener\n  get_proxy_or_package_under_package at org/jruby/javasupport/JavaUtilities.java:54\n                      method_missing at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/java/java_package_module_template.rb:14\n                              (root) at src/util/particle_editor.rb:3\n-> jruby src/util/particle_editor.rb\njava.lang.RuntimeException: No OpenGL context found in the current thread.\n	at org.lwjgl.opengl.GLContext.getCapabilities(GLContext.java:124)\n	at org.lwjgl.opengl.GL11.glViewport(GL11.java:3261)\n	at com.badlogic.gdx.backends.lwjgl.LwjglGL20.glViewport(LwjglGL20.java:728)\n	at com.badlogic.gdx.backends.lwjgl.LwjglCanvas$3.run(LwjglCanvas.java:216)\n	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)\n	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:744)\n	at java.awt.EventQueue.access$400(EventQueue.java:97)\n	at java.awt.EventQueue$3.run(EventQueue.java:697)\n	at java.awt.EventQueue$3.run(EventQueue.java:691)\n	at java.security.AccessController.doPrivileged(Native Method)\n	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)\n	at java.awt.EventQueue.dispatchEvent(EventQueue.java:714)\n	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)\n	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)\n	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)\n	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)\n	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)\n	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)\nAL lib: (EE) alc_cleanup: 1 device not closed\n-> \n-> jruby src/util/particle_editor.rb\nTypeError: superclass must be a Class (#<Class:Java::ComBadlogicGdx::ApplicationListener> given)\n  (root) at src/util/particle_editor.rb:12\n-> jruby src/util/particle_editor.rb\nException in thread \"LWJGL Application\" java.lang.IllegalStateException: Only one OpenAL context may be instantiated at any one time.\n	at org.lwjgl.openal.AL.create(org/lwjgl/openal/AL.java:113)\n	at org.lwjgl.openal.AL.create(org/lwjgl/openal/AL.java:102)\n	at org.lwjgl.openal.AL.create(org/lwjgl/openal/AL.java:201)\n	at com.badlogic.gdx.backends.lwjgl.audio.OpenALAudio.<init>(com/badlogic/gdx/backends/lwjgl/audio/OpenALAudio.java:72)\n	at com.badlogic.gdx.backends.lwjgl.audio.OpenALAudio.<init>(com/badlogic/gdx/backends/lwjgl/audio/OpenALAudio.java:57)\n	at com.badlogic.gdx.backends.lwjgl.LwjglCanvas.initialize(com/badlogic/gdx/backends/lwjgl/LwjglCanvas.java:120)\n	at com.badlogic.gdx.backends.lwjgl.LwjglCanvas.<init>(com/badlogic/gdx/backends/lwjgl/LwjglCanvas.java:64)\n	at com.badlogic.gdx.tools.particleeditor.ParticleEditor.<init>(com/badlogic/gdx/tools/particleeditor/ParticleEditor.java:88)\n	at java.lang.reflect.Constructor.newInstance(java/lang/reflect/Constructor.java:408)\n	at java.lang.invoke.MethodHandle.invokeWithArguments(java/lang/invoke/MethodHandle.java:636)\n	at src.util.particle_editor.create(src/util/particle_editor.rb:15)\n	at src.util.particle_editor.create(src/util/src/util/particle_editor.rb:15)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n-> jruby src/util/particle_editor.rb\nNoMethodError: undefined method `disable_audio=' for #<Java::ComBadlogicGdxBackendsLwjgl::LwjglApplicationConfiguration:0x1423665>\n  (root) at src/util/particle_editor.rb:22\n-> jruby src/util/particle_editor.rb\njava.lang.RuntimeException: No OpenGL context found in the current thread.\n	at org.lwjgl.opengl.GLContext.getCapabilities(GLContext.java:124)\n	at org.lwjgl.opengl.GL11.glViewport(GL11.java:3261)\n	at com.badlogic.gdx.backends.lwjgl.LwjglGL20.glViewport(LwjglGL20.java:728)\n	at com.badlogic.gdx.backends.lwjgl.LwjglCanvas$3.run(LwjglCanvas.java:216)\n	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)\n	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:744)\n	at java.awt.EventQueue.access$400(EventQueue.java:97)\n	at java.awt.EventQueue$3.run(EventQueue.java:697)\n	at java.awt.EventQueue$3.run(EventQueue.java:691)\n	at java.security.AccessController.doPrivileged(Native Method)\n	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)\n	at java.awt.EventQueue.dispatchEvent(EventQueue.java:714)\n	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)\n	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)\n	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)\n	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)\n	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)\n	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)\nException in thread \"LWJGL Application\" java.lang.RuntimeException: org.lwjgl.LWJGLException: X Error - disp: 0xffffffff8364fd80 serial: 6239 error: BadDrawable (invalid Pixmap or Window parameter) request_code: 152 minor_code: 8\n	at org.lwjgl.opengl.Display.update(Display.java:648)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:207)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:114)\nCaused by: org.lwjgl.LWJGLException: X Error - disp: 0xffffffff8364fd80 serial: 6239 error: BadDrawable (invalid Pixmap or Window parameter) request_code: 152 minor_code: 8\n	at org.lwjgl.opengl.LinuxDisplay.globalErrorHandler(LinuxDisplay.java:321)\n	at org.lwjgl.opengl.LinuxContextImplementation.nSwapBuffers(Native Method)\n	at org.lwjgl.opengl.LinuxContextImplementation.swapBuffers(LinuxContextImplementation.java:79)\n	at org.lwjgl.opengl.ContextGL.swapBuffers(ContextGL.java:175)\n	at org.lwjgl.opengl.DrawableGL.swapBuffers(DrawableGL.java:90)\n	at org.lwjgl.opengl.Display.swapBuffers(Display.java:618)\n	at org.lwjgl.opengl.Display.update(Display.java:646)\n	... 2 more\n-> ",
 			"settings":
 			{
-				"buffer_size": 243,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/util/c.rb",
-			"settings":
-			{
-				"buffer_size": 354,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "bash: no job control in this shell\n[kabbotta@localhost systems]$ cd /home/kabbotta/workspace/jruby/libgdx/last-d<]$ cd /home/kabbotta/workspace/jruby/libgdx/last-di                        tch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `energy_fatigue_rate' for #<Needs:0xd137ab>\n	at RUBY.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/status_system.rb:33)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/status_system.rb:13)\n	at last_minus_ditch.render(last-ditch.rb:114)\n	at org.jruby.RubyFixnum.times(org/jruby/RubyFixnum.java:275)\n	at last_minus_ditch.render(last-ditch.rb:107)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> irb\nSwitch to inspect mode.\n\n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> PS1=\"> \"\n> cd /home/kabbotta/workspace/jruby/libgdx/last-ditch\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\nSyntaxError: last-ditch.rb:27: syntax error, unexpected tLBRACE\n			{'player_idle' => ['player_idle1'], \n   ^\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `pos' for #<PhysicsSystem:0x1186d6a>\n	at RUBY.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb:196)\n	at last_minus_ditch.render(last-ditch.rb:120)\n	at org.jruby.RubyFixnum.times(org/jruby/RubyFixnum.java:275)\n	at last_minus_ditch.render(last-ditch.rb:112)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `x' for #<Velocity:0xaf04aa>\n	at RUBY.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb:203)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb:197)\n	at last_minus_ditch.render(last-ditch.rb:120)\n	at org.jruby.RubyFixnum.times(org/jruby/RubyFixnum.java:275)\n	at last_minus_ditch.render(last-ditch.rb:112)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `angle' for #<PhysicsSystem:0x17da553>\n	at RUBY.interpolate(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb:208)\n	at last_minus_ditch.render(last-ditch.rb:131)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n40\n \nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `x' for #<PhysicsSystem:0xb8f2a4>\n	at RUBY.interpolate(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb:207)\n	at last_minus_ditch.render(last-ditch.rb:131)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n40\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.0\n \n40.0\n40.2116813659668\n \n40.21025354410722\n40.374088287353516\n \n40.368150500522034\n40.541080474853516\n \n40.456455028580166\n40.54415512084961\n \n40.48513677347802\n40.573219299316406\n \n40.51692772481198\n40.60517883300781\n \n40.5386090172405\n40.626930236816406\n \n40.5467921418641\n40.63514709472656\n \n40.55724975583132\n40.64562225341797\n \n40.60141148188427\n40.689788818359375\n \n40.66374042195821\n40.84050369262695\n \n40.78332258371347\n40.8717041015625\n \n40.8363739351318\n41.01313781738281\n \n40.92544638718209\n41.01382827758789\n \n40.9536100454373\n41.0419921875\n \n40.9814815499102\n41.10586929321289\n \n41.080612686010795\n41.10000991821289\n \n41.094645329198215\n41.10295104980469\n \n41.10231404395631\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `pos' for #<PhysicsSystem:0xa80ef3>\n	at RUBY.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb:198)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb:196)\n	at last_minus_ditch.render(last-ditch.rb:120)\n	at org.jruby.RubyFixnum.times(org/jruby/RubyFixnum.java:275)\n	at last_minus_ditch.render(last-ditch.rb:112)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> \n***Repl Killed***\njruby last-ditch.rb\n\n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nNon-empty\nNon-empty\nNon-empty\nNon-empty\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nruffage1\nNon-empty\nNon-empty\nNon-empty\novergrowth1\nNon-empty\nNon-empty\n> \\\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nNon-empty\nNon-empty\nNon-empty\ncanteen1\nNon-empty\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nNon-empty\nNon-empty\nNon-empty\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nNon-empty\nNon-empty\nNon-empty\ncanteen1\nhere\nNon-empty\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nruffage1\nhere\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\nNon-empty\n> \n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\nbash: -ditch.rb: command not found\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `name' for nil:NilClass\n	at UISystem.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:398)\n	at last_minus_ditch.render(last-ditch.rb:129)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `item_id' for #<MapSystem:0x1a3af98>\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:191)\n	at org.jruby.RubyRange.each(org/jruby/RubyRange.java:479)\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:120)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:41)\n	at last_minus_ditch.create(last-ditch.rb:63)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `item_id' for #<MapSystem:0xea2e0a>\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:191)\n	at org.jruby.RubyRange.each(org/jruby/RubyRange.java:479)\n	at RUBY.generate_items(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:120)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:41)\n	at last_minus_ditch.create(last-ditch.rb:63)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `item' for #<MapSystem:0x32a60e>\n	at RUBY.remove_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb:373)\n	at RUBY.pickup_item(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:252)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:30)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.touch_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:18)\n	at RUBY.touchDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:13)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `name' for nil:NilClass\n	at UISystem.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:398)\n	at last_minus_ditch.render(last-ditch.rb:129)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) undefined local variable or method `item' for #<UISystem:0x7d6a67>\n	at UISystem.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:393)\n	at last_minus_ditch.render(last-ditch.rb:129)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `locked' for nil:NilClass\n	at RUBY.use_door(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:333)\n	at RUBY.key_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:88)\n	at org.jruby.RubyArray.each(org/jruby/RubyArray.java:1613)\n	at RUBY.key_down(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb:79)\n	at RUBY.keyDown(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb:20)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ jruby last-ditch.rb\nError opening script file: /opt/sublime_text_3/last-ditch.rb (No such file or directory)\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> PS1=\"> \"\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (ArgumentError) no height with arguments matching [] on object Java::ComEsotericsoftwareTablelayout::Cell\n	at RUBY.setup_base(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:51)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:17)\n	at last_minus_ditch.create(last-ditch.rb:64)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `condition' for #<Item:0xf7cf40>\n	at UISystem.update(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:417)\n	at last_minus_ditch.render(last-ditch.rb:133)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:121: syntax error, unexpected kDEF\n					def touchUp(event, x, y, pointer, button)\n       ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:82\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:622: syntax error, unexpected kEND\nend\n  ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:82\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:622: syntax error, unexpected kEND\nend\n  ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:82\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:618: syntax error, unexpected kEND\nend\n  ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:82\n            (root) at last-ditch.rb:1\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\nYou clicked\nYou clicked\nYou clicked\nYou clicked\nYou clicked\nYou clicked\nYou clicked\nYou clicked\nYou clicked\nYou clicked\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\nYou clicked\nYou clicked\nYou clicked\nYou clicked\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\n#\n# A fatal error has been detected by the Java Runtime Environment:\n#\n#  SIGSEGV (0xb) at pc=0x8846bac2, pid=2659, tid=3059129152\n#\n# JRE version: OpenJDK Runtime Environment (7.0_45-b15) (build 1.7.0_45-mockbuild_2013_10_17_16_48-b00)\n# Java VM: OpenJDK Server VM (24.45-b08 mixed mode linux-x86 )\n# Problematic frame:\n# C  [libopenal.so+0x1bac2]  alcCreateContext+0xd2\n#\n# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try \"ulimit -c unlimited\" before starting Java again\n#\n# An error report file with more information is saved as:\n# /tmp/jvm-2659/hs_error.log\n#\n# If you would like to submit a bug report, please include\n# instructions on how to reproduce the bug and visit:\n#   http://icedtea.classpath.org/bugzilla\n# The crash happened outside the Java Virtual Machine in native code.\n# See problematic frame for where to report the bug.\n#\nbash: [2213: 2 (255)] tcsetattr: Inappropriate ioctl for device\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:127 warning: ambiguous Java methods found, using add(com.badlogic.gdx.scenes.scene2d.Actor[])\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `width' for nil:NilClass\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:127)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:18)\n	at last_minus_ditch.create(last-ditch.rb:67)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:127 warning: ambiguous Java methods found, using add(com.badlogic.gdx.scenes.scene2d.Actor[])\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `width' for nil:NilClass\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:127)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:18)\n	at last_minus_ditch.create(last-ditch.rb:67)\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 256x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `base_selection=' for #<UISystem:0xdc87c9>\n	at RUBY.enter(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:100)\n	at RUBY.enter(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:100)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:625)\n	at RUBY.render(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:625)\n	at last_minus_ditch.render(last-ditch.rb:146)\n	at last_minus_ditch.render(last-ditch.rb:146)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\nException in thread \"LWJGL Application\" com.badlogic.gdx.utils.SerializationException: Error reading file: cfg/uiskin.json\n	at com.badlogic.gdx.scenes.scene2d.ui.Skin.load(com/badlogic/gdx/scenes/scene2d/ui/Skin.java:96)\n	at com.badlogic.gdx.scenes.scene2d.ui.Skin.<init>(com/badlogic/gdx/scenes/scene2d/ui/Skin.java:81)\n	at java.lang.reflect.Constructor.newInstance(java/lang/reflect/Constructor.java:526)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:16)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\nCaused by: com.badlogic.gdx.utils.SerializationException: Error reading file: cfg/uiskin.json\n	at com.badlogic.gdx.utils.Json.fromJson(Json.java:662)\n	at com.badlogic.gdx.scenes.scene2d.ui.Skin.load(Skin.java:94)\n	at com.badlogic.gdx.scenes.scene2d.ui.Skin.<init>(Skin.java:81)\n	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\n	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)\n	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)\n	at org.jruby.javasupport.JavaConstructor.newInstanceDirect(JavaConstructor.java:291)\n	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:104)\n	at org.jruby.java.invokers.ConstructorInvoker.call(ConstructorInvoker.java:197)\n	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:356)\n	at org.jruby.runtime.callsite.CachingCallSite.callBlock(CachingCallSite.java:213)\n	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:217)\n	at org.jruby.java.proxies.ConcreteJavaProxy$2.call(ConcreteJavaProxy.java:56)\n	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:356)\n	at org.jruby.runtime.callsite.CachingCallSite.callBlock(CachingCallSite.java:213)\n	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:217)\n	at org.jruby.RubyClass.newInstance(RubyClass.java:811)\n	at org.jruby.RubyClass$INVOKER$i$newInstance.call(RubyClass$INVOKER$i$newInstance.gen)\n	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroOrOneOrTwoOrNBlock.call(JavaMethod.java:314)\n	at org.jruby.java.proxies.ConcreteJavaProxy$3.call(ConcreteJavaProxy.java:155)\n	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:346)\n	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:204)\n	at org.jruby.ast.CallTwoArgNode.interpret(CallTwoArgNode.java:59)\n	at org.jruby.ast.InstAsgnNode.interpret(InstAsgnNode.java:95)\n	at org.jruby.ast.NewlineNode.interpret(NewlineNode.java:105)\n	at org.jruby.ast.BlockNode.interpret(BlockNode.java:71)\n	at org.jruby.evaluator.ASTInterpreter.INTERPRET_METHOD(ASTInterpreter.java:74)\n	at org.jruby.internal.runtime.methods.InterpretedMethod.call(InterpretedMethod.java:290)\n	at org.jruby.internal.runtime.methods.DefaultMethod.call(DefaultMethod.java:238)\n	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:376)\n	at org.jruby.runtime.callsite.CachingCallSite.callBlock(CachingCallSite.java:247)\n	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:251)\n	at org.jruby.RubyClass.newInstance(RubyClass.java:818)\n	at org.jruby.RubyClass$INVOKER$i$newInstance.call(RubyClass$INVOKER$i$newInstance.gen)\n	at org.jruby.internal.runtime.methods.JavaMethod$JavaMethodZeroOrOneOrTwoOrThreeOrNBlock.call(JavaMethod.java:331)\n	at org.jruby.runtime.callsite.CachingCallSite.cacheAndCall(CachingCallSite.java:366)\n	at org.jruby.runtime.callsite.CachingCallSite.call(CachingCallSite.java:238)\n	at last_minus_ditch.method__1$RUBY$create(last-ditch.rb:67)\n	at last_minus_ditch$method__1$RUBY$create.call(last_minus_ditch$method__1$RUBY$create)\n	at last_minus_ditch$method__1$RUBY$create.call(last_minus_ditch$method__1$RUBY$create)\n	at org.jruby.internal.runtime.methods.DynamicMethod.call(DynamicMethod.java:180)\n	at org.jruby.javasupport.proxy.JavaProxyConstructor$2.invoke(JavaProxyConstructor.java:224)\n	at org.jruby.proxy.com.badlogic.gdx.ApplicationAdapter$Proxy0.create(Unknown Source)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(LwjglApplication.java:114)\nCaused by: com.badlogic.gdx.utils.SerializationException: Error parsing file: cfg/uiskin.json\n	at com.badlogic.gdx.utils.JsonReader.parse(JsonReader.java:77)\n	at com.badlogic.gdx.utils.Json.fromJson(Json.java:660)\n	... 45 more\nCaused by: com.badlogic.gdx.utils.SerializationException: Error parsing JSON on line 42 near: base_slot:\n		{\n			up: base_slot\n		},\n		\n		inv_slot:\n		{\n			up: inv_slot\n		},\n\n		status_bars:\n		{\n			up: status_bar\n		}\n	},\n\n	com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: \n	{\n		default: \n		{\n			up: button1, down: button1_pressed, \n			font: default-font, fontColor: white\n		},\n	},\n\n	com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: \n	{\n		default: \n		{\n			background: window1,\n			titleFont: default-font, titleFontColor: white\n		},\n	}\n}\n\n	at com.badlogic.gdx.utils.JsonReader.parse(JsonReader.java:468)\n	at com.badlogic.gdx.utils.JsonReader.parse(JsonReader.java:55)\n	at com.badlogic.gdx.utils.JsonReader.parse(JsonReader.java:75)\n	... 46 more\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:232 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:234 warning: ambiguous Java methods found, using com.badlogic.gdx.graphics.g2d.TextureRegion(com.badlogic.gdx.graphics.g2d.TextureRegion)\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.graphics.g2d.TextureRegion.setRegion(com/badlogic/gdx/graphics/g2d/TextureRegion.java:112)\n	at com.badlogic.gdx.graphics.g2d.TextureRegion.<init>(com/badlogic/gdx/graphics/g2d/TextureRegion.java:63)\n	at java.lang.reflect.Constructor.newInstance(java/lang/reflect/Constructor.java:526)\n	at RUBY.setup_equipment(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:234)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:157)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:232 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:234 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable(com.badlogic.gdx.graphics.g2d.TextureRegion)\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable.setRegion(com/badlogic/gdx/scenes/scene2d/utils/TextureRegionDrawable.java:51)\n	at com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable.<init>(com/badlogic/gdx/scenes/scene2d/utils/TextureRegionDrawable.java:32)\n	at java.lang.reflect.Constructor.newInstance(java/lang/reflect/Constructor.java:526)\n	at RUBY.setup_equipment(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:234)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:157)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:239 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:237 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:235 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:331: syntax error, unexpected tINTEGER\n		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1)   33:\n                                                            ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:82\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:331: syntax error, unexpected tINTEGER\n		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)   33:\n                                                              ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:82\n            (root) at last-ditch.rb:1\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `flip' for #<Java::ComBadlogicGdxScenesScene2dUtils::TextureRegionDrawable:0x17a712c>\n	at RUBY.setup_equipment(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:236)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:157)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NameError) uninitialized constant UISystem::TextRegion\n	at org.jruby.RubyModule.const_missing(org/jruby/RubyModule.java:2690)\n	at RUBY.setup_equipment(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:248)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:157)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\nException in thread \"LWJGL Application\" com.badlogic.gdx.utils.GdxRuntimeException: No com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle registered with name: inv_slot\n	at com.badlogic.gdx.scenes.scene2d.ui.Skin.get(com/badlogic/gdx/scenes/scene2d/ui/Skin.java:147)\n	at java.lang.reflect.Method.invoke(java/lang/reflect/Method.java:606)\n	at RUBY.setup_inventory(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:339)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:159)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\nException in thread \"LWJGL Application\" com.badlogic.gdx.utils.GdxRuntimeException: No com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle registered with name: inv\n	at com.badlogic.gdx.scenes.scene2d.ui.Skin.get(com/badlogic/gdx/scenes/scene2d/ui/Skin.java:147)\n	at java.lang.reflect.Method.invoke(java/lang/reflect/Method.java:606)\n	at RUBY.setup_inventory(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:368)\n	at org.jruby.RubyRange.each(org/jruby/RubyRange.java:479)\n	at RUBY.setup_inventory(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:366)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:159)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 512x256: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:296 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:299 warning: ambiguous Java methods found, using com.badlogic.gdx.graphics.g2d.TextureRegion(com.badlogic.gdx.graphics.g2d.TextureRegion)\nException in thread \"LWJGL Application\" java.lang.NullPointerException\n	at com.badlogic.gdx.graphics.g2d.TextureRegion.setRegion(com/badlogic/gdx/graphics/g2d/TextureRegion.java:112)\n	at com.badlogic.gdx.graphics.g2d.TextureRegion.<init>(com/badlogic/gdx/graphics/g2d/TextureRegion.java:63)\n	at java.lang.reflect.Constructor.newInstance(java/lang/reflect/Constructor.java:526)\n	at RUBY.setup_status(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:299)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:158)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at last_minus_ditch.create(last-ditch.rb:67)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication.mainLoop(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:136)\n	at com.badlogic.gdx.backends.lwjgl.LwjglApplication$1.run(com/badlogic/gdx/backends/lwjgl/LwjglApplication.java:114)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (ArgumentError) wrong number of arguments (1 for 4)\n	at RUBY.setup_equipment(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:245)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:157)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:67)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby --2.0 -S last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\nSyntaxError: /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:336: syntax error, unexpected null\n		@\n  ^\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:1\n           require at /opt/jruby-1.7.12/lib/ruby/shared/rubygems/core_ext/kernel_require.rb:55\n  require_relative at file:/opt/jruby-1.7.12/lib/jruby.jar!/jruby/kernel19/kernel.rb:21\n           require at org/jruby/RubyKernel.java:1065\n            (root) at /home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb:82\n            (root) at last-ditch.rb:1\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `wrap' for #<Java::ComBadlogicGdxScenesScene2dUi::Label:0x97c118>\n	at RUBY.setup_status(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:341)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:165)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:69)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\nException in thread \"LWJGL Application\" org.jruby.exceptions.RaiseException: (NoMethodError) undefined method `padright' for #<Java::ComBadlogicGdxScenesScene2dUi::Cell:0x79c3bb>\n	at RUBY.setup_status(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:350)\n	at RUBY.setup_main(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:165)\n	at RUBY.initialize(/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:19)\n	at last_minus_ditch.create(last-ditch.rb:69)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ jruby last-ditch.rb\nError opening script file: /opt/sublime_text_3/last-ditch.rb (No such file or directory)\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n	\n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> \n#############\n## RESTART ##\n#############\nbash: no job control in this shell\n[kabbotta@localhost sublime_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx<_text_3]$ cd /home/kabbotta/workspace/jruby/libgdx/                        last-ditch\n[kabbotta@localhost last-ditch]$ PS1=\"> \"\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:328 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb:330 warning: ambiguous Java methods found, using com.badlogic.gdx.scenes.scene2d.ui.Image(com.badlogic.gdx.scenes.scene2d.utils.Drawable)\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby --2.0 last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby --2.0 last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> jruby --2.0 last-ditch.rb\ngfx\nPacking.........\nWriting 1024x64: res/gfx/graphics.png\n> ",
-			"settings":
-			{
-				"buffer_size": 76981,
+				"buffer_size": 55259,
 				"line_ending": "Unix",
 				"name": "*REPL* [shell]",
+				"read_only": true,
 				"scratch": true
 			}
 		}
@@ -717,19 +590,19 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 72.0,
+		"height": 52.0,
 		"selected_items":
 		[
 			[
-				"Package Control: in",
+				"Package Control: insta",
 				"Package Control: Install Package"
 			],
 			[
-				"Package Control: insta",
+				"Package Control: in",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 530.0
+		"width": 461.0
 	},
 	"console":
 	{
@@ -750,38 +623,60 @@
 	},
 	"file_history":
 	[
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/particle_editor.rb",
+		"/home/kabbotta/.java/deployment/deployment.properties",
+		"/run/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/java/libgdx/libGDX.34/LastDitch/src/com/gaugestructures/lastditch/InputManager.java",
+		"/home/kabbotta/workspace/Colorsublime-Themes/themes.json",
+		"/home/kabbotta/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/kabbotta/.config/sublime-text-3/Packages/Colorsublime-Themes/Kabbotta.tmTheme",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/.gitignore",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/room.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/c.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/abstract",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/workstation.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/info.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/item.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/entity_manager.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/status_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/last-ditch.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/inventory_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/user_adapter.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/cfg/uiskin.json",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/res/gfx/graphics.atlas",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/inventory.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/action.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/README.md",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/ray_cast_callback_impl.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/initializer.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/time_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/needs.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/velocity.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/sound_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/animation.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ai_system.rb",
+		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/ai.rb",
+		"/home/kabbotta/.config/sublime-text-3/Packages/User/Ruby.sublime-settings",
+		"/home/kabbotta/.config/sublime-text-3/Packages/User/Plain text.sublime-settings",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/test.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/lighting_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ai_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/time_system.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/status_system.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/position.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/rotation.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/physics_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/inventory_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/input_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/animation.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/util/entity_manager.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/equipment_system.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/actions_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/needs.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/last-ditch.rb",
 		"/home/kabbotta/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/kabbotta/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/entity_manager.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/map_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/ui_system.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/inventory.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/item.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/game_screen.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/.gitignore",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/door.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/systems/render_system.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/render.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/size.rb",
 		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/src/components/collision.rb",
-		"/home/kabbotta/workspace/jruby/libgdx/last-ditch/README.md",
 		"/home/kabbotta/workspace/jruby/last-ditch/src/components/attributes.rb",
 		"/home/kabbotta/workspace/jruby/last-ditch/src/components/needs.rb",
 		"/home/kabbotta/workspace/jruby/last-ditch/src/util/c.rb",
@@ -809,7 +704,6 @@
 		"/home/kabbotta/workspace/java/jruby/last-ditch/src/util/user_adapter.rb",
 		"/home/kabbotta/workspace/java/jruby/last-ditch/src/components/user_input.rb",
 		"/home/kabbotta/workspace/java/jruby/last-ditch/cfg/uiskin.json",
-		"/home/kabbotta/.config/sublime-text-3/Packages/User/Ruby.sublime-settings",
 		"/home/kabbotta/.config/sublime-text-2/Packages/User/Ruby.sublime-settings",
 		"/home/kabbotta/workspace/java/jruby/last-ditch/src/systems/inventory_system.rb",
 		"/home/kabbotta/workspace/java/jruby/last-ditch/src/components/inventory.rb",
@@ -856,32 +750,11 @@
 		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/components/animation.rb",
 		"/home/kabbotta/workspace/java/libGDX/last_ditch/src/components/render.rb",
 		"/home/kabbotta/workspace/libGDX/last_ditch/src/listener.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/user_adapter.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/ld_adapter.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/Menu.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/LightingManager.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/GameScreen.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/Callback.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/Listener.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/user_input.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/entity_manager.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/assets/json/skin.json",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/collision.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/render_system.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/lighting_system.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/physics_system.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/EntityContactListener.rb",
-		"/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/libGDX/JRuby/last_ditch_prev/LastDitch-Game.12/src/logic/PlayerListener.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/systems/input_system.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/components/rotation.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/room.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/chunk.rb",
-		"/home/kabbotta/workspace/libGDX/last_ditch/cfg/uiskin.json",
-		"/home/kabbotta/workspace/libGDX/last_ditch/src/ui.rb"
+		"/home/kabbotta/workspace/libGDX/last_ditch/src/user_adapter.rb"
 	],
 	"find":
 	{
-		"height": 21.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -896,6 +769,21 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"player_body",
+			"BIT_WINDOW",
+			"door_id",
+			"add_component",
+			"@dt_sum",
+			"@drone12",
+			"@droid",
+			"screenY",
+			"screenX",
+			"or",
+			"here",
+			"prev_inv_selection",
+			"prev_selection",
+			"only",
+			"set",
 			"wrap",
 			"@status_window",
 			"set_inv_desc",
@@ -1008,29 +896,23 @@
 			"@update",
 			"active",
 			"@active",
-			"@items",
-			"get_all_entities_with_components",
-			"all_entities",
-			"Label",
-			"map.mgr.atlas",
-			"add",
-			"char ",
-			"int ",
-			"boolean ",
-			"font",
-			"\"r\"",
-			"\"g\"",
-			"\"b\"",
-			"\"a\"",
-			"uiskin",
-			")\n"
+			"@items"
 		],
 		"highlight": true,
-		"in_selection": false,
+		"in_selection": true,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"workstation_id",
+			"add_comp",
+			"@timer",
+			"@drone2",
+			"@drone1",
+			"screen_y",
+			"screen_x",
+			"inv_prev_selection",
+			"prev_inv_selection",
 			"@status_table_model",
 			"@equip_label_size",
 			"status_",
@@ -1149,44 +1031,35 @@
 			"skills_cur_available_actions",
 			"skill_list",
 			"self.map.target_y",
-			"self.map.target_x",
-			",",
-			"",
-			"self.skills['",
-			"",
-			", 0.0)",
-			"Skill(",
-			"_tech",
-			"_design",
-			" = 0.0"
+			"self.map.target_x"
 		],
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "last-ditch.rb",
+					"file": "src/systems/ui_system.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4439,
+						"buffer_size": 18259,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3739,
-								3739
+								3321,
+								3321
 							]
 						],
 						"settings":
@@ -1195,56 +1068,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1365.0,
+						"translation.y": 1220.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/systems/input_system.rb",
+					"file": "src/systems/actions_system.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6228,
+						"buffer_size": 127,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								166,
-								166
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/components/ai.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 123,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								42,
-								42
+								65,
+								65
 							]
 						],
 						"settings":
@@ -1255,36 +1099,63 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 23,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/systems/ai_system.rb",
+					"buffer": 2,
+					"file": "src/systems/crafting_system.rb",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 493,
+						"buffer_size": 86,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								214,
-								214
+								86,
+								86
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 19,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/util/initializer.rb",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5133,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1449,
+								1449
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 316.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1293,15 +1164,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3483,
+						"buffer_size": 3480,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								959,
-								959
+								1955,
+								1955
 							]
 						],
 						"settings":
@@ -1310,56 +1181,56 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 273.0,
+						"translation.y": 1170.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "src/components/animation.rb",
+					"file": "/run/media/kabbotta/f892bb5f-cc94-46f4-95af-7a233402c1c1/workspace/java/libgdx/libGDX.34/LastDitch/src/com/gaugestructures/lastditch/SkillsTest.java",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 804,
+						"buffer_size": 2372,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								364,
-								364
+								1306,
+								1306
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"syntax": "Packages/Java/Java.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 56.0,
+						"translation.y": 135.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "src/systems/ui_system.rb",
-					"semi_transient": false,
+					"file": "last-ditch.rb",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 17833,
+						"buffer_size": 4313,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11553,
-								11553
+								4313,
+								4313
 							]
 						],
 						"settings":
@@ -1368,469 +1239,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3637.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/components/info.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 229,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								217,
-								217
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2309.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "src/util/test.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 242,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								242,
-								242
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "cfg/uiskin.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1417,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								934,
-								934
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 429.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "res/gfx/graphics.atlas",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3347,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2235,
-								2235
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1748.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "src/systems/physics_system.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4071,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3442,
-								3442
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2304.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 17,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "src/components/inventory.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 653,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								153,
-								153
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "src/util/entity_manager.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3324,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1573,
-								1573
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 947.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 16,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "src/systems/map_system.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12772,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6394,
-								6394
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3096.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "src/systems/inventory_system.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 955,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								849,
-								849
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 305.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "src/components/item.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 415,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								189,
-								189
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "src/util/initializer.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3323,
-								3323
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "src/systems/time_system.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1261,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								914,
-								914
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 20,
-					"type": "text"
-				},
-				{
-					"buffer": 19,
-					"file": "src/systems/status_system.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 979,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								184,
-								184
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 18,
-					"type": "text"
-				},
-				{
-					"buffer": 20,
-					"file": "src/components/needs.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 525,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								514,
-								514
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 22,
-					"type": "text"
-				},
-				{
-					"buffer": 21,
-					"file": "src/components/velocity.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 243,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								120,
-								120
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 21,
-					"type": "text"
-				},
-				{
-					"buffer": 22,
-					"file": "src/util/c.rb",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 354,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								267,
-								267
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1840,19 +1252,19 @@
 			"sheets":
 			[
 				{
-					"buffer": 23,
+					"buffer": 7,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 76981,
+						"buffer_size": 55259,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								76981,
-								76981
+								52683,
+								52683
 							]
 						],
 						"settings":
@@ -1866,7 +1278,7 @@
 							"line_numbers": false,
 							"repl": true,
 							"repl_external_id": "shell",
-							"repl_id": "f66aec2df3cc4c1d8ebc1632d4c88aba",
+							"repl_id": "8e3ee1e797da471e8287d489edc70d12",
 							"repl_restart_args":
 							{
 								"cmd":
@@ -1909,10 +1321,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 34363.0,
+						"translation.y": 26740.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1920,7 +1332,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 21.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -1951,7 +1363,7 @@
 		"rows":
 		[
 			0.0,
-			0.796659133308,
+			0.84096692112,
 			1.0
 		]
 	},
@@ -1967,7 +1379,7 @@
 	"project": "last-ditch.sublime-project",
 	"replace":
 	{
-		"height": 38.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -2000,8 +1412,8 @@
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": false,
-	"side_bar_visible": false,
-	"side_bar_width": 111.0,
+	"side_bar_visible": true,
+	"side_bar_width": 123.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

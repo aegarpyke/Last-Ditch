@@ -30,6 +30,7 @@ java_import com.badlogic.gdx.graphics.g2d.TextureRegion
 java_import com.badlogic.gdx.graphics.g2d.BitmapFont
 java_import com.badlogic.gdx.graphics.g2d.NinePatch
 java_import com.badlogic.gdx.graphics.g2d.BitmapFont::TextBounds
+java_import com.badlogic.gdx.graphics.g2d.ParticleEffect
 java_import com.badlogic.gdx.physics.box2d.World
 java_import com.badlogic.gdx.physics.box2d.Body
 java_import com.badlogic.gdx.physics.box2d.BodyDef
@@ -56,6 +57,7 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.Label
 java_import com.badlogic.gdx.scenes.scene2d.ui.Label::LabelStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.Window
 java_import com.badlogic.gdx.scenes.scene2d.ui.Window::WindowStyle
+
 java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align
 java_import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
@@ -88,6 +90,8 @@ require_relative '../systems/equipment_system'
 require_relative '../systems/status_system'
 require_relative '../systems/ai_system'
 require_relative '../systems/sound_system'
+require_relative '../systems/crafting_system'
+require_relative '../systems/skill_test_system'
 require_relative '../components/component'
 require_relative '../components/info'
 require_relative '../components/type'

@@ -97,16 +97,14 @@ class RenderSystem < System
 		entities.each do |entity|
 
 			anim = @mgr.comp(entity, Animation)
-			vel = @mgr.comp(entity, Velocity)
 			col = @mgr.comp(entity, Collision)
 
 			anim.state_time += C::BOX_STEP
-
-			vel = col.body.linear_velocity
+			vel_vec = col.body.linear_velocity
 
 			if entity == @player
 				
-				if vel.x.abs < 0.02 && vel.y.abs < 0.02
+				if vel_vec.x.abs < 0.02 && vel_vec.y.abs < 0.02
 					anim.cur = 'player_idle'
 				elsif anim.cur != 'player_walk'
 					anim.cur = 'player_walk'

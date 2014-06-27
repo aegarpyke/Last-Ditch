@@ -1,6 +1,6 @@
 class UISystem < System
 
-	attr_accessor :player, :stage 
+	attr_accessor :player, :stage
 	attr_accessor :main_active, :main_update
 	attr_accessor :base_active, :base_update, :base_selection, :base_no_exit
 	attr_accessor :inv_active, :inv_update, :inv_selection, :inv_prev_selection, :inv_slots, :inv_no_exit
@@ -42,8 +42,7 @@ class UISystem < System
 		@base_active = true
 		@base_update = true
 
-		base_w = 62
-		base_h = 42
+		base_w, base_h = 62, 42
 		@base_table = Table.new(@skin)
 		@base_table.set_bounds(
 			Gdx.graphics.width - base_w, 
@@ -104,6 +103,7 @@ class UISystem < System
 					
 					end
 
+
 					def enter(event, x, y, pointer, from_actor)
 
 						@ui.base_selection = @slot
@@ -139,9 +139,7 @@ class UISystem < System
 
 
 					def clicked(event, x, y)
-
 						@mgr.ui.base_no_exit = true
-
 					end
 
 				end.new(@mgr, @base_slots.last, @atlas, self))
@@ -180,8 +178,8 @@ class UISystem < System
 		@actions_active = true
 
 		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
-		@actions_window.set_position(128, 352)
-		@actions_window.set_size(544, 240)
+		@actions_window.set_position(128, 342)
+		@actions_window.set_size(548, 254)
 		@actions_window.movable = false
 		@actions_window.padTop(9)
 
@@ -212,10 +210,10 @@ class UISystem < System
 		@equip_r_foot_label = Label.new("Athletic shoes", @skin.get("equip", LabelStyle.java_class))
 
 		@equip_desc = Label.new(
-			"This is a description of whatever it is that needs to "\
-			"be described. The act of describing something worth a "\
-			"description is a worthwhile act, and therefore this act "\
-			"also merits a description. This description is that description.",
+			"This is a description of whatever it is that needs to be described. "\
+			"The act of describing something worth a description is a worthwhile "\
+			"act, and therefore this act also merits a description. This "\
+			"description is that description.",
 			@skin.get("equip", LabelStyle.java_class))
 		@equip_desc.wrap = true
 
@@ -253,14 +251,15 @@ class UISystem < System
 		info = @mgr.comp(@player, Info)
 
 		r_head_tex = TextureRegion.new(@atlas.find_region('status_head'))
-		r_head_tex.flip(true, false)
-		r_arm_tex = TextureRegion.new(@atlas.find_region('status_arm'))
-		r_arm_tex.flip(true, false)
+		r_arm_tex  = TextureRegion.new(@atlas.find_region('status_arm'))
 		r_hand_tex = TextureRegion.new(@atlas.find_region('status_hand'))
-		r_hand_tex.flip(true, false)
-		r_leg_tex = TextureRegion.new(@atlas.find_region('status_leg'))
-		r_leg_tex.flip(true, false)
+		r_leg_tex  = TextureRegion.new(@atlas.find_region('status_leg'))
 		r_foot_tex = TextureRegion.new(@atlas.find_region('status_foot'))
+
+		r_head_tex.flip(true, false)
+		r_arm_tex.flip(true, false)
+		r_hand_tex.flip(true, false)
+		r_leg_tex.flip(true, false)
 		r_foot_tex.flip(true, false)
 
 		@status_name = Label.new(
@@ -270,17 +269,17 @@ class UISystem < System
 			"Occupation: %s" % info.occupation, 
 			@skin.get("status", LabelStyle.java_class))
 
-		@status_l_head      = Image.new(@atlas.find_region('status_head'))
-		@status_r_head      = Image.new(r_head_tex)
-		@status_l_arm       = Image.new(@atlas.find_region('status_arm'))
-		@status_torso       = Image.new(@atlas.find_region('status_torso'))
-		@status_r_arm       = Image.new(r_arm_tex)
-		@status_l_hand      = Image.new(@atlas.find_region('status_hand'))
-		@status_r_hand      = Image.new(r_hand_tex)
-		@status_l_leg       = Image.new(@atlas.find_region('status_leg'))
-		@status_r_leg       = Image.new(r_leg_tex)
-		@status_l_foot      = Image.new(@atlas.find_region('status_foot'))
-		@status_r_foot      = Image.new(r_foot_tex)
+		@status_l_head = Image.new(@atlas.find_region('status_head'))
+		@status_r_head = Image.new(r_head_tex)
+		@status_l_arm  = Image.new(@atlas.find_region('status_arm'))
+		@status_torso  = Image.new(@atlas.find_region('status_torso'))
+		@status_r_arm  = Image.new(r_arm_tex)
+		@status_l_hand = Image.new(@atlas.find_region('status_hand'))
+		@status_r_hand = Image.new(r_hand_tex)
+		@status_l_leg  = Image.new(@atlas.find_region('status_leg'))
+		@status_r_leg  = Image.new(r_leg_tex)
+		@status_l_foot = Image.new(@atlas.find_region('status_foot'))
+		@status_r_foot = Image.new(r_foot_tex)
 
 		@status_add_info = Label.new(
 			"Additional Info\n"\
@@ -329,30 +328,27 @@ class UISystem < System
 		@inv_active = true
 		@inv_no_exit = false
 
+		@inv_item_name = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_value = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
+		@inv_item_weight = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_weight.color = Color.new(0.75, 0.75, 0.89, 1.0)
+		@inv_item_quality_dur = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_quality_dur.color = Color.new(0.8, 0.8, 0.8, 1.0)
+		@inv_item_desc = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_desc.alignment = Align::top | Align::left
+		@inv_item_desc.wrap = true
+
 		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
 		@inv_window.set_position(262, 2)
 		@inv_window.set_size(276, 236)
 		@inv_window.movable = false
 		@inv_window.padTop(9)
 
-		@inv_item_name = Label.new("", @skin.get("inv", LabelStyle.java_class))
 		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padTop(4).height(12)
-		
-		@inv_item_value = Label.new("", @skin.get("inv", LabelStyle.java_class))
-		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
 		@inv_window.add(@inv_item_value).colspan(4).align(Align::right).padTop(4).height(14).row
-
-		@inv_item_weight = Label.new("", @skin.get("inv", LabelStyle.java_class))
-		@inv_item_weight.color = Color.new(0.75, 0.75, 0.89, 1.0)
 		@inv_window.add(@inv_item_weight).colspan(4).align(Align::left).height(14).padTop(1)
-
-		@inv_item_quality_dur = Label.new("", @skin.get("inv", LabelStyle.java_class))
-		@inv_item_quality_dur.color = Color.new(0.8, 0.8, 0.8, 1.0)
 		@inv_window.add(@inv_item_quality_dur).colspan(4).align(Align::right).padTop(1).height(12).row
-
-		@inv_item_desc = Label.new("", @skin.get("inv", LabelStyle.java_class))
-		@inv_item_desc.alignment = Align::top | Align::left
-		@inv_item_desc.wrap = true
 		@inv_window.add(@inv_item_desc).colspan(8).width(256).height(62).row
 
 		@inv_slots = []

@@ -67,7 +67,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.input     = @input     = InputSystem.new(@mgr)
 		@mgr.ui        = @ui        = UISystem.new(@mgr, @player, @atlas)
 
-		@mgr.actions   = @actions   = ActionsSystem.new(@mgr)
+		@mgr.actions   = @actions   = ActionsSystem.new(@mgr, @player)
 		@mgr.inventory = @inventory = InventorySystem.new(@mgr, @atlas)
 		@mgr.equipment = @equipment = EquipmentSystem.new(@mgr)
 		@mgr.status    = @status    = StatusSystem.new(@mgr)
@@ -138,6 +138,12 @@ class LastDitch < ApplicationAdapter
 
 		@lighting.render
 		@ui.render
+
+		@batch.begin
+
+			@actions.skill_test_system.render(@batch)
+
+		@batch.end
 
 		# @debug.render(@physics.world, @map.cam.combined)
 

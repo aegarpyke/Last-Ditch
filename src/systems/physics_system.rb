@@ -219,8 +219,8 @@ class PhysicsSystem < System
 			pos = @mgr.comp(entity, Position)
 			col = @mgr.comp(entity, Collision)
 
-			pos.x = col.body.position.x
-			pos.y = col.body.position.y
+			pos.x = col.body.getPosition.x
+			pos.y = col.body.getPosition.y
 
 		end
 
