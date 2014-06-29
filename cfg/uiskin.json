@@ -50,13 +50,16 @@
     	
 	},
 
+	"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle":
+	{
+		"actions_button":
+		{
+			"up": "button1"
+		}
+	},
+
 	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle":
 	{
-		"default":
-		{
-
-		},
-		
 		"base_slot":
 		{
 			"up": "base_slot"
@@ -75,19 +78,35 @@
 
 	"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": 
 	{
-		"default": 
+		"actions_button":
 		{
-			"up": "button1", "down": "button1_pressed", 
+			"up": "button1", "checked": "button1_pressed",
 			"font": "default-font", "fontColor": "white"
-		},
+		}
+	},
+
+	"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle":
+	{
+		"status_bars":
+		{
+			"background": "status_bar"
+		}
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": 
 	{
-		"default": 
+		"window1": 
 		{
 			"background": "window_background1",
 			"titleFont": "default-font", "titleFontColor": "white"
 		},
+	},
+
+	"com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle":
+	{
+		"actions_split_pane": 
+		{
+			"handle": "scroll_handle1"
+		}
 	}
 }

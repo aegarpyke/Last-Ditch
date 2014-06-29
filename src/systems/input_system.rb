@@ -308,8 +308,8 @@ class InputSystem < System
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
-		x = pos.x + C::WTB * (screen_x - Gdx.graphics.width/2)
-		y = pos.y - C::WTB * (screen_y - Gdx.graphics.height/2)
+		x = pos.x + C::WTB * (screen_x - C::WIDTH / 2)
+		y = pos.y - C::WTB * (screen_y - C::HEIGHT / 2)
 
 		item_id = @mgr.map.get_item(x, y) and		
 		inv.add_item(item_id)             and
@@ -407,8 +407,8 @@ class InputSystem < System
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
-		x = pos.x + C::WTB * (screen_x - Gdx.graphics.width/2)
-		y = pos.y - C::WTB * (screen_y - Gdx.graphics.height/2)
+		x = pos.x + C::WTB * (screen_x - C::WIDTH / 2)
+		y = pos.y - C::WTB * (screen_y - C::HEIGHT / 2)
 
 		door_id = @mgr.map.get_door(x, y)  and
 		door    = @mgr.comp(door_id, Door) and

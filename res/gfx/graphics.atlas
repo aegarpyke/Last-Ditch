@@ -1,12 +1,12 @@
 
 graphics.png
-size: 502,117
+size: 509,123
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 base_selection
   rotate: false
-  xy: 232, 85
+  xy: 232, 91
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -14,7 +14,7 @@ base_selection
   index: -1
 base_slot
   rotate: false
-  xy: 266, 85
+  xy: 266, 91
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -22,7 +22,7 @@ base_slot
   index: -1
 button1
   rotate: false
-  xy: 323, 35
+  xy: 388, 41
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -30,7 +30,7 @@ button1
   index: -1
 button1_pressed
   rotate: false
-  xy: 339, 35
+  xy: 404, 41
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -38,105 +38,105 @@ button1_pressed
   index: -1
 canister1_empty
   rotate: false
-  xy: 476, 59
+  xy: 173, 46
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 canister1_fuel
   rotate: false
-  xy: 173, 40
+  xy: 160, 20
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 canister1_waste
   rotate: false
-  xy: 160, 14
+  xy: 186, 20
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 canister1_water
   rotate: false
-  xy: 186, 14
+  xy: 199, 46
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 canteen1_empty
   rotate: false
-  xy: 251, 51
+  xy: 251, 57
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 canteen1_water
   rotate: false
-  xy: 212, 22
+  xy: 251, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 door1
   rotate: false
-  xy: 2, 85
+  xy: 2, 91
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 drone1_idle1
   rotate: false
-  xy: 68, 43
+  xy: 68, 49
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 drone1_idle2
   rotate: false
-  xy: 134, 77
+  xy: 134, 83
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 empty
   rotate: false
-  xy: 230, 25
+  xy: 298, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 floor1
   rotate: false
-  xy: 300, 85
+  xy: 300, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 floor2
   rotate: false
-  xy: 334, 85
+  xy: 334, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 handgun1
   rotate: false
-  xy: 199, 40
+  xy: 225, 49
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 incinerator
   rotate: false
-  xy: 2, 51
+  xy: 2, 57
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 inv_selection
   rotate: false
-  xy: 368, 85
+  xy: 368, 91
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -144,7 +144,7 @@ inv_selection
   index: -1
 inv_slot
   rotate: false
-  xy: 402, 85
+  xy: 402, 91
   size: 32, 32
   split: 4, 4, 4, 4
   orig: 32, 32
@@ -152,126 +152,142 @@ inv_slot
   index: -1
 overgrowth1
   rotate: false
-  xy: 225, 43
+  xy: 212, 20
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 particle
   rotate: false
-  xy: 436, 85
+  xy: 436, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_idle1
   rotate: false
-  xy: 470, 85
+  xy: 470, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk1
   rotate: false
-  xy: 58, 9
+  xy: 58, 15
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 player_walk2
   rotate: false
-  xy: 92, 9
+  xy: 92, 15
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 programming_desk
   rotate: false
-  xy: 68, 85
+  xy: 68, 91
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 rations1
   rotate: false
-  xy: 251, 33
+  xy: 316, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 rations1_empty
   rotate: false
-  xy: 269, 33
+  xy: 334, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 ruffage1
   rotate: false
-  xy: 287, 33
+  xy: 352, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrap1
   rotate: false
-  xy: 305, 33
+  xy: 370, 39
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
+scroll_handle1
+  rotate: false
+  xy: 269, 47
+  size: 1, 26
+  split: 0, 0, 9, 9
+  orig: 1, 26
+  offset: 0, 0
+  index: -1
+scrollpane_background1
+  rotate: false
+  xy: 144, 53
+  size: 27, 28
+  split: 5, 6, 16, 3
+  orig: 27, 28
+  offset: 0, 0
+  index: -1
 sound1
   rotate: false
-  xy: 110, 43
+  xy: 110, 49
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sound2
   rotate: false
-  xy: 126, 9
+  xy: 126, 15
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sound3
   rotate: false
-  xy: 272, 51
+  xy: 272, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sound4
   rotate: false
-  xy: 306, 51
+  xy: 306, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sound5
   rotate: false
-  xy: 340, 51
+  xy: 340, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sound6
   rotate: false
-  xy: 374, 51
+  xy: 374, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 status_arm
   rotate: false
-  xy: 176, 66
+  xy: 176, 72
   size: 28, 51
   orig: 28, 51
   offset: 0, 0
   index: -1
 status_bar
   rotate: false
-  xy: 232, 69
+  xy: 232, 75
   size: 38, 14
   split: 2, 3, 2, 2
   orig: 38, 14
@@ -279,58 +295,73 @@ status_bar
   index: -1
 status_foot
   rotate: false
-  xy: 476, 44
+  xy: 272, 42
   size: 24, 13
   orig: 24, 13
   offset: 0, 0
   index: -1
 status_hand
   rotate: false
-  xy: 355, 35
+  xy: 420, 41
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 status_head
   rotate: false
-  xy: 43, 15
+  xy: 43, 21
   size: 13, 34
   orig: 13, 34
   offset: 0, 0
   index: -1
 status_leg
   rotate: false
-  xy: 206, 70
+  xy: 206, 76
   size: 24, 47
   orig: 24, 47
   offset: 0, 0
   index: -1
 status_torso
   rotate: false
-  xy: 2, 2
+  xy: 2, 8
   size: 39, 47
   orig: 39, 47
   offset: 0, 0
   index: -1
 wall1
   rotate: false
-  xy: 408, 51
+  xy: 408, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window1
   rotate: false
-  xy: 442, 51
+  xy: 442, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 window_background1
   rotate: false
-  xy: 144, 47
+  xy: 476, 61
   size: 27, 28
   split: 4, 3, 16, 3
   orig: 27, 28
+  offset: 0, 0
+  index: -1
+window_scroll_knob1
+  rotate: false
+  xy: 504, 111
+  size: 5, 12
+  orig: 5, 12
+  offset: 0, 0
+  index: -1
+work_bar
+  rotate: false
+  xy: 2, 2
+  size: 32, 4
+  split: 1, 1, 2, 1
+  orig: 32, 4
   offset: 0, 0
   index: -1

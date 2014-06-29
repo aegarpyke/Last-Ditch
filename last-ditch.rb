@@ -88,13 +88,7 @@ class LastDitch < ApplicationAdapter
 	end
 
 
-	def set_step
-
-
-	end
-
-
-	def render
+	def update
 
 		@timer += Gdx.graphics.delta_time
 		n = (@timer / C::BOX_STEP).floor
@@ -120,11 +114,18 @@ class LastDitch < ApplicationAdapter
 
 		end
 		
+		@map.update
+		@ui.update
+
 		@physics.world.clear_forces
 		# @physics.interpolate(alpha)
 
-		@map.update
-		@ui.update
+	end
+
+
+	def render
+
+		update
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
 		@batch.projection_matrix = @map.cam.combined
@@ -139,11 +140,13 @@ class LastDitch < ApplicationAdapter
 		@lighting.render
 		@ui.render
 
-		@batch.begin
-
-			@actions.skill_test_system.render(@batch)
-
-		@batch.end
+		# if @mgr.paused && @ui.actions_active
+		
+		# 	@batch.begin
+		# 		@actions.skill_test_system.render(@batch)
+		# 	@batch.end
+		
+		# end
 
 		# @debug.render(@physics.world, @map.cam.combined)
 
@@ -168,6 +171,10 @@ class LastDitch < ApplicationAdapter
 	end
 
 end
+
+##########
+# Launch #
+##########
 
 config = LwjglApplicationConfiguration.new
 config.title = C::TITLE

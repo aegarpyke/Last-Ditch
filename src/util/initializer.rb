@@ -57,6 +57,10 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.Label
 java_import com.badlogic.gdx.scenes.scene2d.ui.Label::LabelStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.Window
 java_import com.badlogic.gdx.scenes.scene2d.ui.Window::WindowStyle
+java_import com.badlogic.gdx.scenes.scene2d.ui.SplitPane
+java_import com.badlogic.gdx.scenes.scene2d.ui.SplitPane::SplitPaneStyle
+java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar
+java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar::ProgressBarStyle
 
 java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align

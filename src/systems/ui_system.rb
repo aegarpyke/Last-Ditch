@@ -29,6 +29,8 @@ class UISystem < System
 			@status_table_model.debug
 			@inv_window.debug
 			@actions_window.debug
+			@actions_left.debug
+			@actions_right.debug
 			@status_window.debug
 			@equip_window.debug
 
@@ -45,16 +47,16 @@ class UISystem < System
 		base_w, base_h = 62, 42
 		@base_table = Table.new(@skin)
 		@base_table.set_bounds(
-			Gdx.graphics.width - base_w, 
-			Gdx.graphics.height - base_h, 
+			C::WIDTH - base_w, 
+			C::HEIGHT - base_h, 
 			base_w, base_h)
 
-		@base_time = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
-		@base_date = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
-		@base_money = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
+		@base_time = Label.new("", @skin, "base_ui")
+		@base_date = Label.new("", @skin, "base_ui")
+		@base_money = Label.new("", @skin, "base_ui")
 		@base_money.alignment = Align::right
 		@base_money.color = Color.new(0.75, 0.82, 0.70, 1)
-		@base_weight = Label.new("", @skin.get("base_ui", LabelStyle.java_class))
+		@base_weight = Label.new("", @skin, "base_ui")
 		@base_weight.color = Color.new(0.75, 0.75, 0.89, 1)
 		@base_weight.alignment = Align::right
 
@@ -64,31 +66,31 @@ class UISystem < System
 		@base_table.add(@base_money).align(Align::right).height(11)
 
 		@base_table_needs = Table.new(@skin)
-		@base_table_needs.set_bounds(-3, Gdx.graphics.height - 29, 106, 30)
+		@base_table_needs.set_bounds(-3, C::HEIGHT - 29, 106, 30)
 
-		@base_hunger = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_hunger = ImageButton.new(@skin, "status_bars")
 		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1)
-		@base_thirst = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_thirst = ImageButton.new(@skin, "status_bars")
 		@base_thirst.color = Color.new(0.07, 0.86, 0.86, 1)
-		@base_energy = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_energy = ImageButton.new(@skin, "status_bars")
 		@base_energy.color = Color.new(0.98, 0.98, 0.04, 1)
-		@base_sanity = ImageButton.new(@skin.get("status_bars", ImageButtonStyle.java_class))
+		@base_sanity = ImageButton.new(@skin, "status_bars")
 		@base_sanity.color = Color.new(0.77, 0.10, 0.87, 1)
 
-		@base_table_needs.add(@base_hunger).width(106).padTop(0).height(7).row
-		@base_table_needs.add(@base_thirst).width(106).padTop(0).height(7).row
-		@base_table_needs.add(@base_energy).width(106).padTop(0).height(7).row
-		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(7)
+		@base_table_needs.add(@base_hunger).width(106).padTop(0).height(9).row
+		@base_table_needs.add(@base_thirst).width(106).padTop(0).height(9).row
+		@base_table_needs.add(@base_energy).width(106).padTop(0).height(9).row
+		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(9)
 
 		@base_selection = nil
 		@base_no_exit = false
 		@base_table_slots = Table.new(@skin)
-		@base_table_slots.set_bounds(0, 0, Gdx.graphics.width, 32)
+		@base_table_slots.set_bounds(0, 0, C::WIDTH, 32)
 
 		@base_slots = []
 		for i in 1..C::BASE_SLOTS
 			
-			@base_slots << ImageButton.new(@skin.get("base_slot", ImageButtonStyle.java_class))
+			@base_slots << ImageButton.new(@skin, "base_slot")
 			@base_slots.last.add_listener(
 
 				Class.new(ClickListener) do
@@ -163,7 +165,7 @@ class UISystem < System
 		@main_update = true
 
 		@main_table = Table.new(@skin)
-		@main_table.set_bounds(0, 0, Gdx.graphics.width, Gdx.graphics.height)
+		@main_table.set_bounds(0, 0, C::WIDTH, C::HEIGHT)
 		
 		setup_actions
 		setup_equipment
@@ -177,11 +179,39 @@ class UISystem < System
 
 		@actions_active = true
 
-		@actions_window = Window.new("Actions", @skin.get(WindowStyle.java_class))
+		@actions_window = Window.new(
+			"Actions", @skin, "window1")
 		@actions_window.set_position(128, 342)
 		@actions_window.set_size(548, 254)
 		@actions_window.movable = false
 		@actions_window.padTop(9)
+
+		@actions_left = Table.new
+		@actions_left.align(Align::left | Align::top)
+
+		@actions_crafting_button = TextButton.new(
+			"Crafting", @skin, "actions_button")
+
+		@actions_object_button = TextButton.new(
+			"Object", @skin, "actions_button")
+
+		@actions_left.add(@actions_crafting_button).height(15).padRight(9)
+		@actions_left.add(@actions_object_button).height(15)
+
+		@actions_right = Table.new
+		@actions_right.align(Align::left | Align::top)
+
+		@actions_name = Label.new("Name", @skin, "actions")
+		@actions_station_label = Label.new("Station:", @skin, "actions")
+
+		@actions_right.add(@actions_name).align(Align::left).row
+		@actions_right.add(@actions_station_label).align(Align::left)
+
+		@actions_split = SplitPane.new(
+			@actions_left, @actions_right,
+			false, @skin, "actions_split_pane")
+
+		@actions_window.add(@actions_split).width(540).height(234).padTop(10)
 
 	end
 
@@ -190,47 +220,47 @@ class UISystem < System
 
 		@equip_active = true
 
-		@equip_window = Window.new("Equipment", @skin.get(WindowStyle.java_class))
+		@equip_window = Window.new("Equipment", @skin, "window1")
 		@equip_window.set_position(0, 44)
 		@equip_window.set_size(250, 290)
 		@equip_window.movable = false
 		@equip_window.padTop(9)
 		
-		@equip_l_head_label = Label.new("Endex", @skin.get("equip", LabelStyle.java_class))
-		@equip_r_head_label = Label.new("Ear piece", @skin.get("equip", LabelStyle.java_class))
-		@equip_l_arm_label  = Label.new("Empty", @skin.get("equip", LabelStyle.java_class))
-		@equip_torso_label  = Label.new("Flak jacket", @skin.get("equip", LabelStyle.java_class))
-		@equip_r_arm_label  = Label.new("GPS Device", @skin.get("equip", LabelStyle.java_class))
-		@equip_l_hand_label = Label.new("Empty", @skin.get("equip", LabelStyle.java_class))
-		@equip_belt_label   = Label.new("Engineer's belt", @skin.get("equip", LabelStyle.java_class))
-		@equip_r_hand_label = Label.new("Handgun", @skin.get("equip", LabelStyle.java_class))
-		@equip_l_leg_label  = Label.new("Kneepads", @skin.get("equip", LabelStyle.java_class))
-		@equip_r_leg_label  = Label.new("Kneepads", @skin.get("equip", LabelStyle.java_class))
-		@equip_l_foot_label = Label.new("Athletic shoes", @skin.get("equip", LabelStyle.java_class))
-		@equip_r_foot_label = Label.new("Athletic shoes", @skin.get("equip", LabelStyle.java_class))
+		@equip_l_head_label = Label.new("Endex", @skin, "equip")
+		@equip_r_head_label = Label.new("Ear piece", @skin, "equip")
+		@equip_l_arm_label  = Label.new("Empty", @skin, "equip")
+		@equip_torso_label  = Label.new("Flak jacket", @skin, "equip")
+		@equip_r_arm_label  = Label.new("GPS Device", @skin, "equip")
+		@equip_l_hand_label = Label.new("Empty", @skin, "equip")
+		@equip_belt_label   = Label.new("Engineer's belt", @skin, "equip")
+		@equip_r_hand_label = Label.new("Handgun", @skin, "equip")
+		@equip_l_leg_label  = Label.new("Kneepads", @skin, "equip")
+		@equip_r_leg_label  = Label.new("Kneepads", @skin, "equip")
+		@equip_l_foot_label = Label.new("Athletic shoes", @skin, "equip")
+		@equip_r_foot_label = Label.new("Athletic shoes", @skin, "equip")
 
 		@equip_desc = Label.new(
 			"This is a description of whatever it is that needs to be described. "\
 			"The act of describing something worth a description is a worthwhile "\
 			"act, and therefore this act also merits a description. This "\
 			"description is that description.",
-			@skin.get("equip", LabelStyle.java_class))
+			@skin, "equip")
 		@equip_desc.wrap = true
 
-		@equip_label_size = 120
+		equip_label_size = 120
 
-		@equip_window.add(@equip_l_head_label).width(@equip_label_size).padRight(0)
-		@equip_window.add(@equip_r_head_label).width(@equip_label_size).row
-		@equip_window.add(@equip_l_arm_label).width(@equip_label_size).padRight(0)
-		@equip_window.add(@equip_r_arm_label).width(@equip_label_size).row
-		@equip_window.add(@equip_torso_label).width(@equip_label_size).row
-		@equip_window.add(@equip_l_hand_label).width(@equip_label_size).padRight(0)
-		@equip_window.add(@equip_r_hand_label).width(@equip_label_size).row
-		@equip_window.add(@equip_belt_label).width(@equip_label_size).row
-		@equip_window.add(@equip_l_leg_label).width(@equip_label_size).padRight(0)
-		@equip_window.add(@equip_r_leg_label).width(@equip_label_size).row
-		@equip_window.add(@equip_l_foot_label).width(@equip_label_size).padRight(0)
-		@equip_window.add(@equip_r_foot_label).width(@equip_label_size).row
+		@equip_window.add(@equip_l_head_label).width(equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_head_label).width(equip_label_size).row
+		@equip_window.add(@equip_l_arm_label).width(equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_arm_label).width(equip_label_size).row
+		@equip_window.add(@equip_torso_label).width(equip_label_size).colspan(2).row
+		@equip_window.add(@equip_l_hand_label).width(equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_hand_label).width(equip_label_size).row
+		@equip_window.add(@equip_belt_label).width(equip_label_size).colspan(2).row
+		@equip_window.add(@equip_l_leg_label).width(equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_leg_label).width(equip_label_size).row
+		@equip_window.add(@equip_l_foot_label).width(equip_label_size).padRight(0)
+		@equip_window.add(@equip_r_foot_label).width(equip_label_size).row
 		@equip_window.add(@equip_desc).colspan(3).width(240)
 
 	end
@@ -240,7 +270,7 @@ class UISystem < System
 
 		@status_active = true
 
-		@status_window = Window.new("Status", @skin.get(WindowStyle.java_class))
+		@status_window = Window.new("Status", @skin, "window1")
 		@status_window.set_position(560, 44)
 		@status_window.set_size(250, 290)
 		@status_window.movable = false
@@ -263,11 +293,9 @@ class UISystem < System
 		r_foot_tex.flip(true, false)
 
 		@status_name = Label.new(
-			"Name: %s" % info.name, 
-			@skin.get("status", LabelStyle.java_class))
+			"Name: %s" % info.name, @skin, "status")
 		@status_occupation = Label.new(
-			"Occupation: %s" % info.occupation, 
-			@skin.get("status", LabelStyle.java_class))
+			"Occupation: %s" % info.occupation, @skin, "status")
 
 		@status_l_head = Image.new(@atlas.find_region('status_head'))
 		@status_r_head = Image.new(r_head_tex)
@@ -287,7 +315,7 @@ class UISystem < System
 			"Additional Info\n"\
 			"Additional Info\n"\
 			"Additional Info",
-			@skin.get("status", LabelStyle.java_class))
+			@skin, "status")
 		@status_add_info.wrap = true
 
 		@status_window.add(@status_name).width(246).height(14).padLeft(4).colspan(4).align(Align::left).row
@@ -328,18 +356,18 @@ class UISystem < System
 		@inv_active = true
 		@inv_no_exit = false
 
-		@inv_item_name = Label.new("", @skin.get("inv", LabelStyle.java_class))
-		@inv_item_value = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_name = Label.new("", @skin, "inv")
+		@inv_item_value = Label.new("", @skin, "inv")
 		@inv_item_value.color = Color.new(0.75, 0.82, 0.70, 1.0)
-		@inv_item_weight = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_weight = Label.new("", @skin, "inv")
 		@inv_item_weight.color = Color.new(0.75, 0.75, 0.89, 1.0)
-		@inv_item_quality_dur = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_quality_dur = Label.new("", @skin, "inv")
 		@inv_item_quality_dur.color = Color.new(0.8, 0.8, 0.8, 1.0)
-		@inv_item_desc = Label.new("", @skin.get("inv", LabelStyle.java_class))
+		@inv_item_desc = Label.new("", @skin, "inv")
 		@inv_item_desc.alignment = Align::top | Align::left
 		@inv_item_desc.wrap = true
 
-		@inv_window = Window.new("Inventory", @skin.get(WindowStyle.java_class))
+		@inv_window = Window.new("Inventory", @skin, "window1")
 		@inv_window.set_position(262, 2)
 		@inv_window.set_size(276, 236)
 		@inv_window.movable = false
@@ -354,7 +382,7 @@ class UISystem < System
 		@inv_slots = []
 		for i in 1..C::INVENTORY_SLOTS
 			
-			@inv_slots << ImageButton.new(@skin.get("inv_slot", ImageButtonStyle.java_class))
+			@inv_slots << ImageButton.new(@skin, "inv_slot")
 			@inv_slots.last.add_listener(
 
 				Class.new(ClickListener) do
@@ -519,9 +547,9 @@ class UISystem < System
 			needs = @mgr.comp(@player, Needs)
 			inv = @mgr.comp(@player, Inventory)
 
-			@base_time.text = @mgr.time.time
-			@base_date.text = @mgr.time.date
-			@base_money.text = "$%.2f" % inv.money
+			@base_time.text   = @mgr.time.time
+			@base_date.text   = @mgr.time.date
+			@base_money.text  = "$%.2f" % inv.money
 			@base_weight.text = "%.1fkg" % inv.weight
 
 			@base_hunger.width = (needs.hunger * 100 + 4).to_i

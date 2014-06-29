@@ -6,11 +6,11 @@ class SkillTestSystem < System
 
     @mgr = mgr
     @x, @y = 0, 0
-    @R = 40.2
-    @r = 8.3
-    @d = 2.2
+    @R = 110.2
+    @r = 32.3
+    @d = 22.9
     @theta = 0
-    @adjust = 0.08
+    @d_theta = 0.02
 
     @effect1 = ParticleEffect.new
     @effect1.load(
@@ -26,14 +26,18 @@ class SkillTestSystem < System
 
 
   def calc_x(theta)
-    (@R - @r) * Math.cos(@theta)**1 +
-    @d * Math.cos((@R - @r) * @theta / @r)**1
+
+    dr = @R - @r
+    dr * Math.cos(@theta)**2 + @d * Math.cos(@theta * dr / @r)**3
+
   end
   
   
   def calc_y(theta)
-    (@R - @r) * Math.sin(@theta)**1 - 
-    @d * Math.sin((@R - @r) * @theta / @r)**1
+
+    dr = @R - @r
+    dr * Math.sin(@theta)**3 - @d * Math.sin(@theta * dr / @r)**2
+
   end
 
 
@@ -42,13 +46,13 @@ class SkillTestSystem < System
     @effect1.update(C::BOX_STEP)
     @effect2.update(C::BOX_STEP)
 
-    @theta += @adjust
-        
+    @theta += @d_theta
+
     x1, y1 = calc_y(@theta), calc_x(@theta)
     x2, y2 = -x1, y1
     
-    @effect1.setPosition(@x + x1, @y + y1)
-    @effect2.setPosition(@x + x2, @y + y2)
+    @effect1.setPosition(@x + x1, @y + y1 + 140)
+    @effect2.setPosition(@x + x2, @y + y2 + 140)
 
   end
 
