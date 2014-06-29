@@ -20,7 +20,7 @@ class UISystem < System
 		setup_base
 		setup_main
 
-		if 1 == 0
+		if 1 == 1
 			
 			# @main_table.debug
 			@base_table.debug
@@ -54,11 +54,11 @@ class UISystem < System
 		@base_time = Label.new("", @skin, "base_ui")
 		@base_date = Label.new("", @skin, "base_ui")
 		@base_money = Label.new("", @skin, "base_ui")
-		@base_money.alignment = Align::right
-		@base_money.color = Color.new(0.75, 0.82, 0.70, 1)
+		@base_money.set_alignment(Align::right)
+		@base_money.set_color(Color.new(0.75, 0.82, 0.70, 1))
 		@base_weight = Label.new("", @skin, "base_ui")
-		@base_weight.color = Color.new(0.75, 0.75, 0.89, 1)
-		@base_weight.alignment = Align::right
+		@base_weight.set_color(Color.new(0.75, 0.75, 0.89, 1))
+		@base_weight.set_alignment(Align::right)
 
 		@base_table.add(@base_date).align(Align::right).height(11).row
 		@base_table.add(@base_time).align(Align::right).height(11).row
@@ -69,13 +69,13 @@ class UISystem < System
 		@base_table_needs.set_bounds(-3, C::HEIGHT - 29, 106, 30)
 
 		@base_hunger = ImageButton.new(@skin, "status_bars")
-		@base_hunger.color = Color.new(0.94, 0.35, 0.34, 1)
+		@base_hunger.set_color(Color.new(0.94, 0.35, 0.34, 1))
 		@base_thirst = ImageButton.new(@skin, "status_bars")
-		@base_thirst.color = Color.new(0.07, 0.86, 0.86, 1)
+		@base_thirst.set_color(Color.new(0.07, 0.86, 0.86, 1))
 		@base_energy = ImageButton.new(@skin, "status_bars")
-		@base_energy.color = Color.new(0.98, 0.98, 0.04, 1)
+		@base_energy.set_color(Color.new(0.98, 0.98, 0.04, 1))
 		@base_sanity = ImageButton.new(@skin, "status_bars")
-		@base_sanity.color = Color.new(0.77, 0.10, 0.87, 1)
+		@base_sanity.set_color(Color.new(0.77, 0.10, 0.87, 1))
 
 		@base_table_needs.add(@base_hunger).width(106).padTop(0).height(9).row
 		@base_table_needs.add(@base_thirst).width(106).padTop(0).height(9).row
@@ -183,7 +183,7 @@ class UISystem < System
 			"Actions", @skin, "window1")
 		@actions_window.set_position(128, 342)
 		@actions_window.set_size(548, 254)
-		@actions_window.movable = false
+		@actions_window.set_movable(false)
 		@actions_window.padTop(9)
 
 		@actions_left = Table.new
@@ -191,9 +191,50 @@ class UISystem < System
 
 		@actions_crafting_button = TextButton.new(
 			"Crafting", @skin, "actions_button")
-
 		@actions_object_button = TextButton.new(
 			"Object", @skin, "actions_button")
+
+		@actions_crafting_button.add_listener(
+
+			Class.new(ClickListener) do 
+
+				def initialize(crafting_button, object_button)
+
+					super()
+					@crafting_button = crafting_button
+					@object_button = object_button
+				
+				end
+
+				def clicked(event, x, y)
+				
+					@crafting_button.set_checked(true)
+					@object_button.set_checked(false)
+				
+				end
+
+			end.new(@actions_crafting_button, @actions_object_button))
+
+		@actions_object_button.add_listener(
+
+			Class.new(ClickListener) do 
+
+				def initialize(crafting_button, object_button)
+				
+					super()
+					@crafting_button = crafting_button
+					@object_button = object_button
+				
+				end
+
+				def clicked(event, x, y)
+				
+					@crafting_button.set_checked(false)
+					@object_button.set_checked(true)
+				
+				end
+
+			end.new(@actions_crafting_button, @actions_object_button))
 
 		@actions_left.add(@actions_crafting_button).height(15).padRight(9)
 		@actions_left.add(@actions_object_button).height(15)
@@ -204,8 +245,8 @@ class UISystem < System
 		@actions_name = Label.new("Name", @skin, "actions")
 		@actions_station_label = Label.new("Station:", @skin, "actions")
 
-		@actions_right.add(@actions_name).align(Align::left).row
-		@actions_right.add(@actions_station_label).align(Align::left)
+		@actions_right.add(@actions_name).padLeft(8).align(Align::left).row
+		@actions_right.add(@actions_station_label).padLeft(8).align(Align::left)
 
 		@actions_split = SplitPane.new(
 			@actions_left, @actions_right,
@@ -223,8 +264,9 @@ class UISystem < System
 		@equip_window = Window.new("Equipment", @skin, "window1")
 		@equip_window.set_position(0, 44)
 		@equip_window.set_size(250, 290)
-		@equip_window.movable = false
+		@equip_window.set_movable(false)
 		@equip_window.padTop(9)
+		@equip_window.align(Align::center)
 		
 		@equip_l_head_label = Label.new("Endex", @skin, "equip")
 		@equip_r_head_label = Label.new("Ear piece", @skin, "equip")
@@ -239,13 +281,26 @@ class UISystem < System
 		@equip_l_foot_label = Label.new("Athletic shoes", @skin, "equip")
 		@equip_r_foot_label = Label.new("Athletic shoes", @skin, "equip")
 
+		@equip_l_head_label.set_alignment(Align::center)
+		@equip_r_head_label.set_alignment(Align::center)
+		@equip_l_arm_label .set_alignment(Align::center)
+		@equip_torso_label .set_alignment(Align::center)
+		@equip_r_arm_label .set_alignment(Align::center)
+		@equip_l_hand_label.set_alignment(Align::center)
+		@equip_belt_label  .set_alignment(Align::center)
+		@equip_r_hand_label.set_alignment(Align::center)
+		@equip_l_leg_label .set_alignment(Align::center)
+		@equip_r_leg_label .set_alignment(Align::center)
+		@equip_l_foot_label.set_alignment(Align::center)
+		@equip_r_foot_label.set_alignment(Align::center)
+
 		@equip_desc = Label.new(
 			"This is a description of whatever it is that needs to be described. "\
 			"The act of describing something worth a description is a worthwhile "\
 			"act, and therefore this act also merits a description. This "\
 			"description is that description.",
 			@skin, "equip")
-		@equip_desc.wrap = true
+		@equip_desc.set_wrap(true)
 
 		equip_label_size = 120
 

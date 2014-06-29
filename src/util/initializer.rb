@@ -48,6 +48,8 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.Skin
 java_import com.badlogic.gdx.scenes.scene2d.ui.Table
 java_import com.badlogic.gdx.scenes.scene2d.ui.Button
 java_import com.badlogic.gdx.scenes.scene2d.ui.Button::ButtonStyle
+java_import com.badlogic.gdx.scenes.scene2d.ui.List
+java_import com.badlogic.gdx.scenes.scene2d.ui.List::ListStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.Image
 java_import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 java_import com.badlogic.gdx.scenes.scene2d.ui.ImageButton::ImageButtonStyle
@@ -61,7 +63,8 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.SplitPane
 java_import com.badlogic.gdx.scenes.scene2d.ui.SplitPane::SplitPaneStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar
 java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar::ProgressBarStyle
-
+java_import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
+java_import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane::ScrollPaneStyle
 java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align
 java_import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable

@@ -8,10 +8,11 @@
 	
 	"com.badlogic.gdx.graphics.Color":
 	{
-		"green": { "a": 1, "b": 0, "g": 1, "r": 0 },
-		"white": { "a": 1, "b": 1, "g": 1, "r": 1 },
-		"red": { "a": 1, "b": 0, "g": 0, "r": 1 },
-		"black": { "a": 1, "b": 0, "g": 0, "r": 0 },
+		"green": { "a": 1, "r": 0, "g": 1, "b": 0 },
+		"white": { "a": 1, "r": 1, "g": 1, "b": 1 },
+		"red": { "a": 1, "r": 1, "g": 0, "b": 0 },
+		"black": { "a": 1, "r": 0, "g": 0, "b": 0 },
+		"actions_unselected": { "a": 1, "r": 0.34, "g": 0.45, "b": 0.65 }
 
 	},
 
@@ -102,11 +103,28 @@
 		},
 	},
 
-	"com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle":
+	"com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle": 
 	{
 		"actions_split_pane": 
 		{
 			"handle": "scroll_handle1"
+		}
+	},
+
+	"com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle":
+	{
+		"actions":
+		{
+			"background": "scrollpane_background1"
+		}
+	},
+
+	"com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle":
+	{
+		"actions":
+		{
+			"selection": "list_selection", "font": "garuda12", 
+			"fontColorSelected": "white", "fontColorUnselected": "actions_unselected"
 		}
 	}
 }
