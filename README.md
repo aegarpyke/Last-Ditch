@@ -1,18 +1,6 @@
 Last Ditch
 ==========
 
-Premise
--------
-
-After the destabilization of the United States, massive development began to build up around the central government established in Valencia, Venezuela. For hundreds of years, the upper classes have been building higher to get away from the poor on the lower levels. There are now large abandonded areas left in their wake. These have become a gathering place for anyone who wants to remain out of sight.
-
-And it's your new home...
-
-Gameplay Overview
------------------
-
-This is a modern survival game. The player must gather resources, develop survival skills, and engineer equipment with what they take, trade, and work for. To really thrive here, the player will have to develop partnerships and coordinate their efforts with others who live down here, because there are other significant forces who are also trying to get their cut.
-
 Credits
 -------
 
