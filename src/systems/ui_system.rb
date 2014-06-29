@@ -77,10 +77,10 @@ class UISystem < System
 		@base_sanity = ImageButton.new(@skin, "status_bars")
 		@base_sanity.set_color(Color.new(0.77, 0.10, 0.87, 1))
 
-		@base_table_needs.add(@base_hunger).width(106).padTop(0).height(9).row
-		@base_table_needs.add(@base_thirst).width(106).padTop(0).height(9).row
-		@base_table_needs.add(@base_energy).width(106).padTop(0).height(9).row
-		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(9)
+		@base_table_needs.add(@base_hunger).width(106).padTop(0).height(7).row
+		@base_table_needs.add(@base_thirst).width(106).padTop(0).height(7).row
+		@base_table_needs.add(@base_energy).width(106).padTop(0).height(7).row
+		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(7)
 
 		@base_selection = nil
 		@base_no_exit = false
@@ -236,8 +236,32 @@ class UISystem < System
 
 			end.new(@actions_crafting_button, @actions_object_button))
 
+		@actions_crafting_list = List.new(@skin, "actions")
+		collect = com.badlogic.gdx.utils.Array.new
+
+		for i in 0...16
+			collect.add("%s Testing %s" % [i, i])
+		end
+
+		for i in 16..32
+			collect.add("")
+		end
+
+		@actions_crafting_list.set_items(collect)
+
+
+		@actions_object_list = List.new(@skin, "actions")
+
+		@actions_crafting_scrollpane = ScrollPane.new(@actions_crafting_list, @skin, "actions")
+		@actions_crafting_scrollpane.set_overscroll(false, false)
+
+		@actions_object_scrollpane = ScrollPane.new(@actions_object_list, @skin, "actions")
+
+
 		@actions_left.add(@actions_crafting_button).height(15).padRight(9)
-		@actions_left.add(@actions_object_button).height(15)
+		@actions_left.add(@actions_object_button).height(15).row
+		@actions_left.add(@actions_crafting_scrollpane)
+
 
 		@actions_right = Table.new
 		@actions_right.align(Align::left | Align::top)

@@ -140,9 +140,6 @@ class LastDitch < ApplicationAdapter
 		@lighting.render
 		@ui.render
 
-		puts "Java: %s" % Gdx.app.get_java_heap
-		puts "Native: %s" % Gdx.app.get_native_heap
-
 		# if @mgr.paused && @ui.actions_active
 		
 		# 	@batch.begin
