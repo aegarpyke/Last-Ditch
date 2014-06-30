@@ -20,7 +20,7 @@ class UISystem < System
 		setup_base
 		setup_main
 
-		if 1 == 1
+		if 1 == 0
 			
 			# @main_table.debug
 			@base_table.debug
@@ -191,77 +191,77 @@ class UISystem < System
 
 		@actions_crafting_button = TextButton.new(
 			"Crafting", @skin, "actions_button")
+		@actions_crafting_button.set_checked(true)
+		
 		@actions_object_button = TextButton.new(
 			"Object", @skin, "actions_button")
+
+		@actions_crafting_list = List.new(@skin, "actions")
+		@actions_object_list = List.new(@skin, "actions")
+
+		@actions_scrollpane = ScrollPane.new(@actions_crafting_list, @skin, "actions")
+		@actions_scrollpane.set_overscroll(false, false)
+		@actions_scrollpane.set_fade_scroll_bars(false)
+		@actions_scrollpane.set_flick_scroll(false)
+
+		collect = com.badlogic.gdx.utils.Array.new
+
+		for i in 1...16
+			collect.add("%d. Crafting test item" % i)
+		end
+
+		for i in 16..32
+			collect.add("%d." % i)
+		end
+
+		@actions_crafting_list.set_items(collect)
+
+		collect = com.badlogic.gdx.utils.Array.new
+
+		for i in 1...11
+			collect.add("%d. Object test item." % i)
+		end
+
+		for i in 16..32
+			collect.add("%d." % i)
+		end
+
+		@actions_object_list.set_items(collect)
 
 		@actions_crafting_button.add_listener(
 
 			Class.new(ClickListener) do 
 
-				def initialize(crafting_button, object_button)
-
+				def initialize(switch_actions_method)
 					super()
-					@crafting_button = crafting_button
-					@object_button = object_button
-				
+					@switch_actions_method = switch_actions_method
 				end
 
 				def clicked(event, x, y)
-				
-					@crafting_button.set_checked(true)
-					@object_button.set_checked(false)
-				
+					@switch_actions_method.call("crafting")
 				end
 
-			end.new(@actions_crafting_button, @actions_object_button))
+			end.new(method(:switch_actions_focus)))
 
 		@actions_object_button.add_listener(
 
 			Class.new(ClickListener) do 
 
-				def initialize(crafting_button, object_button)
-				
+				def initialize(switch_actions_method)
 					super()
-					@crafting_button = crafting_button
-					@object_button = object_button
-				
+					@switch_actions_method = switch_actions_method
 				end
 
 				def clicked(event, x, y)
-				
-					@crafting_button.set_checked(false)
-					@object_button.set_checked(true)
-				
+
+					@switch_actions_method.call("object")				
 				end
 
-			end.new(@actions_crafting_button, @actions_object_button))
-
-		@actions_crafting_list = List.new(@skin, "actions")
-		collect = com.badlogic.gdx.utils.Array.new
-
-		for i in 0...16
-			collect.add("%s Testing %s" % [i, i])
-		end
-
-		for i in 16..32
-			collect.add("")
-		end
-
-		@actions_crafting_list.set_items(collect)
-
-
-		@actions_object_list = List.new(@skin, "actions")
-
-		@actions_crafting_scrollpane = ScrollPane.new(@actions_crafting_list, @skin, "actions")
-		@actions_crafting_scrollpane.set_overscroll(false, false)
-
-		@actions_object_scrollpane = ScrollPane.new(@actions_object_list, @skin, "actions")
-
+			end.new(method(:switch_actions_focus)))
 
 		@actions_left.add(@actions_crafting_button).height(15).padRight(9)
-		@actions_left.add(@actions_object_button).height(15).row
-		@actions_left.add(@actions_crafting_scrollpane)
-
+		@actions_left.add(@actions_object_button).height(15).padRight(130).row
+		@actions_left.add(@actions_scrollpane).colspan(2).width(240).height(180).padTop(6)
 
 		@actions_right = Table.new
 		@actions_right.align(Align::left | Align::top)
@@ -277,6 +277,28 @@ class UISystem < System
 			false, @skin, "actions_split_pane")
 
 		@actions_window.add(@actions_split).width(540).height(234).padTop(10)
+
+	end
+
+
+	def switch_actions_focus(focus)
+
+		case focus
+			
+			when "crafting"
+				@actions_crafting_button.set_checked(true)
+				@actions_object_button.set_checked(false)
+
+				@actions_scrollpane.set_widget(@actions_crafting_list)
+
+
+			when "object"
+				@actions_crafting_button.set_checked(false)
+				@actions_object_button.set_checked(true)
+		
+				@actions_scrollpane.set_widget(@actions_object_list)
+
+		end
 
 	end
 

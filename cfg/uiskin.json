@@ -115,7 +115,9 @@
 	{
 		"actions":
 		{
-			"background": "scrollpane_background1"
+			"background": "scrollpane_background1",
+			"vScroll": "window_scroll1",
+			"vScrollKnob": "window_scroll_knob1",
 		}
 	},
 
