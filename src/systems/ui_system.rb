@@ -261,7 +261,7 @@ class UISystem < System
 
 		@actions_left.add(@actions_crafting_button).height(15).padRight(9)
 		@actions_left.add(@actions_object_button).height(15).padRight(130).row
-		@actions_left.add(@actions_scrollpane).colspan(2).width(240).height(180).padTop(6)
+		@actions_left.add(@actions_scrollpane).colspan(2).width(264).height(210).padTop(6)
 
 		@actions_right = Table.new
 		@actions_right.align(Align::left | Align::top)
