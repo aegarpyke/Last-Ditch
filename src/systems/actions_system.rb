@@ -10,16 +10,11 @@ class ActionsSystem < System
     @player = player
     @player_pos = @mgr.comp(@player, Position)
     
-    @crafting_system = CraftingSystem.new(mgr)
-    @skill_test_system = SkillTestSystem.new(mgr)
 
 	end
 
 
 	def update
-
-    @crafting_system.update
-    @skill_test_system.update
 
 	end
 

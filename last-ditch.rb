@@ -63,20 +63,25 @@ class LastDitch < ApplicationAdapter
 		@timer = 0
 		@mgr.atlas = @atlas
 
-		@mgr.time      = @time      = TimeSystem.new
-		@mgr.input     = @input     = InputSystem.new(@mgr)
-		@mgr.ui        = @ui        = UISystem.new(@mgr, @player, @atlas)
+		@mgr.time       = @time       = TimeSystem.new
+		@mgr.input      = @input      = InputSystem.new(@mgr)
 
-		@mgr.actions   = @actions   = ActionsSystem.new(@mgr, @player)
-		@mgr.inventory = @inventory = InventorySystem.new(@mgr, @atlas)
-		@mgr.equipment = @equipment = EquipmentSystem.new(@mgr)
-		@mgr.status    = @status    = StatusSystem.new(@mgr)
+		@mgr.actions    = @actions    = ActionsSystem.new(@mgr, @player)
+    @mgr.crafting   = @crafting   = CraftingSystem.new(@mgr)
+    @mgr.skill_test = @skill_test = SkillTestSystem.new(@mgr)
 
-		@mgr.ai        = @ai        = AISystem.new(@mgr)
-		@mgr.map       = @map       = MapSystem.new(@mgr, @player, @atlas)
-		@mgr.render    = @render    = RenderSystem.new(@mgr, @player, @atlas)
-		@mgr.physics   = @physics   = PhysicsSystem.new(@mgr, @player, @map)
-		@mgr.lighting  = @lighting  = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
+    @mgr.ui         = @ui         = UISystem.new(@mgr, @player, @atlas)
+
+		@mgr.inventory  = @inventory  = InventorySystem.new(@mgr, @atlas)
+		@mgr.equipment  = @equipment  = EquipmentSystem.new(@mgr)
+		@mgr.status     = @status     = StatusSystem.new(@mgr)
+
+		
+		@mgr.ai         = @ai         = AISystem.new(@mgr)
+		@mgr.map        = @map        = MapSystem.new(@mgr, @player, @atlas)
+		@mgr.render     = @render     = RenderSystem.new(@mgr, @player, @atlas)
+		@mgr.physics    = @physics    = PhysicsSystem.new(@mgr, @player, @map)
+		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)
@@ -99,6 +104,7 @@ class LastDitch < ApplicationAdapter
 		[n, C::MAX_STEPS].min.times do
 
 			@actions.update
+			@crafting.update
 			@inventory.update
 			@equipment.update
 			@status.update

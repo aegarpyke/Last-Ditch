@@ -205,13 +205,15 @@ class UISystem < System
 		@actions_scrollpane.set_flick_scroll(false)
 
 		crafting_items = GdxArray.new
+ 
+ 		####################################################
+		# Consider adding a search box to the actions list #
+		####################################################
 
-		for i in 1...32
-			if i < 16
-				crafting_items.add("#{i}. Crafting test item.")
-			else
-				crafting_items.add("#{i}.")
-			end
+		i = 0
+		for name, id in @mgr.crafting.recipes
+			i += 1
+			crafting_items.add("#{i}. #{name}")
 		end
 
 		@actions_crafting_list.set_items(crafting_items)
