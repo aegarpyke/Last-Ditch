@@ -20,7 +20,7 @@ class UISystem < System
 		setup_base
 		setup_main
 
-		if 1 == 0
+		if 1 == 1
 			
 			# @main_table.debug
 			@base_table.debug
@@ -204,33 +204,33 @@ class UISystem < System
 		@actions_scrollpane.set_fade_scroll_bars(false)
 		@actions_scrollpane.set_flick_scroll(false)
 
-		collect = com.badlogic.gdx.utils.Array.new
+		crafting_items = GdxArray.new
 
-		for i in 1...16
-			collect.add("%d. Crafting test item" % i)
+		for i in 1...32
+			if i < 16
+				crafting_items.add("#{i}. Crafting test item.")
+			else
+				crafting_items.add("#{i}.")
+			end
 		end
 
-		for i in 16..32
-			collect.add("%d." % i)
+		@actions_crafting_list.set_items(crafting_items)
+
+		object_items = GdxArray.new
+
+		for i in 1...32
+			if i < 11
+				object_items.add("#{i}. Object test item.")
+			else
+				object_items.add("#{i}.")
+			end
 		end
 
-		@actions_crafting_list.set_items(collect)
-
-		collect = com.badlogic.gdx.utils.Array.new
-
-		for i in 1...11
-			collect.add("%d. Object test item." % i)
-		end
-
-		for i in 16..32
-			collect.add("%d." % i)
-		end
-
-		@actions_object_list.set_items(collect)
+		@actions_object_list.set_items(object_items)
 
 		@actions_crafting_button.add_listener(
 
-			Class.new(ClickListener) do 
+			Class.new(ClickListener) do
 
 				def initialize(switch_actions_method)
 					super()
@@ -238,7 +238,7 @@ class UISystem < System
 				end
 
 				def clicked(event, x, y)
-					@switch_actions_method.call("crafting")
+					@switch_actions_method.call(:crafting)
 				end
 
 			end.new(method(:switch_actions_focus)))
@@ -253,15 +253,14 @@ class UISystem < System
 				end
 
 				def clicked(event, x, y)
-
-					@switch_actions_method.call("object")				
+					@switch_actions_method.call(:object)				
 				end
 
 			end.new(method(:switch_actions_focus)))
 
 		@actions_left.add(@actions_crafting_button).height(15).padRight(9)
 		@actions_left.add(@actions_object_button).height(15).padRight(130).row
-		@actions_left.add(@actions_scrollpane).colspan(2).width(264).height(210).padTop(6)
+		@actions_left.add(@actions_scrollpane).colspan(2).width(264).height(202).padTop(6)
 
 		@actions_right = Table.new
 		@actions_right.align(Align::left | Align::top)
@@ -276,27 +275,24 @@ class UISystem < System
 			@actions_left, @actions_right,
 			false, @skin, "actions_split_pane")
 
-		@actions_window.add(@actions_split).width(540).height(234).padTop(10)
+		@actions_window.add(@actions_split).width(540).height(239).padTop(10)
 
 	end
 
 
 	def switch_actions_focus(focus)
 
-		case focus
-			
-			when "crafting"
-				@actions_crafting_button.set_checked(true)
-				@actions_object_button.set_checked(false)
+		if focus == :crafting
 
-				@actions_scrollpane.set_widget(@actions_crafting_list)
+			@actions_crafting_button.set_checked(true)
+			@actions_object_button.set_checked(false)
+			@actions_scrollpane.set_widget(@actions_crafting_list)
 
+		elsif focus == :object
 
-			when "object"
-				@actions_crafting_button.set_checked(false)
-				@actions_object_button.set_checked(true)
-		
-				@actions_scrollpane.set_widget(@actions_object_list)
+			@actions_crafting_button.set_checked(false)
+			@actions_object_button.set_checked(true)
+			@actions_scrollpane.set_widget(@actions_object_list)
 
 		end
 
@@ -350,8 +346,8 @@ class UISystem < System
 
 		equip_label_size = 120
 
-		@equip_window.add(@equip_l_head_label).width(equip_label_size).padRight(0)
-		@equip_window.add(@equip_r_head_label).width(equip_label_size).row
+		@equip_window.add(@equip_l_head_label).width(equip_label_size).padTop(8).padRight(0)
+		@equip_window.add(@equip_r_head_label).width(equip_label_size).padTop(8).row
 		@equip_window.add(@equip_l_arm_label).width(equip_label_size).padRight(0)
 		@equip_window.add(@equip_r_arm_label).width(equip_label_size).row
 		@equip_window.add(@equip_torso_label).width(equip_label_size).colspan(2).row
@@ -362,7 +358,7 @@ class UISystem < System
 		@equip_window.add(@equip_r_leg_label).width(equip_label_size).row
 		@equip_window.add(@equip_l_foot_label).width(equip_label_size).padRight(0)
 		@equip_window.add(@equip_r_foot_label).width(equip_label_size).row
-		@equip_window.add(@equip_desc).colspan(3).width(240)
+		@equip_window.add(@equip_desc).padTop(18).colspan(3).width(240)
 
 	end
 

@@ -1,0 +1,18 @@
+battery_basic:
+  ingredients:
+    - battery_dead: 1
+  requirements:
+    - mechanical: 0.04
+    - electrical: 0.02
+
+canteen1_water:
+  ingredients:
+    - canteen1_empty: 1
+  requirements:
+    - mechanical: 0.4
+
+canister1_water:
+  ingredients:
+    - canister1_empty: 1
+  requirements:
+    - mechanical: 0.5

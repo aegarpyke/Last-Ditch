@@ -1,4 +1,5 @@
 require 'java'
+require 'yaml'
 
 require_relative '../../lib/gdx-backend-lwjgl.jar'
 require_relative '../../lib/gdx-backend-lwjgl-natives.jar'
@@ -18,6 +19,9 @@ java_import com.badlogic.gdx.InputAdapter
 java_import com.badlogic.gdx.InputMultiplexer
 java_import com.badlogic.gdx.InputProcessor
 java_import com.badlogic.gdx.utils.TimeUtils
+java_import com.badlogic.gdx.utils.Json
+java_import com.badlogic.gdx.utils.JsonWriter
+java_import com.badlogic.gdx.utils.JsonWriter::OutputType
 java_import com.badlogic.gdx.math.Vector2
 java_import com.badlogic.gdx.math.Rectangle
 java_import com.badlogic.gdx.graphics.GL20
@@ -119,3 +123,7 @@ require_relative '../components/skills'
 require_relative '../components/attributes'
 require_relative '../components/workstation'
 require_relative '../components/ai'
+require_relative '../components/ingredients'
+require_relative '../components/requirements'
+
+GdxArray = com.badlogic.gdx.utils.Array
