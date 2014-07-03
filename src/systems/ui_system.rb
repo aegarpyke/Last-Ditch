@@ -20,7 +20,7 @@ class UISystem < System
 		setup_base
 		setup_main
 
-		if 1 == 1
+		if 1 == 0
 			
 			# @main_table.debug
 			@base_table.debug

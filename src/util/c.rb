@@ -21,10 +21,4 @@ module C
 	BIT_WINDOW = 16
 	BIT_ENTITY = 32
 
-	ITEMS = [
-		'overgrowth1', 'handgun1', 'scrap1',
-		'rations1_empty', 'rations1', 
-		'canteen1_empty', 'canteen1_water', 
-		'canister1_empty', 'canister1_water', 'canister1_waste', 'canister1_fuel']
-
 end

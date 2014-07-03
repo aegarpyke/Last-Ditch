@@ -15,7 +15,7 @@ class PhysicsSystem < System
 		generate_entity_bodies
 		generate_tile_bodies
 		generate_door_bodies
-		generate_workstation_bodies
+		generate_station_bodies
 
 	end
 
@@ -121,14 +121,14 @@ class PhysicsSystem < System
 	end
 
 
-	def generate_workstation_bodies
+	def generate_station_bodies
 
-		@map.workstations.each do |workstation|
+		@map.stations.each do |station_id|
 
-			pos    = @mgr.comp(workstation, Position)
-			rot    = @mgr.comp(workstation, Rotation)
-			render = @mgr.comp(workstation, Render)
-			col    = @mgr.comp(workstation, Collision)
+			pos    = @mgr.comp(station_id, Position)
+			rot    = @mgr.comp(station_id, Rotation)
+			render = @mgr.comp(station_id, Render)
+			col    = @mgr.comp(station_id, Collision)
 
 			w = render.width * C::WTB
 			h = render.height * C::WTB

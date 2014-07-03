@@ -1,4 +1,4 @@
-class Workstation < Component
+class Station < Component
 
   attr_accessor :type
 

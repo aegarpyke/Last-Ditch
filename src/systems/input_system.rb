@@ -80,7 +80,8 @@ class InputSystem < System
 						if @mgr.ui.main_active
 
 						else
-							use_door(entity)
+							use_door(entity)				or
+							use_station(entity)
 						end
 
 					else
@@ -370,6 +371,37 @@ class InputSystem < System
 			@mgr.ui.set_inv_weight(-1)
 			@mgr.inventory.update_slots = true
 
+			return true
+
+		end.call
+
+		false
+
+	end
+
+
+	def use_station(entity)
+
+
+
+		pos = @mgr.comp(entity, Position)
+		inv = @mgr.comp(entity, Inventory)
+
+		station_id = @mgr.map.get_near_station(pos.x, pos.y) and
+		station    = @mgr.comp(station_id, Station)      and
+
+		Proc.new do
+
+			@mgr.ui.main_update = true
+
+			vel = @mgr.comp(entity, Velocity)
+			vel.spd = 0
+			vel.ang_spd = 0
+			
+			@mgr.paused         = !@mgr.paused
+			@mgr.ui.main_active = !@mgr.ui.main_active
+			@mgr.time.active    = !@mgr.time.active
+			
 			return true
 
 		end.call

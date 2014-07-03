@@ -8,6 +8,7 @@ class InventorySystem < System
 		@mgr = mgr
 		@atlas = atlas
 		@update_slots = true
+		@item_data = YAML.load_file('cfg/items.yml')
 		@inv_slots = @mgr.ui.inv_slots
 
 	end
@@ -78,48 +79,27 @@ class InventorySystem < System
 		type = @mgr.comp(item_id, Type)
 		info = @mgr.comp(item_id, Info)
 		item = @mgr.comp(item_id, Item)
-		
+
+		type_data = @item_data[type_value]
+
+		type.type = type_value
+		info.name = type_data["name"]
+		info.desc = type_data["desc"]
+		item.usable = type_data["usable"]
+		item.weight = type_data["weight"]
+		item.base_value = type_data["base_value"]
+		item.condition -= item.decay_rate
+
 		case type_value
 
 			when "rations1"
-
 				needs.hunger = [1, needs.hunger += 0.1].min
 
-				type.type = 'rations1_empty'
-			  info.name = "Rations, empty"
-			  item.usable = false
-			  item.weight = 0.2
-			  item.base_value = 0.02
-			  item.condition -= item.decay_rate
-			  info.desc = 
-			  	"An empty rations container. " \
-			  	"It can be cleaned and refilled or used as scrap."
-
 			when "canteen1_water"
-
 				needs.thirst = [1, needs.thirst += 0.1].min
 
-				type.type = 'canteen1_empty'
-				info.name = 'Canteen, empty'
-				item.usable = false
-				item.weight = 0.2
-				item.base_value = 0.02
-				item.condition -= item.decay_rate
-				info.desc = 
-			  	"This is an empty canteen. It can hold non-corrossive materials."
-
 			when "canister1_water"
-				
 				needs.thirst = [1, needs.thirst += 0.3].min
-
-				type.type = 'canister1_empty'
-				info.name = 'Canister, empty'
-				item.usable = false
-				item.weight = 0.8
-				item.base_value = 0.07
-				item.condition -= item.decay_rate
-				info.desc =
-			  	"This is an empty canteen. It can hold non-corrossive materials."
 
 		end
 
@@ -132,170 +112,25 @@ class InventorySystem < System
 
 		item_id = @mgr.create_basic_entity
 
+		type_data = @item_data[type_value]
 		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
+
+		puts type_value
 
 		pos    = @mgr.add_comp(item_id, Position.new(x, y))
 		rot    = @mgr.add_comp(item_id, Rotation.new(Random.rand(360)))
-		info   = @mgr.add_comp(item_id, Info.new)
+		info   = @mgr.add_comp(item_id, Info.new(type_data["name"], type_data["desc"]))
 		type   = @mgr.add_comp(item_id, Type.new(type_value))
 		item   = @mgr.add_comp(item_id, Item.new(quality, condition))
-		size   = @mgr.add_comp(item_id, Size.new(0, 0))
+		
 		render = @mgr.add_comp(item_id, Render.new(''))
 
-		case type_value
-
-			when "rations1"
-
-				render.region_name = 'rations1'
-				render.region = @atlas.find_region('rations1')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.usable = true
-				item.weight = 0.5
-				item.base_value = 0.06
-				info.name = 'Rations'
-			  info.desc = 
-			  	"These are basic rations."
-
-			when "rations1_empty"
-
-				render.region_name = 'rations1_empty'
-				render.region = @atlas.find_region('rations1_empty')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.2
-				item.base_value = 0.02
-				info.name = 'Rations, empty'
-			  info.desc = 
-			  	"This is an empty rations container. It can be " \
-			  	"used for scrap or cleaned and refilled."
-
-			when "canteen1_water"
-
-				render.region_name = 'canteen1_water'
-				render.region = @atlas.find_region('canteen1_water')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.usable = true
-				item.weight = 0.6
-				item.base_value = 0.07
-				info.name = 'Canteen, water'
-			  info.desc = 
-			  	"This is a canteen of clean drinking water."
-
-		  when "canteen1_empty"
-
-				render.region_name = 'canteen1_empty'
-				render.region = @atlas.find_region('canteen1_empty')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.2
-				item.base_value = 0.02
-				info.name = 'Canteen, empty'
-			  info.desc = 
-			  	"This is an empty canteen. It can be refilled " \
-			  	"or used for scrap."
-
-			when "canister1_empty"
-
-				render.region_name = 'canister1_empty'
-				render.region = @atlas.find_region('canister1_empty')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.8
-				item.base_value = 0.07
-				info.name = 'Canister, empty'
-			  info.desc = 
-			  	"This is an empty canister. It can hold corrosive materials."
-
-			when "canister1_water"
-
-				render.region_name = 'canister1_water'
-				render.region = @atlas.find_region('canister1_water')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.usable = true
-				item.weight = 1.4
-				item.base_value = 0.21
-				info.name = 'Canister, water'
-			  info.desc = 
-			  	"This is a canister of drinking water."
-
-			when "canister1_waste"
-
-				render.region_name = 'canister1_waste'
-				render.region = @atlas.find_region('canister1_waste')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 1.6
-				item.base_value = 0.09
-				info.name = 'Canister, waste'
-			  info.desc = 
-			  	"This is canister of waste. It can be used to produce energy, " \
-			  	"chemicals, or gases."
-
-			when "canister1_fuel"
-
-				render.region_name = 'canister1_fuel'
-				render.region = @atlas.find_region('canister1_fuel')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 1.3
-				item.base_value = 0.34
-				info.name = 'Canister, fuel'
-			  info.desc = 
-			  	"This is a canister of fuel."
-
-			when 'handgun1'
-
-				render.region_name = 'handgun1'
-				render.region = @atlas.find_region('handgun1')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.36
-				item.base_value = 0.54
-				info.name = 'Handgun'
-			  info.desc = 
-			  	"This is a handgun."
-
-			when 'scrap1'
-
-				render.region_name = 'scrap1'
-				render.region = @atlas.find_region('scrap1')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 1.4
-				item.base_value = 0.10
-				info.name = 'Scrap'
-			  info.desc = 
-			  	"This is a piece of scrap that contains pieces of plastic and metal."			
-
-			when "overgrowth1"
-
-				render.region_name = 'overgrowth1'
-				render.region = @atlas.find_region('overgrowth1')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.4
-				item.base_value = 0.01
-				info.name = 'Overgrowth'
-			  info.desc = 
-			  	"This is the roots of some overgrowth. It can be " \
-			  	"burned for energy."
-
-			when "ruffage1"
-
-				render.region_name = 'ruffage1'
-				render.region = @atlas.find_region('ruffage1')
-				size.width = render.width * C::WTB
-				size.height = render.height * C::WTB
-				item.weight = 0.2
-				item.base_value = 0.005
-				info.name = 'Ruffage'
-			  info.desc = 
-			  	"These are stray roots and vines from some overgrowth."
-
-		end
+		render.region_name = type_value
+		render.region = @atlas.find_region(type_value)
+		
+		size = @mgr.add_comp(
+			item_id, 
+			Size.new(render.width * C::WTB, render.height * C::WTB))
 
 		item_id
 

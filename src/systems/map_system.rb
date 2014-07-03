@@ -1,7 +1,7 @@
 class MapSystem < System
 
 	attr_accessor :width, :height
-	attr_accessor :cam, :items, :doors, :workstations, :focus, :atlas
+	attr_accessor :cam, :items, :doors, :stations, :focus, :atlas
 	attr_accessor :tiles, :solid, :sight, :rot
 
 	def initialize(mgr, player, atlas)
@@ -15,7 +15,7 @@ class MapSystem < System
 		@focus = @mgr.comp(player, Position)
 		
 		@iterations = 120
-		@rooms, @items, @doors, @workstations = [], [], [], []
+		@rooms, @items, @doors, @stations = [], [], [], []
 		@num_of_rooms, @num_of_items = 200, 1200
 
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
@@ -40,7 +40,7 @@ class MapSystem < System
 		generate_rooms
 		generate_items
 		generate_doors
-		generate_workstations
+		generate_stations
 
 		update
 
@@ -116,6 +116,8 @@ class MapSystem < System
 
 	def generate_items
 
+		item_list = YAML.load_file('cfg/items.yml')['items']
+
 		x, y = 0, 0
 
 		for i in 0...@num_of_items
@@ -123,11 +125,10 @@ class MapSystem < System
 			loop do
 				x = Random.rand(10.0...@width-10)
 				y = Random.rand(10.0...@height-10)
-				
 				break if !@solid[x.to_i][y.to_i]
 			end
 
-			choice = C::ITEMS.sample
+			choice = item_list.sample
 
 			item_id = @mgr.inventory.create_item(choice, x, y)
 
@@ -242,18 +243,20 @@ class MapSystem < System
 	end
 
 
-	def generate_workstations
+	def generate_stations
+
+		station_list = YAML.load_file('cfg/items.yml')['stations']
 
 		@rooms.each do |room|
 
 			if room.x1 + 2 < room.x2 - 4 && room.y1 + 2 < room.y2 - 4
 
-				workstation_id = @mgr.create_basic_entity
+				station_id = @mgr.create_basic_entity
 
 				rot = [0, 90, 180, 270].sample
-				workstation_type = ['incinerator', 'programming_desk'].sample
+				station_type = station_list.sample
 				render = Render.new(
-					workstation_type, @atlas.find_region(workstation_type))
+					station_type, @atlas.find_region(station_type))
 				
 				w = render.width * C::WTB
 				h = render.height * C::WTB
@@ -261,19 +264,19 @@ class MapSystem < System
 				y = Random.rand(room.y1 + 2...room.y2 - 4)
 				
 				if [0, 180].include?(rot)
-					@mgr.add_comp(workstation_id, Position.new(x + w/2, y + h/2))
+					@mgr.add_comp(station_id, Position.new(x + w/2, y + h/2))
 				elsif [90, 270].include?(rot)
-					@mgr.add_comp(workstation_id, Position.new(x + h/2, y + w/2))
+					@mgr.add_comp(station_id, Position.new(x + h/2, y + w/2))
 				end
 
-				@mgr.add_comp(workstation_id, render)
-				@mgr.add_comp(workstation_id, Size.new(w, h))
-				@mgr.add_comp(workstation_id, Rotation.new(rot))
-				@mgr.add_comp(workstation_id, Collision.new)
-				@mgr.add_comp(workstation_id, Type.new('workstation'))
-				@mgr.add_comp(workstation_id, Workstation.new(workstation_type))
+				@mgr.add_comp(station_id, render)
+				@mgr.add_comp(station_id, Size.new(w, h))
+				@mgr.add_comp(station_id, Rotation.new(rot))
+				@mgr.add_comp(station_id, Collision.new)
+				@mgr.add_comp(station_id, Type.new('station'))
+				@mgr.add_comp(station_id, Station.new(station_type))
 
-				@workstations << workstation_id
+				@stations << station_id
 
 			end
 
@@ -332,6 +335,63 @@ class MapSystem < System
 
 		@items.delete(item_id)
 		@mgr.inventory.update_slots = true
+
+	end
+
+
+	def get_station(x, y)
+
+		@mgr.render.nearby_entities.each do |entity|
+
+			if @stations.include?(entity)
+
+				pos    = @mgr.comp(entity, Position)
+				render = @mgr.comp(entity, Render)
+				size   = @mgr.comp(entity, Size)
+				rot    = @mgr.comp(entity, Rotation)
+
+				# Transform coordinates to axis-aligned frame
+				c = Math.cos(-rot.angle * Math::PI/180)
+				s = Math.sin(-rot.angle * Math::PI/180)
+				rot_x = pos.x + c * (x - pos.x) - s * (y - pos.y)
+				rot_y = pos.y + s * (x - pos.x) + c * (y - pos.y)
+
+				left   = pos.x - size.width / 2
+				right  = pos.x + size.width / 2
+				top    = pos.y - size.height / 2
+				bottom = pos.y + size.height / 2
+
+				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
+					return entity
+				end
+
+			end
+
+		end
+
+		nil
+
+	end
+
+
+	def get_near_station(x, y)
+
+		@mgr.render.nearby_entities.each do |entity|
+
+			if @stations.include?(entity)
+				
+				pos = @mgr.comp(entity, Position)
+				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
+
+				if dist_sqr < 2.6
+					return entity
+				end
+
+			end
+
+		end
+
+		nil
 
 	end
 
