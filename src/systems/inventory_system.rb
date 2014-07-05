@@ -1,6 +1,6 @@
 class InventorySystem < System
 
-	attr_accessor :update_slots
+	attr_accessor :inv_slots, :update_slots
 
 	def initialize(mgr, atlas)
 
@@ -9,7 +9,6 @@ class InventorySystem < System
 		@atlas = atlas
 		@update_slots = true
 		@item_data = YAML.load_file('cfg/items.yml')
-		@inv_slots = @mgr.ui.inv_slots
 
 	end
 
@@ -137,6 +136,26 @@ class InventorySystem < System
 			Size.new(render.width * C::WTB, render.height * C::WTB))
 
 		item_id
+
+	end
+
+
+	def item_count(entity_id, type)
+		
+		count = 0
+		inv = @mgr.comp(entity_id, Inventory)
+
+		for item in inv.items
+
+			item_type = @mgr.comp(item, Type)
+
+			if item_type == type
+				count += 1
+			end
+
+		end
+
+		count
 
 	end
 

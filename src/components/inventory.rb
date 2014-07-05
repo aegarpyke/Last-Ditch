@@ -46,9 +46,7 @@ class Inventory < Component
 
 
 	def add_money(amount)
-
 		@money += amount
-
 	end
 
 

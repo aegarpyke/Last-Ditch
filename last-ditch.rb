@@ -69,14 +69,13 @@ class LastDitch < ApplicationAdapter
 		@mgr.actions    = @actions    = ActionsSystem.new(@mgr, @player)
     @mgr.crafting   = @crafting   = CraftingSystem.new(@mgr)
     @mgr.skill_test = @skill_test = SkillTestSystem.new(@mgr)
-
-    @mgr.ui         = @ui         = UISystem.new(@mgr, @player, @atlas)
-
-		@mgr.inventory  = @inventory  = InventorySystem.new(@mgr, @atlas)
+    @mgr.inventory  = @inventory  = InventorySystem.new(@mgr, @atlas)
 		@mgr.equipment  = @equipment  = EquipmentSystem.new(@mgr)
 		@mgr.status     = @status     = StatusSystem.new(@mgr)
 
-		
+    @mgr.ui         = @ui         = UISystem.new(@mgr, @player, @atlas)
+    @mgr.inventory.inv_slots = @ui.inv_slots
+
 		@mgr.ai         = @ai         = AISystem.new(@mgr)
 		@mgr.map        = @map        = MapSystem.new(@mgr, @player, @atlas)
 		@mgr.render     = @render     = RenderSystem.new(@mgr, @player, @atlas)

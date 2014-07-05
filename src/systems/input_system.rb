@@ -14,9 +14,6 @@ class InputSystem < System
 
 	def touch_down(screen_x, screen_y, pointer, button)
 
-		# @mgr.ui.inv_active and @mgr.ui.inv_clicked = true
-		# @mgr.ui.base_active and @mgr.ui.base_clicked = true
-
 		entities = @mgr.entities_with(UserInput)
 		entities.each do |entity|
 
@@ -380,7 +377,7 @@ class InputSystem < System
 		inv = @mgr.comp(entity, Inventory)
 
 		station_id = @mgr.map.get_near_station(pos.x, pos.y) and
-		station    = @mgr.comp(station_id, Station)      and
+		station = @mgr.comp(station_id, Station)             and
 
 		Proc.new do
 
@@ -390,8 +387,8 @@ class InputSystem < System
 			vel.spd = 0
 			vel.ang_spd = 0
 			
+			@mgr.actions.cur_station = station_id
 			@mgr.paused         = !@mgr.paused
-			@mgr.ui.main_active = !@mgr.ui.main_active
 			@mgr.time.active    = !@mgr.time.active
 			
 			return true

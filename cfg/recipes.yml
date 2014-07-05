@@ -9,7 +9,7 @@ canteen1_water:
   station: purification_station
   ingredients:
     - canteen1_empty: 1
-    - water: 1
+    - water: 1.0
   requirements:
     - mechanical: 0.04
 
@@ -19,7 +19,7 @@ canister1_water:
   station: purification_station
   ingredients:
     - canister1_empty: 1
-    - water: 3
+    - water: 3.0
   requirements:
     - mechanical: 0.05
 

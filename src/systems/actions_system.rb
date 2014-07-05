@@ -1,5 +1,7 @@
 class ActionsSystem < System
 
+  attr_accessor :cur_station
+
 	def initialize(mgr, player)
 
 		super()

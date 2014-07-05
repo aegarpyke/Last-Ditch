@@ -278,6 +278,7 @@ class MapSystem < System
 				@mgr.add_comp(station_id, Collision.new)
 				@mgr.add_comp(station_id, Type.new('station'))
 				@mgr.add_comp(station_id, Station.new(station_type))
+				@mgr.add_comp(station_id, Resources.new)
 
 				@stations << station_id
 

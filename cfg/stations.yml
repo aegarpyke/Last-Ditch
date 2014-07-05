@@ -5,13 +5,19 @@ stations:
   - charging_station
 
 incinerator:
-  name: "Incinerator"
+  name: 'Incinerator'
+  resources:
+    - energy
 
 purification_station:
-  name: "Purification System"
+  name: 'Purification System'
+  resources:
+    - water
 
 programming_desk:
-  name: "Programming Desk"
+  name: 'Programming Desk'
+  resources:
 
 charging_station:
-  name: "Charging Station"
+  name: 'Charging Station'
+  resources:

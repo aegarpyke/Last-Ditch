@@ -127,5 +127,6 @@ require_relative '../components/ai'
 require_relative '../components/station'
 require_relative '../components/ingredients'
 require_relative '../components/requirements'
+require_relative '../components/resources'
 
 GdxArray = com.badlogic.gdx.utils.Array

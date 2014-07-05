@@ -380,7 +380,7 @@ class UISystem < System
 			skill_name = skill_data[req]['name']
 			skill_lvl = skills.get_level(req)
 
-			reqs_list << "#{skill_name} - #{skill_lvl}/#{lvl}\n"
+			reqs_list << "#{skill_name} - #{skill_lvl} / #{lvl}\n"
 		
 		end
 
@@ -398,10 +398,25 @@ class UISystem < System
 
 		for ing, amt in ingredients
 
-			if item_data[ing]
-				ings_list << "#{resource_data[ing]['name']} - #{amt}\n"	
-			elsif resource_data[ing]
-				ings_list << "#{item_data[ing]['name']} - #{amt}\n"
+			if resource_data[ing]
+			
+				if @mgr.actions.cur_station
+
+					resources = @mgr.comp(@mgr.actions.cur_station, Resources)
+					resource_amt = resources.get_amount(ing)
+					ings_list << "#{resource_data[ing]['name']} - #{resource_amt} / #{amt}\n"	
+
+				else
+
+					ings_list << "#{resource_data[ing]['name']} - 0.0 / #{amt}\n"	
+				
+				end
+
+			elsif item_data[ing]
+				
+				item_amt = @mgr.inventory.item_count(@player, ing)
+				ings_list << "#{item_data[ing]['name']} - #{item_amt} / #{amt}\n"
+			
 			else
 				raise "Invalid ingredient in recipe: #{ing}"
 			end
