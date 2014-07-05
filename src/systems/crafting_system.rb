@@ -7,25 +7,21 @@ class CraftingSystem < System
     @mgr = mgr
     @active = false
     @recipes = Hash.new
-    @item_data = YAML.load_file('cfg/items.yml')
+    @recipe_data = YAML.load_file('cfg/recipes.yml')
 
-    for name, data in @item_data
+    for recipe_type, data in @recipe_data
 
-      unless ['stations', 'items'].include?(name)
+      unless recipe_type == 'recipe_list'
 
-        if data["station"]
-
-          recipe = @mgr.create_basic_entity
-          
-          @mgr.add_comp(recipe, Info.new(data["name"], data["desc"]))
-          @mgr.add_comp(recipe, Station.new(data["station"]))
-          @mgr.add_comp(recipe, Ingredients.new(data["ingredients"]))
-          @mgr.add_comp(recipe, Requirements.new(data["requirements"]))
-
-          @recipes[name] = recipe
+        recipe = @mgr.create_basic_entity
         
-        end
+        @mgr.add_comp(recipe, Info.new(data['name'], data['desc']))
+        @mgr.add_comp(recipe, Station.new(data['station']))
+        @mgr.add_comp(recipe, Ingredients.new(data['ingredients']))
+        @mgr.add_comp(recipe, Requirements.new(data['requirements']))
 
+        @recipes[data['name']] = recipe
+        
       end
 
     end

@@ -14,8 +14,8 @@ class InputSystem < System
 
 	def touch_down(screen_x, screen_y, pointer, button)
 
-		@mgr.ui.inv_active and @mgr.ui.inv_no_exit = true
-		@mgr.ui.base_active and @mgr.ui.base_no_exit = true
+		# @mgr.ui.inv_active and @mgr.ui.inv_clicked = true
+		# @mgr.ui.base_active and @mgr.ui.base_clicked = true
 
 		entities = @mgr.entities_with(UserInput)
 		entities.each do |entity|

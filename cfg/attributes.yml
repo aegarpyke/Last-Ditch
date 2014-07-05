@@ -1,0 +1,10 @@
+attribute_list:
+  - Strength
+  - Stamina
+  - Agility
+  - Dexterity
+  - Constitution
+  - Intelligence
+  - Willpower
+  - Speed
+  - Charisma

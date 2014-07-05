@@ -2,8 +2,8 @@ class UISystem < System
 
 	attr_accessor :player, :stage
 	attr_accessor :main_active, :main_toggle
-	attr_accessor :base_active, :base_toggle, :base_selection, :base_no_exit
-	attr_accessor :inv_active, :inv_toggle, :inv_selection, :inv_prev_selection, :inv_slots, :inv_no_exit
+	attr_accessor :base_active, :base_toggle, :base_selection, :base_clicked
+	attr_accessor :inv_active, :inv_toggle, :inv_selection, :inv_prev_selection, :inv_slots, :inv_clicked
 	attr_accessor :actions_active, :equip_active, :status_active
 	attr_accessor :actions_toggle, :equip_toggle, :status_toggle
  
@@ -42,6 +42,7 @@ class UISystem < System
 	def setup_base
 
 		@base_active = true
+		@base_clicked = false
 		@base_toggle = false
 
 		base_w, base_h = 62, 42
@@ -83,7 +84,6 @@ class UISystem < System
 		@base_table_needs.add(@base_sanity).width(106).padTop(0).height(7)
 
 		@base_selection = nil
-		@base_no_exit = false
 		@base_table_slots = Table.new(@skin)
 		@base_table_slots.set_bounds(0, 0, C::WIDTH, 32)
 		@base_table_slots.add_listener(
@@ -98,16 +98,24 @@ class UISystem < System
 
 				def exit(event, x, y, pointer, to_actor)
 				
-					if @ui.base_selection
-							
-						style = ImageButtonStyle.new(@ui.base_selection.style)
-						style.up = TextureRegionDrawable.new(@atlas.find_region('base_slot'))
-						@ui.base_selection.style = style
+					if @ui.base_clicked
+					
+						@ui.base_clicked = false
 
-						@ui.base_selection = nil
+					else
+					
+						if @ui.base_selection
+								
+							style = ImageButtonStyle.new(@ui.base_selection.style)
+							style.up = TextureRegionDrawable.new(@atlas.find_region('base_slot'))
+							@ui.base_selection.style = style
 
-					end	
-				
+							@ui.base_selection = nil
+
+						end	
+					
+					end
+
 				end
 
 			end.new(@atlas, self))
@@ -153,7 +161,8 @@ class UISystem < System
 
 
 					def clicked(event, x, y)
-						@mgr.ui.base_no_exit = true
+						@mgr.ui.base_clicked = true
+						true
 					end
 
 				end.new(@mgr, @base_slots.last, @atlas, self))
@@ -201,6 +210,15 @@ class UISystem < System
 		@actions_window.set_size(548, 254)
 		@actions_window.set_movable(false)
 		@actions_window.padTop(9)
+
+		@actions_name_label = Label.new('Name:', @skin, 'actions')
+		@actions_station_label = Label.new('Station:', @skin, 'actions')
+		@actions_requirements_label = Label.new('Reqs:', @skin, 'actions')
+		@actions_requirements_list_label = Label.new('', @skin, 'actions')
+		@actions_requirements_list_label.set_wrap(true)
+		@actions_ingredients_label = Label.new('Ingredients:', @skin, 'actions')
+		@actions_ingredients_list_label = Label.new('', @skin, 'actions')
+		@actions_ingredients_list_label.set_wrap(true)
 
 		@actions_left = Table.new
 		@actions_left.align(Align::left | Align::top)
@@ -300,15 +318,6 @@ class UISystem < System
 		@actions_right = Table.new
 		@actions_right.align(Align::left | Align::top)
 
-		@actions_name_label = Label.new('Name:', @skin, 'actions')
-		@actions_station_label = Label.new('Station:', @skin, 'actions')
-		@actions_requirements_label = Label.new('Reqs:', @skin, 'actions')
-		@actions_requirements_list_label = Label.new('', @skin, 'actions')
-		@actions_requirements_list_label.set_wrap(true)
-		@actions_ingredients_label = Label.new('Ingredients:', @skin, 'actions')
-		@actions_ingredients_list_label = Label.new('', @skin, 'actions')
-		@actions_ingredients_list_label.set_wrap(true)
-
 		@actions_right.add(@actions_name_label).padLeft(8).align(Align::left).row
 		@actions_right.add(@actions_station_label).padLeft(8).align(Align::left).row
 		@actions_right.add(@actions_requirements_label).padLeft(8).align(Align::left).row
@@ -327,9 +336,82 @@ class UISystem < System
 
 	def set_current_action(item_selection)
 
-		puts item_selection
+		for type, id in @mgr.crafting.recipes
+
+			info = @mgr.comp(id, Info)
+
+			if item_selection.include?(info.name)
+
+				ings = @mgr.comp(id, Ingredients)
+				reqs = @mgr.comp(id, Requirements)
+				station = @mgr.comp(id, Station)
+
+				set_actions_name(info.name)
+				set_actions_station(station.name)
+				set_actions_reqs(reqs.requirements)
+				set_actions_ingredients(ings.ingredients)
+
+			end
+
+		end
 
 	end
+
+
+	def set_actions_name(name)
+		@actions_name_label.text = "Name: #{name}"
+	end
+
+
+	def set_actions_station(station)
+		@actions_station_label.text = "Station: #{station}"
+	end
+
+
+	def set_actions_reqs(reqs)
+		
+		reqs_list = ''
+
+		skills = @mgr.comp(@player, Skills)
+		skill_data = YAML.load_file('cfg/skills.yml')
+
+		for req, lvl in reqs
+			
+			skill_name = skill_data[req]['name']
+			skill_lvl = skills.get_level(req)
+
+			reqs_list << "#{skill_name} - #{skill_lvl}/#{lvl}\n"
+		
+		end
+
+		@actions_requirements_list_label.text = reqs_list
+
+	end
+
+
+	def set_actions_ingredients(ingredients)
+		
+		ings_list = ''
+
+		item_data = YAML.load_file('cfg/items.yml')
+		resource_data = YAML.load_file('cfg/resources.yml')
+
+		for ing, amt in ingredients
+
+			if item_data[ing]
+				ings_list << "#{resource_data[ing]['name']} - #{amt}\n"	
+			elsif resource_data[ing]
+				ings_list << "#{item_data[ing]['name']} - #{amt}\n"
+			else
+				raise "Invalid ingredient in recipe: #{ing}"
+			end
+			
+		end
+
+		@actions_ingredients_list_label.text = ings_list
+
+	end
+
 
 
 	def switch_actions_focus(focus)
@@ -533,15 +615,22 @@ class UISystem < System
 
 				def exit(event, x, y, pointer, to_actor)
 				
-					if @ui.inv_selection
-							
-						style = ImageButtonStyle.new(@ui.inv_selection.style)
-						style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
-						@ui.inv_selection.style = style
+					if @ui.inv_clicked
+						
+						@ui.inv_clicked = false
+					
+					else
 
-						@ui.inv_selection = nil							
+						if @ui.inv_selection
+								
+							style = ImageButtonStyle.new(@ui.inv_selection.style)
+							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
+							@ui.inv_selection.style = style
 
-					end	
+							@ui.inv_selection = nil							
+
+						end	
+					end
 				
 				end
 
@@ -596,6 +685,7 @@ class UISystem < System
 
 					def clicked(event, x, y)
 
+						@ui.inv_clicked = true
 						@ui.use_item
 
 						true

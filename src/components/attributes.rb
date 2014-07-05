@@ -1,15 +1,19 @@
 class Attributes < Component
 
-	attr_accessor :strength, :dexterity, :agility, :endurance, :intelligence
+  attr_accessor :attributes
 
 	def initialize
 
 		super()
-		@strength = 10.0
-		@dexterity = 10.0
-		@agility = 10.0
-		@endurance = 10.0
-		@intelligence = 10.0
+
+    @attributes = Hash.new
+
+    attribute_data = YAML.load_file('cfg/attributes.yml')
+    attribute_list = attribute_data['attribute_list']
+
+    for attribute in attribute_list
+      @attributes[attribute] = 0.01
+    end
 
 	end
 

@@ -1,0 +1,16 @@
+resource_list:
+  - water
+  - energy
+  - fuel
+
+water:
+  name: 'Water'
+
+energy:
+  name: 'Energy'
+
+fuel:
+  name: 'Fuel'
+
+food:
+  name: 'Food'

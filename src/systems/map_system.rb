@@ -16,7 +16,7 @@ class MapSystem < System
 		
 		@iterations = 120
 		@rooms, @items, @doors, @stations = [], [], [], []
-		@num_of_rooms, @num_of_items = 200, 1200
+		@num_of_rooms, @num_of_items = 200, 3200
 
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
 		@sight = Array.new(@width) {|i| Array.new(@height) {|i| true }}
@@ -116,16 +116,18 @@ class MapSystem < System
 
 	def generate_items
 
-		item_list = YAML.load_file('cfg/items.yml')['items']
-
+		item_data = YAML.load_file('cfg/items.yml')
+		item_list = item_data['item_list'] 
 		x, y = 0, 0
 
 		for i in 0...@num_of_items
 
 			loop do
+
 				x = Random.rand(10.0...@width-10)
 				y = Random.rand(10.0...@height-10)
 				break if !@solid[x.to_i][y.to_i]
+			
 			end
 
 			choice = item_list.sample
@@ -245,16 +247,17 @@ class MapSystem < System
 
 	def generate_stations
 
-		station_list = YAML.load_file('cfg/items.yml')['stations']
+		station_data = YAML.load_file('cfg/stations.yml')
+		station_list = station_data['stations']
 
 		@rooms.each do |room|
 
 			if room.x1 + 2 < room.x2 - 4 && room.y1 + 2 < room.y2 - 4
 
 				station_id = @mgr.create_basic_entity
+				station_type = station_list.sample
 
 				rot = [0, 90, 180, 270].sample
-				station_type = station_list.sample
 				render = Render.new(
 					station_type, @atlas.find_region(station_type))
 				

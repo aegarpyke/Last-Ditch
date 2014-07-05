@@ -1,9 +1,4 @@
-stations:
-  - incinerator
-  - purification_station
-  - programming_desk
-
-items:
+item_list:
   - canteen1_water
   - canteen1_empty
   - canister1_water
@@ -20,7 +15,6 @@ items:
   - ruffage1
 
 canteen1_water:
-  # Basic Info
   name: 'Canteen, water'
   desc: >
     This is a canteen of clean drinking water.
@@ -28,15 +22,7 @@ canteen1_water:
   weight: 0.6
   base_value: 0.07
   
-  # Recipe
-  station: purification_station
-  ingredients:
-    - canteen1_empty: 1
-  requirements:
-    - mechanical: 0.4
-
 canteen1_empty:
-  # Basic Info
   name: 'Canteen, empty'
   desc: >
     This is an empty canteen. It can be refilled
@@ -46,23 +32,14 @@ canteen1_empty:
   base_value: 0.02
 
 canister1_water:
-  # Basic Info
   name: 'Canister, water'
   desc: >
     This is a large canister of clean water.
   usable: true
   weight: 1.4
   base_value: 0.21
-  
-  # Recipe
-  station: purification_station
-  ingredients:
-    - canister1_empty: 1
-  requirements:
-    - mechanical: 0.5
 
 canister1_waste:
-  # Basic Info
   name: 'Canister, waste'
   desc: >
     This is a canister of waste. It can be used to generate
@@ -72,7 +49,6 @@ canister1_waste:
   base_value: 0.03
 
 canister1_fuel:
-  # Basic Info
   name: 'Canister, fuel'
   desc: >
     This is a canister of fuel. It can be used for
@@ -82,7 +58,6 @@ canister1_fuel:
   base_value: 0.34
 
 canister1_empty:
-  # Basic Info
   name: 'Canister, empty'
   desc: >
     This is an empty canister. It can hold corrosive materials.
@@ -91,7 +66,6 @@ canister1_empty:
   base_value: 0.07
 
 battery_basic:
-  # Basic Info
   name: 'Battery, basic'
   desc: >
     This is a basic battery for energy storage. It has a
@@ -100,16 +74,7 @@ battery_basic:
   weight: 1.2
   base_value: 0.26
 
-  # Recipe
-  station: charging_station
-  ingredients:
-    - battery_empty: 1
-  requirements:
-    - mechanical: 0.04
-    - electrical: 0.02
-
 battery_empty:
-  # Basic Info
   name: 'Battery, empty'
   desc: >
     This is a battery that has been drained. It can be recharged
@@ -119,7 +84,6 @@ battery_empty:
   base_value: 0.12
 
 rations1:
-  # Basic Info
   name: 'Rations'
   desc: >
     These are basic rations.
@@ -128,7 +92,6 @@ rations1:
   base_value: 0.06
 
 rations1_empty:
-  # Basic Info
   name: 'Rations, empty'
   desc: >
     This is an empty rations container. It can be
@@ -138,7 +101,6 @@ rations1_empty:
   base_value: 0.02
 
 handgun1:
-  # Basic Info
   name: 'Handgun'
   desc: >
     This is a handgun.
@@ -147,7 +109,6 @@ handgun1:
   base_value: 0.54
 
 scrap1:
-  # Basic Info
   name: 'Scrap'
   desc: >
     This is a piece of scrap material that can be
@@ -157,7 +118,6 @@ scrap1:
   base_value: 0.1
 
 overgrowth1:
-  # Basic Info
   name: 'Overgrowth'
   desc: >
     This is the root of some overgrowth. It can be
@@ -167,7 +127,6 @@ overgrowth1:
   base_value: 0.01
 
 ruffage1:
-  # Basic Info
   name: 'Ruffage'
   desc: >
     These are stray twigs and vines from some overgrowth.

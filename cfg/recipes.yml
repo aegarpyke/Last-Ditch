@@ -1,0 +1,35 @@
+recipe_list:
+  - canteen1_water
+  - canister1_water
+  - battery_basic
+
+canteen1_water:
+  name: 'Canteen, water'
+  desc: ''
+  station: purification_station
+  ingredients:
+    - canteen1_empty: 1
+    - water: 1
+  requirements:
+    - mechanical: 0.04
+
+canister1_water:
+  name: 'Canister, water'
+  desc: ''
+  station: purification_station
+  ingredients:
+    - canister1_empty: 1
+    - water: 3
+  requirements:
+    - mechanical: 0.05
+
+battery_basic:
+  name: 'Battery, basic'
+  desc: ''
+  station: charging_station
+  ingredients:
+    - battery_empty: 1
+    - energy: 0.2
+  requirements:
+    - mechanical: 0.04
+    - electrical: 0.02

@@ -1,0 +1,17 @@
+stations:
+  - incinerator 
+  - purification_station
+  - programming_desk
+  - charging_station
+
+incinerator:
+  name: "Incinerator"
+
+purification_station:
+  name: "Purification System"
+
+programming_desk:
+  name: "Programming Desk"
+
+charging_station:
+  name: "Charging Station"
