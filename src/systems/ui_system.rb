@@ -86,6 +86,31 @@ class UISystem < System
 		@base_no_exit = false
 		@base_table_slots = Table.new(@skin)
 		@base_table_slots.set_bounds(0, 0, C::WIDTH, 32)
+		@base_table_slots.add_listener(
+
+			Class.new(ClickListener) do
+
+				def initialize(atlas, ui)
+					super()
+					@ui = ui
+					@atlas = atlas
+				end
+
+				def exit(event, x, y, pointer, to_actor)
+				
+					if @ui.base_selection
+							
+						style = ImageButtonStyle.new(@ui.base_selection.style)
+						style.up = TextureRegionDrawable.new(@atlas.find_region('base_slot'))
+						@ui.base_selection.style = style
+
+						@ui.base_selection = nil
+
+					end	
+				
+				end
+
+			end.new(@atlas, self))
 
 		@base_slots = []
 		for i in 1..C::BASE_SLOTS
@@ -108,32 +133,19 @@ class UISystem < System
 
 					def enter(event, x, y, pointer, from_actor)
 
+						if @base_selection
+
+							style = ImageButtonStyle.new(@ui.base_selection.style)
+							style.up = TextureRegionDrawable.new(@atlas.find_region('base_slot'))
+							@ui.base_selection.style = style
+
+						end
+
 						@ui.base_selection = @slot
 
 						style = ImageButtonStyle.new(@ui.base_selection.style)
 						style.up = TextureRegionDrawable.new(@atlas.find_region('base_selection'))
 						@ui.base_selection.style = style
-
-						true
-
-					end
-
-
-					def exit(event, x, y, pointer, to_actor)
-
-						if @mgr.ui.base_no_exit
-
-							@mgr.ui.base_no_exit = false
-
-						else
-
-							@ui.base_selection = nil
-
-							style = ImageButtonStyle.new(@slot.style)
-							style.up = TextureRegionDrawable.new(@atlas.find_region('base_slot'))
-							@slot.style = style
-
-						end
 
 						true
 
@@ -491,7 +503,7 @@ class UISystem < System
 	def setup_inventory
 
 		@inv_active = true
-		@inv_no_exit = false
+		@inv_clicked = false
 
 		@inv_item_name = Label.new("", @skin, "inv")
 		@inv_item_value = Label.new("", @skin, "inv")
@@ -509,6 +521,31 @@ class UISystem < System
 		@inv_window.set_size(276, 236)
 		@inv_window.movable = false
 		@inv_window.padTop(9)
+		@inv_window.add_listener(
+			
+			Class.new(ClickListener) do
+
+				def initialize(atlas, ui)
+					super()
+					@ui = ui
+					@atlas = atlas
+				end
+
+				def exit(event, x, y, pointer, to_actor)
+				
+					if @ui.inv_selection
+							
+						style = ImageButtonStyle.new(@ui.inv_selection.style)
+						style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
+						@ui.inv_selection.style = style
+
+						@ui.inv_selection = nil							
+
+					end	
+				
+				end
+
+			end.new(@atlas, self))
 
 		@inv_window.add(@inv_item_name).colspan(4).align(Align::left).padTop(4).height(12)
 		@inv_window.add(@inv_item_value).colspan(4).align(Align::right).padTop(4).height(14).row
@@ -538,6 +575,14 @@ class UISystem < System
 
 					def enter(event, x, y, pointer, from_actor)
 
+						if @ui.inv_selection
+							
+							style = ImageButtonStyle.new(@ui.inv_selection.style)
+							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
+							@ui.inv_selection.style = style
+
+						end
+
 						@ui.inv_selection = @slot
 
 						style = ImageButtonStyle.new(@ui.inv_selection.style)
@@ -549,31 +594,11 @@ class UISystem < System
 					end
 
 
-					def exit(event, x, y, pointer, to_actor)
-
-						if @mgr.ui.inv_no_exit
-
-							@mgr.ui.inv_no_exit = false
-
-						else
-
-							@ui.inv_selection = nil
-
-							style = ImageButtonStyle.new(@slot.style)
-							style.up = TextureRegionDrawable.new(@atlas.find_region('inv_slot'))
-							@slot.style = style
-
-						end
-
-						true
-
-					end
-
-
 					def clicked(event, x, y)
 
-						@mgr.ui.inv_no_exit = true
 						@ui.use_item
+
+						true
 
 					end
 
