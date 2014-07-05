@@ -21,6 +21,11 @@ class Item < Component
 		@value = @base_value * (2*@quality + 1*@condition)
 	end
 
+	def base_value=(base_value)
+		@base_value = base_value
+		@value = @base_value * (2*@quality + 1*@condition)
+	end
+
 	def value
 		@value = @base_value * (2*@quality + 1*@condition)
 	end

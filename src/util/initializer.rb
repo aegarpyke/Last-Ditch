@@ -69,8 +69,9 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar
 java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar::ProgressBarStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 java_import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane::ScrollPaneStyle
-java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align
+java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
+java_import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable
 java_import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 java_import com.badlogic.gdx.backends.lwjgl.LwjglApplication

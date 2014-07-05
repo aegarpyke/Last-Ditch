@@ -74,7 +74,24 @@ class InventorySystem < System
 
 	def use_item(entity_id, item_id, type_value)
 
+		@update_slots = true
 		needs = @mgr.comp(entity_id, Needs)
+
+		case type_value
+
+			when 'rations1'
+				type_value = 'rations1_empty'
+				needs.hunger = [1, needs.hunger += 0.1].min
+
+			when 'canteen1_water'
+				type_value = 'canteen1_empty'
+				needs.thirst = [1, needs.thirst += 0.1].min
+
+			when 'canister1_water'
+				type_value = 'canister1_empty'
+				needs.thirst = [1, needs.thirst += 0.3].min
+
+		end
 
 		type = @mgr.comp(item_id, Type)
 		info = @mgr.comp(item_id, Info)
@@ -83,25 +100,12 @@ class InventorySystem < System
 		type_data = @item_data[type_value]
 
 		type.type = type_value
-		info.name = type_data["name"]
-		info.desc = type_data["desc"]
-		item.usable = type_data["usable"]
-		item.weight = type_data["weight"]
-		item.base_value = type_data["base_value"]
+		info.name = type_data['name']
+		info.desc = type_data['desc']
+		item.usable = type_data['usable']
+		item.weight = type_data['weight']
+		item.base_value = type_data['base_value']
 		item.condition -= item.decay_rate
-
-		case type_value
-
-			when "rations1"
-				needs.hunger = [1, needs.hunger += 0.1].min
-
-			when "canteen1_water"
-				needs.thirst = [1, needs.thirst += 0.1].min
-
-			when "canister1_water"
-				needs.thirst = [1, needs.thirst += 0.3].min
-
-		end
 
 		@mgr.inventory.destroy_item(item_id) if item.condition < 0
 
@@ -111,20 +115,20 @@ class InventorySystem < System
 	def create_item(type_value, x=0, y=0)
 
 		item_id = @mgr.create_basic_entity
-
 		type_data = @item_data[type_value]
-		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
-
-		puts type_value
 
 		pos    = @mgr.add_comp(item_id, Position.new(x, y))
 		rot    = @mgr.add_comp(item_id, Rotation.new(Random.rand(360)))
 		info   = @mgr.add_comp(item_id, Info.new(type_data["name"], type_data["desc"]))
 		type   = @mgr.add_comp(item_id, Type.new(type_value))
-		item   = @mgr.add_comp(item_id, Item.new(quality, condition))
 		
-		render = @mgr.add_comp(item_id, Render.new(''))
+		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
 
+		item = @mgr.add_comp(item_id, Item.new(quality, condition))
+		item.base_value = type_data['base_value']
+		item.usable = type_data['usable']
+
+		render = @mgr.add_comp(item_id, Render.new(''))
 		render.region_name = type_value
 		render.region = @atlas.find_region(type_value)
 		

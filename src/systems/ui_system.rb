@@ -1,11 +1,11 @@
 class UISystem < System
 
 	attr_accessor :player, :stage
-	attr_accessor :main_active, :main_update
-	attr_accessor :base_active, :base_update, :base_selection, :base_no_exit
-	attr_accessor :inv_active, :inv_update, :inv_selection, :inv_prev_selection, :inv_slots, :inv_no_exit
+	attr_accessor :main_active, :main_toggle
+	attr_accessor :base_active, :base_toggle, :base_selection, :base_no_exit
+	attr_accessor :inv_active, :inv_toggle, :inv_selection, :inv_prev_selection, :inv_slots, :inv_no_exit
 	attr_accessor :actions_active, :equip_active, :status_active
-	attr_accessor :actions_update, :equip_update, :status_update
+	attr_accessor :actions_toggle, :equip_toggle, :status_toggle
  
 	def initialize(mgr, player, atlas)
 
@@ -42,7 +42,7 @@ class UISystem < System
 	def setup_base
 
 		@base_active = true
-		@base_update = true
+		@base_toggle = false
 
 		base_w, base_h = 62, 42
 		@base_table = Table.new(@skin)
@@ -156,13 +156,17 @@ class UISystem < System
 
 		end
 
+		@stage.add_actor(@base_table)
+		@stage.add_actor(@base_table_needs)
+		@stage.add_actor(@base_table_slots)
+
 	end
 
 
 	def setup_main
 		
 		@main_active = false
-		@main_update = true
+		@main_toggle = false
 
 		@main_table = Table.new(@skin)
 		@main_table.set_bounds(0, 0, C::WIDTH, C::HEIGHT)
@@ -189,15 +193,36 @@ class UISystem < System
 		@actions_left = Table.new
 		@actions_left.align(Align::left | Align::top)
 
-		@actions_crafting_button = TextButton.new(
-			"Crafting", @skin, "actions_button")
-		@actions_crafting_button.set_checked(true)
-		
-		@actions_object_button = TextButton.new(
-			"Object", @skin, "actions_button")
-
 		@actions_crafting_list = List.new(@skin, "actions")
+		@actions_crafting_list.add_listener(
+		
+			Class.new(ChangeListener) do
+
+				def initialize(ui)
+					super()
+					@ui = ui
+				end
+
+				def changed(event, actor)
+
+					item_selection = actor.get_selection.to_s
+
+					@ui.set_current_action(item_selection)
+
+				end
+
+			end.new(self))
+		
 		@actions_object_list = List.new(@skin, "actions")
+		@actions_object_list.add_listener(
+		
+			Class.new(ChangeListener) do
+
+				def changed(event, actor)
+					puts actor.get_selection
+				end
+
+			end.new)
 
 		@actions_scrollpane = ScrollPane.new(@actions_crafting_list, @skin, "actions")
 		@actions_scrollpane.set_overscroll(false, false)
@@ -206,59 +231,55 @@ class UISystem < System
 
 		crafting_items = GdxArray.new
  
- 		####################################################
-		# Consider adding a search box to the actions list #
-		####################################################
-
 		i = 0
 		for name, id in @mgr.crafting.recipes
 			i += 1
-			crafting_items.add("#{i}. #{name}")
+			info = @mgr.comp(id, Info)
+			crafting_items.add("#{i}. #{info.name}")
 		end
 
 		@actions_crafting_list.set_items(crafting_items)
 
 		object_items = GdxArray.new
 
-		for i in 1...32
-			if i < 11
-				object_items.add("#{i}. Object test item.")
-			else
-				object_items.add("#{i}.")
-			end
-		end
-
 		@actions_object_list.set_items(object_items)
+
+		@actions_crafting_button = TextButton.new(
+			"Crafting", @skin, "actions_button")
+		@actions_crafting_button.set_checked(true)
+		
+		@actions_object_button = TextButton.new(
+			"Object", @skin, "actions_button")
 
 		@actions_crafting_button.add_listener(
 
 			Class.new(ClickListener) do
 
-				def initialize(switch_actions_method)
+				def initialize(ui)
 					super()
-					@switch_actions_method = switch_actions_method
+					@ui = ui
 				end
 
 				def clicked(event, x, y)
-					@switch_actions_method.call(:crafting)
+					@ui.switch_actions_focus(:crafting)
 				end
 
-			end.new(method(:switch_actions_focus)))
+			end.new(self))
 
 		@actions_object_button.add_listener(
 
 			Class.new(ClickListener) do 
 
-				def initialize(switch_actions_method)
+				def initialize(ui)
 					super()
-					@switch_actions_method = switch_actions_method
+					@ui = ui
 				end
 
 				def clicked(event, x, y)
-					@switch_actions_method.call(:object)				
+					@ui.switch_actions_focus(:object)				
 				end
 
-			end.new(method(:switch_actions_focus)))
+			end.new(self))
 
 		@actions_left.add(@actions_crafting_button).height(15).padRight(9)
 		@actions_left.add(@actions_object_button).height(15).padRight(130).row
@@ -267,17 +288,34 @@ class UISystem < System
 		@actions_right = Table.new
 		@actions_right.align(Align::left | Align::top)
 
-		@actions_name = Label.new("Name", @skin, "actions")
-		@actions_station_label = Label.new("Station:", @skin, "actions")
+		@actions_name_label = Label.new('Name:', @skin, 'actions')
+		@actions_station_label = Label.new('Station:', @skin, 'actions')
+		@actions_requirements_label = Label.new('Reqs:', @skin, 'actions')
+		@actions_requirements_list_label = Label.new('', @skin, 'actions')
+		@actions_requirements_list_label.set_wrap(true)
+		@actions_ingredients_label = Label.new('Ingredients:', @skin, 'actions')
+		@actions_ingredients_list_label = Label.new('', @skin, 'actions')
+		@actions_ingredients_list_label.set_wrap(true)
 
-		@actions_right.add(@actions_name).padLeft(8).align(Align::left).row
-		@actions_right.add(@actions_station_label).padLeft(8).align(Align::left)
+		@actions_right.add(@actions_name_label).padLeft(8).align(Align::left).row
+		@actions_right.add(@actions_station_label).padLeft(8).align(Align::left).row
+		@actions_right.add(@actions_requirements_label).padLeft(8).align(Align::left).row
+		@actions_right.add(@actions_requirements_list_label).padLeft(14).align(Align::left).row
+		@actions_right.add(@actions_ingredients_label).padLeft(8).align(Align::left).row
+		@actions_right.add(@actions_ingredients_list_label).padLeft(14).align(Align::left)
 
 		@actions_split = SplitPane.new(
 			@actions_left, @actions_right,
 			false, @skin, "actions_split_pane")
 
 		@actions_window.add(@actions_split).width(540).height(239).padTop(10)
+
+	end
+
+
+	def set_current_action(item_selection)
+
+		puts item_selection
 
 	end
 
@@ -549,40 +587,6 @@ class UISystem < System
 
 		end
 
-
-	end
-
-
-	def use_item
-
-		@inv_selection                           and
-		index = @inv_slots.index(@inv_selection) and
-		inv = @mgr.comp(@player, Inventory)      and
-		item_id = inv.items[index]               and
-		item = @mgr.comp(item_id, Item)          and
-		item.usable                              and
-
-		Proc.new do
-
-			@mgr.inventory.update_slots = true
-
-			type = @mgr.comp(item_id, Type)
-			info = @mgr.comp(item_id, Info)
-
-			@mgr.inventory.use_item(@player, item_id, type.type)
-
-			set_inv_name(info.name)
-			set_inv_desc(info.desc)
-			set_inv_qual_cond(item.quality, item.condition)
-			set_inv_value(item.value)
-			set_inv_weight(item.weight)
-
-			return true
-
-		end.call
-	
-		false
-
 	end
 
 
@@ -639,7 +643,40 @@ class UISystem < System
 	end
 
 
+	def use_item
+
+		@inv_selection                           and
+		index = @inv_slots.index(@inv_selection) and
+		inv = @mgr.comp(@player, Inventory)      and
+		item_id = inv.items[index]               and
+		item = @mgr.comp(item_id, Item)          and
+		item.usable															 and
+
+		Proc.new do
+		
+			type = @mgr.comp(item_id, Type)
+			info = @mgr.comp(item_id, Info)
+
+			@mgr.inventory.use_item(@player, item_id, type.type)
+
+			set_inv_name(info.name)
+			set_inv_desc(info.desc)
+			set_inv_qual_cond(item.quality, item.condition)
+			set_inv_value(item.value)
+			set_inv_weight(item.weight)
+
+			true
+		
+		end.call
+
+		false
+
+	end
+
+
 	def update
+
+		update_view
 
 		if @base_active
 
@@ -691,9 +728,15 @@ class UISystem < System
 
 		end
 
-		if @base_update
+	end
 
-			@base_update = false
+
+	def update_view
+
+		if @base_toggle
+
+			@base_toggle = false
+			@base_active = !@base_active
 
 			if @base_active
 
@@ -711,9 +754,10 @@ class UISystem < System
 		
 		end
 
-		if @main_update
+		if @main_toggle
 
-			@main_update = false
+			@main_toggle = false
+			@main_active = !@main_active
 
 			if @main_active
 
@@ -735,9 +779,10 @@ class UISystem < System
 		
 		end
 
-		if @inv_update
+		if @inv_toggle
 
-			@inv_update = false
+			@inv_toggle = false
+			@inv_active = !@inv_active
 
 			if @inv_active
 				@stage.add_actor(@inv_window)
@@ -747,9 +792,10 @@ class UISystem < System
 
 		end
 
-		if @status_update
+		if @status_toggle
 
-			@status_update = false
+			@status_toggle = false
+			@status_active = !@status_active
 
 			if @status_active
 				@stage.add_actor(@status_window)
@@ -759,9 +805,10 @@ class UISystem < System
 
 		end
 
-		if @actions_update
+		if @actions_toggle
 
-			@actions_update = false
+			@actions_toggle = false
+			@actions_active = !@actions_active
 
 			if @actions_active
 				@stage.add_actor(@actions_window)
@@ -771,9 +818,10 @@ class UISystem < System
 
 		end
 
-		if @equip_update
+		if @equip_toggle
 
-			@equip_update = false
+			@equip_toggle = false
+			@equip_active = !@equip_active
 
 			if @equip_active
 				@stage.add_actor(@equip_window)

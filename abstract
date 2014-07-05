@@ -3,10 +3,14 @@ LAST DITCH
 
 TODO
 
+	UI:
+		+ Add search field to actions list
+		+
+
 	Environment:
-	  + The buildings were built in a highly modular fashion to allow the communities to
-	    to grow. After aquiring/developing the right technology the player will be able 
-	    to reshape their surroundings.
+	  + The buildings were built in a highly modular fashion to allow the 
+	  	communities to to grow. After aquiring/developing the right 
+	  	technology the player will be able to reshape their surroundings.
 	  + 
 
 	Transplants:  
@@ -20,7 +24,9 @@ TODO
  		+ 
  		
  	Crimes:
- 		+ If a player kills anyone and interacts with their dead body, then their DNA will   	 be traced to crime and they will become wanted for murder.
+ 		+ If a player kills anyone and interacts with their dead body, then 
+ 			their DNA will be traced to crime and they will become wanted for 
+ 			murder.
  		+ 
 
  		

@@ -101,20 +101,18 @@ class InputSystem < System
 					
 					if !@ctrl
 
-						@mgr.ui.main_update = true
+						@mgr.ui.main_toggle = true
 
 						vel = @mgr.comp(entity, Velocity)
 						vel.spd = 0
 						vel.ang_spd = 0
 						
 						@mgr.paused         = !@mgr.paused
-						@mgr.ui.main_active = !@mgr.ui.main_active
 						@mgr.time.active    = !@mgr.time.active
 
 					else
 
-						@mgr.ui.base_update = true
-						@mgr.ui.base_active = !@mgr.ui.base_active
+						@mgr.ui.base_toggle = true
 							
 					end
 
@@ -124,8 +122,7 @@ class InputSystem < System
 
 						if @mgr.ui.main_active
 
-							@mgr.ui.actions_update = true
-							@mgr.ui.actions_active = !@mgr.ui.actions_active
+							@mgr.ui.actions_toggle = true
 
 						else
 
@@ -142,8 +139,7 @@ class InputSystem < System
 						
 						if @mgr.ui.main_active
 
-							@mgr.ui.inv_update = true
-							@mgr.ui.inv_active = !@mgr.ui.inv_active
+							@mgr.ui.inv_toggle = true
 
 						else
 
@@ -160,8 +156,7 @@ class InputSystem < System
 
 						if @mgr.ui.main_active
 
-							@mgr.ui.equip_update = true
-							@mgr.ui.equip_active = !@mgr.ui.equip_active
+							@mgr.ui.equip_toggle = true
 
 						else
 
@@ -189,8 +184,7 @@ class InputSystem < System
 
 						if @mgr.ui.main_active
 
-							@mgr.ui.status_update = true
-							@mgr.ui.status_active = !@mgr.ui.status_active
+							@mgr.ui.status_toggle = true
 
 						else
 
@@ -382,8 +376,6 @@ class InputSystem < System
 
 	def use_station(entity)
 
-
-
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
@@ -392,7 +384,7 @@ class InputSystem < System
 
 		Proc.new do
 
-			@mgr.ui.main_update = true
+			@mgr.ui.main_toggle = true
 
 			vel = @mgr.comp(entity, Velocity)
 			vel.spd = 0
