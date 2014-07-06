@@ -145,11 +145,11 @@ class InventorySystem < System
 		count = 0
 		inv = @mgr.comp(entity_id, Inventory)
 
-		for item in inv.items
+		for item_id in inv.items
 
-			item_type = @mgr.comp(item, Type)
+			item_type = @mgr.comp(item_id, Type)
 
-			if item_type == type
+			if item_type && item_type.type == type
 				count += 1
 			end
 

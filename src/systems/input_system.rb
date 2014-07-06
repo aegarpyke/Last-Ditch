@@ -23,7 +23,7 @@ class InputSystem < System
 
 					if !@shift
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
 						else
 							pickup_item(entity)
@@ -31,7 +31,7 @@ class InputSystem < System
 
 					else
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
 						else
 
@@ -46,8 +46,18 @@ class InputSystem < System
 
 					if !@shift
 
-						if @mgr.ui.main_active
+						if @mgr.ui.base.active
+
+							@mgr.ui.base.no_exit = true
+
+						end
+
+						if @mgr.ui.active
+
+							@mgr.ui.inv.no_exit = true
+
 							drop_item(entity)
+						
 						end
 
 					else
@@ -74,7 +84,7 @@ class InputSystem < System
 
 					if !@shift
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
 						else
 							use_door(entity)				or
@@ -98,18 +108,19 @@ class InputSystem < System
 					
 					if !@ctrl
 
-						@mgr.ui.main_toggle = true
-
 						vel = @mgr.comp(entity, Velocity)
 						vel.spd = 0
 						vel.ang_spd = 0
-						
-						@mgr.paused         = !@mgr.paused
-						@mgr.time.active    = !@mgr.time.active
+
+						@mgr.ui.toggle = true
+						@mgr.paused = !@mgr.paused
+						@mgr.actions.cur_station = nil
+						@mgr.time.active = !@mgr.time.active
+						@mgr.ui.actions.set_station_highlight(false)
 
 					else
 
-						@mgr.ui.base_toggle = true
+						@mgr.ui.base.toggle = true
 							
 					end
 
@@ -117,9 +128,9 @@ class InputSystem < System
 
 					if !@shift
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
-							@mgr.ui.actions_toggle = true
+							@mgr.ui.actions.toggle = true
 
 						else
 
@@ -134,9 +145,9 @@ class InputSystem < System
 
 					if !@shift
 						
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
-							@mgr.ui.inv_toggle = true
+							@mgr.ui.inv.toggle = true
 
 						else
 
@@ -151,9 +162,9 @@ class InputSystem < System
 
 					if !@shift
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
-							@mgr.ui.equip_toggle = true
+							@mgr.ui.equip.toggle = true
 
 						else
 
@@ -164,7 +175,7 @@ class InputSystem < System
 						
 					else
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
 						else
 
@@ -179,9 +190,9 @@ class InputSystem < System
 
 					if !@shift
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
-							@mgr.ui.status_toggle = true
+							@mgr.ui.status.toggle = true
 
 						else
 
@@ -192,7 +203,7 @@ class InputSystem < System
 
 					else
 
-						if @mgr.ui.main_active
+						if @mgr.ui.active
 
 						else
 
@@ -233,7 +244,7 @@ class InputSystem < System
 
 				when Keys::W, Keys::S, Keys::UP, Keys::DOWN
 
-					if @mgr.ui.main_active
+					if @mgr.ui.active
 
 					else
 
@@ -244,7 +255,7 @@ class InputSystem < System
 
 				when Keys::A, Keys::D, Keys::LEFT, Keys::RIGHT
 
-					if @mgr.ui.main_active
+					if @mgr.ui.active
 
 					else
 
@@ -283,8 +294,9 @@ class InputSystem < System
 
 			item = @mgr.comp(item_id, Item)
 			inv.weight += item.weight 
-			@mgr.ui.inv_prev_selection = nil
+			
 			@mgr.map.remove_item(item_id)
+			@mgr.ui.inv.prev_selection = nil
 
 			return true
 		
@@ -310,7 +322,7 @@ class InputSystem < System
 
 			item = @mgr.comp(item_id, Item)
 			inv.weight += item.weight
-			@mgr.ui.inv_prev_selection = nil
+			@mgr.ui.inv.prev_selection = nil
 			@mgr.map.remove_item(item_id)
 
 			return true
@@ -328,8 +340,8 @@ class InputSystem < System
 		inv = @mgr.comp(entity, Inventory)
 		rot = @mgr.comp(entity, Rotation)
 
-		@mgr.ui.inv_selection                                  and
-		index = @mgr.ui.inv_slots.index(@mgr.ui.inv_selection) and
+		@mgr.ui.inv.selection                                  and
+		index = @mgr.ui.inv.slots.index(@mgr.ui.inv.selection) and
 		item_id = inv.items[index]														 and
 
 		Proc.new do
@@ -351,16 +363,20 @@ class InputSystem < System
 			@mgr.add_comp(item_id, item_render)
 
 			@mgr.map.items << item_id
+			@mgr.inventory.update_slots = true
+
 			item = @mgr.comp(item_id, Item)
+			
 			inv.weight -= item.weight 
 			inv.remove_item(item_id)
+
 			@mgr.render.nearby_entities << item_id
-			@mgr.ui.set_inv_name("")
-			@mgr.ui.set_inv_desc("")
-			@mgr.ui.set_inv_qual_cond(-1, -1)
-			@mgr.ui.set_inv_value(-1)
-			@mgr.ui.set_inv_weight(-1)
-			@mgr.inventory.update_slots = true
+			
+			@mgr.ui.inv.set_item_name("")
+			@mgr.ui.inv.set_item_desc("")
+			@mgr.ui.inv.set_item_qual_cond(-1, -1)
+			@mgr.ui.inv.set_item_value(-1)
+			@mgr.ui.inv.set_item_weight(-1)
 
 			return true
 
@@ -381,16 +397,15 @@ class InputSystem < System
 
 		Proc.new do
 
-			@mgr.ui.main_toggle = true
-
 			vel = @mgr.comp(entity, Velocity)
 			vel.spd = 0
 			vel.ang_spd = 0
 			
+			@mgr.paused = !@mgr.paused
+			@mgr.ui.toggle = true
+			@mgr.time.active = !@mgr.time.active
 			@mgr.actions.cur_station = station_id
-			@mgr.paused         = !@mgr.paused
-			@mgr.time.active    = !@mgr.time.active
-			
+
 			return true
 
 		end.call
@@ -406,7 +421,7 @@ class InputSystem < System
 		inv = @mgr.comp(entity, Inventory)
 
 		door_id = @mgr.map.get_near_door(pos.x, pos.y) and
-		door    = @mgr.comp(door_id, Door)             and
+		door = @mgr.comp(door_id, Door)                and
 		!door.locked                                   and
 
 		Proc.new do

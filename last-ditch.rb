@@ -12,7 +12,7 @@ class LastDitch < ApplicationAdapter
 		@debug = Box2DDebugRenderer.new
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 
-		@player = @mgr.create_tagged_entity('player')
+		@mgr.player = @player = @mgr.create_tagged_entity('player')
 		@mgr.add_comp(@player, Position.new(40, 40))
 		@mgr.add_comp(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
 		@mgr.add_comp(@player, Rotation.new(0))
@@ -73,8 +73,8 @@ class LastDitch < ApplicationAdapter
 		@mgr.equipment  = @equipment  = EquipmentSystem.new(@mgr)
 		@mgr.status     = @status     = StatusSystem.new(@mgr)
 
-    @mgr.ui         = @ui         = UISystem.new(@mgr, @player, @atlas)
-    @mgr.inventory.inv_slots = @ui.inv_slots
+    @mgr.ui         = @ui         = UISystem.new(@mgr, @atlas)
+    @mgr.inventory.inv_slots = @ui.inv.slots
 
 		@mgr.ai         = @ai         = AISystem.new(@mgr)
 		@mgr.map        = @map        = MapSystem.new(@mgr, @player, @atlas)

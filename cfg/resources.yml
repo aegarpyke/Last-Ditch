@@ -11,6 +11,3 @@ energy:
 
 fuel:
   name: 'Fuel'
-
-food:
-  name: 'Food'

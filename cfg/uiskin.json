@@ -8,12 +8,9 @@
 	
 	"com.badlogic.gdx.graphics.Color":
 	{
-		"green": { "a": 1, "r": 0, "g": 1, "b": 0 },
 		"white": { "a": 1, "r": 1, "g": 1, "b": 1 },
-		"red": { "a": 1, "r": 1, "g": 0, "b": 0 },
-		"black": { "a": 1, "r": 0, "g": 0, "b": 0 },
-		"actions_unselected": { "a": 1, "r": 0.34, "g": 0.45, "b": 0.65 }
-
+		"black": { "a": 0, "r": 0, "g": 0, "b": 0 },
+		"actions_unselected": { "a": 0.63, "r": 0.63, "g": 0.59, "b": 0.45 },
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": 
@@ -56,7 +53,7 @@
 		"actions_button":
 		{
 			"up": "button1"
-		}
+		},
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle":
@@ -74,7 +71,7 @@
 		"status_bars":
 		{
 			"up": "status_bar"
-		}
+		},
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": 
@@ -83,7 +80,7 @@
 		{
 			"up": "button1", "checked": "button1_pressed",
 			"font": "default-font", "fontColor": "white"
-		}
+		},
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle":
@@ -91,7 +88,7 @@
 		"status_bars":
 		{
 			"background": "status_bar"
-		}
+		},
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": 
@@ -108,7 +105,7 @@
 		"actions_split_pane": 
 		{
 			"handle": "scroll_handle1"
-		}
+		},
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle":

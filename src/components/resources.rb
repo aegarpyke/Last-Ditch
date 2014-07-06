@@ -6,7 +6,7 @@ class Resources < Component
 
     super()
     @water = 0.0
-    @energy = 0.0
+    @energy = 8.0
     @fuel = 0.0
 
   end
