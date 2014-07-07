@@ -16,7 +16,8 @@ class UIStatusSystem < System
     if 1 == 0
 
       @window.debug
-      @table_model.debug
+      @table_male_model.debug
+      @table_female_model.debug
 
     end
 
@@ -38,7 +39,7 @@ class UIStatusSystem < System
     @occupation = Label.new(
       "Occupation: %s" % info.occupation, @skin, "status")
 
-    @empty  = Image.new(@mgr.atlas.find_region('empty'))
+    @empty  = Image.new(@mgr.atlas.find_region('environ/empty'))
 
     @window.add(@name).width(246).height(14).padLeft(4).colspan(4).align(Align::left).row
     @window.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(12).align(Align::left).row
@@ -47,17 +48,17 @@ class UIStatusSystem < System
 
     # @window.add(@table_male_model).width(180).height(160).align(Align::left).row
 
-    @male_l_head = Image.new(@mgr.atlas.find_region('male/l_head'))
-    @male_r_head = Image.new(@mgr.atlas.find_region('male/r_head'))
-    @male_l_arm  = Image.new(@mgr.atlas.find_region('male/l_arm'))
-    @male_torso  = Image.new(@mgr.atlas.find_region('male/torso'))
-    @male_r_arm  = Image.new(@mgr.atlas.find_region('male/r_arm'))
-    @male_l_hand = Image.new(@mgr.atlas.find_region('male/l_hand'))
-    @male_r_hand = Image.new(@mgr.atlas.find_region('male/r_hand'))
-    @male_l_leg  = Image.new(@mgr.atlas.find_region('male/l_leg'))
-    @male_r_leg  = Image.new(@mgr.atlas.find_region('male/r_leg'))
-    @male_l_foot = Image.new(@mgr.atlas.find_region('male/l_foot'))
-    @male_r_foot = Image.new(@mgr.atlas.find_region('male/r_foot'))
+    @male_l_head = Image.new(@mgr.atlas.find_region('male_model/l_head'))
+    @male_r_head = Image.new(@mgr.atlas.find_region('male_model/r_head'))
+    @male_l_arm  = Image.new(@mgr.atlas.find_region('male_model/l_arm'))
+    @male_torso  = Image.new(@mgr.atlas.find_region('male_model/torso'))
+    @male_r_arm  = Image.new(@mgr.atlas.find_region('male_model/r_arm'))
+    @male_l_hand = Image.new(@mgr.atlas.find_region('male_model/l_hand'))
+    @male_r_hand = Image.new(@mgr.atlas.find_region('male_model/r_hand'))
+    @male_l_leg  = Image.new(@mgr.atlas.find_region('male_model/l_leg'))
+    @male_r_leg  = Image.new(@mgr.atlas.find_region('male_model/r_leg'))
+    @male_l_foot = Image.new(@mgr.atlas.find_region('male_model/l_foot'))
+    @male_r_foot = Image.new(@mgr.atlas.find_region('male_model/r_foot'))
     
     @male_l_head.color = Color.new(1.00, 0.50, 0.50, 1.0)
     @male_r_head.color = Color.new(1.00, 1.00, 1.00, 1.0)
@@ -93,17 +94,17 @@ class UIStatusSystem < System
 
     @window.add(@table_female_model).width(180).height(160).align(Align::left).row
 
-    @female_l_head = Image.new(@mgr.atlas.find_region('female/l_head'))
-    @female_r_head = Image.new(@mgr.atlas.find_region('female/r_head'))
-    @female_l_arm  = Image.new(@mgr.atlas.find_region('female/l_arm'))
-    @female_torso  = Image.new(@mgr.atlas.find_region('female/torso'))
-    @female_r_arm  = Image.new(@mgr.atlas.find_region('female/r_arm'))
-    @female_l_hand = Image.new(@mgr.atlas.find_region('female/l_hand'))
-    @female_r_hand = Image.new(@mgr.atlas.find_region('female/r_hand'))
-    @female_l_leg  = Image.new(@mgr.atlas.find_region('female/l_leg'))
-    @female_r_leg  = Image.new(@mgr.atlas.find_region('female/r_leg'))
-    @female_l_foot = Image.new(@mgr.atlas.find_region('female/l_foot'))
-    @female_r_foot = Image.new(@mgr.atlas.find_region('female/r_foot'))
+    @female_l_head = Image.new(@mgr.atlas.find_region('female_model/l_head'))
+    @female_r_head = Image.new(@mgr.atlas.find_region('female_model/r_head'))
+    @female_l_arm  = Image.new(@mgr.atlas.find_region('female_model/l_arm'))
+    @female_torso  = Image.new(@mgr.atlas.find_region('female_model/torso'))
+    @female_r_arm  = Image.new(@mgr.atlas.find_region('female_model/r_arm'))
+    @female_l_hand = Image.new(@mgr.atlas.find_region('female_model/l_hand'))
+    @female_r_hand = Image.new(@mgr.atlas.find_region('female_model/r_hand'))
+    @female_l_leg  = Image.new(@mgr.atlas.find_region('female_model/l_leg'))
+    @female_r_leg  = Image.new(@mgr.atlas.find_region('female_model/r_leg'))
+    @female_l_foot = Image.new(@mgr.atlas.find_region('female_model/l_foot'))
+    @female_r_foot = Image.new(@mgr.atlas.find_region('female_model/r_foot'))
     
     @female_l_head.color = Color.new(1.00, 0.50, 0.50, 1.0)
     @female_r_head.color = Color.new(1.00, 1.00, 1.00, 1.0)

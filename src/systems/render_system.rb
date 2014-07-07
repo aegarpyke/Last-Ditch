@@ -105,9 +105,9 @@ class RenderSystem < System
 			if entity == @player
 				
 				if vel_vec.x.abs < 0.02 && vel_vec.y.abs < 0.02
-					anim.cur = 'player_idle'
-				elsif anim.cur != 'player_walk'
-					anim.cur = 'player_walk'
+					anim.cur = 'male1/idle'
+				elsif anim.cur != 'male1/walk'
+					anim.cur = 'male1/walk'
 				end
 			
 			end

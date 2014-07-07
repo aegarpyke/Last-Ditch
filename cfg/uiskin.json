@@ -52,7 +52,7 @@
 	{
 		"actions_button":
 		{
-			"up": "button1"
+			"up": "ui/button1"
 		},
 	},
 
@@ -60,17 +60,17 @@
 	{
 		"base_slot":
 		{
-			"up": "base_slot"
+			"up": "ui/base_slot"
 		},
 
 		"inv_slot":
 		{
-			"up": "inv_slot"
+			"up": "ui/inv_slot"
 		},
 
 		"status_bars":
 		{
-			"up": "status_bar"
+			"up": "ui/status_bar"
 		},
 	},
 
@@ -78,7 +78,7 @@
 	{
 		"actions_button":
 		{
-			"up": "button1", "checked": "button1_pressed",
+			"up": "ui/button1", "checked": "ui/button1_pressed",
 			"font": "default-font", "fontColor": "white"
 		},
 	},
@@ -87,7 +87,7 @@
 	{
 		"status_bars":
 		{
-			"background": "status_bar"
+			"background": "ui/status_bar"
 		},
 	},
 
@@ -95,7 +95,7 @@
 	{
 		"window1": 
 		{
-			"background": "window_background1",
+			"background": "ui/window_background1",
 			"titleFont": "default-font", "titleFontColor": "white"
 		},
 	},
@@ -104,7 +104,7 @@
 	{
 		"actions_split_pane": 
 		{
-			"handle": "scroll_handle1"
+			"handle": "ui/scroll_handle1"
 		},
 	},
 
@@ -112,9 +112,9 @@
 	{
 		"actions":
 		{
-			"background": "scrollpane_background1",
-			"vScroll": "window_scroll1",
-			"vScrollKnob": "window_scroll_knob1",
+			"background": "ui/scrollpane_background1",
+			"vScroll": "ui/window_scroll1",
+			"vScrollKnob": "ui/window_scroll_knob1",
 		}
 	},
 
@@ -122,7 +122,7 @@
 	{
 		"actions":
 		{
-			"selection": "list_selection", "font": "garuda12", 
+			"selection": "ui/list_selection", "font": "garuda12", 
 			"fontColorSelected": "white", "fontColorUnselected": "actions_unselected"
 		}
 	}

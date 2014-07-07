@@ -32,7 +32,7 @@ class InventorySystem < System
 
 						style = ImageButtonStyle.new(@inv_slots[i].style)
 						tex = TextureRegionDrawable.new(
-							@mgr.atlas.find_region(type.type))
+							@mgr.atlas.find_region("items/#{type.type}"))
 
 						style.imageUp = tex
 
@@ -42,7 +42,7 @@ class InventorySystem < System
 						
 						style = ImageButtonStyle.new(@inv_slots[i].style)
 						tex = TextureRegionDrawable.new(
-							@mgr.atlas.find_region('empty'))
+							@mgr.atlas.find_region('environ/empty'))
 
 						style.imageUp = tex
 
@@ -128,8 +128,8 @@ class InventorySystem < System
 		item.usable = type_data['usable']
 
 		render = @mgr.add_comp(item_id, Render.new(''))
-		render.region_name = type_value
-		render.region = @atlas.find_region(type_value)
+		render.region_name = "items/#{type_value}"
+		render.region = @atlas.find_region("items/#{type_value}")
 		
 		size = @mgr.add_comp(
 			item_id, 

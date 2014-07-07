@@ -112,7 +112,7 @@ class UIInventorySystem < System
     if @selection
               
       style = ImageButtonStyle.new(@selection.style)
-      style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_slot'))
+      style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/inv_slot'))
       @selection.style = style
 
     end
@@ -120,7 +120,7 @@ class UIInventorySystem < System
     @selection = slot
 
     style = ImageButtonStyle.new(@selection.style)
-    style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_selection'))
+    style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/inv_selection'))
     @selection.style = style
 
   end
@@ -137,7 +137,7 @@ class UIInventorySystem < System
       if @selection
           
         style = ImageButtonStyle.new(@selection.style)
-        style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('inv_slot'))
+        style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/inv_slot'))
         @selection.style = style
 
         @selection = nil              

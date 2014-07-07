@@ -142,7 +142,7 @@ class UIBaseSystem < System
       if @selection
           
         style = ImageButtonStyle.new(@selection.style)
-        style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('base_slot'))
+        style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/base_slot'))
         @selection.style = style
 
         @selection = nil
@@ -159,7 +159,7 @@ class UIBaseSystem < System
     if @selection
 
       style = ImageButtonStyle.new(@selection.style)
-      style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('base_slot'))
+      style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/base_slot'))
       @selection.style = style
 
     end
@@ -167,7 +167,7 @@ class UIBaseSystem < System
     @selection = slot
 
     style = ImageButtonStyle.new(@selection.style)
-    style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('base_selection'))
+    style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/base_selection'))
     @selection.style = style
 
   end

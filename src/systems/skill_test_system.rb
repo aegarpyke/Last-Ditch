@@ -15,12 +15,12 @@ class SkillTestSystem < System
     @effect1 = ParticleEffect.new
     @effect1.load(
       Gdx.files.internal("res/fx/trails_eff1.p"), 
-      Gdx.files.internal("res/gfx"))
+      Gdx.files.internal("res/gfx/ui"))
     
     @effect2 = ParticleEffect.new
     @effect2.load(
       Gdx.files.internal("res/fx/trails_eff2.p"), 
-      Gdx.files.internal("res/gfx"))
+      Gdx.files.internal("res/gfx/ui"))
     
   end
 

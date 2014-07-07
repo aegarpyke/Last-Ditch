@@ -353,8 +353,8 @@ class InputSystem < System
 				pos.y + rot.y)
 
 			item_render = Render.new(
-				item_type.type,
-				@mgr.atlas.find_region(item_type.type))
+				"items/#{item_type.type}",
+				@mgr.atlas.find_region("items/#{item_type.type}"))
 
 			item_rot = @mgr.comp(item_id, Rotation)
 			item_rot.angle = rot.angle - 90

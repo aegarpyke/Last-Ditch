@@ -24,15 +24,15 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@player, Collision.new)
 		@mgr.add_comp(@player, Animation.new(
 			0.1,
-			{'player_idle' => ['player_idle1'], 
-	     'player_walk' => ['player_idle1',
-	                       'player_walk1', 
-	                       'player_walk2',
-	                       'player_walk1',
-	                       'player_idle1', 
-	                       "player_walk1-f", 
-	                       "player_walk2-f", 
-	                       "player_walk1-f"]}))
+			{'male1/idle' => ['male1/idle1'], 
+	     'male1/walk' => ['male1/idle1',
+                        'male1/walk1', 
+                        'male1/walk2',
+                        'male1/walk1',
+                        'male1/idle1', 
+                        "male1/walk1-f", 
+                        "male1/walk2-f", 
+                        "male1/walk1-f"]}))
 		player_info = @mgr.add_comp(@player, Info.new(
 			'Kadijah',
 			'This is the player'))
@@ -46,8 +46,8 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@drone1, AI.new('wander'))
 		@mgr.add_comp(@drone1, Animation.new(
 			0.3,
-			{'drone1_idle' => ['drone1_idle1',
-												 'drone1_idle2']}))
+			{'drone1/idle' => ['drone1/idle1',
+												 'drone1/idle2']}))
 
 		@drone2 = @mgr.create_tagged_entity('drone 2')
 		@mgr.add_comp(@drone2, Position.new(44, 44))
@@ -57,8 +57,8 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@drone2, AI.new('wander'))
 		@mgr.add_comp(@drone2, Animation.new(
 			0.3,
-			{'drone1_idle' => ['drone1_idle1',
-												 'drone1_idle2']}))
+			{'drone1/idle' => ['drone1/idle1',
+												 'drone1/idle2']}))
 
 		@timer = 0
 		@mgr.atlas = @atlas

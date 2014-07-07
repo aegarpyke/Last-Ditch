@@ -21,7 +21,7 @@ class MapSystem < System
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
 		@sight = Array.new(@width) {|i| Array.new(@height) {|i| true }}
 		@rot   = Array.new(@width) {|i| Array.new(@height) {|i| 0.0}}
-		@tiles = Array.new(@width) {|i| Array.new(@height) {|i| @atlas.find_region('floor1')}}
+		@tiles = Array.new(@width) {|i| Array.new(@height) {|i| @atlas.find_region('environ/floor1')}}
 
 		for x in 0...@width
 			for y in 0...@height
@@ -30,7 +30,7 @@ class MapSystem < System
 					
 					@solid[x][y] = true
 					@sight[x][y] = true
-					@tiles[x][y] = @atlas.find_region('empty')
+					@tiles[x][y] = @atlas.find_region('environ/empty')
 
 				end
 
@@ -84,21 +84,21 @@ class MapSystem < System
 							@solid[x][y] = true
 							@sight[x][y] = false
 							@rot[x][y]   = 0.0
-							@tiles[x][y] = @atlas.find_region('wall1')
+							@tiles[x][y] = @atlas.find_region('environ/wall1')
 
 						elsif y == room.y1 || y == room.y2-1
 
 							@solid[x][y] = true
 							@sight[x][y] = false
 							@rot[x][y]   = 0.0
-							@tiles[x][y] = @atlas.find_region('wall1')
+							@tiles[x][y] = @atlas.find_region('environ/wall1')
 
 						else
 
 							@solid[x][y] = false
 							@sight[x][y] = true
 							@rot[x][y]   = 0.0
-							@tiles[x][y] = @atlas.find_region('floor2')
+							@tiles[x][y] = @atlas.find_region('environ/floor2')
 
 						end
 
@@ -179,16 +179,16 @@ class MapSystem < System
 			@solid[x][y] = false
 			@sight[x][y] = true
 			@rot[x][y]   = 0.0
-			@tiles[x][y] = @atlas.find_region('floor2')
+			@tiles[x][y] = @atlas.find_region('environ/floor2')
 
 			@solid[x+1][y] = false
 			@sight[x+1][y] = true
 			@rot[x+1][y]   = 0.0
-			@tiles[x+1][y] = @atlas.find_region('floor2')
+			@tiles[x+1][y] = @atlas.find_region('environ/floor2')
 
 			door_id = @mgr.create_basic_entity
 
-			render = Render.new('door1', @atlas.find_region('door1'))
+			render = Render.new('environ/door1', @atlas.find_region('environ/door1'))
 			w = render.width * C::WTB
 			h = render.height * C::WTB
 
@@ -215,18 +215,18 @@ class MapSystem < System
 			@solid[x][y] = false
 			@sight[x][y] = true
 			@rot[x][y]   = 0.0
-			@tiles[x][y] = @atlas.find_region('floor2')
+			@tiles[x][y] = @atlas.find_region('environ/floor2')
 
 			@solid[x][y+1] = false
 			@sight[x][y+1] = true
 			@rot[x][y+1]   = 0.0
-			@tiles[x][y+1] = @atlas.find_region('floor2')
+			@tiles[x][y+1] = @atlas.find_region('environ/floor2')
 
 			door_id = @mgr.create_basic_entity
 			
 			@mgr.add_comp(door_id, Render.new(
-				'door1', 
-				@atlas.find_region('door1')))
+				'environ/door1', 
+				@atlas.find_region('environ/door1')))
 
 			w = render.width * C::WTB
 			h = render.height * C::WTB
@@ -259,7 +259,8 @@ class MapSystem < System
 
 				rot = [0, 90, 180, 270].sample
 				render = Render.new(
-					station_type, @atlas.find_region(station_type))
+					"environ/#{station_type}", 
+					@atlas.find_region("environ/#{station_type}"))
 				
 				w = render.width * C::WTB
 				h = render.height * C::WTB
@@ -482,7 +483,7 @@ class MapSystem < System
 
 			@mgr.add_comp(
 				door_id, 
-				Render.new(type, @atlas.find_region(type)))
+				Render.new(type, @atlas.find_region("environ/#{type}")))
 		
 		end
 
