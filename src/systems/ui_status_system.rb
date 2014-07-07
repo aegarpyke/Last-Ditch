@@ -31,39 +31,110 @@ class UIStatusSystem < System
     @window.movable = false
     @window.padTop(9)
 
-    @table_model = Table.new(@skin)
-
     info = @mgr.comp(@mgr.player, Info)
-
-    r_head_tex = TextureRegion.new(@mgr.atlas.find_region('status_head'))
-    r_arm_tex  = TextureRegion.new(@mgr.atlas.find_region('status_arm'))
-    r_hand_tex = TextureRegion.new(@mgr.atlas.find_region('status_hand'))
-    r_leg_tex  = TextureRegion.new(@mgr.atlas.find_region('status_leg'))
-    r_foot_tex = TextureRegion.new(@mgr.atlas.find_region('status_foot'))
-
-    r_head_tex.flip(true, false)
-    r_arm_tex.flip(true, false)
-    r_hand_tex.flip(true, false)
-    r_leg_tex.flip(true, false)
-    r_foot_tex.flip(true, false)
 
     @name = Label.new(
       "Name: %s" % info.name, @skin, "status")
     @occupation = Label.new(
       "Occupation: %s" % info.occupation, @skin, "status")
 
-    @l_head = Image.new(@mgr.atlas.find_region('status_head'))
-    @r_head = Image.new(r_head_tex)
-    @l_arm  = Image.new(@mgr.atlas.find_region('status_arm'))
-    @torso  = Image.new(@mgr.atlas.find_region('status_torso'))
-    @r_arm  = Image.new(r_arm_tex)
-    @l_hand = Image.new(@mgr.atlas.find_region('status_hand'))
-    @r_hand = Image.new(r_hand_tex)
-    @l_leg  = Image.new(@mgr.atlas.find_region('status_leg'))
-    @r_leg  = Image.new(r_leg_tex)
-    @l_foot = Image.new(@mgr.atlas.find_region('status_foot'))
-    @r_foot = Image.new(r_foot_tex)
+    @empty  = Image.new(@mgr.atlas.find_region('empty'))
 
+    @window.add(@name).width(246).height(14).padLeft(4).colspan(4).align(Align::left).row
+    @window.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(12).align(Align::left).row
+
+    @table_male_model = Table.new(@skin)
+
+    # @window.add(@table_male_model).width(180).height(160).align(Align::left).row
+
+    @male_l_head = Image.new(@mgr.atlas.find_region('male/l_head'))
+    @male_r_head = Image.new(@mgr.atlas.find_region('male/r_head'))
+    @male_l_arm  = Image.new(@mgr.atlas.find_region('male/l_arm'))
+    @male_torso  = Image.new(@mgr.atlas.find_region('male/torso'))
+    @male_r_arm  = Image.new(@mgr.atlas.find_region('male/r_arm'))
+    @male_l_hand = Image.new(@mgr.atlas.find_region('male/l_hand'))
+    @male_r_hand = Image.new(@mgr.atlas.find_region('male/r_hand'))
+    @male_l_leg  = Image.new(@mgr.atlas.find_region('male/l_leg'))
+    @male_r_leg  = Image.new(@mgr.atlas.find_region('male/r_leg'))
+    @male_l_foot = Image.new(@mgr.atlas.find_region('male/l_foot'))
+    @male_r_foot = Image.new(@mgr.atlas.find_region('male/r_foot'))
+    
+    @male_l_head.color = Color.new(1.00, 0.50, 0.50, 1.0)
+    @male_r_head.color = Color.new(1.00, 1.00, 1.00, 1.0)
+    @male_l_arm.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @male_torso.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @male_r_arm.color  = Color.new(1.00, 0.40, 0.40, 1.0)
+    @male_l_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
+    @male_l_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @male_r_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @male_r_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
+    @male_l_foot.color = Color.new(1.00, 0.20, 0.20, 1.0)
+    @male_r_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
+
+    @table_male_model.add(@empty).colspan(2)
+    @table_male_model.add(@male_l_head).padLeft(57).padTop(0).colspan(1)
+    @table_male_model.add(@male_r_head).padRight(55).padTop(0).colspan(1)
+    @table_male_model.add(@empty).colspan(2).row
+    @table_male_model.add(@male_l_hand).padRight(-4).padTop(-74).padBottom(0).colspan(1)
+    @table_male_model.add(@male_l_arm).padRight(-52).padLeft(0).padTop(-49).colspan(1)
+    @table_male_model.add(@male_torso).padTop(0).colspan(2)
+    @table_male_model.add(@male_r_arm).padRight(0).padLeft(-58).padTop(-48).colspan(1)
+    @table_male_model.add(@male_r_hand).padLeft(-18).padTop(-76).padBottom(0).colspan(1).row
+    @table_male_model.add(@empty).colspan(2)
+    @table_male_model.add(@male_l_leg).padRight(-26).padTop(0).colspan(1)
+    @table_male_model.add(@male_r_leg).padLeft(-17).padTop(-2).colspan(1)
+    @table_male_model.add(@empty).colspan(2).row
+    @table_male_model.add(@empty).colspan(2)
+    @table_male_model.add(@male_l_foot).colspan(1).padTop(-9).padRight(21)
+    @table_male_model.add(@male_r_foot).colspan(1).padTop(-12).padLeft(30)
+    @table_male_model.add(@empty).colspan(2).row
+
+    @table_female_model = Table.new(@skin)
+
+    @window.add(@table_female_model).width(180).height(160).align(Align::left).row
+
+    @female_l_head = Image.new(@mgr.atlas.find_region('female/l_head'))
+    @female_r_head = Image.new(@mgr.atlas.find_region('female/r_head'))
+    @female_l_arm  = Image.new(@mgr.atlas.find_region('female/l_arm'))
+    @female_torso  = Image.new(@mgr.atlas.find_region('female/torso'))
+    @female_r_arm  = Image.new(@mgr.atlas.find_region('female/r_arm'))
+    @female_l_hand = Image.new(@mgr.atlas.find_region('female/l_hand'))
+    @female_r_hand = Image.new(@mgr.atlas.find_region('female/r_hand'))
+    @female_l_leg  = Image.new(@mgr.atlas.find_region('female/l_leg'))
+    @female_r_leg  = Image.new(@mgr.atlas.find_region('female/r_leg'))
+    @female_l_foot = Image.new(@mgr.atlas.find_region('female/l_foot'))
+    @female_r_foot = Image.new(@mgr.atlas.find_region('female/r_foot'))
+    
+    @female_l_head.color = Color.new(1.00, 0.50, 0.50, 1.0)
+    @female_r_head.color = Color.new(1.00, 1.00, 1.00, 1.0)
+    @female_l_arm.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @female_torso.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @female_r_arm.color  = Color.new(1.00, 0.40, 0.40, 1.0)
+    @female_l_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
+    @female_l_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @female_r_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
+    @female_r_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
+    @female_l_foot.color = Color.new(1.00, 0.20, 0.20, 1.0)
+    @female_r_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
+
+    @table_female_model.add(@empty).colspan(2)
+    @table_female_model.add(@female_l_head).padLeft(55).padTop(0).colspan(1)
+    @table_female_model.add(@female_r_head).padRight(57).padTop(0).colspan(1)
+    @table_female_model.add(@empty).colspan(2).row
+    @table_female_model.add(@female_l_hand).padRight(-8).padTop(-74).padBottom(0).colspan(1)
+    @table_female_model.add(@female_l_arm).padRight(-58).padLeft(0).padTop(-44).colspan(1)
+    @table_female_model.add(@female_torso).padBottom(0).colspan(2)
+    @table_female_model.add(@female_r_arm).padRight(0).padLeft(-64).padTop(-46).colspan(1)
+    @table_female_model.add(@female_r_hand).padLeft(-21).padTop(-75).padBottom(0).colspan(1).row
+    @table_female_model.add(@empty).colspan(2)
+    @table_female_model.add(@female_l_leg).padRight(-21).padTop(-3).colspan(1)
+    @table_female_model.add(@female_r_leg).padLeft(-27).padTop(0).colspan(1)
+    @table_female_model.add(@empty).colspan(2).row
+    @table_female_model.add(@empty).colspan(2)
+    @table_female_model.add(@female_l_foot).colspan(1).padTop(-12).padRight(23)
+    @table_female_model.add(@female_r_foot).colspan(1).padTop(-9).padLeft(21)
+    @table_female_model.add(@empty).colspan(2).row
+    
     @add_info = Label.new(
       "Additional Info\n"\
       "Additional Info\n"\
@@ -73,35 +144,7 @@ class UIStatusSystem < System
       @skin, "status")
     @add_info.wrap = true
 
-    @window.add(@name).width(246).height(14).padLeft(4).colspan(4).align(Align::left).row
-    @window.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(12).align(Align::left).row
-    
-    @table_model.add(@l_head).width(13).height(34).padLeft(39).padBottom(3).colspan(2)
-    @table_model.add(@r_head).width(13).height(34).padRight(39).padBottom(3).colspan(2).row
-    @table_model.add(@l_arm).width(28).height(51).padRight(-7).padLeft(0).padTop(0).colspan(1)
-    @table_model.add(@torso).width(39).height(47).padTop(-2).colspan(2)
-    @table_model.add(@r_arm).width(28).height(51).padRight(0).padLeft(-7).padTop(0).colspan(1).row
-    @table_model.add(@l_hand).width(14).height(14).padRight(14).padTop(-5).padBottom(28).colspan(1)
-    @table_model.add(@l_leg).width(24).height(47).padRight(0).padTop(-2).colspan(1)
-    @table_model.add(@r_leg).width(24).height(47).padLeft(0).padTop(-2).colspan(1)
-    @table_model.add(@r_hand).width(14).height(14).padLeft(14).padTop(-5).padBottom(28).colspan(1).row
-    @table_model.add(@l_foot).width(24).height(13).colspan(2).padTop(2).padLeft(18).padRight(7)
-    @table_model.add(@r_foot).width(24).height(13).colspan(2).padTop(2).padLeft(7).padRight(18).row
-
-    @window.add(@table_model).width(117).height(140).padLeft(4).align(Align::left).row
     @window.add(@add_info).width(246).padTop(8).padLeft(4)
-
-    @l_head.color = Color.new(1.00, 0.50, 0.50, 1.0)
-    @r_head.color = Color.new(1.00, 1.00, 1.00, 1.0)
-    @l_arm.color  = Color.new(1.00, 1.00, 1.00, 1.0)
-    @torso.color  = Color.new(1.00, 1.00, 1.00, 1.0)
-    @r_arm.color  = Color.new(1.00, 0.40, 0.40, 1.0)
-    @l_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
-    @l_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
-    @r_leg.color  = Color.new(1.00, 1.00, 1.00, 1.0)
-    @r_hand.color = Color.new(1.00, 1.00, 1.00, 1.0)
-    @l_foot.color = Color.new(1.00, 0.20, 0.20, 1.0)
-    @r_foot.color = Color.new(1.00, 1.00, 1.00, 1.0)
 
   end
 
