@@ -15,7 +15,8 @@ class CraftingSystem < System
 
         recipe = @mgr.create_basic_entity
         
-        @mgr.add_comp(recipe, Info.new(data['name'], data['desc']))
+        info = @mgr.add_comp(recipe, Info.new(data['name']))
+        info.desc = data['desc']
         @mgr.add_comp(recipe, Station.new(data['station']))
         @mgr.add_comp(recipe, Ingredients.new(data['ingredients']))
         @mgr.add_comp(recipe, Requirements.new(data['requirements']))

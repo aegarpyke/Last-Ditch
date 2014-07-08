@@ -165,6 +165,14 @@ class UIActionsSystem < System
   end
 
 
+  def update_action_info
+
+    item_selection = @crafting_list.get_selection.to_s
+    set_cur_action(item_selection)
+
+  end
+
+
   def set_cur_action(item_selection)
 
     for type, id in @mgr.crafting.recipes
@@ -201,7 +209,9 @@ class UIActionsSystem < System
     
     if @mgr.actions.cur_station
 
-      if @mgr.actions.cur_station == station
+      current_station = @mgr.comp(@mgr.actions.cur_station, Station)
+
+      if current_station.type == station.type
         set_station_highlight(true)
       else    
         set_station_highlight(false)
@@ -246,7 +256,7 @@ class UIActionsSystem < System
         @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
       end
 
-      @reqs_and_ings_label_list[@cur_index].text = "  #{skill_name} - #{skill_lvl} / #{lvl}\n"
+      @reqs_and_ings_label_list[@cur_index].text = "  #{skill_lvl}/#{lvl} #{skill_name}\n"
 
       @cur_index += 1
 
@@ -280,12 +290,12 @@ class UIActionsSystem < System
             @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
           end
 
-          @reqs_and_ings_label_list[@cur_index].text = "  #{resource_data[ing]['name']} - #{resource_amt} / #{amt}\n"  
+          @reqs_and_ings_label_list[@cur_index].text = "  #{resource_amt}/#{amt} #{resource_data[ing]['name']}\n"  
 
         else
 
-          @reqs_and_ings_label_list[@cur_index].text = "  #{resource_data[ing]['name']} - 0.0 / #{amt}\n"  
-          @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
+          @reqs_and_ings_label_list[@cur_index].text = "  0.0/#{amt} #{resource_data[ing]['name']}\n"  
+          @reqs_and_ings_label_list[@cur_index].color = Color.new(0.5, 0.5, 0.5, 1.0)
 
         end
 
@@ -299,7 +309,7 @@ class UIActionsSystem < System
           @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
         end
 
-        @reqs_and_ings_label_list[@cur_index].text = "  #{item_data[ing]['name']} - #{item_amt} / #{amt}\n"
+        @reqs_and_ings_label_list[@cur_index].text = "  #{item_data[ing]['name']} #{item_amt}/#{amt}\n"
 
       else
         raise "Invalid ingredient in recipe: #{ing}"
@@ -354,6 +364,8 @@ class UIActionsSystem < System
 
       if @active
         @stage.add_actor(@window)
+
+
       else
         @window.remove
       end

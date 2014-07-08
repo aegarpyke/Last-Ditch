@@ -1,14 +1,15 @@
 class Info < Component
 
-	attr_accessor :name, :occupation, :desc
+	attr_accessor :name, :occupation, :gender, :desc
 
-	def initialize(name='', desc='', occupation='Unemployed')
+	def initialize(name)
 
 		super()
 
 		@name = name
-    @desc = desc
-		@occupation = occupation
+    @occupation = 'Unemployed'
+    @gender = 'female'
+    @desc = ''
 
 	end
 

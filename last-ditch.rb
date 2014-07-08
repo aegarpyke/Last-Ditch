@@ -24,19 +24,19 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@player, Collision.new)
 		@mgr.add_comp(@player, Animation.new(
 			0.1,
-			{'male1/idle' => ['male1/idle1'], 
-	     'male1/walk' => ['male1/idle1',
-                        'male1/walk1', 
-                        'male1/walk2',
-                        'male1/walk1',
-                        'male1/idle1', 
-                        "male1/walk1-f", 
-                        "male1/walk2-f", 
-                        "male1/walk1-f"]}))
-		player_info = @mgr.add_comp(@player, Info.new(
-			'Kadijah',
-			'This is the player'))
+			{'female1/idle' => ['female1/idle1'], 
+	     'female1/walk' => ['female1/idle1',
+	                        'female1/walk1', 
+	                        'female1/walk2',
+	                        'female1/walk1',
+	                        'female1/idle1', 
+	                        "female1/walk1-f", 
+	                        "female1/walk2-f", 
+	                        "female1/walk1-f"]}))
+		player_info = @mgr.add_comp(
+			@player, Info.new('Kadijah'))
 		player_info.occupation = 'Unemployed'
+		player_info.gender = 'female'
 
 		@drone1 = @mgr.create_tagged_entity('drone 1')
 		@mgr.add_comp(@drone1, Position.new(42, 42))

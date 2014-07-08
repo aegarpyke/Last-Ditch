@@ -36,7 +36,7 @@ class InventorySystem < System
 
 						style.imageUp = tex
 
-						@inv_slots[i].style = style 
+						@inv_slots[i].style = style
 					
 					else
 						
@@ -66,7 +66,9 @@ class InventorySystem < System
 
 		item.usable = false
 		item.condition = 0
-		info.desc = "This item is junk. It can only be used as scrap at this point."
+		info.desc = 
+			"This item is junk. It can only be used "\
+			"as scrap at this point."
 
 	end
 
@@ -118,8 +120,9 @@ class InventorySystem < System
 
 		pos    = @mgr.add_comp(item_id, Position.new(x, y))
 		rot    = @mgr.add_comp(item_id, Rotation.new(Random.rand(360)))
-		info   = @mgr.add_comp(item_id, Info.new(type_data["name"], type_data["desc"]))
 		type   = @mgr.add_comp(item_id, Type.new(type_value))
+		info   = @mgr.add_comp(item_id, Info.new(type_data["name"]))
+		info.desc = type_data["desc"]
 		
 		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
 

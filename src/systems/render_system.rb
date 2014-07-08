@@ -103,11 +103,13 @@ class RenderSystem < System
 			vel_vec = col.body.linear_velocity
 
 			if entity == @player
-				
+
+				info = @mgr.comp(@player, Info)
+
 				if vel_vec.x.abs < 0.02 && vel_vec.y.abs < 0.02
-					anim.cur = 'male1/idle'
-				elsif anim.cur != 'male1/walk'
-					anim.cur = 'male1/walk'
+					anim.cur = "#{info.gender}1/idle"
+				elsif anim.cur != "#{info.gender}1/walk"
+					anim.cur = "#{info.gender}1/walk"
 				end
 			
 			end

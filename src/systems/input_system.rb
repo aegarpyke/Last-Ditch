@@ -115,8 +115,8 @@ class InputSystem < System
 						@mgr.ui.toggle = true
 						@mgr.paused = !@mgr.paused
 						@mgr.actions.cur_station = nil
-						@mgr.time.active = !@mgr.time.active
 						@mgr.ui.actions.set_station_highlight(false)
+						@mgr.ui.actions.update_action_info
 
 					else
 
@@ -405,6 +405,7 @@ class InputSystem < System
 			@mgr.ui.toggle = true
 			@mgr.time.active = !@mgr.time.active
 			@mgr.actions.cur_station = station_id
+			@mgr.ui.actions.update_action_info
 
 			return true
 
