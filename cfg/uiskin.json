@@ -45,6 +45,10 @@
     		"font": "garuda12", "fontColor": "white"
     	},
 
+    	"actions_title":
+    	{
+    		"font": "default-font", "fontColor": "white"
+    	},
     	
 	},
 

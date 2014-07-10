@@ -12,7 +12,7 @@ class Skills < Component
     skill_list = skill_data['skill_list']
 
     for skill in skill_list
-      @skills[skill] = 0.01
+      @skills[skill] = 0.12
     end
 
 	end

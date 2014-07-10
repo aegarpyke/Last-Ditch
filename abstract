@@ -5,7 +5,10 @@ TODO
 
 	UI:
 		+ Add search field to actions list
-		+
+		+ Using an item will create a "use item" action of the same type, then
+			when unpaused the action can be activated to start the actual process
+			of using the item which will take a certain amount of actual gametime 
+			to complete.
 
 	Environment:
 	  + The buildings were built in a highly modular fashion to allow the 

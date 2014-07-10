@@ -1,6 +1,6 @@
 class UIActionsSystem < System
 
-  attr_accessor :active, :toggle, :window
+  attr_accessor :active, :toggle, :window, :recipe_check
 
   def initialize(mgr, stage, skin)
 
@@ -12,13 +12,15 @@ class UIActionsSystem < System
     @active = true
     @cur_index = 0
 
+    @recipe_check = false
+
     setup
 
     if 1 == 0
 
       @window.debug
-      @right.debug
-      @left.debug
+      @crafting_info_table.debug
+      @object_info_table.debug
 
     end
 
@@ -34,27 +36,34 @@ class UIActionsSystem < System
     @window.set_movable(false)
     @window.padTop(9)
 
-    @right = Table.new
-    @right.align(Align::left | Align::top)
+    @crafting_info_table = Table.new
+    @crafting_info_table.align(Align::left | Align::top)
 
-    @name_label = Label.new('Name:', @skin, 'actions')
-    @station_label = Label.new('Station:', @skin, 'actions')
+    @name_label = Label.new('Name:', @skin, 'actions_title')
+    @station_identifier_label = Label.new('  Station: ', @skin, 'actions')
+    @station_label = Label.new('', @skin, 'actions')
 
-    @right.add(@name_label).padLeft(8).align(Align::left).row
-    @right.add(@station_label).padLeft(8).align(Align::left).row
+    @crafting_info_table.add(@name_label).padLeft(8).align(Align::left).row
+    @crafting_info_table.add(@station_identifier_label).padLeft(8).align(Align::left)
+    @crafting_info_table.add(@station_label).padLeft(-78).row
 
     @reqs_and_ings_label_list = []
 
     10.times do
       
       @reqs_and_ings_label_list << Label.new('', @skin, 'actions')
-      @right.add(
+      @reqs_and_ings_label_list.last.color = Color::GRAY
+      
+      @crafting_info_table.add(
         @reqs_and_ings_label_list.last).padLeft(8).align(Align::left).row 
 
     end
 
-    @left = Table.new
-    @left.align(Align::left | Align::top)
+    @object_info_table = Table.new
+    @object_info_table.align(Align::left | Align::top)
+
+    @actions_list_table = Table.new
+    @actions_list_table.align(Align::left | Align::top)
 
     @crafting_list = List.new(@skin, "actions")
     @crafting_list.add_listener(
@@ -68,9 +77,7 @@ class UIActionsSystem < System
 
         def changed(event, actor)
 
-          item_selection = actor.get_selection.to_s
-          @actions.set_cur_action(item_selection)
-
+          @actions.update_action_info
           true
 
         end
@@ -88,7 +95,10 @@ class UIActionsSystem < System
         end
 
         def changed(event, actor)
+
+          @actions.update_object_info
           true
+
         end
 
       end.new(self))
@@ -100,12 +110,10 @@ class UIActionsSystem < System
 
     crafting_items = GdxArray.new
  
-    i = 0
     for name, id in @mgr.crafting.recipes
 
-      i += 1
       info = @mgr.comp(id, Info)
-      crafting_items.add("#{i}. #{info.name}")
+      crafting_items.add("#{info.name}")
     
     end
 
@@ -127,12 +135,17 @@ class UIActionsSystem < System
       Class.new(ClickListener) do
 
         def initialize(actions)
+
           super()
           @actions = actions
+        
         end
 
         def clicked(event, x, y)
+          
           @actions.switch_focus(:crafting)
+          true
+        
         end
 
       end.new(self))
@@ -142,33 +155,60 @@ class UIActionsSystem < System
       Class.new(ClickListener) do 
 
         def initialize(actions)
+
           super()
           @actions = actions
+        
         end
 
         def clicked(event, x, y)
+        
           @actions.switch_focus(:object)       
+          true
+
         end
 
       end.new(self))
 
-    @left.add(@crafting_button).height(15).padRight(9)
-    @left.add(@object_button).height(15).padRight(130).row
-    @left.add(@scrollpane).colspan(2).width(264).height(202).padTop(6)
+    @actions_list_table.add(@crafting_button).height(15).padRight(9)
+    @actions_list_table.add(@object_button).height(15).padRight(130).row
+    @actions_list_table.add(@scrollpane).colspan(2).width(264).height(202).padTop(6)
 
     @split = SplitPane.new(
-      @left, @right,
+      @actions_list_table, @crafting_info,
       false, @skin, "actions_split_pane")
 
     @window.add(@split).width(540).height(239).padTop(10)
+
+    switch_focus(:crafting)
 
   end
 
 
   def update_action_info
 
+    set_station_highlight(false)
     item_selection = @crafting_list.get_selection.to_s
     set_cur_action(item_selection)
+    set_recipe_active
+
+  end
+
+
+  def update_object_info
+
+
+
+  end
+
+
+  def set_recipe_active
+
+    if @recipe_check
+      set_name_highlight(true)
+    else
+      set_name_highlight(false)
+    end
 
   end
 
@@ -184,6 +224,8 @@ class UIActionsSystem < System
         ings = @mgr.comp(id, Ingredients)
         reqs = @mgr.comp(id, Requirements)
         station = @mgr.comp(id, Station)
+
+        @recipe_check = true
 
         set_name(info.name)
         set_station(station)
@@ -201,7 +243,18 @@ class UIActionsSystem < System
 
 
   def set_name(name)
-    @name_label.text = "Name: #{name}"
+    @name_label.text = "#{name}"
+  end
+
+
+  def set_name_highlight(highlighted)
+
+    if highlighted
+      @name_label.color = Color::WHITE
+    else
+      @name_label.color = Color::GRAY
+    end
+
   end
 
 
@@ -211,15 +264,25 @@ class UIActionsSystem < System
 
       current_station = @mgr.comp(@mgr.actions.cur_station, Station)
 
-      if current_station.type == station.type
+      if current_station && current_station.type == station.type
+
         set_station_highlight(true)
+      
       else    
+      
+        @recipe_check = false
         set_station_highlight(false)
+      
       end
+
+    else
+
+      @recipe_check = false
+      set_station_highlight(false)
 
     end
 
-    @station_label.text = "Station: #{station.name}"
+    @station_label.text = "#{station.name}"
   
   end
 
@@ -227,9 +290,9 @@ class UIActionsSystem < System
   def set_station_highlight(highlighted)
 
     if highlighted
-      @station_label.color = Color.new(1.0, 1.0, 1.0, 1.0)
+      @station_label.color = Color::WHITE
     else
-      @station_label.color = Color.new(0.5, 0.5, 0.5, 1.0)
+      @station_label.color = Color::GRAY
     end
 
   end
@@ -240,41 +303,44 @@ class UIActionsSystem < System
     skills = @mgr.comp(@mgr.player, Skills)
     skill_data = YAML.load_file('cfg/skills.yml')
 
-    @reqs_and_ings_label_list[@cur_index].text = 'Requirements:'
-    @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
+    @reqs_and_ings_label_list[@cur_index].text = '  Requirements:'
+    @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
 
     @cur_index += 1
 
     for req, lvl in reqs
 
       skill_name = skill_data[req]['name']
-      skill_lvl = skills.get_level(req)
+      skill_lvl  = skills.get_level(req)
 
       if skill_lvl < lvl
-        @reqs_and_ings_label_list[@cur_index].color = Color.new(0.5, 0.5, 0.5, 1.0)
+        @recipe_check = false
+        @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
       else
-        @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
+        @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
       end
 
-      @reqs_and_ings_label_list[@cur_index].text = "  #{skill_lvl}/#{lvl} #{skill_name}\n"
+      @reqs_and_ings_label_list[@cur_index].text = "    #{skill_name} #{skill_lvl}/#{lvl}\n"
 
       @cur_index += 1
 
     end
 
-    @reqs_and_ings_label_list[@cur_index].text = 'Ingredients:'
-    @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
-
-    @cur_index += 1
+    
 
   end
 
 
   def set_ings(ings)
 
+    @reqs_and_ings_label_list[@cur_index].text = '  Ingredients:'
+    @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
+
+    @cur_index += 1
+
     for ing, amt in ings
 
-      item_data = YAML.load_file('cfg/items.yml')
+      item_data     = YAML.load_file('cfg/items.yml')
       resource_data = YAML.load_file('cfg/resources.yml')
 
       if resource_data[ing]
@@ -285,17 +351,18 @@ class UIActionsSystem < System
           resource_amt = resources.get_amount(ing)
 
           if resource_amt < amt
-            @reqs_and_ings_label_list[@cur_index].color = Color.new(0.5, 0.5, 0.5, 1.0)
+            @recipe_check = false
+            @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
           else
-            @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
+            @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
           end
 
-          @reqs_and_ings_label_list[@cur_index].text = "  #{resource_amt}/#{amt} #{resource_data[ing]['name']}\n"  
+          @reqs_and_ings_label_list[@cur_index].text = "    #{resource_data[ing]['name']} #{resource_amt}/#{amt}\n"  
 
         else
 
-          @reqs_and_ings_label_list[@cur_index].text = "  0.0/#{amt} #{resource_data[ing]['name']}\n"  
-          @reqs_and_ings_label_list[@cur_index].color = Color.new(0.5, 0.5, 0.5, 1.0)
+          @reqs_and_ings_label_list[@cur_index].text = "    #{resource_data[ing]['name']} 0.0/#{amt}\n"  
+          @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
 
         end
 
@@ -304,12 +371,13 @@ class UIActionsSystem < System
         item_amt = @mgr.inventory.item_count(@mgr.player, ing)
 
         if item_amt < amt
-          @reqs_and_ings_label_list[@cur_index].color = Color.new(0.5, 0.5, 0.5, 1.0)
+          @recipe_check = false
+          @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
         else
-          @reqs_and_ings_label_list[@cur_index].color = Color.new(1.0, 1.0, 1.0, 1.0)
+          @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
         end
 
-        @reqs_and_ings_label_list[@cur_index].text = "  #{item_data[ing]['name']} #{item_amt}/#{amt}\n"
+        @reqs_and_ings_label_list[@cur_index].text = "    #{item_data[ing]['name']} #{item_amt}/#{amt}\n"
 
       else
         raise "Invalid ingredient in recipe: #{ing}"
@@ -336,12 +404,14 @@ class UIActionsSystem < System
       @crafting_button.set_checked(true)
       @object_button.set_checked(false)
       @scrollpane.set_widget(@crafting_list)
+      @split.set_second_widget(@crafting_info_table)
 
     elsif focus == :object
 
       @crafting_button.set_checked(false)
       @object_button.set_checked(true)
       @scrollpane.set_widget(@object_list)
+      @split.set_second_widget(@object_info_table)
 
     end
 

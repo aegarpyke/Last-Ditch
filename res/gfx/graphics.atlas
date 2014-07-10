@@ -261,10 +261,10 @@ ui/inv_slot
   index: -1
 ui/list_selection
   rotate: false
-  xy: 201, 46
-  size: 32, 16
+  xy: 201, 48
+  size: 32, 14
   split: 1, 1, 1, 1
-  orig: 32, 16
+  orig: 32, 14
   offset: 0, 0
   index: -1
 ui/particle
@@ -278,7 +278,7 @@ ui/scroll_handle1
   rotate: false
   xy: 87, 2
   size: 1, 26
-  split: 0, 0, 9, 9
+  split: 0, 0, 12, 12
   orig: 1, 26
   offset: 0, 0
   index: -1
@@ -324,7 +324,7 @@ ui/window_scroll_knob1
   index: -1
 ui/work_bar
   rotate: false
-  xy: 201, 40
+  xy: 201, 42
   size: 32, 4
   split: 1, 1, 2, 1
   orig: 32, 4

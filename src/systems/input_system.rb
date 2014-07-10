@@ -115,7 +115,6 @@ class InputSystem < System
 						@mgr.ui.toggle = true
 						@mgr.paused = !@mgr.paused
 						@mgr.actions.cur_station = nil
-						@mgr.ui.actions.set_station_highlight(false)
 						@mgr.ui.actions.update_action_info
 
 					else
@@ -372,11 +371,8 @@ class InputSystem < System
 
 			@mgr.render.nearby_entities << item_id
 			
-			@mgr.ui.inv.set_item_name("")
-			@mgr.ui.inv.set_item_desc("")
-			@mgr.ui.inv.set_item_qual_cond(-1, -1)
-			@mgr.ui.inv.set_item_value(-1)
-			@mgr.ui.inv.set_item_weight(-1)
+			@mgr.ui.inv.reset_info
+			@mgr.ui.actions.update_action_info
 
 			return true
 

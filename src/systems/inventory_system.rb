@@ -109,6 +109,7 @@ class InventorySystem < System
 		item.condition -= item.decay_rate
 
 		@mgr.inventory.destroy_item(item_id) if item.condition < 0
+		@mgr.ui.actions.update_action_info
 
 	end
 

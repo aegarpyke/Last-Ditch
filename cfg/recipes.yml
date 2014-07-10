@@ -1,7 +1,17 @@
 recipe_list:
+  - water
   - canteen1_water
   - canister1_water
   - battery_basic
+
+water:
+  name: 'Water'
+  desc: ''
+  station: purification_station
+  ingredients:
+    - canister1_waste: 1
+  requirements:
+    - mechanical: 0.02
 
 canteen1_water:
   name: 'Canteen, water'
