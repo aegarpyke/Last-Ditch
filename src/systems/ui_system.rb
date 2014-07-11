@@ -45,13 +45,15 @@ class UISystem < System
 		@equip.activate
 		@status.activate
 
+		@mgr.ui.actions.update_action_info
+
 	end
 
 
 	def deactivate
 
-		@mgr.paused = false
 		@active = false
+		@mgr.paused = false
 
 		@actions.deactivate
 		@inv.deactivate
@@ -74,6 +76,7 @@ class UISystem < System
 		
 		else
 
+			@mgr.paused = false
 			@actions.deactivate
 			@inv.deactivate
 			@equip.deactivate

@@ -1,5 +1,7 @@
 recipe_list:
   - water
+  - energy1
+  - energy2
   - canteen1_water
   - canister1_water
   - battery_basic
@@ -12,6 +14,24 @@ water:
     - canister1_waste: 1
   requirements:
     - mechanical: 0.02
+
+energy1:
+  name: 'Energy 1'
+  desc: ''
+  station: incinerator
+  ingredients:
+    - canister1_waste: 1
+  requirements:
+    - mechanical: 0.06
+
+energy2:
+  name: 'Energy 2'
+  desc: ''
+  station: incinerator
+  ingredients:
+    - overgrowth1: 1
+  requirements:
+    - mechanical: 0.06
 
 canteen1_water:
   name: 'Canteen, water'

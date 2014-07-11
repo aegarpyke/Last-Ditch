@@ -430,6 +430,7 @@ class UIActionsSystem < System
     @active = true
     @mgr.ui.active = true
     @stage.add_actor(@window)
+    update_action_info
 
   end
 
@@ -448,6 +449,7 @@ class UIActionsSystem < System
 
     if @active
       @stage.add_actor(@window)
+      update_action_info
     else
       @window.remove
     end

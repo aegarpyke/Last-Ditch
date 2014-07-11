@@ -290,6 +290,9 @@ class MapSystem < System
 					when 'charging_station'
 						resources.energy = 2.0
 
+					when 'incinerator'
+						resources.energy = 1.0
+
 				end
 
 				@stations << station_id
