@@ -80,19 +80,45 @@ class InputSystem < System
 
 			case keycode
 
+				when Keys::TAB
+					
+					if !@ctrl
+
+						vel = @mgr.comp(entity, Velocity)
+						vel.spd = 0
+						vel.ang_spd = 0
+
+						@mgr.paused = !@mgr.paused
+						@mgr.actions.cur_station = nil
+						
+						if @mgr.ui.active
+							@mgr.ui.deactivate
+						else
+							@mgr.ui.activate
+						end
+
+					else
+
+						@mgr.ui.base.toggle_active
+							
+					end
+
 				when Keys::E
 
 					if !@shift
 
 						if @mgr.ui.active
 
+							@mgr.ui.deactivate
+
 						else
+
 							use_door(entity)				or
 							use_station(entity)
+						
 						end
 
 					else
-
 						
 					end
 
@@ -104,32 +130,13 @@ class InputSystem < System
 
 					end
 
-				when Keys::TAB
-					
-					if !@ctrl
-
-						vel = @mgr.comp(entity, Velocity)
-						vel.spd = 0
-						vel.ang_spd = 0
-
-						@mgr.ui.toggle = true
-						@mgr.paused = !@mgr.paused
-						@mgr.actions.cur_station = nil
-						@mgr.ui.actions.update_action_info
-
-					else
-
-						@mgr.ui.base.toggle = true
-							
-					end
-
 				when Keys::W, Keys::UP
 
 					if !@shift
 
 						if @mgr.ui.active
 
-							@mgr.ui.actions.toggle = true
+							@mgr.ui.actions.toggle_active
 
 						else
 
@@ -146,7 +153,7 @@ class InputSystem < System
 						
 						if @mgr.ui.active
 
-							@mgr.ui.inv.toggle = true
+							@mgr.ui.inv.toggle_active
 
 						else
 
@@ -163,7 +170,7 @@ class InputSystem < System
 
 						if @mgr.ui.active
 
-							@mgr.ui.equip.toggle = true
+							@mgr.ui.equip.toggle_active
 
 						else
 
@@ -175,6 +182,8 @@ class InputSystem < System
 					else
 
 						if @mgr.ui.active
+
+
 
 						else
 
@@ -191,7 +200,7 @@ class InputSystem < System
 
 						if @mgr.ui.active
 
-							@mgr.ui.status.toggle = true
+							@mgr.ui.status.toggle_active
 
 						else
 
@@ -398,10 +407,9 @@ class InputSystem < System
 			vel.ang_spd = 0
 			
 			@mgr.paused = !@mgr.paused
-			@mgr.ui.toggle = true
 			@mgr.time.active = !@mgr.time.active
 			@mgr.actions.cur_station = station_id
-			@mgr.ui.actions.update_action_info
+			@mgr.ui.actions.activate
 
 			return true
 

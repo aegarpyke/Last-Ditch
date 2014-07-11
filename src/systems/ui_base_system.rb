@@ -10,7 +10,7 @@ class UIBaseSystem < System
     @mgr = mgr
     @skin = skin
     @stage = stage
-    @active = true
+    @active = false
     @toggle = false
     @no_exit = false
 
@@ -175,8 +175,6 @@ class UIBaseSystem < System
 
   def update
 
-    update_view
-
     if @active
 
       needs = @mgr.comp(@mgr.player, Needs)
@@ -197,29 +195,46 @@ class UIBaseSystem < System
   end
 
 
-  def update_view
+  def activate
 
-    if @toggle
+    @active = true
 
-      @toggle = false
-      @active = !@active
+    @stage.add_actor(@table)
+    @stage.add_actor(@table_needs)
+    @stage.add_actor(@table_slots)
 
-      if @active
+  end
 
-        @stage.add_actor(@table)
-        @stage.add_actor(@table_needs)
-        @stage.add_actor(@table_slots)
-      
-      else
-      
-        @table.remove
-        @table_needs.remove
-        @table_slots.remove
-      
-      end
+
+  def deactivate
+
+    @active = false
+
+    @table.remove
+    @table_needs.remove
+    @table_slots.remove
+
+  end
+
+
+  def toggle_activate
     
-    end
+    @active = !@active
 
+    if @active
+      
+      @stage.add_actor(@table)
+      @stage.add_actor(@table_needs)
+      @stage.add_actor(@table_slots)
+
+    else
+
+      @table.remove
+      @table_needs.remove
+      @table_slots.remove
+
+    end
+    
   end
 
 end

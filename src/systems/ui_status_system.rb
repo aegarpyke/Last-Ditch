@@ -7,7 +7,7 @@ class UIStatusSystem < System
     super()
 
     @mgr = mgr
-    @active = true
+    @active = false
     @stage = stage
     @skin = skin
 
@@ -39,14 +39,12 @@ class UIStatusSystem < System
     @occupation = Label.new(
       "Occupation: %s" % info.occupation, @skin, "status")
 
-    @empty  = Image.new(@mgr.atlas.find_region('environ/empty'))
+    @empty = Image.new(@mgr.atlas.find_region('environ/empty'))
 
     @window.add(@name).width(246).height(14).padLeft(4).colspan(4).align(Align::left).row
-    @window.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(12).align(Align::left).row
+    @window.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(18).align(Align::left).row
 
     @table_male_model = Table.new(@skin)
-
-    # @window.add(@table_male_model).width(180).height(160).align(Align::left).row
 
     @male_l_head = Image.new(@mgr.atlas.find_region('model/male/l_head'))
     @male_r_head = Image.new(@mgr.atlas.find_region('model/male/r_head'))
@@ -91,9 +89,7 @@ class UIStatusSystem < System
     @table_male_model.add(@empty).colspan(2).row
 
     @table_female_model = Table.new(@skin)
-
-    @window.add(@table_female_model).width(180).height(160).align(Align::left).row
-
+   
     @female_l_head = Image.new(@mgr.atlas.find_region('model/female/l_head'))
     @female_r_head = Image.new(@mgr.atlas.find_region('model/female/r_head'))
     @female_l_arm  = Image.new(@mgr.atlas.find_region('model/female/l_arm'))
@@ -135,6 +131,9 @@ class UIStatusSystem < System
     @table_female_model.add(@female_l_foot).colspan(1).padTop(-12).padRight(23)
     @table_female_model.add(@female_r_foot).colspan(1).padTop(-9).padLeft(21)
     @table_female_model.add(@empty).colspan(2).row
+
+    # @window.add(@table_male_model).width(180).height(140).align(Align::left).row
+    @window.add(@table_female_model).width(180).height(140).align(Align::left).row
     
     @add_info = Label.new(
       "Additional Info\n"\
@@ -152,26 +151,36 @@ class UIStatusSystem < System
 
   def update
 
-    update_view
+  end
+
+
+  def activate
+
+    @active = true
+    @mgr.ui.active = true
+    @stage.add_actor(@window)
 
   end
 
 
-  def update_view
+  def deactivate
 
-    if @toggle
+    @active = false
+    @window.remove
 
-      @toggle = false
-      @active = !@active
+  end
 
-      if @active
-        @stage.add_actor(@window)
-      else
-        @window.remove
-      end
 
+  def toggle_active
+  
+    @active = !@active
+
+    if @active
+      @stage.add_actor(@window)
+    else
+      @window.remove
     end
-
+    
   end
 
 end

@@ -9,7 +9,7 @@ class UIEquipSystem < System
     @mgr = mgr
     @stage = stage
     @skin = skin
-    @active = true
+    @active = false
 
     setup
 
@@ -86,26 +86,37 @@ class UIEquipSystem < System
 
   def update
 
-    update_view
 
   end
 
 
-  def update_view
+  def activate
 
-    if @toggle
+    @active = true
+    @mgr.ui.active = true
+    @stage.add_actor(@window)
 
-      @toggle = false
-      @active = !@active
+  end
 
-      if @active
-        @stage.add_actor(@window)
-      else
-        @window.remove
-      end
 
+  def deactivate
+
+    @active = false
+    @window.remove
+
+  end
+
+
+  def toggle_active
+  
+    @active = !@active
+
+    if @active
+      @stage.add_actor(@window)
+    else
+      @window.remove
     end
-
+    
   end
 
 end

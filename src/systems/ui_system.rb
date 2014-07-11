@@ -8,16 +8,13 @@ class UISystem < System
 
 		super()
 		@mgr = mgr
-		@mgr.ui = self
 		@atlas = atlas
+		@mgr.ui = self
 		@active = false
 		@toggle = false
 
 		@stage = Stage.new
 		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
-
-		@table = Table.new(@skin)
-		@table.set_bounds(0, 0, C::WIDTH, C::HEIGHT)
 
 		@base    = UIBaseSystem.new(@mgr, @stage, @skin)
 		@actions = UIActionsSystem.new(@mgr, @stage, @skin)
@@ -25,18 +22,10 @@ class UISystem < System
 		@equip   = UIEquipSystem.new(@mgr, @stage, @skin)
 		@status  = UIStatusSystem.new(@mgr, @stage, @skin)
 
-		if 1 == 0
-			
-			@table.debug
-
-		end
-
 	end
 
 
 	def update
-
-		update_view
 
 		@base.update
 		@actions.update
@@ -47,32 +36,49 @@ class UISystem < System
 	end
 
 
-	def update_view
+	def activate
 
-		if @toggle
+		@active = true
 
-			@toggle = false
-			@active = !@active
+		@actions.activate
+		@inv.activate
+		@equip.activate
+		@status.activate
 
-			if @active
+	end
 
-				@stage.add_actor(@table)
-				@stage.add_actor(@actions.window) if @actions.active
-				@stage.add_actor(@inv.window)     if @inv.active
-				@stage.add_actor(@equip.window)   if @equip.active
-				@stage.add_actor(@status.window)  if @status.active
-			
-			else
-			
-				@table.remove
-				
-				@actions.window.remove
-				@inv.window.remove
-				@equip.window.remove
-				@status.window.remove
 
-			end
+	def deactivate
+
+		@mgr.paused = false
+		@active = false
+
+		@actions.deactivate
+		@inv.deactivate
+		@equip.deactivate
+		@status.deactivate
+
+	end
+
+
+	def toggle_active
+
+		@active = !@active
+
+		if @active
+
+			@actions.activate
+			@inv.activate
+			@equip.activate
+			@status.activate
 		
+		else
+
+			@actions.deactivate
+			@inv.deactivate
+			@equip.deactivate
+			@status.deactivate
+
 		end
 
 	end
@@ -80,17 +86,12 @@ class UISystem < System
 
 	def render
 
-		if @active || @base.active
+		@stage.act
+		@stage.draw
 
-			@stage.act
-			@stage.draw
-
-			Table.draw_debug(@stage)
-
-		end
+		Table.draw_debug(@stage)
 
 	end
-
 
 	def dispose
 

@@ -9,7 +9,7 @@ class UIInventorySystem < System
     @mgr = mgr
     @skin = skin
     @stage = stage
-    @active = true
+    @active = false
     @no_exit = false
     @prev_selection = nil
 
@@ -234,8 +234,6 @@ class UIInventorySystem < System
 
   def update
 
-    update_view
-
     if @active
 
       if @selection != @prev_selection
@@ -277,21 +275,34 @@ class UIInventorySystem < System
   end
 
 
-  def update_view
+  def activate
 
-    if @toggle
-
-      @toggle = false
-      @active = !@active
-
-      if @active
-        @stage.add_actor(@window)
-      else
-        @window.remove
-      end
-
-    end
+    @active = true
+    @mgr.ui.active = true
+    @stage.add_actor(@window)
 
   end
+
+
+  def deactivate
+
+    @active = false
+    @window.remove
+
+  end
+
+
+  def toggle_active
+  
+    @active = !@active
+
+    if @active
+      @stage.add_actor(@window)
+    else
+      @window.remove
+    end
+    
+  end
+
 
 end

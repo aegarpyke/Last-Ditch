@@ -7,11 +7,10 @@ class UIActionsSystem < System
     super()
 
     @mgr = mgr
-    @stage = stage
     @skin = skin
-    @active = true
+    @stage = stage
     @cur_index = 0
-
+    @active = false
     @recipe_check = false
 
     setup
@@ -71,8 +70,10 @@ class UIActionsSystem < System
       Class.new(ChangeListener) do
 
         def initialize(actions)
+
           super()
           @actions = actions
+        
         end
 
         def changed(event, actor)
@@ -90,8 +91,10 @@ class UIActionsSystem < System
       Class.new(ChangeListener) do
 
         def initialize(actions)
+
           super()
           @actions = actions
+        
         end
 
         def changed(event, actor)
@@ -326,8 +329,6 @@ class UIActionsSystem < System
 
     end
 
-    
-
   end
 
 
@@ -420,26 +421,35 @@ class UIActionsSystem < System
 
   def update
 
-    update_view
 
   end
 
 
-  def update_view
+  def activate
+
+    @active = true
+    @mgr.ui.active = true
+    @stage.add_actor(@window)
+
+  end
+
+
+  def deactivate
+
+    @active = false
+    @window.remove
+
+  end
+
+
+  def toggle_active
     
-    if @toggle
+    @active = !@active
 
-      @toggle = false
-      @active = !@active
-
-      if @active
-        @stage.add_actor(@window)
-
-
-      else
-        @window.remove
-      end
-
+    if @active
+      @stage.add_actor(@window)
+    else
+      @window.remove
     end
 
   end
