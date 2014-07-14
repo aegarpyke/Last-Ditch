@@ -45,8 +45,6 @@ class UISystem < System
 		@equip.activate
 		@status.activate
 
-		@mgr.ui.actions.update_action_info
-
 	end
 
 

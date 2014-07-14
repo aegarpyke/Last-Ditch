@@ -16,7 +16,7 @@ water:
     - mechanical: 0.02
 
 energy1:
-  name: 'Energy 1'
+  name: 'Energy'
   desc: ''
   station: incinerator
   ingredients:
@@ -25,7 +25,7 @@ energy1:
     - mechanical: 0.06
 
 energy2:
-  name: 'Energy 2'
+  name: 'Energy '
   desc: ''
   station: incinerator
   ingredients:

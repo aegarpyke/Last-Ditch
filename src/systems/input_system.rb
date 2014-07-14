@@ -22,24 +22,18 @@ class InputSystem < System
 				when 0
 
 					if !@shift
-
-						if @mgr.ui.active
-
+						
+						if @mgr.skill_test.testing
+							@mgr.skill_test.score
 						else
 							pickup_item(entity)
 						end
 
 					else
-
-						if @mgr.ui.active
-
-						else
-
-							pickup_item_at(entity, screen_x, screen_y) or
-							use_door_at(entity, screen_x, screen_y)
+						
+						pickup_item_at(entity, screen_x, screen_y) or
+						use_door_at(entity, screen_x, screen_y)
 							
-						end
-
 					end
 
 				when 1
@@ -92,6 +86,7 @@ class InputSystem < System
 						@mgr.actions.cur_station = nil
 						
 						if @mgr.ui.active
+							@mgr.skill_test.deactivate
 							@mgr.ui.deactivate
 						else
 							@mgr.ui.activate
@@ -347,8 +342,8 @@ class InputSystem < System
 	def drop_item(entity)
 
 		pos = @mgr.comp(entity, Position)
-		inv = @mgr.comp(entity, Inventory)
 		rot = @mgr.comp(entity, Rotation)
+		inv = @mgr.comp(entity, Inventory)
 
 		@mgr.ui.inv.selection                                  and
 		index = @mgr.ui.inv.slots.index(@mgr.ui.inv.selection) and
@@ -383,7 +378,7 @@ class InputSystem < System
 			@mgr.render.nearby_entities << item_id
 			
 			@mgr.ui.inv.reset_info
-			@mgr.ui.actions.update_action_info
+			@mgr.ui.actions.update_crafting_info
 
 			return true
 

@@ -1,6 +1,6 @@
 class UIActionsSystem < System
 
-  attr_accessor :active, :toggle, :window, :recipe_check
+  attr_accessor :active, :focus, :toggle, :window, :recipe_check
 
   def initialize(mgr, stage, skin)
 
@@ -10,6 +10,8 @@ class UIActionsSystem < System
     @skin = skin
     @stage = stage
     @cur_index = 0
+    @focus = :crafting
+    @prev_selection = nil
     @active = false
     @recipe_check = false
 
@@ -44,7 +46,7 @@ class UIActionsSystem < System
 
     @crafting_info_table.add(@name_label).padLeft(8).align(Align::left).row
     @crafting_info_table.add(@station_identifier_label).padLeft(8).align(Align::left)
-    @crafting_info_table.add(@station_label).padLeft(-78).row
+    @crafting_info_table.add(@station_label).align(Align::left).padLeft(-78).row
 
     @reqs_and_ings_label_list = []
 
@@ -78,7 +80,7 @@ class UIActionsSystem < System
 
         def changed(event, actor)
 
-          @actions.update_action_info
+          @actions.activate_skill_system
           true
 
         end
@@ -99,7 +101,7 @@ class UIActionsSystem < System
 
         def changed(event, actor)
 
-          @actions.update_object_info
+          @actions.activate_skill_system
           true
 
         end
@@ -188,19 +190,27 @@ class UIActionsSystem < System
   end
 
 
-  def update_action_info
+  def activate_skill_system
 
-    set_station_highlight(false)
-    item_selection = @crafting_list.get_selection.to_s
-    set_cur_action(item_selection)
-    set_recipe_active
+    if @focus == :crafting
 
-  end
+      update_crafting_info
 
+      if @recipe_check &&  @crafting_list.get_selection.first == @prev_selection
 
-  def update_object_info
+        deactivate
 
+        @mgr.skill_test.activate
 
+      end
+
+      @prev_selection = @crafting_list.get_selection.first
+
+    elsif @focus == :object
+
+      update_object_info
+
+    end
 
   end
 
@@ -400,14 +410,16 @@ class UIActionsSystem < System
 
   def switch_focus(focus)
 
-    if focus == :crafting
+    @focus = focus
+
+    if @focus == :crafting
 
       @crafting_button.set_checked(true)
       @object_button.set_checked(false)
       @scrollpane.set_widget(@crafting_list)
       @split.set_second_widget(@crafting_info_table)
 
-    elsif focus == :object
+    elsif @focus == :object
 
       @crafting_button.set_checked(false)
       @object_button.set_checked(true)
@@ -425,12 +437,30 @@ class UIActionsSystem < System
   end
 
 
+  def update_crafting_info
+
+    set_station_highlight(false)
+    item_selection = @crafting_list.get_selection.to_s
+    set_cur_action(item_selection)
+    set_recipe_active
+
+  end
+
+
+  def update_object_info
+
+
+
+  end
+
+
   def activate
 
     @active = true
     @mgr.ui.active = true
     @stage.add_actor(@window)
-    update_action_info
+
+    update_crafting_info
 
   end
 
@@ -449,7 +479,7 @@ class UIActionsSystem < System
 
     if @active
       @stage.add_actor(@window)
-      update_action_info
+      update_crafting_info
     else
       @window.remove
     end

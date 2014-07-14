@@ -82,6 +82,12 @@ class LastDitch < ApplicationAdapter
 		@mgr.physics    = @physics    = PhysicsSystem.new(@mgr, @player, @map)
 		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
+		inv = @mgr.comp(@player, Inventory)
+		inv.add_item(@inventory.create_inv_item('canister1_waste'))
+		inv.add_item(@inventory.create_inv_item('battery_empty'))
+		inv.add_item(@inventory.create_inv_item('canister1_empty'))
+		inv.add_item(@inventory.create_inv_item('overgrowth1'))
+
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)
 		@multiplexer.add_processor(@input.user_adapter)
@@ -107,6 +113,7 @@ class LastDitch < ApplicationAdapter
 			@inventory.update
 			@equipment.update
 			@status.update
+			@skill_test.update
 
 			unless @mgr.paused
 				
@@ -122,7 +129,7 @@ class LastDitch < ApplicationAdapter
 		@map.update
 		@ui.update
 
-		@physics.world.clear_forces
+		# @physics.world.clear_forces
 		# @physics.interpolate(alpha)
 
 	end
@@ -144,14 +151,7 @@ class LastDitch < ApplicationAdapter
 
 		@lighting.render
 		@ui.render
-
-		# if @mgr.paused && @ui.actions_active
-		
-		# 	@batch.begin
-		# 		@actions.skill_test_system.render(@batch)
-		# 	@batch.end
-		
-		# end
+		@skill_test.render(@batch)
 
 		# @debug.render(@physics.world, @map.cam.combined)
 

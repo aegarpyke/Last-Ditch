@@ -146,7 +146,7 @@ class EntityManager
 		return nil if components.nil? || components.empty?
 
 		if components.size != 1
-			puts "Warning: #{entity} has #{components.size} #{component_class.to_s} components."
+			raise "Warning: #{entity} has #{components.size} #{component_class.to_s} components."
 		end
 
 		components.first

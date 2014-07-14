@@ -109,7 +109,36 @@ class InventorySystem < System
 		item.condition -= item.decay_rate
 
 		@mgr.inventory.destroy_item(item_id) if item.condition < 0
-		@mgr.ui.actions.update_action_info
+		@mgr.ui.actions.update_crafting_info
+
+	end
+
+
+	def create_inv_item(type_value)
+
+		item_id = @mgr.create_basic_entity
+		type_data = @item_data[type_value]
+
+		rot    = @mgr.add_comp(item_id, Rotation.new(0))
+		type   = @mgr.add_comp(item_id, Type.new(type_value))
+		info   = @mgr.add_comp(item_id, Info.new(type_data["name"]))
+		info.desc = type_data["desc"]
+		
+		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
+
+		item = @mgr.add_comp(item_id, Item.new(quality, condition))
+		item.base_value = type_data['base_value']
+		item.usable = type_data['usable']
+
+		render = Render.new('')
+		render.region_name = "items/#{type_value}"
+		render.region = @atlas.find_region("items/#{type_value}")
+		
+		size = @mgr.add_comp(
+			item_id, 
+			Size.new(render.width * C::WTB, render.height * C::WTB))
+
+		item_id
 
 	end
 
