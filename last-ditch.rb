@@ -13,6 +13,7 @@ class LastDitch < ApplicationAdapter
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 
 		@mgr.player = @player = @mgr.create_tagged_entity('player')
+		
 		@mgr.add_comp(@player, Position.new(40, 40))
 		@mgr.add_comp(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
 		@mgr.add_comp(@player, Rotation.new(0))

@@ -5,9 +5,9 @@ class Inventory < Component
 	def initialize(size)
 
 		super()
+		@weight = 0
 		@size = size
 		@money = 0.34
-		@weight = 0
 		@items = Array.new(size)
 
 	end

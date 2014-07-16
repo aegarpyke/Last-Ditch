@@ -17,11 +17,12 @@ class SkillTestSystem < System
     @theta = 0
     @d_theta = 0.01
     @final_score = 0
-    @num_of_hits = 8
+    @num_of_hits = 4
     @score_range = 0.12
+    @score_min_dist = 0.1
 
-    @scores = []
     @hits = []
+    @scores = []
 
     @effect1 = ParticleEffect.new
     @effect1.load(
@@ -45,7 +46,7 @@ class SkillTestSystem < System
     count = 0
     theta = 0
     x, px = 0, 0
-    prev_hit = -0.2
+    prev_hit = -(@score_min_dist + 0.1)
 
     @hits = []
 
@@ -57,7 +58,7 @@ class SkillTestSystem < System
       if (x < 0 && px >= 0) || 
          (x > 0 && px <= 0)
 
-        if theta - prev_hit > 0.1
+        if theta - prev_hit > @score_min_dist
  
           count += 1
           prev_hit = theta
@@ -128,8 +129,7 @@ class SkillTestSystem < System
 
         @scores = adj_scores
 
-        @final_score = @scores.inject(:+)
-        @final_score /= @hits.size-1
+        finalize
 
         @mgr.ui.deactivate
         @active = false
@@ -138,6 +138,41 @@ class SkillTestSystem < System
 
     end
   
+  end
+
+
+  def finalize
+
+    @final_score = @scores.reduce(:+)
+    @final_score /= @hits.size-1
+
+    inv = @mgr.comp(@mgr.player, Inventory)
+
+    station = @mgr.comp(@mgr.actions.cur_station, Station)
+
+    type = @mgr.comp(@mgr.crafting.cur_recipe, Type)
+    ings = @mgr.comp(@mgr.crafting.cur_recipe, Ingredients)
+
+    if ['water', 'energy1', 'energy2'].include?(type.type) 
+      
+    else
+
+      res = @mgr.comp(@mgr.actions.cur_station, Resources)
+
+      for ing_type, ing_amt in ings.ingredients
+
+        if ['water', 'energy1', 'energy2'].include?(ing_type)
+          res.change_amount(ing_type, -ing_amt)
+        else
+          @mgr.inventory.remove_item_by_type(inv, ing_type, ing_amt)
+        end
+
+      end
+
+      inv.add_item(@mgr.inventory.create_inv_item(type.type))
+
+    end
+    
   end
 
 

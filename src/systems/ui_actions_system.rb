@@ -196,10 +196,9 @@ class UIActionsSystem < System
 
       update_crafting_info
 
-      if @recipe_check &&  @crafting_list.get_selection.first == @prev_selection
+      if @recipe_check && @crafting_list.get_selection.first == @prev_selection
 
         deactivate
-
         @mgr.skill_test.activate
 
       end
@@ -238,13 +237,12 @@ class UIActionsSystem < System
         reqs = @mgr.comp(id, Requirements)
         station = @mgr.comp(id, Station)
 
+        @cur_index = 0
         @recipe_check = true
+        @mgr.crafting.cur_recipe = id
 
         set_name(info.name)
         set_station(station)
-
-        @cur_index = 0
-
         set_reqs(reqs.requirements)
         set_ings(ings.ingredients)
 

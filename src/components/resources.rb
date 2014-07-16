@@ -29,4 +29,40 @@ class Resources < Component
   
   end
 
+
+  def change_amount(type, amount)
+
+    case type
+
+      when 'water'
+        @water += amount
+      when 'energy'
+        @energy += amount
+      when 'fuel'
+        @fuel += amount
+      else
+        raise "Invalid resource type: #{type}"
+
+    end
+
+  end
+
+
+  def set_amount(type, amount)
+
+    case type
+
+      when 'water'
+        @water = amount
+      when 'energy'
+        @energy = amount
+      when 'fuel'
+        @fuel = amount
+      else
+        raise "Invalid resource type: #{type}"
+
+    end
+
+  end
+
 end

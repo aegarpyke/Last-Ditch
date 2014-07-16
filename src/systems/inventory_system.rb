@@ -116,6 +116,8 @@ class InventorySystem < System
 
 	def create_inv_item(type_value)
 
+		@update_slots = true
+
 		item_id = @mgr.create_basic_entity
 		type_data = @item_data[type_value]
 
@@ -139,6 +141,46 @@ class InventorySystem < System
 			Size.new(render.width * C::WTB, render.height * C::WTB))
 
 		item_id
+
+	end
+
+
+	def remove_item_by_type(inv, type, amt)
+
+		items_to_remove = []
+
+		for item_id in inv.items
+
+			next if item_id.nil?
+			
+			type_comp = @mgr.comp(item_id, Type)
+
+			if type == type_comp.type
+			
+				amt -= 1
+				items_to_remove << item_id
+				break if amt == 0
+			
+			end
+
+		end
+
+		if amt > 0
+		
+			return false
+		
+		else
+
+			for item_id in items_to_remove
+
+				index = inv.items.index(item_id)
+				inv.items[index] = nil
+			
+			end
+
+			return true
+		
+		end
 
 	end
 

@@ -1,6 +1,6 @@
 class CraftingSystem < System
 
-  attr_accessor :active, :recipes
+  attr_accessor :active, :cur_recipe, :recipes
 
   def initialize(mgr)
 
@@ -19,6 +19,7 @@ class CraftingSystem < System
         info.name = data['name']
         info.desc = data['desc']
         
+        @mgr.add_comp(recipe, Type.new(recipe_type))
         @mgr.add_comp(recipe, Station.new(data['station']))
         @mgr.add_comp(recipe, Ingredients.new(data['ingredients']))
         @mgr.add_comp(recipe, Requirements.new(data['requirements']))
@@ -33,6 +34,7 @@ class CraftingSystem < System
 
 
   def update
+
 
   end
 
