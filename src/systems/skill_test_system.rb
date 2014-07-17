@@ -153,23 +153,49 @@ class SkillTestSystem < System
     type = @mgr.comp(@mgr.crafting.cur_recipe, Type)
     ings = @mgr.comp(@mgr.crafting.cur_recipe, Ingredients)
 
-    if ['water', 'energy1', 'energy2'].include?(type.type) 
+    ing_qualities, ing_conditions = [], []
+    res = @mgr.comp(@mgr.actions.cur_station, Resources)
+
+    for ing_type, ing_amt in ings.ingredients
+
+      if ['water', 'energy'].include?(ing_type)
+        
+        res.change_amount(ing_type, -ing_amt)
       
-    else
+      else
+        
+        removed = @mgr.inventory.remove_items_by_type(
+          inv, ing_type, ing_amt)
+        
+        for item_id in removed
 
-      res = @mgr.comp(@mgr.actions.cur_station, Resources)
-
-      for ing_type, ing_amt in ings.ingredients
-
-        if ['water', 'energy1', 'energy2'].include?(ing_type)
-          res.change_amount(ing_type, -ing_amt)
-        else
-          @mgr.inventory.remove_item_by_type(inv, ing_type, ing_amt)
+          item = @mgr.comp(item_id, Item)
+          ing_qualities << item.quality
+          ing_conditions << item.condition
+        
         end
 
       end
 
-      inv.add_item(@mgr.inventory.create_inv_item(type.type))
+    end
+
+    averaged_quality = ing_qualities.reduce(:+)
+    averaged_quality /= ing_qualities.size
+
+    averaged_condition = ing_conditions.reduce(:+)
+    averaged_condition /= ing_conditions.size
+
+    if ['water', 'energy1', 'energy2'].include?(type.type) 
+      
+    else
+
+      item_id = @mgr.inventory.create_inv_item(type.type)
+
+      item = @mgr.comp(item_id, Item)
+      item.quality = averaged_quality * @final_score
+      item.condition = averaged_condition
+
+      @mgr.inventory.add_item(inv, item_id)
 
     end
     

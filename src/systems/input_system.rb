@@ -293,7 +293,7 @@ class InputSystem < System
 		inv = @mgr.comp(entity, Inventory)
 
 		item_id = @mgr.map.get_near_item(pos.x, pos.y) and
-		inv.add_item(item_id)													 and
+		@mgr.inventory.add_item(inv, item_id)					 and
 
 		Proc.new do
 
@@ -320,8 +320,8 @@ class InputSystem < System
 		x = pos.x + C::WTB * (screen_x - C::WIDTH / 2)
 		y = pos.y - C::WTB * (screen_y - C::HEIGHT / 2)
 
-		item_id = @mgr.map.get_item(x, y) and		
-		inv.add_item(item_id)             and
+		item_id = @mgr.map.get_item(x, y)     and		
+		@mgr.inventory.add_item(inv, item_id) and
 
 		Proc.new do
 
@@ -373,7 +373,7 @@ class InputSystem < System
 			item = @mgr.comp(item_id, Item)
 			
 			inv.weight -= item.weight 
-			inv.remove_item(item_id)
+			@mgr.inventory.remove_item(inv, item_id)
 
 			@mgr.render.nearby_entities << item_id
 			

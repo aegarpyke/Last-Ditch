@@ -84,10 +84,14 @@ class LastDitch < ApplicationAdapter
 		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
 		inv = @mgr.comp(@player, Inventory)
-		inv.add_item(@inventory.create_inv_item('canister1_waste'))
-		inv.add_item(@inventory.create_inv_item('battery_empty'))
-		inv.add_item(@inventory.create_inv_item('canister1_empty'))
-		inv.add_item(@inventory.create_inv_item('overgrowth1'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('canister1_waste'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('battery_empty'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('canister1_empty'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('overgrowth1'))
 
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)

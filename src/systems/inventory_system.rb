@@ -145,7 +145,39 @@ class InventorySystem < System
 	end
 
 
-	def remove_item_by_type(inv, type, amt)
+	def add_item(inv, item_id)
+
+		for i in 0...inv.items.size
+
+			if inv.items[i].nil?
+
+				inv.items[i] = item_id
+				return item_id
+			
+			end
+
+		end
+
+		nil
+
+	end
+
+
+	def remove_item(inv, item_id)
+
+		index = inv.items.index(item_id)
+
+		if index
+			inv.items[index] = nil
+			return item_id
+		end
+
+		nil
+
+	end
+
+
+	def remove_items_by_type(inv, type, amt)
 
 		items_to_remove = []
 
@@ -167,7 +199,7 @@ class InventorySystem < System
 
 		if amt > 0
 		
-			return false
+			return nil
 		
 		else
 
@@ -178,7 +210,7 @@ class InventorySystem < System
 			
 			end
 
-			return true
+			return items_to_remove
 		
 		end
 

@@ -15,8 +15,8 @@ class MapSystem < System
 		@focus = @mgr.comp(player, Position)
 		
 		@iterations = 120
-		@rooms, @items, @doors, @stations = [], [], [], []
 		@num_of_rooms, @num_of_items = 200, 3200
+		@rooms, @items, @doors, @stations = [], [], [], []
 
 		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
 		@sight = Array.new(@width) {|i| Array.new(@height) {|i| true }}
