@@ -247,6 +247,58 @@ class InventorySystem < System
 	end
 
 
+	def pickup_item(entity)
+
+		pos = @mgr.comp(entity, Position)
+		inv = @mgr.comp(entity, Inventory)
+
+		item_id = @mgr.map.get_near_item(pos.x, pos.y) and
+		add_item(inv, item_id)					               and
+
+		Proc.new do
+
+			item = @mgr.comp(item_id, Item)
+			inv.weight += item.weight 
+			
+			@mgr.map.remove_item(item_id)
+			@mgr.ui.inv.prev_selection = nil
+
+			return true
+		
+		end.call
+
+		false
+
+	end
+
+
+	def pickup_item_at(entity, screen_x, screen_y)
+
+		pos = @mgr.comp(entity, Position)
+		inv = @mgr.comp(entity, Inventory)
+
+		x = pos.x + C::WTB * (screen_x - C::WIDTH / 2)
+		y = pos.y - C::WTB * (screen_y - C::HEIGHT / 2)
+
+		item_id = @mgr.map.get_item(x, y)     and		
+		add_item(inv, item_id) 								and
+
+		Proc.new do
+
+			item = @mgr.comp(item_id, Item)
+			inv.weight += item.weight
+			@mgr.ui.inv.prev_selection = nil
+			@mgr.map.remove_item(item_id)
+
+			return true
+
+		end.call
+
+		false
+
+	end
+
+
 	def item_count(entity_id, type)
 		
 		count = 0

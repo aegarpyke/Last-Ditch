@@ -15,10 +15,11 @@ class UIBaseSystem < System
     @no_exit = false
 
     setup
+    activate
 
-    if 1 == 0
+    if 1 == 1
       
-      @table_main.debug
+      @table_info.debug
       @table_needs.debug
       @table_slots.debug
 
@@ -30,10 +31,10 @@ class UIBaseSystem < System
   def setup
 
     w, h = 62, 42
-    @table = Table.new(@skin)
-    @table.set_bounds(C::WIDTH - w, C::HEIGHT - h, w, h)
+    @table_info = Table.new(@skin)
+    @table_info.set_bounds(C::WIDTH - w, C::HEIGHT - h, w, h)
 
-    @time =   Label.new("", @skin, "base_ui")
+    @time =   Label.new("We're still here!", @skin, "base_ui")
     @date =   Label.new("", @skin, "base_ui")
     @money =  Label.new("", @skin, "base_ui")
     @weight = Label.new("", @skin, "base_ui")
@@ -43,10 +44,10 @@ class UIBaseSystem < System
     @weight.set_alignment(Align::right)
     @weight.set_color(Color.new(0.75, 0.75, 0.89, 1))
 
-    @table.add(@date).align(Align::right).height(11).row
-    @table.add(@time).align(Align::right).height(11).row
-    @table.add(@weight).align(Align::right).height(11).row
-    @table.add(@money).align(Align::right).height(11)
+    @table_info.add(@date).align(Align::right).height(11).row
+    @table_info.add(@time).align(Align::right).height(11).row
+    @table_info.add(@weight).align(Align::right).height(11).row
+    @table_info.add(@money).align(Align::right).height(11)
 
     @table_needs = Table.new(@skin)
     @table_needs.set_bounds(-3, C::HEIGHT - 29, 106, 30)
@@ -124,7 +125,7 @@ class UIBaseSystem < System
 
     end
 
-    @stage.add_actor(@table)
+    @stage.add_actor(@table_info)
     @stage.add_actor(@table_needs)
     @stage.add_actor(@table_slots)
 
@@ -199,7 +200,7 @@ class UIBaseSystem < System
 
     @active = true
 
-    @stage.add_actor(@table)
+    @stage.add_actor(@table_info)
     @stage.add_actor(@table_needs)
     @stage.add_actor(@table_slots)
 
@@ -210,26 +211,26 @@ class UIBaseSystem < System
 
     @active = false
 
-    @table.remove
+    @table_info.remove
     @table_needs.remove
     @table_slots.remove
 
   end
 
 
-  def toggle_activate
+  def toggle_active
     
     @active = !@active
 
     if @active
       
-      @stage.add_actor(@table)
+      @stage.add_actor(@table_info)
       @stage.add_actor(@table_needs)
       @stage.add_actor(@table_slots)
 
     else
 
-      @table.remove
+      @table_info.remove
       @table_needs.remove
       @table_slots.remove
 

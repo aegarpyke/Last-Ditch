@@ -26,14 +26,20 @@ class InputSystem < System
 						if @mgr.skill_test.testing
 							@mgr.skill_test.score
 						else
-							pickup_item(entity)
+							@mgr.inventory.pickup_item(entity)
 						end
 
 					else
 						
-						pickup_item_at(entity, screen_x, screen_y) or
-						use_door_at(entity, screen_x, screen_y)
+						if @mgr.ui.active
 							
+						else
+						
+							@mgr.inventory.pickup_item_at(entity, screen_x, screen_y) or
+							@mgr.map.use_door_at(entity, screen_x, screen_y)
+
+						end
+
 					end
 
 				when 1
@@ -49,8 +55,7 @@ class InputSystem < System
 						if @mgr.ui.active
 
 							@mgr.ui.inv.no_exit = true
-
-							drop_item(entity)
+							@mgr.map.drop_item(entity)
 						
 						end
 
@@ -108,11 +113,9 @@ class InputSystem < System
 
 						else
 
-							use_door(entity)				or
-							use_station(entity)
+							@mgr.map.use_door(entity)   	or
+							@mgr.map.use_station(entity)
 
-							
-						
 						end
 
 					else
@@ -282,186 +285,6 @@ class InputSystem < System
 		end
 
 		true
-
-	end
-
-
-
-	def pickup_item(entity)
-
-		pos = @mgr.comp(entity, Position)
-		inv = @mgr.comp(entity, Inventory)
-
-		item_id = @mgr.map.get_near_item(pos.x, pos.y) and
-		@mgr.inventory.add_item(inv, item_id)					 and
-
-		Proc.new do
-
-			item = @mgr.comp(item_id, Item)
-			inv.weight += item.weight 
-			
-			@mgr.map.remove_item(item_id)
-			@mgr.ui.inv.prev_selection = nil
-
-			return true
-		
-		end.call
-
-		false
-
-	end
-
-
-	def pickup_item_at(entity, screen_x, screen_y)
-
-		pos = @mgr.comp(entity, Position)
-		inv = @mgr.comp(entity, Inventory)
-
-		x = pos.x + C::WTB * (screen_x - C::WIDTH / 2)
-		y = pos.y - C::WTB * (screen_y - C::HEIGHT / 2)
-
-		item_id = @mgr.map.get_item(x, y)     and		
-		@mgr.inventory.add_item(inv, item_id) and
-
-		Proc.new do
-
-			item = @mgr.comp(item_id, Item)
-			inv.weight += item.weight
-			@mgr.ui.inv.prev_selection = nil
-			@mgr.map.remove_item(item_id)
-
-			return true
-
-		end.call
-
-		false
-
-	end
-
-
-	def drop_item(entity)
-
-		pos = @mgr.comp(entity, Position)
-		rot = @mgr.comp(entity, Rotation)
-		inv = @mgr.comp(entity, Inventory)
-
-		@mgr.ui.inv.selection                                  and
-		index = @mgr.ui.inv.slots.index(@mgr.ui.inv.selection) and
-		item_id = inv.items[index]														 and
-
-		Proc.new do
-
-			item_type = @mgr.comp(item_id, Type)
-
-			item_pos = Position.new(
-				pos.x + rot.x, 
-				pos.y + rot.y)
-
-			item_render = Render.new(
-				"items/#{item_type.type}",
-				@mgr.atlas.find_region("items/#{item_type.type}"))
-
-			item_rot = @mgr.comp(item_id, Rotation)
-			item_rot.angle = rot.angle - 90
-
-			@mgr.add_comp(item_id, item_pos)
-			@mgr.add_comp(item_id, item_render)
-
-			@mgr.map.items << item_id
-			@mgr.inventory.update_slots = true
-
-			item = @mgr.comp(item_id, Item)
-			
-			inv.weight -= item.weight 
-			@mgr.inventory.remove_item(inv, item_id)
-
-			@mgr.render.nearby_entities << item_id
-			
-			@mgr.ui.inv.reset_info
-			@mgr.ui.actions.update_crafting_info
-
-			return true
-
-		end.call
-
-		false
-
-	end
-
-
-	def use_station(entity)
-
-		pos = @mgr.comp(entity, Position)
-		inv = @mgr.comp(entity, Inventory)
-
-		station_id = @mgr.map.get_near_station(pos.x, pos.y) and
-		station = @mgr.comp(station_id, Station)             and
-
-		Proc.new do
-
-			vel = @mgr.comp(entity, Velocity)
-			vel.spd = 0
-			vel.ang_spd = 0
-			
-			@mgr.paused = !@mgr.paused
-			@mgr.time.active = !@mgr.time.active
-			@mgr.actions.cur_station = station_id
-			@mgr.ui.actions.activate
-
-			return true
-
-		end.call
-
-		false
-
-	end
-
-
-	def use_door(entity)
-
-		pos = @mgr.comp(entity, Position)
-		inv = @mgr.comp(entity, Inventory)
-
-		door_id = @mgr.map.get_near_door(pos.x, pos.y) and
-		door = @mgr.comp(door_id, Door)                and
-		!door.locked                                   and
-
-		Proc.new do
-		
-			door.open = !door.open
-			@mgr.map.change_door(door_id, door.open)
-
-			return true
-
-		end.call
-
-		false
-
-	end
-
-
-	def use_door_at(entity, screen_x, screen_y)
-
-		pos = @mgr.comp(entity, Position)
-		inv = @mgr.comp(entity, Inventory)
-
-		x = pos.x + C::WTB * (screen_x - C::WIDTH / 2)
-		y = pos.y - C::WTB * (screen_y - C::HEIGHT / 2)
-
-		door_id = @mgr.map.get_door(x, y)  and
-		door    = @mgr.comp(door_id, Door) and
-		!door.locked                       and
-
-		Proc.new do
-
-			door.open = !door.open
-			@mgr.map.change_door(door_id, door.open)
-
-			return true
-
-		end.call
-
-		false
 
 	end
 
