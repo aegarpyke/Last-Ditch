@@ -140,6 +140,34 @@ class SkillTestSystem < System
   
   end
 
+  
+  def score
+
+    goal = false
+    lowest_dif = 1000
+
+    for hit in @hits
+
+      dif = (@theta - hit).abs
+      lowest_dif = dif if dif < lowest_dif
+
+      if dif < @score_range
+
+        goal = true
+        @scores << dif 
+
+        break
+
+      end
+    
+    end
+
+    if !goal
+      @scores << lowest_dif
+    end
+
+  end
+
 
   def finalize
 
@@ -199,34 +227,6 @@ class SkillTestSystem < System
 
     end
     
-  end
-
-
-  def score
-
-    goal = false
-    lowest_dif = 1000
-
-    for hit in @hits
-
-      dif = (@theta - hit).abs
-      lowest_dif = dif if dif < lowest_dif
-
-      if dif < @score_range
-
-        goal = true
-        @scores << dif 
-
-        break
-
-      end
-    
-    end
-
-    if !goal
-      @scores << lowest_dif
-    end
-
   end
 
 

@@ -14,6 +14,7 @@ class LastDitch < ApplicationAdapter
 
 		@mgr.player = @player = @mgr.create_tagged_entity('player')
 		
+		@mgr.add_comp(@player, Type.new('player'))
 		@mgr.add_comp(@player, Position.new(40, 40))
 		@mgr.add_comp(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
 		@mgr.add_comp(@player, Rotation.new(0))
@@ -84,10 +85,13 @@ class LastDitch < ApplicationAdapter
 		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
 		inv = @mgr.comp(@player, Inventory)
+
 		@inventory.add_item(
 			inv, @inventory.create_inv_item('canister1_waste'))
 		@inventory.add_item(
 			inv, @inventory.create_inv_item('battery_empty'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('canteen1_empty'))
 		@inventory.add_item(
 			inv, @inventory.create_inv_item('canister1_empty'))
 		@inventory.add_item(
