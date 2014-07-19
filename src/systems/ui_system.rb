@@ -8,19 +8,19 @@ class UISystem < System
 
 		super()
 		@mgr = mgr
+		@skin = @mgr.skin
 		@atlas = atlas
 		@mgr.ui = self
 		@active = false
 		@toggle = false
 
 		@stage = Stage.new
-		@skin = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
 
-		@base    = UIBaseSystem.new(@mgr, @stage, @skin)
-		@actions = UIActionsSystem.new(@mgr, @stage, @skin)
-		@inv     = UIInventorySystem.new(@mgr, @stage, @skin)
-		@equip   = UIEquipSystem.new(@mgr, @stage, @skin)
-		@status  = UIStatusSystem.new(@mgr, @stage, @skin)
+		@base    = UIBaseSystem.new(@mgr, @stage)
+		@actions = UIActionsSystem.new(@mgr, @stage)
+		@inv     = UIInventorySystem.new(@mgr, @stage)
+		@equip   = UIEquipSystem.new(@mgr, @stage)
+		@status  = UIStatusSystem.new(@mgr, @stage)
 
 	end
 

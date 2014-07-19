@@ -19,6 +19,7 @@ java_import com.badlogic.gdx.InputAdapter
 java_import com.badlogic.gdx.InputMultiplexer
 java_import com.badlogic.gdx.InputProcessor
 java_import com.badlogic.gdx.utils.TimeUtils
+java_import com.badlogic.gdx.utils.Pool
 java_import com.badlogic.gdx.utils.Json
 java_import com.badlogic.gdx.utils.JsonWriter
 java_import com.badlogic.gdx.utils.JsonWriter::OutputType

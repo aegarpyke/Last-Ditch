@@ -1,6 +1,6 @@
 class EntityManager
 
-	attr_reader :id
+	attr_accessor :id, :skin
 	attr_accessor :render, :physics, :actions, :crafting, :skill_test, :inventory, :equipment, :status
 	attr_accessor :player, :physics, :lighting, :input, :ai, :map, :atlas, :ui, :time, :paused
 

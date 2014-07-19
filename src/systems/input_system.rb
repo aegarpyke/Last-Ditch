@@ -113,7 +113,7 @@ class InputSystem < System
 
 						else
 
-							@mgr.map.use_door(entity)   	or
+							@mgr.map.use_door(entity)    or
 							@mgr.map.use_station(entity)
 
 						end

@@ -2,12 +2,12 @@ class UIInventorySystem < System
 
   attr_accessor :active, :toggle, :window, :selection, :prev_selection, :slots, :no_exit
 
-  def initialize(mgr, stage, skin)
+  def initialize(mgr, stage)
     
     super()
 
     @mgr = mgr
-    @skin = skin
+    @skin = @mgr.skin
     @stage = stage
     @active = false
     @no_exit = false

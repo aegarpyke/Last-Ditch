@@ -147,10 +147,12 @@ class InventorySystem < System
 
 	def add_item(inv, item_id)
 
+
 		for i in 0...inv.items.size
 
 			if inv.items[i].nil?
 
+				@update_slots = true
 				inv.items[i] = item_id
 				return item_id
 			
@@ -168,6 +170,7 @@ class InventorySystem < System
 		index = inv.items.index(item_id)
 
 		if index
+			@update_slots = true
 			inv.items[index] = nil
 			return item_id
 		end
@@ -209,6 +212,8 @@ class InventorySystem < System
 				inv.items[index] = nil
 			
 			end
+
+			@mgr.inventory.update_slots = true
 
 			return items_to_remove
 		

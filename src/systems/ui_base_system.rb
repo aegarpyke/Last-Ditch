@@ -3,12 +3,12 @@ class UIBaseSystem < System
   attr_accessor :active, :toggle, :selection, :no_exit, :slots, :window
   attr_accessor :time, :date, :money, :weight
 
-  def initialize(mgr, stage, skin)
+  def initialize(mgr, stage)
 
     super()
 
     @mgr = mgr
-    @skin = skin
+    @skin = @mgr.skin
     @stage = stage
     @active = false
     @toggle = false
@@ -17,7 +17,7 @@ class UIBaseSystem < System
     setup
     activate
 
-    if 1 == 1
+    if 1 == 0
       
       @table_info.debug
       @table_needs.debug

@@ -2,12 +2,12 @@ class UIActionsSystem < System
 
   attr_accessor :active, :focus, :toggle, :window, :recipe_check
 
-  def initialize(mgr, stage, skin)
+  def initialize(mgr, stage)
 
     super()
 
     @mgr = mgr
-    @skin = skin
+    @skin = @mgr.skin
     @stage = stage
     @cur_index = 0
     @focus = :crafting
@@ -43,10 +43,11 @@ class UIActionsSystem < System
     @name_label = Label.new('Name:', @skin, 'actions_title')
     @station_identifier_label = Label.new('  Station: ', @skin, 'actions')
     @station_label = Label.new('', @skin, 'actions')
+    @station_label.set_alignment(Align::left)
 
-    @crafting_info_table.add(@name_label).padLeft(8).align(Align::left).row
-    @crafting_info_table.add(@station_identifier_label).padLeft(8).align(Align::left)
-    @crafting_info_table.add(@station_label).align(Align::left).padLeft(-78).row
+    @crafting_info_table.add(@name_label).width(240).colspan(2).padLeft(8).align(Align::left).row
+    @crafting_info_table.add(@station_identifier_label).width(50).padLeft(8).align(Align::left)
+    @crafting_info_table.add(@station_label).width(210).align(Align::left).padLeft(4).row
 
     @reqs_and_ings_label_list = []
 
@@ -56,7 +57,7 @@ class UIActionsSystem < System
       @reqs_and_ings_label_list.last.color = Color::GRAY
       
       @crafting_info_table.add(
-        @reqs_and_ings_label_list.last).padLeft(8).align(Align::left).row 
+        @reqs_and_ings_label_list.last).colspan(2).padLeft(8).align(Align::left).row 
 
     end
 
@@ -314,24 +315,26 @@ class UIActionsSystem < System
     skills = @mgr.comp(@mgr.player, Skills)
     skill_data = YAML.load_file('cfg/skills.yml')
 
-    @reqs_and_ings_label_list[@cur_index].text = '  Requirements:'
+    @reqs_and_ings_label_list[@cur_index].text = '  Skills:'
     @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
 
     @cur_index += 1
 
     for req, lvl in reqs
 
-      skill_name = skill_data[req]['name']
-      skill_lvl  = skills.get_level(req)
+      skill_name  = skill_data[req]['name']
+      display_lvl = (lvl * 100).to_i
+      skill_lvl   = (skills.get_level(req) * 100).to_i
 
-      if skill_lvl < lvl
+      if skill_lvl < display_lvl
         @recipe_check = false
         @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
       else
         @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
       end
 
-      @reqs_and_ings_label_list[@cur_index].text = "    #{skill_name} #{skill_lvl}/#{lvl}\n"
+      txt = "    %s %d / %d" % [skill_name, skill_lvl, display_lvl]
+      @reqs_and_ings_label_list[@cur_index].text = txt
 
       @cur_index += 1
 
@@ -366,11 +369,13 @@ class UIActionsSystem < System
             @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
           end
 
-          @reqs_and_ings_label_list[@cur_index].text = "    #{resource_data[ing]['name']} #{resource_amt}/#{amt}\n"  
+          txt = "    %s %.1f / %.1f" % [resource_data[ing]['name'], resource_amt, amt]  
+          @reqs_and_ings_label_list[@cur_index].text = txt
 
         else
 
-          @reqs_and_ings_label_list[@cur_index].text = "    #{resource_data[ing]['name']} 0.0/#{amt}\n"  
+          txt = "    %s 0.0 / %.1f" % [resource_data[ing]['name'], amt]
+          @reqs_and_ings_label_list[@cur_index].text = txt
           @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
 
         end
@@ -386,7 +391,8 @@ class UIActionsSystem < System
           @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
         end
 
-        @reqs_and_ings_label_list[@cur_index].text = "    #{item_data[ing]['name']} #{item_amt}/#{amt}\n"
+        txt = "    %s %d / %d" % [item_data[ing]['name'], item_amt, amt]
+        @reqs_and_ings_label_list[@cur_index].text = txt
 
       else
         raise "Invalid ingredient in recipe: #{ing}"

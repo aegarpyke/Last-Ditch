@@ -103,7 +103,7 @@ rations1_empty:
 handgun1:
   name: 'Handgun'
   desc: >
-    This is a handgun.
+    This is a handgun that fires bursts of energy.
   usable: false
   weight: 0.36
   base_value: 0.54

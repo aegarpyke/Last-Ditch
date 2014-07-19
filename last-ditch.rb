@@ -11,7 +11,9 @@ class LastDitch < ApplicationAdapter
 		@batch = SpriteBatch.new
 		@debug = Box2DDebugRenderer.new
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
+		@skin  = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
 
+		@mgr.skin = @skin
 		@mgr.player = @player = @mgr.create_tagged_entity('player')
 		
 		@mgr.add_comp(@player, Type.new('player'))
@@ -149,7 +151,7 @@ class LastDitch < ApplicationAdapter
 		update
 
 		Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
-		@batch.projection_matrix = @map.cam.combined
+		@batch.set_projection_matrix(@map.cam.combined)
 
 		@batch.begin
 

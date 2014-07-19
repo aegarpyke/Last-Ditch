@@ -2,13 +2,13 @@ class UIEquipSystem < System
 
   attr_accessor :active, :toggle, :window
 
-  def initialize(mgr, stage, skin)
+  def initialize(mgr, stage)
     
     super()
 
     @mgr = mgr
+    @skin = @mgr.skin
     @stage = stage
-    @skin = skin
     @active = false
 
     setup

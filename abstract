@@ -13,6 +13,8 @@ TODO
 
 	Crafting:
 		+ Genetically engineer weeds into plants with useful properties
+		+ Add wires to allow player to transfer energy
+		+ Add bonuses for streaks in skill test
 		+
 
 	Environment:
@@ -33,9 +35,9 @@ TODO
  		
  	Crimes:
  		+ If a player kills anyone and interacts with their dead body, then 
- 			their DNA will be traced to crime and they will become wanted for 
+ 			their DNA will be traced to the crime and they will become wanted for 
  			murder.
- 		+ 
+ 		+ Stores ahve CC video that will identify any assailents.
 
  		
 

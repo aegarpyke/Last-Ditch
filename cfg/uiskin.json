@@ -49,6 +49,11 @@
     	{
     		"font": "default-font", "fontColor": "white"
     	},
+
+    	"skills_score":
+    	{
+    		"font": "garuda12", "fontColor": "white"
+    	},
     	
 	},
 

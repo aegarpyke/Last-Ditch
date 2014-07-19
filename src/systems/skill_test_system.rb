@@ -20,9 +20,7 @@ class SkillTestSystem < System
     @num_of_hits = 4
     @score_range = 0.12
     @score_min_dist = 0.1
-
-    @hits = []
-    @scores = []
+    @hits, @scores = [], []
 
     @effect1 = ParticleEffect.new
     @effect1.load(
@@ -33,6 +31,8 @@ class SkillTestSystem < System
     @effect2.load(
       Gdx.files.internal("res/fx/trails_eff2.p"), 
       Gdx.files.internal("res/gfx/ui"))
+
+    @score_labels = []
 
     @player_pos = @mgr.comp(@mgr.player, Position)
 
@@ -80,7 +80,7 @@ class SkillTestSystem < System
   def calc_x(theta)
 
     dr = @R - @r
-    dr * Math.sin(theta)**3 - @d * Math.sin(theta * dr / @r)**2
+    dr * Math.sin(theta)**4 - @d * Math.sin(theta * dr / @r)**2
 
   end
 
@@ -88,7 +88,7 @@ class SkillTestSystem < System
   def calc_y(theta)
 
     dr = @R - @r
-    dr * Math.cos(theta)**2 + @d * Math.cos(theta * dr / @r)**3
+    dr * Math.cos(theta)**3 + @d * Math.cos(theta * dr / @r)**1
 
   end
 
@@ -132,6 +132,7 @@ class SkillTestSystem < System
         finalize
 
         @mgr.ui.deactivate
+        @mgr.time.active = true
         @active = false
 
       end
@@ -140,7 +141,7 @@ class SkillTestSystem < System
   
   end
 
-  
+
   def score
 
     goal = false
@@ -154,7 +155,7 @@ class SkillTestSystem < System
       if dif < @score_range
 
         goal = true
-        @scores << dif 
+        @scores << dif
 
         break
 
@@ -166,6 +167,10 @@ class SkillTestSystem < System
       @scores << lowest_dif
     end
 
+    @score_labels << Label.new(
+      "%.2f" % @final_score, 
+      @mgr.skin, 'skills_score')
+
   end
 
 
@@ -173,12 +178,13 @@ class SkillTestSystem < System
 
     @final_score = @scores.reduce(:+)
     @final_score /= @hits.size-1
+    @final_score.round(2)
 
     inv = @mgr.comp(@mgr.player, Inventory)
 
     station = @mgr.comp(@mgr.actions.cur_station, Station)
 
-    type = @mgr.comp(@mgr.crafting.cur_recipe, Type)
+    recipe_type = @mgr.comp(@mgr.crafting.cur_recipe, Type)
     ings = @mgr.comp(@mgr.crafting.cur_recipe, Ingredients)
 
     ing_qualities, ing_conditions = [], []
@@ -213,11 +219,17 @@ class SkillTestSystem < System
     averaged_condition = ing_conditions.reduce(:+)
     averaged_condition /= ing_conditions.size
 
-    if ['water', 'energy1', 'energy2'].include?(type.type) 
+    if ['water'].include?(recipe_type.type) 
       
+      res.change_amount('water', @final_score)
+
+    elsif ['energy1', 'energy2'].include?(recipe_type.type)
+
+      res.change_amount('energy', @final_score)
+
     else
 
-      item_id = @mgr.inventory.create_inv_item(type.type)
+      item_id = @mgr.inventory.create_inv_item(recipe_type.type)
 
       item = @mgr.comp(item_id, Item)
       item.quality = averaged_quality * @final_score
@@ -263,8 +275,8 @@ class SkillTestSystem < System
       
       batch.begin
 
-      @effect1.draw(batch)
-      @effect2.draw(batch)
+        @effect1.draw(batch)
+        @effect2.draw(batch)
     
       batch.end
 
