@@ -262,6 +262,10 @@ class UIActionsSystem < System
 
       update_crafting_info
 
+      if @tot_num_of_craftables > 0
+        @num_of_craftables = @tot_num_of_craftables
+      end
+
       if @recipe_check && @crafting_list.get_selection.first == @prev_selection
 
         deactivate
@@ -451,8 +455,8 @@ class UIActionsSystem < System
 
           if resource_amt < amt
 
-            @recipe_check = false
             craftables = 0
+            @recipe_check = false
             @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
           
           else
@@ -483,8 +487,8 @@ class UIActionsSystem < System
 
         if item_amt < amt
         
-          @recipe_check = false
           craftables = 0
+          @recipe_check = false
           @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
         
         else
@@ -505,10 +509,12 @@ class UIActionsSystem < System
         raise "Invalid ingredient in recipe: #{ing}"
       end
 
-      if !@recipe_check
-        @tot_num_of_craftables = 0
-      else
-        @num_of_craftables = 1
+      if @tot_num_of_craftables > 0 && @num_of_craftables == 0
+        @num_of_craftables = @tot_num_of_craftables
+      end
+
+      if @num_of_craftables > @tot_num_of_craftables
+        @num_of_craftables = @tot_num_of_craftables
       end
 
       @cur_index += 1
@@ -556,8 +562,6 @@ class UIActionsSystem < System
 
   def update_crafting_info
 
-    
-
     set_station_highlight(false)
     item_selection = @crafting_list.get_selection.to_s
     set_cur_action(item_selection)
@@ -580,6 +584,10 @@ class UIActionsSystem < System
     @stage.add_actor(@window)
 
     update_crafting_info
+
+    if @tot_num_of_craftables > 0
+      @num_of_craftables = @tot_num_of_craftables
+    end
 
   end
 
