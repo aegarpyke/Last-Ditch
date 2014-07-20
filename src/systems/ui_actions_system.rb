@@ -14,11 +14,12 @@ class UIActionsSystem < System
     @prev_selection = nil
     @active = false
     @recipe_check = false
+    @num_of_craftables = 0
     @tot_num_of_craftables = 0
 
     setup
 
-    if 1 == 1
+    if 1 == 0
 
       @window.debug
       @crafting_info_table.debug
@@ -42,10 +43,43 @@ class UIActionsSystem < System
     @crafting_info_table.align(Align::left | Align::top)
 
     @name_label = Label.new('Name:', @skin, 'actions_title')
+    
     @craftables_left_arrow_button = Button.new(@skin, 'actions_left_arrow_button')
+    @craftables_left_arrow_button.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(actions)
+          super()
+          @actions = actions
+        end
+
+        def changed(event, actor)
+          @actions.change_num_of_craftables(-1)
+          true
+        end
+
+      end.new(self))
+
     @craftables_label = Label.new('', @skin, 'actions')
     @craftables_label.set_alignment(Align::right)
     @craftables_right_arrow_button = Button.new(@skin, 'actions_right_arrow_button')
+    @craftables_right_arrow_button.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(actions)
+          super()
+          @actions = actions
+        end
+
+        def changed(event, actor)
+          @actions.change_num_of_craftables(1)
+          true
+        end
+
+      end.new(self))
+
     @station_identifier_label = Label.new('  Station: ', @skin, 'actions')
     @station_label = Label.new('', @skin, 'actions')
     @station_label.set_alignment(Align::left)
@@ -199,6 +233,29 @@ class UIActionsSystem < System
   end
 
 
+  def change_num_of_craftables(amount)
+
+    if @tot_num_of_craftables > 0
+
+      @num_of_craftables += amount
+
+      if @num_of_craftables < 1
+        @num_of_craftables = @tot_num_of_craftables
+      elsif @num_of_craftables > @tot_num_of_craftables
+        @num_of_craftables = 1
+      end
+
+    else
+
+      @num_of_craftables = 0
+
+    end
+
+    update_crafting_info
+
+  end
+
+
   def activate_skill_system
 
     if @focus == :crafting
@@ -283,7 +340,7 @@ class UIActionsSystem < System
 
   def set_num_of_craftables
 
-    @craftables_label.text = "0 / %d" % @tot_num_of_craftables
+    @craftables_label.text = "%d / %d" % [@num_of_craftables, @tot_num_of_craftables]
 
   end
 
@@ -301,6 +358,7 @@ class UIActionsSystem < System
       else    
       
         @recipe_check = false
+        @num_of_craftables = 0
         @tot_num_of_craftables = 0
         set_station_highlight(false)
       
@@ -309,6 +367,7 @@ class UIActionsSystem < System
     else
 
       @recipe_check = false
+      @num_of_craftables = 0
       @tot_num_of_craftables = 0
       set_station_highlight(false)
 
@@ -349,11 +408,12 @@ class UIActionsSystem < System
       if skill_lvl < display_lvl
 
         @recipe_check = false
+        @num_of_craftables = 0
         @tot_num_of_craftables = 0
         @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
         
       else
-      
+        
         @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
       
       end
@@ -370,7 +430,7 @@ class UIActionsSystem < System
 
   def set_ings(ings)
 
-    num_of_craftables = 0
+    craftables = 0
 
     @reqs_and_ings_label_list[@cur_index].text = '  Ingredients:'
     @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
@@ -392,18 +452,18 @@ class UIActionsSystem < System
           if resource_amt < amt
 
             @recipe_check = false
-            num_of_craftables = 0
+            craftables = 0
             @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
           
           else
 
-            num_of_craftables = (resource_amt / amt).to_i
+            craftables = (resource_amt / amt).to_i
             @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
 
           end
 
-          if num_of_craftables < @tot_num_of_craftables
-            @tot_num_of_craftables = num_of_craftables
+          if craftables < @tot_num_of_craftables
+            @tot_num_of_craftables = craftables
           end
 
           txt = "    - %s %.1f / %.1f" % [resource_data[ing]['name'].uncapitalize, resource_amt, amt]  
@@ -424,18 +484,18 @@ class UIActionsSystem < System
         if item_amt < amt
         
           @recipe_check = false
-          num_of_craftables = 0
+          craftables = 0
           @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
         
         else
 
-          num_of_craftables = (item_amt / amt).to_i
+          craftables = (item_amt / amt).to_i
           @reqs_and_ings_label_list[@cur_index].color = Color::WHITE
         
         end
 
-        if num_of_craftables < @tot_num_of_craftables
-          @tot_num_of_craftables = num_of_craftables
+        if craftables < @tot_num_of_craftables
+          @tot_num_of_craftables = craftables
         end
 
         txt = "    - %s %d / %d" % [item_data[ing]['name'].uncapitalize, item_amt, amt]
@@ -447,8 +507,9 @@ class UIActionsSystem < System
 
       if !@recipe_check
         @tot_num_of_craftables = 0
+      else
+        @num_of_craftables = 1
       end
-
 
       @cur_index += 1
 
@@ -494,6 +555,8 @@ class UIActionsSystem < System
 
 
   def update_crafting_info
+
+    
 
     set_station_highlight(false)
     item_selection = @crafting_list.get_selection.to_s
