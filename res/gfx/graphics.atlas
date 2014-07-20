@@ -237,7 +237,7 @@ model/female/l_arm
   index: -1
 model/female/l_foot
   rotate: false
-  xy: 173, 29
+  xy: 257, 16
   size: 12, 13
   orig: 12, 13
   offset: 0, 0
@@ -251,7 +251,7 @@ model/female/l_hand
   index: -1
 model/female/l_head
   rotate: false
-  xy: 187, 20
+  xy: 205, 20
   size: 8, 22
   orig: 8, 22
   offset: 0, 0
@@ -286,7 +286,7 @@ model/female/r_hand
   index: -1
 model/female/r_head
   rotate: false
-  xy: 463, 62
+  xy: 271, 7
   size: 8, 22
   orig: 8, 22
   offset: 0, 0
@@ -328,7 +328,7 @@ model/male/l_hand
   index: -1
 model/male/l_head
   rotate: false
-  xy: 197, 19
+  xy: 231, 9
   size: 8, 23
   orig: 8, 23
   offset: 0, 0
@@ -363,7 +363,7 @@ model/male/r_hand
   index: -1
 model/male/r_head
   rotate: false
-  xy: 453, 61
+  xy: 281, 6
   size: 8, 23
   orig: 8, 23
   offset: 0, 0
@@ -411,6 +411,34 @@ ui/button1_pressed
   xy: 149, 14
   size: 14, 14
   split: 4, 4, 4, 4
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+ui/button_left1
+  rotate: false
+  xy: 173, 28
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+ui/button_left_down1
+  rotate: false
+  xy: 189, 28
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+ui/button_right1
+  rotate: false
+  xy: 215, 18
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+ui/button_right_down1
+  rotate: false
+  xy: 241, 15
+  size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1

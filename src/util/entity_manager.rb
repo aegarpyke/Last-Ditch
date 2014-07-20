@@ -1,14 +1,15 @@
 class EntityManager
 
-	attr_accessor :id, :skin
-	attr_accessor :render, :physics, :actions, :crafting, :skill_test, :inventory, :equipment, :status
-	attr_accessor :player, :physics, :lighting, :input, :ai, :map, :atlas, :ui, :time, :paused
+	attr_accessor :skin, :player, :atlas, :paused
+  attr_accessor :ai, :map, :ui, :input, :time
+  attr_accessor :actions, :crafting, :skill_test
+  attr_accessor :inventory, :equipment, :status
+  attr_accessor :render, :physics, :lighting 
 
 	def initialize
 
 		@paused = false
 
-		@id = java.util.UUID.randomUUID.to_s
 		@ids_to_tags = Hash.new
 		@tags_to_ids = Hash.new
 		@component_stores = Hash.new
@@ -60,7 +61,9 @@ class EntityManager
 		end
 
 		if store.has_key?(entity)
-			store[entity] << component unless store[entity].include?(component)
+      unless store[entity].include?(component)
+        store[entity] << component
+      end
 		else
 			store[entity] = [component]
 		end
@@ -80,7 +83,7 @@ class EntityManager
     result = components.delete(component)
 
     if result.nil?
-      raise ArgumentError, "Entity #{entity} has no #{component} to remove"
+      raise ArgumentError, "Entity #{entity} has no #{component}."
     else
       store.delete(entity) if store[entity].empty?
       return true

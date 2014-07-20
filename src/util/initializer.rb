@@ -136,3 +136,9 @@ require_relative '../components/requirements'
 require_relative '../components/resources'
 
 GdxArray = com.badlogic.gdx.utils.Array
+
+class String
+  def uncapitalize 
+    self[0, 1].downcase + self[1..-1]
+  end
+end

@@ -63,6 +63,19 @@
 		{
 			"up": "ui/button1"
 		},
+
+		"actions_left_arrow_button":
+		{
+			"up": "ui/button_left1",
+			"down": "ui/button_left_down1",
+		},
+
+		"actions_right_arrow_button":
+		{
+			"up": "ui/button_right1",
+			"down": "ui/button_right_down1",
+		},
+
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle":

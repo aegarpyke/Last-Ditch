@@ -21,15 +21,7 @@ class InputSystem < System
 
 				when 0
 
-					if !@shift
-						
-						if @mgr.skill_test.testing
-							@mgr.skill_test.score
-						else
-							@mgr.inventory.pickup_item(entity)
-						end
-
-					else
+					if @shift
 						
 						if @mgr.ui.active
 							
@@ -40,11 +32,29 @@ class InputSystem < System
 
 						end
 
+					else
+
+						if @mgr.ui.active
+							
+							if @mgr.skill_test.testing
+								@mgr.skill_test.score
+							end
+						
+						else
+							
+							@mgr.inventory.pickup_item(entity)
+
+						end
+
 					end
 
 				when 1
 
-					if !@shift
+					if @shift
+
+						# Shift - Right mouse click
+
+					else
 
 						if @mgr.ui.base.active
 
@@ -58,8 +68,6 @@ class InputSystem < System
 							@mgr.map.drop_item(entity)
 						
 						end
-
-					else
 
 					end
 
@@ -81,7 +89,11 @@ class InputSystem < System
 
 				when Keys::TAB
 					
-					if !@ctrl
+					if @ctrl
+
+						@mgr.ui.base.toggle_active
+
+					else
 
 						vel = @mgr.comp(entity, Velocity)
 						vel.spd = 0
@@ -97,15 +109,15 @@ class InputSystem < System
 							@mgr.ui.activate
 						end
 
-					else
-
-						@mgr.ui.base.toggle_active
-							
 					end
 
 				when Keys::E
 
-					if !@shift
+					if @shift
+
+						# Shift - E
+
+					else
 
 						if @mgr.ui.active
 
@@ -118,21 +130,27 @@ class InputSystem < System
 
 						end
 
-					else
-						
 					end
 
 				when Keys::C
 
-					if !@shift
+					if @shift
+
+						# Shift - C
 
 					else
+
+						# C
 
 					end
 
 				when Keys::W, Keys::UP
 
-					if !@shift
+					if @shift
+
+						# Shift - W
+
+					else
 
 						if @mgr.ui.active
 
@@ -149,8 +167,12 @@ class InputSystem < System
 
 				when Keys::S, Keys::DOWN
 
-					if !@shift
+					if @shift
 						
+						# Shift - S
+
+					else
+
 						if @mgr.ui.active
 
 							@mgr.ui.inv.toggle_active
@@ -166,7 +188,20 @@ class InputSystem < System
 
 				when Keys::A, Keys::LEFT
 
-					if !@shift
+					if @shift
+
+						if @mgr.ui.active
+
+							# Shift - A
+
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = 0.5 * C::PLAYER_ROT_SPD
+
+						end
+
+					else
 
 						if @mgr.ui.active
 
@@ -179,24 +214,22 @@ class InputSystem < System
 
 						end
 						
-					else
-
-						if @mgr.ui.active
-
-
-
-						else
-
-							vel = @mgr.comp(entity, Velocity)
-							vel.ang_spd = 0.5 * C::PLAYER_ROT_SPD
-
-						end
-
 					end
 
 				when Keys::D, Keys::RIGHT
 
-					if !@shift
+					if @shift
+
+						if @mgr.ui.active
+
+						else
+
+							vel = @mgr.comp(entity, Velocity)
+							vel.ang_spd = -0.5 * C::PLAYER_ROT_SPD
+
+						end
+						
+					else
 
 						if @mgr.ui.active
 
@@ -207,17 +240,6 @@ class InputSystem < System
 							vel = @mgr.comp(entity, Velocity)
 							vel.ang_spd = -C::PLAYER_ROT_SPD
 						
-						end
-
-					else
-
-						if @mgr.ui.active
-
-						else
-
-							vel = @mgr.comp(entity, Velocity)
-							vel.ang_spd = -0.5 * C::PLAYER_ROT_SPD
-
 						end
 
 					end

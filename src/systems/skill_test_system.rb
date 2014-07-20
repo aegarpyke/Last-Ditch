@@ -20,7 +20,7 @@ class SkillTestSystem < System
     @num_of_hits = 4
     @score_range = 0.12
     @score_min_dist = 0.1
-    @hits, @scores = [], []
+    @hits, @scores, @score_labels = [], [], []
 
     @effect1 = ParticleEffect.new
     @effect1.load(
@@ -31,8 +31,6 @@ class SkillTestSystem < System
     @effect2.load(
       Gdx.files.internal("res/fx/trails_eff2.p"), 
       Gdx.files.internal("res/gfx/ui"))
-
-    @score_labels = []
 
     @player_pos = @mgr.comp(@mgr.player, Position)
 
@@ -80,7 +78,7 @@ class SkillTestSystem < System
   def calc_x(theta)
 
     dr = @R - @r
-    dr * Math.sin(theta)**4 - @d * Math.sin(theta * dr / @r)**2
+    dr * Math.sin(theta)**2 - @d * Math.sin(theta * dr / @r)**2
 
   end
 
@@ -88,7 +86,7 @@ class SkillTestSystem < System
   def calc_y(theta)
 
     dr = @R - @r
-    dr * Math.cos(theta)**3 + @d * Math.cos(theta * dr / @r)**1
+    dr * Math.cos(theta)**2 + @d * Math.cos(theta * dr / @r)**2
 
   end
 
@@ -156,7 +154,6 @@ class SkillTestSystem < System
 
         goal = true
         @scores << dif
-
         break
 
       end
@@ -167,8 +164,10 @@ class SkillTestSystem < System
       @scores << lowest_dif
     end
 
+    puts "%.2f" % @scores[-1] 
+
     @score_labels << Label.new(
-      "%.2f" % @final_score, 
+      "%.2f" % @scores[-1], 
       @mgr.skin, 'skills_score')
 
   end
@@ -178,7 +177,6 @@ class SkillTestSystem < System
 
     @final_score = @scores.reduce(:+)
     @final_score /= @hits.size-1
-    @final_score.round(2)
 
     inv = @mgr.comp(@mgr.player, Inventory)
 
