@@ -1,6 +1,7 @@
 class StatusSystem < System
 
 	def initialize(mgr)
+
 		super()
 		@mgr = mgr
 
@@ -21,6 +22,7 @@ class StatusSystem < System
 
 				needs.hunger += needs.hunger_rate * gd
 				needs.hunger = [0, needs.hunger, 1].sort[1]
+				
 				needs.thirst += needs.thirst_rate * gd
 				needs.thirst = [0, needs.thirst, 1].sort[1]
 				
@@ -33,10 +35,9 @@ class StatusSystem < System
 				end
 				
 				needs.energy_max += needs.energy_fatigue_rate * gd
-
 				needs.energy_max = 0 if needs.energy_max < 0
-
 				needs.energy = [0, needs.energy, needs.energy_max].sort[1]
+
 				needs.sanity += needs.sanity_rate * gd
 				needs.sanity = [0, needs.sanity, 1].sort[1]
 

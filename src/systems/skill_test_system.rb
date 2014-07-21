@@ -12,7 +12,7 @@ class SkillTestSystem < System
     @x1, @y1, @x2, @y2 = 0, 0, 0, 0
     
     @R = 110.2
-    @r = 32.3
+    @r = 42.3
     @d = 22.9
     @theta = 0
     @d_theta = 0.01
@@ -91,55 +91,6 @@ class SkillTestSystem < System
   end
 
 
-  def update
-
-    if @active
-
-      if @theta < @hits.last
-
-        @effect1.update(C::BOX_STEP)
-        @effect2.update(C::BOX_STEP)
-
-        x = C::BTW * @player_pos.x
-        y = C::BTW * @player_pos.y
-
-        @x1, @y1 = calc_x(@theta), calc_y(@theta)
-        @x2, @y2 = -@x1, @y1
-
-        @theta += @d_theta
-
-        @effect1.set_position(x + @x1, y + @y1 + 140)
-        @effect2.set_position(x + @x2, y + @y2 + 140)
-
-      else
-
-        @testing = false
-        adj_scores = []
-
-        for score in @scores
-
-          adj_score = (@score_range - score) * @score_range**-1 
-          adj_score = [-1.0, adj_score].max
-
-          adj_scores << adj_score
-
-        end
-
-        @scores = adj_scores
-
-        finalize
-
-        @mgr.ui.deactivate
-        @mgr.time.active = true
-        @active = false
-
-      end
-
-    end
-  
-  end
-
-
   def score
 
     goal = false
@@ -153,7 +104,11 @@ class SkillTestSystem < System
       if dif < @score_range
 
         goal = true
-        @scores << dif
+
+        score = (@score_range - dif) * @score_range**-1 
+        score = [-1.0, score].max
+        @scores << score
+
         break
 
       end
@@ -161,13 +116,15 @@ class SkillTestSystem < System
     end
 
     if !goal
-      @scores << lowest_dif
+
+      score = (@score_range - lowest_dif) * @score_range**-1 
+      score = [-1.0, score].max
+      @scores << score
+    
     end
 
-    puts "%.2f" % @scores[-1] 
-
     @score_labels << Label.new(
-      "%.2f" % @scores[-1], 
+      "%.2f" % @scores[-1],
       @mgr.skin, 'skills_score')
 
   end
@@ -217,7 +174,7 @@ class SkillTestSystem < System
     averaged_condition = ing_conditions.reduce(:+)
     averaged_condition /= ing_conditions.size
 
-    if ['water'].include?(recipe_type.type) 
+    if ['water'].include?(recipe_type.type)
       
       res.change_amount('water', @final_score)
 
@@ -236,7 +193,7 @@ class SkillTestSystem < System
       @mgr.inventory.add_item(inv, item_id)
 
     end
-    
+
   end
 
 
@@ -262,8 +219,45 @@ class SkillTestSystem < System
 
     @theta = 0
     @scores = []
+
     calc_hits
 
+  end
+
+
+  def update
+
+    if @active
+
+      if @theta < @hits.last
+
+        @effect1.update(C::BOX_STEP)
+        @effect2.update(C::BOX_STEP)
+
+        x = C::BTW * @player_pos.x
+        y = C::BTW * @player_pos.y
+
+        @x1, @y1 = calc_x(@theta), calc_y(@theta)
+        @x2, @y2 = -@x1, @y1
+
+        @theta += @d_theta
+
+        @effect1.set_position(x + @x1, y + @y1 + 140)
+        @effect2.set_position(x + @x2, y + @y2 + 140)
+
+      else
+
+        @active = false
+        @testing = false
+
+        finalize
+
+        @mgr.ui.deactivate
+
+      end
+
+    end
+  
   end
 
 

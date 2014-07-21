@@ -39,6 +39,8 @@ class UISystem < System
 	def activate
 
 		@active = true
+		@mgr.paused = true
+		@mgr.time.active = false
 
 		@actions.activate
 		@inv.activate
@@ -52,6 +54,7 @@ class UISystem < System
 
 		@active = false
 		@mgr.paused = false
+    @mgr.time.active = true
 
 		@actions.deactivate
 		@inv.deactivate

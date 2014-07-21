@@ -41,7 +41,7 @@ class UIStatusSystem < System
 
     @empty = Image.new(@mgr.atlas.find_region('environ/empty'))
 
-    @window.add(@name).width(246).height(14).padLeft(4).colspan(4).align(Align::left).row
+    @window.add(@name).width(246).height(14).padTop(4).padLeft(4).colspan(4).align(Align::left).row
     @window.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(18).align(Align::left).row
 
     @table_male_model = Table.new(@skin)
@@ -121,19 +121,19 @@ class UIStatusSystem < System
     @table_female_model.add(@female_l_hand).padRight(-8).padTop(-71).colspan(1)
     @table_female_model.add(@female_l_arm).padRight(-56).padTop(-43).colspan(1)
     @table_female_model.add(@female_torso).padBottom(0).colspan(2)
-    @table_female_model.add(@female_r_arm).padLeft(-64).padTop(-43).colspan(1)
+    @table_female_model.add(@female_r_arm).padLeft(-64).padTop(-45).colspan(1)
     @table_female_model.add(@female_r_hand).padLeft(-21).padTop(-73).colspan(1).row
     @table_female_model.add(@empty).colspan(2)
-    @table_female_model.add(@female_l_leg).padRight(-21).padTop(0).colspan(1)
+    @table_female_model.add(@female_l_leg).padRight(-21).padTop(-3).colspan(1)
     @table_female_model.add(@female_r_leg).padLeft(-25).padTop(1).colspan(1)
     @table_female_model.add(@empty).colspan(2).row
     @table_female_model.add(@empty).colspan(2)
-    @table_female_model.add(@female_l_foot).colspan(1).padTop(-5).padLeft(-23)
-    @table_female_model.add(@female_r_foot).colspan(1).padTop(-8).padRight(-20)
+    @table_female_model.add(@female_l_foot).colspan(1).padTop(-10).padLeft(-23)
+    @table_female_model.add(@female_r_foot).colspan(1).padTop(-9).padRight(-23)
     @table_female_model.add(@empty).colspan(2).row
 
-    # @window.add(@table_male_model).width(180).height(140).align(Align::left).row
-    @window.add(@table_female_model).width(180).height(142).align(Align::left).row
+    # @window.add(@table_male_model).width(180).height(150).align(Align::left).row
+    @window.add(@table_female_model).width(180).height(150).align(Align::left).row
     
     @add_info = Label.new(
       "Additional Info\n"\
@@ -144,7 +144,7 @@ class UIStatusSystem < System
       @skin, "status")
     @add_info.wrap = true
 
-    @window.add(@add_info).width(246).padTop(8).padLeft(4)
+    @window.add(@add_info).width(246).padTop(4).padLeft(4)
 
   end
 

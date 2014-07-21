@@ -640,7 +640,6 @@ class MapSystem < System
 			vel.ang_spd = 0
 			
 			@mgr.paused = !@mgr.paused
-			@mgr.time.active = !@mgr.time.active
 			@mgr.actions.cur_station = station_id
 			@mgr.ui.actions.activate
 

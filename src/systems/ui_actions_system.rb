@@ -84,12 +84,18 @@ class UIActionsSystem < System
     @station_label = Label.new('', @skin, 'actions')
     @station_label.set_alignment(Align::left)
 
-    @crafting_info_table.add(@name_label).width(120).padLeft(8).align(Align::left)
-    @crafting_info_table.add(@craftables_left_arrow_button)
-    @crafting_info_table.add(@craftables_label).align(Align::right)
-    @crafting_info_table.add(@craftables_right_arrow_button).row
-    @crafting_info_table.add(@station_identifier_label).width(50).padLeft(8).align(Align::left)
-    @crafting_info_table.add(@station_label).width(120).align(Align::left).padLeft(-30).row
+    @crafting_info_table.add(@name_label).
+      width(190).padLeft(8).align(Align::left)
+    @crafting_info_table.add(@craftables_left_arrow_button).
+      width(16).padRight(0)
+    @crafting_info_table.add(@craftables_label).
+      width(26).align(Align::center)
+    @crafting_info_table.add(@craftables_right_arrow_button).
+      width(16).padLeft(0).padRight(0).row
+    @crafting_info_table.add(@station_identifier_label).
+      width(50).padLeft(8).align(Align::left).colspan(2)
+    @crafting_info_table.add(@station_label).
+      width(208).padLeft(-153).align(Align::left).colspan(2).row
 
     @reqs_and_ings_label_list = []
 
@@ -99,7 +105,7 @@ class UIActionsSystem < System
       @reqs_and_ings_label_list.last.color = Color::GRAY
       
       @crafting_info_table.add(
-        @reqs_and_ings_label_list.last).colspan(2).padLeft(8).align(Align::left).row 
+        @reqs_and_ings_label_list.last).padLeft(8).align(Align::left).colspan(4).row 
 
     end
 
@@ -218,8 +224,8 @@ class UIActionsSystem < System
 
       end.new(self))
 
-    @actions_list_table.add(@crafting_button).height(15).padRight(9)
-    @actions_list_table.add(@object_button).height(15).padRight(130).row
+    @actions_list_table.add(@crafting_button).height(15).padRight(9).padTop(3)
+    @actions_list_table.add(@object_button).height(15).padRight(130).padTop(3).row
     @actions_list_table.add(@scrollpane).colspan(2).width(264).height(202).padTop(6)
 
     @split = SplitPane.new(
