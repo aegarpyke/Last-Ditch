@@ -18,6 +18,7 @@ class SkillTestSystem < System
     @d_theta = 0.01
     @final_score = 0
     @num_of_hits = 4
+    @score_flip = true
     @score_range = 0.12
     @score_min_dist = 0.1
     @hits, @scores, @score_labels = [], [], []
@@ -127,6 +128,12 @@ class SkillTestSystem < System
       "%.2f" % @scores[-1],
       @mgr.skin, 'skills_score')
 
+    @score_flip = !@score_flip
+    dx = @score_flip ? 60 : -60
+
+    @score_labels[-1].set_position(
+      C::BTW * @player_pos.x + dx, C::BTW * @player_pos.y + 80)
+
   end
 
 
@@ -220,6 +227,8 @@ class SkillTestSystem < System
     @theta = 0
     @scores = []
 
+    @score_label_height_limit = C::BTW * @player_pos.y + 200
+
     calc_hits
 
   end
@@ -229,32 +238,77 @@ class SkillTestSystem < System
 
     if @active
 
-      if @theta < @hits.last
+      if @testing
 
-        @effect1.update(C::BOX_STEP)
-        @effect2.update(C::BOX_STEP)
+        if @theta < @hits.last
 
-        x = C::BTW * @player_pos.x
-        y = C::BTW * @player_pos.y
+          @effect1.update(C::BOX_STEP)
+          @effect2.update(C::BOX_STEP)
 
-        @x1, @y1 = calc_x(@theta), calc_y(@theta)
-        @x2, @y2 = -@x1, @y1
+          x = C::BTW * @player_pos.x
+          y = C::BTW * @player_pos.y
 
-        @theta += @d_theta
+          @x1, @y1 = calc_x(@theta), calc_y(@theta)
+          @x2, @y2 = -@x1, @y1
 
-        @effect1.set_position(x + @x1, y + @y1 + 140)
-        @effect2.set_position(x + @x2, y + @y2 + 140)
+          @theta += @d_theta
+
+          @effect1.set_position(x + @x1, y + @y1 + 140)
+          @effect2.set_position(x + @x2, y + @y2 + 140)
+
+        else
+
+          @testing = false
+
+          finalize
+
+          @score_labels << Label.new(
+            "Final: %.2f" % @final_score,
+            @mgr.skin, 'skills_score')
+
+          @score_labels[-1].set_position(
+            C::BTW * @player_pos.x - 80,
+            C::BTW * @player_pos.y + 80)
+
+        end
 
       else
+        
+        if @score_labels.empty?
 
-        @active = false
-        @testing = false
-
-        finalize
-
-        @mgr.ui.deactivate
+          @active = false
+          @mgr.ui.deactivate
+        
+        end
 
       end
+
+      removal_list = []
+
+      for label in @score_labels
+        
+        if label.get_y > @score_label_height_limit
+          
+          removal_list << label
+          next
+        
+        end
+
+        if label.get_y > @score_label_height_limit - 20
+          
+          label.set_color(
+            label.get_color.r, 
+            label.get_color.g, 
+            label.get_color.b, 
+            label.get_color.a - 0.05)
+        
+        end
+
+        label.set_position(label.get_x, label.get_y + 1)
+
+      end
+
+      @score_labels -= removal_list
 
     end
   
@@ -267,9 +321,15 @@ class SkillTestSystem < System
       
       batch.begin
 
-        @effect1.draw(batch)
-        @effect2.draw(batch)
-    
+        if @testing
+          @effect1.draw(batch)
+          @effect2.draw(batch)
+        end
+
+        for label in @score_labels
+          label.draw(batch, 1)
+        end
+
       batch.end
 
     end
