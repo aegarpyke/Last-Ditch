@@ -35,11 +35,7 @@ class InputSystem < System
 					else
 
 						if @mgr.ui.active
-							
-							if @mgr.skill_test.testing
-								@mgr.skill_test.score
-							end
-						
+							@mgr.skill_test.score	
 						else
 							
 							@mgr.inventory.pickup_item(entity)

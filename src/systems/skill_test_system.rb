@@ -18,9 +18,11 @@ class SkillTestSystem < System
     @d_theta = 0.01
     @final_score = 0
     @num_of_hits = 4
+    @num_of_items_to_craft = 0
     @score_flip = true
     @score_range = 0.12
     @score_min_dist = 0.1
+    @score_label_height_limit = 0
     @hits, @scores, @score_labels = [], [], []
 
     @effect1 = ParticleEffect.new
@@ -94,50 +96,56 @@ class SkillTestSystem < System
 
   def score
 
-    goal = false
-    lowest_dif = 1000
+    if @testing
 
-    for hit in @hits
+      goal = false
+      lowest_dif = 1000
 
-      dif = (@theta - hit).abs
-      lowest_dif = dif if dif < lowest_dif
+      for hit in @hits
 
-      if dif < @score_range
+        dif = (@theta - hit).abs
+        lowest_dif = dif if dif < lowest_dif
 
-        goal = true
+        if dif < @score_range
 
-        score = (@score_range - dif) * @score_range**-1 
+          goal = true
+
+          score = (@score_range - dif) * @score_range**-1 
+          score = [-1.0, score].max
+          @scores << score
+
+          break
+
+        end
+      
+      end
+
+      if !goal
+
+        score = (@score_range - lowest_dif) * @score_range**-1 
         score = [-1.0, score].max
         @scores << score
-
-        break
-
+      
       end
+
+      @score_labels << Label.new(
+        "%.2f" % @scores[-1],
+        @mgr.skin, 'skills_score')
+
+      @score_flip = !@score_flip
+      dx = @score_flip ? 60 : -60
+
+      @score_labels[-1].set_position(
+        C::BTW * @player_pos.x + dx, C::BTW * @player_pos.y + 80)
     
     end
-
-    if !goal
-
-      score = (@score_range - lowest_dif) * @score_range**-1 
-      score = [-1.0, score].max
-      @scores << score
-    
-    end
-
-    @score_labels << Label.new(
-      "%.2f" % @scores[-1],
-      @mgr.skin, 'skills_score')
-
-    @score_flip = !@score_flip
-    dx = @score_flip ? 60 : -60
-
-    @score_labels[-1].set_position(
-      C::BTW * @player_pos.x + dx, C::BTW * @player_pos.y + 80)
 
   end
 
 
   def finalize
+
+    @num_of_items_to_craft -= 1
 
     @final_score = @scores.reduce(:+)
     @final_score /= @hits.size-1
@@ -210,11 +218,14 @@ class SkillTestSystem < System
 
     @active = true
     @testing = true
+    @num_of_items_to_craft = @mgr.ui.actions.num_of_craftables
 
   end
 
 
   def deactivate
+
+    reset
 
     @active = false
     @testing = false
@@ -225,9 +236,13 @@ class SkillTestSystem < System
   def reset
 
     @theta = 0
-    @scores = []
 
-    @score_label_height_limit = C::BTW * @player_pos.y + 200
+    @effect1.reset
+    @effect2.reset
+
+    @scores = []
+    @score_labels = []
+    @score_label_height_limit = C::BTW * @player_pos.y + 260
 
     calc_hits
 
@@ -267,8 +282,8 @@ class SkillTestSystem < System
             @mgr.skin, 'skills_score')
 
           @score_labels[-1].set_position(
-            C::BTW * @player_pos.x - 80,
-            C::BTW * @player_pos.y + 80)
+            C::BTW * @player_pos.x,
+            C::BTW * @player_pos.y + 160)
 
         end
 
@@ -276,9 +291,19 @@ class SkillTestSystem < System
         
         if @score_labels.empty?
 
-          @active = false
-          @mgr.ui.deactivate
-        
+          if @num_of_items_to_craft > 0
+          
+            reset
+
+            @testing = true
+          
+          else
+
+            @active = false
+            @mgr.ui.deactivate
+          
+          end
+
         end
 
       end

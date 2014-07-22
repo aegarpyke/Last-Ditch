@@ -1,36 +1,23 @@
 class UIActionsSystem < System
 
   attr_accessor :active, :focus, :toggle, :window, :recipe_check
+  attr_reader :num_of_craftables
 
   def initialize(mgr, stage)
 
     super()
 
     @mgr = mgr
-    @skin = @mgr.skin
     @stage = stage
+    @active = false
+    @skin = @mgr.skin
+    
     @cur_index = 0
     @focus = :crafting
     @prev_selection = nil
-    @active = false
     @recipe_check = false
     @num_of_craftables = 0
     @tot_num_of_craftables = 0
-
-    setup
-
-    if 1 == 0
-
-      @window.debug
-      @crafting_info_table.debug
-      @object_info_table.debug
-
-    end
-
-  end
-
-
-  def setup
 
     @window = Window.new(
       "Actions", @skin, "window1")
@@ -39,11 +26,172 @@ class UIActionsSystem < System
     @window.set_movable(false)
     @window.padTop(9)
 
+    @actions_list_table = Table.new
+    @actions_list_table.align(Align::left | Align::top)
+
+    setup_main_buttons
+    setup_crafting_info
+    setup_object_info
+    setup_crafting_list
+    setup_object_list
+    setup_scrollpane
+
+    if 1 == 0
+
+      @window.debug
+      @actions_list_table.debug
+      @crafting_info_table.debug
+      @object_info_table.debug
+
+    end
+
+  end
+
+
+  def setup_main_buttons
+
+    @crafting_button = TextButton.new(
+      "Crafting", @skin, "actions_button")
+    @crafting_button.set_checked(true)
+
+    @object_button = TextButton.new(
+      "Object", @skin, "actions_button")
+
+    @crafting_button.add_listener(
+
+      Class.new(ClickListener) do
+
+        def initialize(actions)
+          super()
+          @actions = actions
+        end
+
+        def clicked(event, x, y)
+          @actions.switch_focus(:crafting)
+          true
+        end
+
+      end.new(self))
+
+    @object_button.add_listener(
+
+      Class.new(ClickListener) do 
+
+        def initialize(actions)
+          super()
+          @actions = actions
+        end
+
+        def clicked(event, x, y)
+          @actions.switch_focus(:object)       
+          true
+        end
+
+      end.new(self))
+
+    @actions_list_table.add(@crafting_button).
+      height(15).padRight(9).padTop(3)
+    @actions_list_table.add(@object_button).
+      height(15).padRight(130).padTop(3).row
+
+  end
+
+
+  def setup_scrollpane
+
+    @scrollpane = ScrollPane.new(@crafting_list, @skin, "actions")
+    @scrollpane.set_overscroll(false, false)
+    @scrollpane.set_fade_scroll_bars(false)
+    @scrollpane.set_flick_scroll(false)
+    
+    @actions_list_table.add(@scrollpane).
+      width(264).height(202).padTop(6).colspan(2)
+
+    @split = SplitPane.new(
+      @actions_list_table, @crafting_info,
+      false, @skin, "actions_split_pane")
+
+    @window.add(@split).width(540).height(239).padTop(10)
+
+    switch_focus(:crafting)
+
+  end
+
+
+  def setup_crafting_list
+
+    @crafting_list = List.new(@skin, "actions")
+    @crafting_list.add_listener(
+    
+      Class.new(ChangeListener) do
+
+        def initialize(actions)
+
+          super()
+          @actions = actions
+        
+        end
+
+        def changed(event, actor)
+
+          @actions.list_item_changed
+          true
+
+        end
+
+      end.new(self))
+
+    crafting_items = GdxArray.new
+ 
+    for name, id in @mgr.crafting.recipes
+
+      info = @mgr.comp(id, Info)
+      crafting_items.add("#{info.name}")
+    
+    end
+
+    @crafting_list.set_items(crafting_items)
+
+  end
+
+
+  def setup_object_list
+
+    @object_list = List.new(@skin, "actions")
+    @object_list.add_listener(
+    
+      Class.new(ChangeListener) do
+
+        def initialize(actions)
+
+          super()
+          @actions = actions
+        
+        end
+
+        def changed(event, actor)
+
+          @actions.list_item_changed
+          true
+
+        end
+
+      end.new(self))
+
+    object_items = GdxArray.new
+    object_items.add("Fire")
+
+    @object_list.set_items(object_items)
+
+  end
+
+
+  def setup_crafting_info
+
     @crafting_info_table = Table.new
     @crafting_info_table.align(Align::left | Align::top)
 
-    @name_label = Label.new('Name:', @skin, 'actions_title')
-    
+    @crafting_name_label = Label.new('Name:', @skin, 'actions_title')
     @craftables_left_arrow_button = Button.new(@skin, 'actions_left_arrow_button')
     @craftables_left_arrow_button.add_listener(
 
@@ -62,7 +210,7 @@ class UIActionsSystem < System
       end.new(self))
 
     @craftables_label = Label.new('', @skin, 'actions')
-    @craftables_label.set_alignment(Align::right)
+    @craftables_label.set_alignment(Align::center)
     @craftables_right_arrow_button = Button.new(@skin, 'actions_right_arrow_button')
     @craftables_right_arrow_button.add_listener(
 
@@ -84,7 +232,7 @@ class UIActionsSystem < System
     @station_label = Label.new('', @skin, 'actions')
     @station_label.set_alignment(Align::left)
 
-    @crafting_info_table.add(@name_label).
+    @crafting_info_table.add(@crafting_name_label).
       width(190).padLeft(8).align(Align::left)
     @crafting_info_table.add(@craftables_left_arrow_button).
       width(16).padRight(0)
@@ -109,132 +257,13 @@ class UIActionsSystem < System
 
     end
 
+  end
+
+
+  def setup_object_info
+
     @object_info_table = Table.new
     @object_info_table.align(Align::left | Align::top)
-
-    @actions_list_table = Table.new
-    @actions_list_table.align(Align::left | Align::top)
-
-    @crafting_list = List.new(@skin, "actions")
-    @crafting_list.add_listener(
-    
-      Class.new(ChangeListener) do
-
-        def initialize(actions)
-
-          super()
-          @actions = actions
-        
-        end
-
-        def changed(event, actor)
-
-          @actions.activate_skill_system
-          true
-
-        end
-
-      end.new(self))
-    
-    @object_list = List.new(@skin, "actions")
-    @object_list.add_listener(
-    
-      Class.new(ChangeListener) do
-
-        def initialize(actions)
-
-          super()
-          @actions = actions
-        
-        end
-
-        def changed(event, actor)
-
-          @actions.activate_skill_system
-          true
-
-        end
-
-      end.new(self))
-
-    @scrollpane = ScrollPane.new(@crafting_list, @skin, "actions")
-    @scrollpane.set_overscroll(false, false)
-    @scrollpane.set_fade_scroll_bars(false)
-    @scrollpane.set_flick_scroll(false)
-
-    crafting_items = GdxArray.new
- 
-    for name, id in @mgr.crafting.recipes
-
-      info = @mgr.comp(id, Info)
-      crafting_items.add("#{info.name}")
-    
-    end
-
-    @crafting_list.set_items(crafting_items)
-
-    object_items = GdxArray.new
-
-    @object_list.set_items(object_items)
-
-    @crafting_button = TextButton.new(
-      "Crafting", @skin, "actions_button")
-    @crafting_button.set_checked(true)
-    
-    @object_button = TextButton.new(
-      "Object", @skin, "actions_button")
-
-    @crafting_button.add_listener(
-
-      Class.new(ClickListener) do
-
-        def initialize(actions)
-
-          super()
-          @actions = actions
-        
-        end
-
-        def clicked(event, x, y)
-          
-          @actions.switch_focus(:crafting)
-          true
-        
-        end
-
-      end.new(self))
-
-    @object_button.add_listener(
-
-      Class.new(ClickListener) do 
-
-        def initialize(actions)
-
-          super()
-          @actions = actions
-        
-        end
-
-        def clicked(event, x, y)
-        
-          @actions.switch_focus(:object)       
-          true
-
-        end
-
-      end.new(self))
-
-    @actions_list_table.add(@crafting_button).height(15).padRight(9).padTop(3)
-    @actions_list_table.add(@object_button).height(15).padRight(130).padTop(3).row
-    @actions_list_table.add(@scrollpane).colspan(2).width(264).height(202).padTop(6)
-
-    @split = SplitPane.new(
-      @actions_list_table, @crafting_info,
-      false, @skin, "actions_split_pane")
-
-    @window.add(@split).width(540).height(239).padTop(10)
-
-    switch_focus(:crafting)
 
   end
 
@@ -262,7 +291,7 @@ class UIActionsSystem < System
   end
 
 
-  def activate_skill_system
+  def list_item_changed
 
     if @focus == :crafting
 
@@ -333,16 +362,16 @@ class UIActionsSystem < System
 
 
   def set_name(name)
-    @name_label.text = "#{name}"
+    @crafting_name_label.text = "#{name}"
   end
 
 
   def set_name_highlight(highlighted)
 
     if highlighted
-      @name_label.color = Color::WHITE
+      @crafting_name_label.color = Color::WHITE
     else
-      @name_label.color = Color::GRAY
+      @crafting_name_label.color = Color::GRAY
     end
 
   end

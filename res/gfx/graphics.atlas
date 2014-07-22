@@ -165,6 +165,27 @@ items/canteen1_water
   orig: 16, 16
   offset: 0, 0
   index: -1
+items/chip1
+  rotate: false
+  xy: 291, 2
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+items/chip2
+  rotate: false
+  xy: 300, 2
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
+items/chip3
+  rotate: false
+  xy: 124, 3
+  size: 7, 10
+  orig: 7, 10
+  offset: 0, 0
+  index: -1
 items/handgun1
   rotate: false
   xy: 377, 74
@@ -205,6 +226,27 @@ items/scrap1
   xy: 155, 30
   size: 16, 16
   orig: 16, 16
+  offset: 0, 0
+  index: -1
+items/syringe1
+  rotate: false
+  xy: 291, 14
+  size: 7, 15
+  orig: 7, 15
+  offset: 0, 0
+  index: -1
+items/syringe2
+  rotate: false
+  xy: 300, 14
+  size: 7, 15
+  orig: 7, 15
+  offset: 0, 0
+  index: -1
+items/syringe3
+  rotate: false
+  xy: 309, 13
+  size: 7, 15
+  orig: 7, 15
   offset: 0, 0
   index: -1
 male1/idle1
