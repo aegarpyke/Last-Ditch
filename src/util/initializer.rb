@@ -142,7 +142,7 @@ require_relative '../components/equipable'
 GdxArray = com.badlogic.gdx.utils.Array
 
 class String
-  def uncapitalize 
-    self[0, 1].downcase + self[1..-1]
+  def title 
+    self.split(/ |\_/).map(&:capitalize).join(" ")
   end
 end

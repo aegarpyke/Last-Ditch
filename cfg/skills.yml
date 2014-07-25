@@ -14,41 +14,41 @@ skill_list:
   - agriculture
 
 mechanical:
-  name: 'Mechanical'
+  name: 'mechanical'
 
 electrical:
-  name: 'Electrical'
+  name: 'electrical'
 
 computer:
-  name: 'Computer'
+  name: 'computer'
 
 lockpicking:
-  name: 'Lockpicking'
+  name: 'lockpicking'
 
 martial:
-  name: 'Martial'
+  name: 'martial'
 
 firearms:
-  name: 'Firearms'
+  name: 'firearms'
 
 technical:
-  name: 'Technical'
+  name: 'technical'
 
 first_aid:
-  name: 'First Aid'
+  name: 'first Aid'
 
 munitions:
-  name: 'Munitions'
+  name: 'munitions'
 
 security:
-  name: 'Security'
+  name: 'security'
 
 metalworking:
-  name: 'Metalworking'
+  name: 'metalworking'
 
 cooking:
-  name: 'Cooking'
+  name: 'cooking'
 
 agriculture:
-  name: 'Agriculture'
+  name: 'agriculture'
 

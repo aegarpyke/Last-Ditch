@@ -66,7 +66,91 @@ class UIEquipSystem < System
     @window.add(@r_leg_box).width(equip_box_size).row
     @window.add(@l_foot_box).width(equip_box_size).padRight(0)
     @window.add(@r_foot_box).width(equip_box_size).row
-    @window.add(@desc).padTop(18).colspan(3).width(240)
+
+    @window.add(@desc).padTop(6).colspan(3).width(240)
+
+  end
+
+
+  def setup_slots
+
+    inv = @mgr.comp(@mgr.player, Inventory)
+
+    @head_list  = GdxArray.new
+    @arm_list   = GdxArray.new
+    @torso_list = GdxArray.new
+    @hand_list  = GdxArray.new
+    @belt_list  = GdxArray.new
+    @leg_list   = GdxArray.new
+    @foot_list  = GdxArray.new
+
+    @head_list.add('none')
+    @arm_list.add('none')
+    @torso_list.add('none')
+    @hand_list.add('none')
+    @belt_list.add('none')
+    @leg_list.add('none')
+    @foot_list.add('none')
+    
+    for item_id in inv.items
+
+      equipable = @mgr.comp(item_id, Equipable) and
+
+      Proc.new do
+
+        info = @mgr.comp(item_id, Info)
+
+        if equipable.types.include?('l_head') ||
+           equipable.types.include?('r_head')
+
+          @head_list.add(info.name)
+
+        elsif equipable.types.include?('l_arm') ||
+              equipable.types.include?('r_arm')
+
+          @arm_list.add(info.name)
+
+        elsif equipable.types.include?('torso')
+
+          @torso_list.add(info.name)
+
+        elsif equipable.types.include?('l_hand') ||
+              equipable.types.include?('r_hand')
+
+          @hand_list.add(info.name)
+
+        elsif equipable.types.include?('belt')
+
+          @belt_list.add(info.name)
+
+        elsif equipable.types.include?('l_leg') ||
+              equipable.types.include?('r_leg')
+
+          @leg_list.add(info.name)
+
+        elsif equipable.types.include?('l_foot') ||
+              equipable.types.include?('r_foot')
+
+          @foot_list.add(info.name)
+
+        end
+
+        @l_head_box.set_items(@head_list)
+        @r_head_box.set_items(@head_list)
+        @l_arm_box.set_items(@arm_list)
+        @torso_box.set_items(@torso_list)
+        @r_arm_box.set_items(@arm_list)
+        @l_hand_box.set_items(@hand_list)
+        @belt_box.set_items(@belt_list)
+        @r_hand_box.set_items(@hand_list)
+        @l_leg_box.set_items(@leg_list)
+        @r_leg_box.set_items(@leg_list)
+        @l_foot_box.set_items(@foot_list)
+        @r_foot_box.set_items(@foot_list)
+
+      end.call
+      
+    end
 
   end
 

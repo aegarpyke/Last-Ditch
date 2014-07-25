@@ -301,7 +301,8 @@ class UIActionsSystem < System
         @num_of_craftables = @tot_num_of_craftables
       end
 
-      if @recipe_check && @crafting_list.get_selection.first == @prev_selection
+      if @recipe_check && 
+         @crafting_list.get_selection.first == @prev_selection
 
         deactivate
         @mgr.skill_test.activate
@@ -362,7 +363,7 @@ class UIActionsSystem < System
 
 
   def set_name(name)
-    @crafting_name_label.text = "#{name}"
+    @crafting_name_label.text = "#{name.capitalize}"
   end
 
 
@@ -412,7 +413,7 @@ class UIActionsSystem < System
 
     end
 
-    @station_label.text = "#{station.name}"
+    @station_label.text = "#{station.name.title}"
   
   end
 
@@ -457,7 +458,7 @@ class UIActionsSystem < System
       
       end
 
-      txt = "    - %s %d / %d" % [skill_name.uncapitalize, skill_lvl, display_lvl]
+      txt = "    - %s %d / %d" % [skill_name, skill_lvl, display_lvl]
       @reqs_and_ings_label_list[@cur_index].text = txt
 
       @cur_index += 1
@@ -505,12 +506,12 @@ class UIActionsSystem < System
             @tot_num_of_craftables = craftables
           end
 
-          txt = "    - %s %.1f / %.1f" % [resource_data[ing]['name'].uncapitalize, resource_amt, amt]  
+          txt = "    - %s %.1f / %.1f" % [resource_data[ing]['name'], resource_amt, amt]  
           @reqs_and_ings_label_list[@cur_index].text = txt
 
         else
 
-          txt = "    - %s 0.0 / %.1f" % [resource_data[ing]['name'].uncapitalize, amt]
+          txt = "    - %s 0.0 / %.1f" % [resource_data[ing]['name'], amt]
           @reqs_and_ings_label_list[@cur_index].text = txt
           @reqs_and_ings_label_list[@cur_index].color = Color::GRAY
 
@@ -537,7 +538,7 @@ class UIActionsSystem < System
           @tot_num_of_craftables = craftables
         end
 
-        txt = "    - %s %d / %d" % [item_data[ing]['name'].uncapitalize, item_amt, amt]
+        txt = "    - %s %d / %d" % [item_data[ing]['name'], item_amt, amt]
         @reqs_and_ings_label_list[@cur_index].text = txt
 
       else

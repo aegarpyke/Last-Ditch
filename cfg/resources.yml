@@ -4,10 +4,10 @@ resource_list:
   - fuel
 
 water:
-  name: 'Water'
+  name: 'water'
 
 energy:
-  name: 'Energy'
+  name: 'energy'
 
 fuel:
-  name: 'Fuel'
+  name: 'fuel'

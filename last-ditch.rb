@@ -89,6 +89,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.physics    = @physics    = PhysicsSystem.new(@mgr, @player, @map)
 		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
+		# Give player starting items
 		inv = @mgr.comp(@player, Inventory)
 
 		@inventory.add_item(
@@ -101,6 +102,14 @@ class LastDitch < ApplicationAdapter
 			inv, @inventory.create_inv_item('canister1_empty'))
 		@inventory.add_item(
 			inv, @inventory.create_inv_item('overgrowth1'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('overgrowth1'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('handgun1'))
+		@inventory.add_item(
+			inv, @inventory.create_inv_item('headset1'))
+
+		@ui.equip.setup_slots
 
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)

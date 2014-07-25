@@ -182,7 +182,7 @@ class UIInventorySystem < System
 
 
   def set_item_name(name)
-    @item_name.text = name
+    @item_name.text = name.capitalize
   end
 
 
