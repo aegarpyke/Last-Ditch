@@ -1,6 +1,6 @@
 
 graphics.png
-size: 1017,126
+size: 1021,126
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -34,7 +34,7 @@ environ/door1
   index: -1
 environ/empty
   rotate: false
-  xy: 399, 55
+  xy: 515, 68
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -81,9 +81,16 @@ environ/wall1
   orig: 32, 32
   offset: 0, 0
   index: -1
-environ/window1
+environ/wall2
   rotate: false
   xy: 310, 30
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+environ/window1
+  rotate: false
+  xy: 344, 30
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -118,7 +125,7 @@ items/battery_basic
   index: -1
 items/battery_empty
   rotate: false
-  xy: 429, 77
+  xy: 432, 77
   size: 20, 20
   orig: 20, 20
   offset: 0, 0
@@ -139,112 +146,119 @@ items/canister1_fuel
   index: -1
 items/canister1_waste
   rotate: false
-  xy: 41, 14
+  xy: 406, 73
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 items/canister1_water
   rotate: false
-  xy: 67, 14
+  xy: 378, 44
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 items/canteen1_empty
   rotate: false
-  xy: 373, 41
+  xy: 479, 68
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 items/canteen1_water
   rotate: false
-  xy: 115, 15
+  xy: 497, 68
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 items/chip1
   rotate: false
-  xy: 291, 2
+  xy: 122, 3
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 items/chip2
   rotate: false
-  xy: 300, 2
+  xy: 588, 76
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 items/chip3
   rotate: false
-  xy: 124, 3
+  xy: 424, 44
   size: 7, 10
   orig: 7, 10
   offset: 0, 0
   index: -1
 items/handgun1
   rotate: false
-  xy: 377, 74
+  xy: 378, 18
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+items/headset1
+  rotate: false
+  xy: 41, 18
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 items/overgrowth1
   rotate: false
-  xy: 403, 73
+  xy: 67, 18
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
   index: -1
 items/rations1
   rotate: false
-  xy: 417, 55
+  xy: 115, 15
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 items/rations1_empty
   rotate: false
-  xy: 435, 59
+  xy: 137, 30
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 items/ruffage1
   rotate: false
-  xy: 137, 30
+  xy: 155, 30
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 items/scrap1
   rotate: false
-  xy: 155, 30
+  xy: 133, 12
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 items/syringe1
   rotate: false
-  xy: 291, 14
+  xy: 533, 69
   size: 7, 15
   orig: 7, 15
   offset: 0, 0
   index: -1
 items/syringe2
   rotate: false
-  xy: 300, 14
+  xy: 205, 27
   size: 7, 15
   orig: 7, 15
   offset: 0, 0
   index: -1
 items/syringe3
   rotate: false
-  xy: 309, 13
+  xy: 424, 56
   size: 7, 15
   orig: 7, 15
   offset: 0, 0
@@ -279,21 +293,21 @@ model/female/l_arm
   index: -1
 model/female/l_foot
   rotate: false
-  xy: 257, 16
+  xy: 574, 73
   size: 12, 13
   orig: 12, 13
   offset: 0, 0
   index: -1
 model/female/l_hand
   rotate: false
-  xy: 93, 2
+  xy: 91, 2
   size: 15, 11
   orig: 15, 11
   offset: 0, 0
   index: -1
 model/female/l_head
   rotate: false
-  xy: 205, 20
+  xy: 414, 49
   size: 8, 22
   orig: 8, 22
   offset: 0, 0
@@ -314,21 +328,21 @@ model/female/r_arm
   index: -1
 model/female/r_foot
   rotate: false
-  xy: 377, 59
+  xy: 457, 71
   size: 20, 13
   orig: 20, 13
   offset: 0, 0
   index: -1
 model/female/r_hand
   rotate: false
-  xy: 41, 2
+  xy: 75, 44
   size: 14, 10
   orig: 14, 10
   offset: 0, 0
   index: -1
 model/female/r_head
   rotate: false
-  xy: 271, 7
+  xy: 414, 25
   size: 8, 22
   orig: 8, 22
   offset: 0, 0
@@ -370,7 +384,7 @@ model/male/l_hand
   index: -1
 model/male/l_head
   rotate: false
-  xy: 231, 9
+  xy: 404, 45
   size: 8, 23
   orig: 8, 23
   offset: 0, 0
@@ -398,14 +412,14 @@ model/male/r_foot
   index: -1
 model/male/r_hand
   rotate: false
-  xy: 110, 2
+  xy: 108, 2
   size: 12, 11
   orig: 12, 11
   offset: 0, 0
   index: -1
 model/male/r_head
   rotate: false
-  xy: 281, 6
+  xy: 404, 20
   size: 8, 23
   orig: 8, 23
   offset: 0, 0
@@ -442,7 +456,7 @@ ui/base_slot
   index: -1
 ui/button1
   rotate: false
-  xy: 133, 14
+  xy: 75, 2
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -450,7 +464,7 @@ ui/button1
   index: -1
 ui/button1_pressed
   rotate: false
-  xy: 149, 14
+  xy: 151, 14
   size: 14, 14
   split: 4, 4, 4, 4
   orig: 14, 14
@@ -472,14 +486,14 @@ ui/button_left_down1
   index: -1
 ui/button_right1
   rotate: false
-  xy: 215, 18
+  xy: 542, 73
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
   index: -1
 ui/button_right_down1
   rotate: false
-  xy: 241, 15
+  xy: 558, 73
   size: 14, 14
   orig: 14, 14
   offset: 0, 0
@@ -502,7 +516,7 @@ ui/inv_slot
   index: -1
 ui/list_selection
   rotate: false
-  xy: 46, 40
+  xy: 41, 2
   size: 32, 14
   split: 1, 1, 1, 1
   orig: 32, 14
@@ -517,7 +531,7 @@ ui/particle
   index: -1
 ui/scroll_handle1
   rotate: false
-  xy: 1016, 100
+  xy: 454, 71
   size: 1, 26
   split: 0, 0, 12, 12
   orig: 1, 26
@@ -531,6 +545,14 @@ ui/scrollpane_background1
   orig: 27, 18
   offset: 0, 0
   index: -1
+ui/selectbox_background1
+  rotate: false
+  xy: 46, 44
+  size: 27, 10
+  split: 4, 3, 4, 4
+  orig: 27, 10
+  offset: 0, 0
+  index: -1
 ui/status_bar
   rotate: false
   xy: 176, 44
@@ -541,7 +563,7 @@ ui/status_bar
   index: -1
 ui/window_background1
   rotate: false
-  xy: 344, 34
+  xy: 377, 70
   size: 27, 28
   split: 4, 3, 16, 3
   orig: 27, 28
@@ -549,7 +571,7 @@ ui/window_background1
   index: -1
 ui/window_scroll1
   rotate: false
-  xy: 80, 42
+  xy: 1016, 114
   size: 5, 12
   split: 2, 2, 2, 2
   orig: 5, 12
@@ -557,7 +579,7 @@ ui/window_scroll1
   index: -1
 ui/window_scroll_knob1
   rotate: false
-  xy: 391, 45
+  xy: 424, 30
   size: 5, 12
   split: 2, 1, 1, 1
   orig: 5, 12
@@ -565,7 +587,7 @@ ui/window_scroll_knob1
   index: -1
 ui/work_bar
   rotate: false
-  xy: 57, 8
+  xy: 574, 88
   size: 32, 4
   split: 1, 1, 2, 1
   orig: 32, 4

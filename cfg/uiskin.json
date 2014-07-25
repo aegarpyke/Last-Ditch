@@ -17,42 +17,50 @@
 	{
     	"default": 
     	{ 
-    		"font": "default-font", "fontColor": "white" 
+    		"font": "default-font", 
+    		"fontColor": "white", 
     	},
 
     	"base_ui":
     	{
-    		"font": "garuda12", "fontColor": "white"
+    		"font": "garuda12", 
+    		"fontColor": "white",
     	},
 
     	"equip":
     	{
-    		"font": "garuda12", "fontColor": "white"
+    		"font": "garuda12", 
+    		"fontColor": "white",
     	},
 
     	"status":
     	{
-    		"font": "garuda12", "fontColor": "white"
+    		"font": "garuda12", 
+    		"fontColor": "white",
     	},
 
     	"inv":
     	{
-    		"font": "garuda12", "fontColor": "white"
+    		"font": "garuda12", 
+    		"fontColor": "white",
     	},
 
     	"actions":
     	{
-    		"font": "garuda12", "fontColor": "white"
+    		"font": "garuda12", 
+    		"fontColor": "white",
     	},
 
     	"actions_title":
     	{
-    		"font": "default-font", "fontColor": "white"
+    		"font": "default-font", 
+    		"fontColor": "white",
     	},
 
     	"skills_score":
     	{
-    		"font": "garuda12", "fontColor": "white"
+    		"font": "garuda12", 
+    		"fontColor": "white",
     	},
     	
 	},
@@ -61,7 +69,7 @@
 	{
 		"actions_button":
 		{
-			"up": "ui/button1"
+			"up": "ui/button1",
 		},
 
 		"actions_left_arrow_button":
@@ -82,17 +90,17 @@
 	{
 		"base_slot":
 		{
-			"up": "ui/base_slot"
+			"up": "ui/base_slot",
 		},
 
 		"inv_slot":
 		{
-			"up": "ui/inv_slot"
+			"up": "ui/inv_slot",
 		},
 
 		"status_bars":
 		{
-			"up": "ui/status_bar"
+			"up": "ui/status_bar",
 		},
 	},
 
@@ -100,8 +108,10 @@
 	{
 		"actions_button":
 		{
-			"up": "ui/button1", "checked": "ui/button1_pressed",
-			"font": "default-font", "fontColor": "white"
+			"up": "ui/button1", 
+			"checked": "ui/button1_pressed",
+			"font": "default-font", 
+			"fontColor": "white",
 		},
 	},
 
@@ -109,7 +119,7 @@
 	{
 		"status_bars":
 		{
-			"background": "ui/status_bar"
+			"background": "ui/status_bar",
 		},
 	},
 
@@ -118,7 +128,8 @@
 		"window1": 
 		{
 			"background": "ui/window_background1",
-			"titleFont": "default-font", "titleFontColor": "white"
+			"titleFont": "default-font", 
+			"titleFontColor": "white",
 		},
 	},
 
@@ -126,7 +137,7 @@
 	{
 		"actions_split_pane": 
 		{
-			"handle": "ui/scroll_handle1"
+			"handle": "ui/scroll_handle1",
 		},
 	},
 
@@ -137,15 +148,45 @@
 			"background": "ui/scrollpane_background1",
 			"vScroll": "ui/window_scroll1",
 			"vScrollKnob": "ui/window_scroll_knob1",
-		}
+		},
+
+		"equipment":
+		{
+			"background": "ui/selectbox_background1",
+			"vScroll": "ui/window_scroll1",
+			"vScrollKnob": "ui/window_scroll_knob1",
+		},
 	},
 
 	"com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle":
 	{
 		"actions":
 		{
-			"selection": "ui/list_selection", "font": "garuda12", 
-			"fontColorSelected": "white", "fontColorUnselected": "actions_unselected"
+			"font": "garuda12",
+			"selection": "ui/list_selection", 
+			"fontColorSelected": "white", 
+			"fontColorUnselected": "actions_unselected",
+		},
+
+		"equipment":
+		{
+			"font": "garuda12",
+			"selection": "ui/list_selection",
+			"fontColorSelected": "white",
+			"fontColorUnselected": "actions_unselected",
 		}
-	}
+
+	},
+
+	"com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle":
+	{
+		"equipment":
+		{
+			"background": "ui/selectbox_background1",
+			"font": "garuda12",
+			"fontColor": "white",
+			"listStyle": "equipment",
+			"scrollStyle": "equipment",
+		},
+	},
 }

@@ -114,37 +114,6 @@ class InventorySystem < System
 	end
 
 
-	def create_inv_item(type_value)
-
-		@update_slots = true
-
-		item_id = @mgr.create_basic_entity
-		type_data = @item_data[type_value]
-
-		rot    = @mgr.add_comp(item_id, Rotation.new(0))
-		type   = @mgr.add_comp(item_id, Type.new(type_value))
-		info   = @mgr.add_comp(item_id, Info.new(type_data["name"]))
-		info.desc = type_data["desc"]
-		
-		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
-
-		item = @mgr.add_comp(item_id, Item.new(quality, condition))
-		item.base_value = type_data['base_value']
-		item.usable = type_data['usable']
-
-		render = Render.new('')
-		render.region_name = "items/#{type_value}"
-		render.region = @atlas.find_region("items/#{type_value}")
-		
-		size = @mgr.add_comp(
-			item_id, 
-			Size.new(render.width * C::WTB, render.height * C::WTB))
-
-		item_id
-
-	end
-
-
 	def add_item(inv, item_id)
 
 
@@ -230,6 +199,49 @@ class InventorySystem < System
 		pos    = @mgr.add_comp(item_id, Position.new(x, y))
 		rot    = @mgr.add_comp(item_id, Rotation.new(Random.rand(360)))
 		type   = @mgr.add_comp(item_id, Type.new(type_value))
+		info   = @mgr.add_comp(item_id, Info.new(type_data['name']))
+		info.desc = type_data["desc"]
+
+		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
+
+		item = @mgr.add_comp(item_id, Item.new(quality, condition))
+		item.base_value = type_data['base_value']
+		item.usable = type_data['usable']
+
+		equipable_types = []
+
+		if type_data['equipable']
+
+			for type in type_data['equipable']
+				equipable_types << type
+			end
+
+			@mgr.add_comp(item_id, Equipable.new(equipable_types))
+
+		end
+
+		render = @mgr.add_comp(item_id, Render.new(''))
+		render.region_name = "items/#{type_value}"
+		render.region = @atlas.find_region("items/#{type_value}")
+		
+		size = @mgr.add_comp(
+			item_id, 
+			Size.new(render.width * C::WTB, render.height * C::WTB))
+
+		item_id
+
+	end
+
+
+	def create_inv_item(type_value)
+
+		@update_slots = true
+
+		item_id = @mgr.create_basic_entity
+		type_data = @item_data[type_value]
+
+		rot    = @mgr.add_comp(item_id, Rotation.new(0))
+		type   = @mgr.add_comp(item_id, Type.new(type_value))
 		info   = @mgr.add_comp(item_id, Info.new(type_data["name"]))
 		info.desc = type_data["desc"]
 		
@@ -239,7 +251,19 @@ class InventorySystem < System
 		item.base_value = type_data['base_value']
 		item.usable = type_data['usable']
 
-		render = @mgr.add_comp(item_id, Render.new(''))
+		equipable_types = []
+
+		if type_data['equipable']
+
+			for type in type_data['equipable']
+				equipable_types << type
+			end
+
+			@mgr.add_comp(item_id, Equipable.new(equipable_types))
+			
+		end
+
+		render = Render.new('')
 		render.region_name = "items/#{type_value}"
 		render.region = @atlas.find_region("items/#{type_value}")
 		

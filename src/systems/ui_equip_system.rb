@@ -31,31 +31,18 @@ class UIEquipSystem < System
     @window.padTop(9)
     @window.align(Align::center)
     
-    @l_head_label = Label.new("Endex", @skin, "equip")
-    @r_head_label = Label.new("Ear piece", @skin, "equip")
-    @l_arm_label  = Label.new("Empty", @skin, "equip")
-    @torso_label  = Label.new("Flak jacket", @skin, "equip")
-    @r_arm_label  = Label.new("GPS Device", @skin, "equip")
-    @l_hand_label = Label.new("Empty", @skin, "equip")
-    @belt_label   = Label.new("Engineer's belt", @skin, "equip")
-    @r_hand_label = Label.new("Handgun", @skin, "equip")
-    @l_leg_label  = Label.new("Kneepads", @skin, "equip")
-    @r_leg_label  = Label.new("Kneepads", @skin, "equip")
-    @l_foot_label = Label.new("Athletic shoes", @skin, "equip")
-    @r_foot_label = Label.new("Athletic shoes", @skin, "equip")
-
-    @l_head_label.set_alignment(Align::center)
-    @r_head_label.set_alignment(Align::center)
-    @l_arm_label .set_alignment(Align::center)
-    @torso_label .set_alignment(Align::center)
-    @r_arm_label .set_alignment(Align::center)
-    @l_hand_label.set_alignment(Align::center)
-    @belt_label  .set_alignment(Align::center)
-    @r_hand_label.set_alignment(Align::center)
-    @l_leg_label .set_alignment(Align::center)
-    @r_leg_label .set_alignment(Align::center)
-    @l_foot_label.set_alignment(Align::center)
-    @r_foot_label.set_alignment(Align::center)
+    @l_head_box = SelectBox.new(@skin, "equipment")
+    @r_head_box = SelectBox.new(@skin, "equipment")
+    @l_arm_box  = SelectBox.new(@skin, "equipment")
+    @torso_box  = SelectBox.new(@skin, "equipment")
+    @r_arm_box  = SelectBox.new(@skin, "equipment")
+    @l_hand_box = SelectBox.new(@skin, "equipment")
+    @belt_box   = SelectBox.new(@skin, "equipment")
+    @r_hand_box = SelectBox.new(@skin, "equipment")
+    @l_leg_box  = SelectBox.new(@skin, "equipment")
+    @r_leg_box  = SelectBox.new(@skin, "equipment")
+    @l_foot_box = SelectBox.new(@skin, "equipment")
+    @r_foot_box = SelectBox.new(@skin, "equipment")
 
     @desc = Label.new(
       "This is a description of whatever it is that needs to be described. "\
@@ -65,20 +52,20 @@ class UIEquipSystem < System
       @skin, "equip")
     @desc.set_wrap(true)
 
-    equip_label_size = 120
+    equip_box_size = 120
 
-    @window.add(@l_head_label).width(equip_label_size).padTop(8).padRight(0)
-    @window.add(@r_head_label).width(equip_label_size).padTop(8).row
-    @window.add(@l_arm_label).width(equip_label_size).padRight(0)
-    @window.add(@r_arm_label).width(equip_label_size).row
-    @window.add(@torso_label).width(equip_label_size).colspan(2).row
-    @window.add(@l_hand_label).width(equip_label_size).padRight(0)
-    @window.add(@r_hand_label).width(equip_label_size).row
-    @window.add(@belt_label).width(equip_label_size).colspan(2).row
-    @window.add(@l_leg_label).width(equip_label_size).padRight(0)
-    @window.add(@r_leg_label).width(equip_label_size).row
-    @window.add(@l_foot_label).width(equip_label_size).padRight(0)
-    @window.add(@r_foot_label).width(equip_label_size).row
+    @window.add(@l_head_box).width(equip_box_size).padTop(8).padRight(0)
+    @window.add(@r_head_box).width(equip_box_size).padTop(8).row
+    @window.add(@l_arm_box).width(equip_box_size).padRight(0)
+    @window.add(@r_arm_box).width(equip_box_size).row
+    @window.add(@torso_box).width(equip_box_size).colspan(2).row
+    @window.add(@l_hand_box).width(equip_box_size).padRight(0)
+    @window.add(@r_hand_box).width(equip_box_size).row
+    @window.add(@belt_box).width(equip_box_size).colspan(2).row
+    @window.add(@l_leg_box).width(equip_box_size).padRight(0)
+    @window.add(@r_leg_box).width(equip_box_size).row
+    @window.add(@l_foot_box).width(equip_box_size).padRight(0)
+    @window.add(@r_foot_box).width(equip_box_size).row
     @window.add(@desc).padTop(18).colspan(3).width(240)
 
   end

@@ -1,22 +1,26 @@
 class UIBaseSystem < System
 
-  attr_accessor :active, :toggle, :selection, :no_exit, :slots, :window
-  attr_accessor :time, :date, :money, :weight
+  attr_accessor :time, :date, :money, :weight, :window
+  attr_accessor :active, :toggle, :selection, :slots, :no_exit
 
   def initialize(mgr, stage)
 
     super()
 
     @mgr = mgr
-    @skin = @mgr.skin
     @stage = stage
+    @skin = @mgr.skin
+
+    @slots = []
     @active = false
     @toggle = false
     @no_exit = false
+    @selection = nil
 
     setup
-    activate
 
+    activate
+    
     if 1 == 0
       
       @table_info.debug
@@ -34,9 +38,9 @@ class UIBaseSystem < System
     @table_info = Table.new(@skin)
     @table_info.set_bounds(C::WIDTH - w, C::HEIGHT - h, w, h)
 
-    @time =   Label.new("We're still here!", @skin, "base_ui")
-    @date =   Label.new("", @skin, "base_ui")
-    @money =  Label.new("", @skin, "base_ui")
+    @time   = Label.new("We're still here!", @skin, "base_ui")
+    @date   = Label.new("", @skin, "base_ui")
+    @money  = Label.new("", @skin, "base_ui")
     @weight = Label.new("", @skin, "base_ui")
 
     @money.set_alignment(Align::right)
@@ -67,8 +71,6 @@ class UIBaseSystem < System
     @table_needs.add(@energy).width(106).padTop(0).height(7).row
     @table_needs.add(@sanity).width(106).padTop(0).height(7)
 
-    @selection = nil
-
     @table_slots = Table.new(@skin)
     @table_slots.set_bounds(0, 0, C::WIDTH, 32)
     @table_slots.add_listener(
@@ -86,8 +88,6 @@ class UIBaseSystem < System
         end
 
       end.new(self))
-
-    @slots = []
 
     for i in 1..C::BASE_SLOTS
       

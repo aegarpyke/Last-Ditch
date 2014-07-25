@@ -70,6 +70,8 @@ java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar
 java_import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar::ProgressBarStyle
 java_import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 java_import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane::ScrollPaneStyle
+java_import com.badlogic.gdx.scenes.scene2d.ui.SelectBox
+java_import com.badlogic.gdx.scenes.scene2d.ui.SelectBox::SelectBoxStyle
 java_import com.badlogic.gdx.scenes.scene2d.utils.Align
 java_import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 java_import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener
@@ -134,6 +136,8 @@ require_relative '../components/station'
 require_relative '../components/ingredients'
 require_relative '../components/requirements'
 require_relative '../components/resources'
+require_relative '../components/equipment'
+require_relative '../components/equipable'
 
 GdxArray = com.badlogic.gdx.utils.Array
 

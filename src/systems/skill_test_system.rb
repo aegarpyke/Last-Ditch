@@ -18,10 +18,10 @@ class SkillTestSystem < System
     @d_theta = 0.01
     @final_score = 0
     @num_of_hits = 4
-    @num_of_items_to_craft = 0
     @score_flip = true
     @score_range = 0.12
     @score_min_dist = 0.1
+    @num_of_items_to_craft = 0
     @score_label_height_limit = 0
     @hits, @scores, @score_labels = [], [], []
 
@@ -145,6 +145,8 @@ class SkillTestSystem < System
 
   def finalize
 
+    @testing = false
+
     @num_of_items_to_craft -= 1
 
     @final_score = @scores.reduce(:+)
@@ -202,7 +204,7 @@ class SkillTestSystem < System
       item_id = @mgr.inventory.create_inv_item(recipe_type.type)
 
       item = @mgr.comp(item_id, Item)
-      item.quality = averaged_quality * @final_score
+      item.quality = averaged_quality * 1.3 * @final_score
       item.condition = averaged_condition
 
       @mgr.inventory.add_item(inv, item_id)
@@ -273,8 +275,6 @@ class SkillTestSystem < System
 
         else
 
-          @testing = false
-
           finalize
 
           @score_labels << Label.new(
@@ -294,7 +294,6 @@ class SkillTestSystem < System
           if @num_of_items_to_craft > 0
           
             reset
-
             @testing = true
           
           else

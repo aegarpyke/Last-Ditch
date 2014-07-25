@@ -26,6 +26,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@player, Skills.new)
 		@mgr.add_comp(@player, UserInput.new)
 		@mgr.add_comp(@player, Collision.new)
+		@mgr.add_comp(@player, Equipment.new)
 		@mgr.add_comp(@player, Animation.new(
 			0.1,
 			{'female1/idle' => ['female1/idle1'], 
@@ -47,6 +48,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@drone1, Velocity.new(0, 0, 0.8, 1))
 		@mgr.add_comp(@drone1, Rotation.new(0))
 		@mgr.add_comp(@drone1, Collision.new)
+		@mgr.add_comp(@drone1, Equipment.new)
 		@mgr.add_comp(@drone1, AI.new('wander'))
 		@mgr.add_comp(@drone1, Animation.new(
 			0.3,
@@ -58,6 +60,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@drone2, Velocity.new(0, 0, 1.0, 1))
 		@mgr.add_comp(@drone2, Rotation.new(0))
 		@mgr.add_comp(@drone2, Collision.new)
+		@mgr.add_comp(@drone2, Equipment.new)
 		@mgr.add_comp(@drone2, AI.new('wander'))
 		@mgr.add_comp(@drone2, Animation.new(
 			0.3,
