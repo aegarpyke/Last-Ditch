@@ -581,9 +581,9 @@ class MapSystem < System
 		rot = @mgr.comp(entity, Rotation)
 		inv = @mgr.comp(entity, Inventory)
 
-		@mgr.ui.inv.selection                                  and
-		index = @mgr.ui.inv.slots.index(@mgr.ui.inv.selection) and
-		item_id = inv.items[index]														 and
+		@mgr.ui.inventory.selection                                        and
+		index = @mgr.ui.inventory.slots.index(@mgr.ui.inventory.selection) and
+		item_id = inv.items[index]														             and
 
 		Proc.new do
 
@@ -613,7 +613,7 @@ class MapSystem < System
 
 			@mgr.render.nearby_entities << item_id
 			
-			@mgr.ui.inv.reset_info
+			@mgr.ui.inventory.reset_info
 			@mgr.ui.actions.update_crafting_info
 
 			return true
@@ -642,6 +642,7 @@ class MapSystem < System
 			@mgr.paused = !@mgr.paused
 			@mgr.actions.cur_station = station_id
 			@mgr.ui.actions.activate
+			@mgr.ui.switch_focus(:actions)
 
 			return true
 

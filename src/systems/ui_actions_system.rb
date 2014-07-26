@@ -1,14 +1,14 @@
 class UIActionsSystem < System
 
-  attr_accessor :active, :focus, :toggle, :window, :recipe_check
+  attr_accessor :active, :focus, :toggle, :table, :window, :recipe_check
   attr_reader :num_of_craftables
 
-  def initialize(mgr, stage)
+  def initialize(mgr, window)
 
     super()
 
     @mgr = mgr
-    @stage = stage
+    @window = window
     @active = false
     @skin = @mgr.skin
     
@@ -19,12 +19,9 @@ class UIActionsSystem < System
     @num_of_craftables = 0
     @tot_num_of_craftables = 0
 
-    @window = Window.new(
-      "Actions", @skin, "window1")
-    @window.set_position(128, 342)
-    @window.set_size(548, 254)
-    @window.set_movable(false)
-    @window.padTop(9)
+    @table = Table.new
+    @table.set_position(128, 342)
+    @table.set_size(548, 254)
 
     @actions_list_table = Table.new
     @actions_list_table.align(Align::left | Align::top)
@@ -36,9 +33,9 @@ class UIActionsSystem < System
     setup_object_list
     setup_scrollpane
 
-    if 1 == 0
+    if 1 == 1
 
-      @window.debug
+      @table.debug
       @actions_list_table.debug
       @crafting_info_table.debug
       @object_info_table.debug
@@ -111,7 +108,7 @@ class UIActionsSystem < System
       @actions_list_table, @crafting_info,
       false, @skin, "actions_split_pane")
 
-    @window.add(@split).width(540).height(239).padTop(10)
+    @table.add(@split).width(540).height(239).padTop(10)
 
     switch_focus(:crafting)
 
@@ -253,7 +250,8 @@ class UIActionsSystem < System
       @reqs_and_ings_label_list.last.color = Color::GRAY
       
       @crafting_info_table.add(
-        @reqs_and_ings_label_list.last).padLeft(8).align(Align::left).colspan(4).row 
+        @reqs_and_ings_label_list.last).
+          padLeft(8).align(Align::left).colspan(4).row 
 
     end
 
@@ -617,7 +615,6 @@ class UIActionsSystem < System
 
     @active = true
     @mgr.ui.active = true
-    @stage.add_actor(@window)
 
     update_crafting_info
 
@@ -631,7 +628,6 @@ class UIActionsSystem < System
   def deactivate
 
     @active = false
-    @window.remove
 
   end
 
@@ -641,10 +637,8 @@ class UIActionsSystem < System
     @active = !@active
 
     if @active
-      @stage.add_actor(@window)
       update_crafting_info
     else
-      @window.remove
     end
 
   end

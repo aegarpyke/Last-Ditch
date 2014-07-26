@@ -1,21 +1,21 @@
 class UIEquipSystem < System
 
-  attr_accessor :active, :toggle, :window
+  attr_accessor :active, :toggle, :window, :table
 
-  def initialize(mgr, stage)
+  def initialize(mgr, window)
     
     super()
 
     @mgr = mgr
-    @skin = @mgr.skin
-    @stage = stage
+    @window = window
     @active = false
+    @skin = @mgr.skin
 
     setup
 
     if 1 == 0
 
-      @window.debug
+      @table.debug
 
     end
 
@@ -24,12 +24,9 @@ class UIEquipSystem < System
 
   def setup
 
-    @window = Window.new("Equipment", @skin, "window1")
-    @window.set_position(0, 44)
-    @window.set_size(250, 290)
-    @window.set_movable(false)
-    @window.padTop(9)
-    @window.align(Align::center)
+    @table = Table.new
+    @table.set_position(0, 44)
+    @table.set_size(250, 290)
     
     @l_head_box = SelectBox.new(@skin, "equipment")
     @r_head_box = SelectBox.new(@skin, "equipment")
@@ -49,25 +46,25 @@ class UIEquipSystem < System
       "The act of describing something worth a description is a worthwhile "\
       "act, and therefore this act also merits a description. This "\
       "description is that description.",
-      @skin, "equip")
+      @skin, "equipment")
     @desc.set_wrap(true)
 
     equip_box_size = 120
 
-    @window.add(@l_head_box).width(equip_box_size).padTop(8).padRight(0)
-    @window.add(@r_head_box).width(equip_box_size).padTop(8).row
-    @window.add(@l_arm_box).width(equip_box_size).padRight(0)
-    @window.add(@r_arm_box).width(equip_box_size).row
-    @window.add(@torso_box).width(equip_box_size).colspan(2).row
-    @window.add(@l_hand_box).width(equip_box_size).padRight(0)
-    @window.add(@r_hand_box).width(equip_box_size).row
-    @window.add(@belt_box).width(equip_box_size).colspan(2).row
-    @window.add(@l_leg_box).width(equip_box_size).padRight(0)
-    @window.add(@r_leg_box).width(equip_box_size).row
-    @window.add(@l_foot_box).width(equip_box_size).padRight(0)
-    @window.add(@r_foot_box).width(equip_box_size).row
+    @table.add(@l_head_box).width(equip_box_size).padTop(8).padRight(0)
+    @table.add(@r_head_box).width(equip_box_size).padTop(8).row
+    @table.add(@l_arm_box).width(equip_box_size).padRight(0)
+    @table.add(@r_arm_box).width(equip_box_size).row
+    @table.add(@torso_box).width(equip_box_size).colspan(2).row
+    @table.add(@l_hand_box).width(equip_box_size).padRight(0)
+    @table.add(@r_hand_box).width(equip_box_size).row
+    @table.add(@belt_box).width(equip_box_size).colspan(2).row
+    @table.add(@l_leg_box).width(equip_box_size).padRight(0)
+    @table.add(@r_leg_box).width(equip_box_size).row
+    @table.add(@l_foot_box).width(equip_box_size).padRight(0)
+    @table.add(@r_foot_box).width(equip_box_size).row
 
-    @window.add(@desc).padTop(6).colspan(3).width(240)
+    @table.add(@desc).padTop(6).colspan(3).width(240)
 
   end
 
@@ -165,7 +162,6 @@ class UIEquipSystem < System
 
     @active = true
     @mgr.ui.active = true
-    @stage.add_actor(@window)
 
   end
 
@@ -173,7 +169,6 @@ class UIEquipSystem < System
   def deactivate
 
     @active = false
-    @window.remove
 
   end
 
@@ -183,9 +178,7 @@ class UIEquipSystem < System
     @active = !@active
 
     if @active
-      @stage.add_actor(@window)
     else
-      @window.remove
     end
     
   end

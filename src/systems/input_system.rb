@@ -60,7 +60,7 @@ class InputSystem < System
 
 						if @mgr.ui.active
 
-							@mgr.ui.inv.no_exit = true
+							@mgr.ui.inventory.no_exit = true
 							@mgr.map.drop_item(entity)
 						
 						end
@@ -150,7 +150,6 @@ class InputSystem < System
 
 						if @mgr.ui.active
 
-							@mgr.ui.actions.toggle_active
 
 						else
 
@@ -171,7 +170,6 @@ class InputSystem < System
 
 						if @mgr.ui.active
 
-							@mgr.ui.inv.toggle_active
 
 						else
 
@@ -201,7 +199,6 @@ class InputSystem < System
 
 						if @mgr.ui.active
 
-							@mgr.ui.equip.toggle_active
 
 						else
 
@@ -229,7 +226,6 @@ class InputSystem < System
 
 						if @mgr.ui.active
 
-							@mgr.ui.status.toggle_active
 
 						else
 

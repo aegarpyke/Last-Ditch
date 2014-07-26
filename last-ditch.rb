@@ -81,7 +81,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.status     = @status     = StatusSystem.new(@mgr)
 
     @mgr.ui         = @ui         = UISystem.new(@mgr, @atlas)
-    @mgr.inventory.inv_slots = @ui.inv.slots
+    @mgr.inventory.inv_slots = @ui.inventory.slots
 
 		@mgr.ai         = @ai         = AISystem.new(@mgr)
 		@mgr.map        = @map        = MapSystem.new(@mgr, @player, @atlas)
@@ -109,7 +109,7 @@ class LastDitch < ApplicationAdapter
 		@inventory.add_item(
 			inv, @inventory.create_inv_item('headset1'))
 
-		@ui.equip.setup_slots
+		@ui.equipment.setup_slots
 
 		@multiplexer = InputMultiplexer.new
 		@multiplexer.add_processor(@ui.stage)

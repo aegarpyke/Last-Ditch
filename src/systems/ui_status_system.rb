@@ -1,21 +1,21 @@
 class UIStatusSystem < System
 
-  attr_accessor :active, :toggle, :window
+  attr_accessor :active, :toggle, :table, :window
 
-  def initialize(mgr, stage)
+  def initialize(mgr, window)
     
     super()
 
     @mgr = mgr
     @skin = @mgr.skin
     @active = false
-    @stage = stage
+    @window = window
 
     setup
 
     if 1 == 0
 
-      @window.debug
+      @table.debug
       @table_male_model.debug
       @table_female_model.debug
 
@@ -26,11 +26,9 @@ class UIStatusSystem < System
 
   def setup
 
-    @window = Window.new("Status", @skin, "window1")
-    @window.set_position(560, 44)
-    @window.set_size(250, 290)
-    @window.movable = false
-    @window.padTop(9)
+    @table = Table.new
+    @table.set_position(560, 44)
+    @table.set_size(250, 290)
 
     info = @mgr.comp(@mgr.player, Info)
 
@@ -41,8 +39,8 @@ class UIStatusSystem < System
 
     @empty = Image.new(@mgr.atlas.find_region('environ/empty'))
 
-    @window.add(@name).width(246).height(14).padTop(4).padLeft(4).colspan(4).align(Align::left).row
-    @window.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(18).align(Align::left).row
+    @table.add(@name).width(246).height(14).padTop(4).padLeft(4).colspan(4).align(Align::left).row
+    @table.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(18).align(Align::left).row
 
     @table_male_model = Table.new(@skin)
 
@@ -132,8 +130,8 @@ class UIStatusSystem < System
     @table_female_model.add(@female_r_foot).colspan(1).padTop(-9).padRight(-23)
     @table_female_model.add(@empty).colspan(2).row
 
-    # @window.add(@table_male_model).width(180).height(150).align(Align::left).row
-    @window.add(@table_female_model).width(180).height(150).align(Align::left).row
+    # @table.add(@table_male_model).width(180).height(150).align(Align::left).row
+    @table.add(@table_female_model).width(180).height(150).align(Align::left).row
     
     @add_info = Label.new(
       "Additional Info\n"\
@@ -144,7 +142,7 @@ class UIStatusSystem < System
       @skin, "status")
     @add_info.wrap = true
 
-    @window.add(@add_info).width(246).padTop(4).padLeft(4)
+    @table.add(@add_info).width(246).padTop(4).padLeft(4)
 
   end
 
@@ -158,7 +156,6 @@ class UIStatusSystem < System
 
     @active = true
     @mgr.ui.active = true
-    @stage.add_actor(@window)
 
   end
 
@@ -166,7 +163,6 @@ class UIStatusSystem < System
   def deactivate
 
     @active = false
-    @window.remove
 
   end
 
@@ -176,9 +172,7 @@ class UIStatusSystem < System
     @active = !@active
 
     if @active
-      @stage.add_actor(@window)
     else
-      @window.remove
     end
     
   end

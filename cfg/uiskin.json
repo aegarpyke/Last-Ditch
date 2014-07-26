@@ -27,7 +27,7 @@
     		"fontColor": "white",
     	},
 
-    	"equip":
+    	"equipment":
     	{
     		"font": "garuda12", 
     		"fontColor": "white",
@@ -39,7 +39,7 @@
     		"fontColor": "white",
     	},
 
-    	"inv":
+    	"inventory":
     	{
     		"font": "garuda12", 
     		"fontColor": "white",

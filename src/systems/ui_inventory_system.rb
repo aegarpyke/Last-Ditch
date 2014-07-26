@@ -1,14 +1,15 @@
 class UIInventorySystem < System
 
-  attr_accessor :active, :toggle, :window, :selection, :prev_selection, :slots, :no_exit
+  attr_accessor :active, :toggle, :window, :table
+  attr_accessor :selection, :prev_selection, :slots, :no_exit
 
-  def initialize(mgr, stage)
+  def initialize(mgr, window)
     
     super()
 
     @mgr = mgr
     @skin = @mgr.skin
-    @stage = stage
+    @window = window
     @active = false
     @no_exit = false
     @prev_selection = nil
@@ -17,7 +18,7 @@ class UIInventorySystem < System
 
     if 1 == 0
 
-      @window.debug
+      @table.debug
 
     end
 
@@ -26,11 +27,11 @@ class UIInventorySystem < System
 
   def setup
 
-    @item_name        = Label.new("", @skin, "inv")
-    @item_desc        = Label.new("", @skin, "inv")
-    @item_value       = Label.new("", @skin, "inv")
-    @item_weight      = Label.new("", @skin, "inv")
-    @item_quality_dur = Label.new("", @skin, "inv")
+    @item_name        = Label.new("", @skin, "inventory")
+    @item_desc        = Label.new("", @skin, "inventory")
+    @item_value       = Label.new("", @skin, "inventory")
+    @item_weight      = Label.new("", @skin, "inventory")
+    @item_quality_dur = Label.new("", @skin, "inventory")
     
     @item_value.color       = Color.new(0.75, 0.82, 0.70, 1.0)
     @item_weight.color      = Color.new(0.75, 0.75, 0.89, 1.0)
@@ -39,31 +40,30 @@ class UIInventorySystem < System
     @item_desc.alignment = Align::top | Align::left
     @item_desc.wrap = true
 
-    @window = Window.new("Inventory", @skin, "window1")
-    @window.set_position(262, 2)
-    @window.set_size(276, 236)
-    @window.movable = false
-    @window.padTop(9)
-    @window.add_listener(
+    @table = Table.new
+    @table.set_position(262, 2)
+    @table.set_size(276, 236)
+
+    @table.add_listener(
       
       Class.new(ClickListener) do
 
-        def initialize(inv)
+        def initialize(inventory)
           super()
-          @inv = inv
+          @inventory = inventory
         end
 
         def exit(event, x, y, pointer, to_actor)
-          @inv.exit_window
+          @inventory.exit_table
         end
 
       end.new(self))
 
-    @window.add(@item_name).colspan(4).align(Align::left).padTop(4).height(12)
-    @window.add(@item_value).colspan(4).align(Align::right).padTop(4).height(14).row
-    @window.add(@item_weight).colspan(4).align(Align::left).height(14).padTop(1)
-    @window.add(@item_quality_dur).colspan(4).align(Align::right).padTop(1).height(12).row
-    @window.add(@item_desc).colspan(8).width(256).height(62).row
+    @table.add(@item_name).colspan(4).align(Align::left).padTop(4).height(12)
+    @table.add(@item_value).colspan(4).align(Align::right).padTop(4).height(14).row
+    @table.add(@item_weight).colspan(4).align(Align::left).height(14).padTop(1)
+    @table.add(@item_quality_dur).colspan(4).align(Align::right).padTop(1).height(12).row
+    @table.add(@item_desc).colspan(8).width(256).height(62).row
 
     @slots = []
 
@@ -75,31 +75,31 @@ class UIInventorySystem < System
 
         Class.new(ClickListener) do
         
-          def initialize(inv, slot)
+          def initialize(inventory, slot)
             super()
-            @inv = inv
+            @inventory = inventory
             @slot = slot
           end
 
 
           def enter(event, x, y, pointer, from_actor)
-            @inv.enter_slot(@slot)
+            @inventory.enter_slot(@slot)
             true
           end
 
 
           def clicked(event, x, y)
-            @inv.no_exit = true
-            @inv.use_item
+            @inventory.no_exit = true
+            @inventory.use_item
             true
           end
 
         end.new(self, @slots.last))
 
       if i % 8 == 0
-        @window.add(@slots.last).pad(0).row
+        @table.add(@slots.last).pad(0).row
       else
-        @window.add(@slots.last).pad(0)
+        @table.add(@slots.last).pad(0)
       end
 
     end
@@ -126,7 +126,7 @@ class UIInventorySystem < System
   end
 
 
-  def exit_window
+  def exit_table
 
     if @no_exit
       
@@ -279,7 +279,6 @@ class UIInventorySystem < System
 
     @active = true
     @mgr.ui.active = true
-    @stage.add_actor(@window)
 
   end
 
@@ -287,8 +286,7 @@ class UIInventorySystem < System
   def deactivate
 
     @active = false
-    @window.remove
-
+    @table.remove
   end
 
 
@@ -297,9 +295,7 @@ class UIInventorySystem < System
     @active = !@active
 
     if @active
-      @stage.add_actor(@window)
     else
-      @window.remove
     end
     
   end

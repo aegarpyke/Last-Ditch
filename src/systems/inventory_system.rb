@@ -290,7 +290,7 @@ class InventorySystem < System
 			inv.weight += item.weight 
 			
 			@mgr.map.remove_item(item_id)
-			@mgr.ui.inv.prev_selection = nil
+			@mgr.ui.inventory.prev_selection = nil
 
 			return true
 		
@@ -316,7 +316,7 @@ class InventorySystem < System
 
 			item = @mgr.comp(item_id, Item)
 			inv.weight += item.weight
-			@mgr.ui.inv.prev_selection = nil
+			@mgr.ui.inventory.prev_selection = nil
 			@mgr.map.remove_item(item_id)
 
 			return true
