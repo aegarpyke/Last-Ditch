@@ -29,14 +29,31 @@ class UISystem < System
 		@equipment = UIEquipSystem.new(@mgr, @window)
 		@status    = UIStatusSystem.new(@mgr, @window)
 
-		if 1 == 1
-			
-			@window.debug
+		@focus = @actions.table
+
+		setup_buttons
 		
+		@window.add(@actions.table).width(680).height(432)
+		
+		switch_focus(:actions)
+
+		if 1 == 1
+			@window.debug
 		end
+
+	end
+
+
+	def setup_buttons
 
 		@actions_button = TextButton.new(
 			"Actions", @skin, "actions_button")
+		@inventory_button = TextButton.new(
+			"Inventory", @skin, "actions_button")
+		@equipment_button = TextButton.new(
+			"Equipment", @skin, "actions_button")
+		@status_button = TextButton.new(
+			"Status", @skin, "actions_button")
 
     @actions_button.add_listener(
 
@@ -54,9 +71,6 @@ class UISystem < System
 
       end.new(self))
 
-		@inventory_button = TextButton.new(
-			"Inventory", @skin, "actions_button")
-
 		@inventory_button.add_listener(
 
       Class.new(ClickListener) do
@@ -73,9 +87,6 @@ class UISystem < System
 
       end.new(self))
 
-		@equipment_button = TextButton.new(
-			"Equipment", @skin, "actions_button")
-
 		@equipment_button.add_listener(
 
       Class.new(ClickListener) do
@@ -91,9 +102,6 @@ class UISystem < System
         end
 
       end.new(self))
-
-		@status_button = TextButton.new(
-			"Status", @skin, "actions_button")
 
 		@status_button.add_listener(
 
@@ -112,18 +120,13 @@ class UISystem < System
       end.new(self))
 
 		@button_table = Table.new
-		@button_table.add(@actions_button)
-		@button_table.add(@inventory_button)
-		@button_table.add(@equipment_button)
-		@button_table.add(@status_button)
+		@button_table.add(@actions_button).width(100).height(16).padRight(60)
+		@button_table.add(@inventory_button).width(100).height(16).padRight(60)
+		@button_table.add(@equipment_button).width(100).height(16).padRight(60)
+		@button_table.add(@status_button).width(100).height(16).padRight(60)
 
 		@window.add(@button_table).width(700).row
-
-		@focus = @actions.table
-		@window.add(@actions.table).height(400)
-
-		switch_focus(:actions)
-
+		
 	end
 
 

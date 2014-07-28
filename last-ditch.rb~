@@ -30,7 +30,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.add_comp(@player, Animation.new(
 			0.1,
 			{'female1/idle' => ['female1/idle1'], 
-	     'female1/walk' => ['female1/idle1',
+	     		 'female1/walk' => ['female1/idle1',
 	                        'female1/walk1', 
 	                        'female1/walk2',
 	                        'female1/walk1',
@@ -87,7 +87,7 @@ class LastDitch < ApplicationAdapter
 		@mgr.map        = @map        = MapSystem.new(@mgr, @player, @atlas)
 		@mgr.render     = @render     = RenderSystem.new(@mgr, @player, @atlas)
 		@mgr.physics    = @physics    = PhysicsSystem.new(@mgr, @player, @map)
-		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics)
+		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics.world, @physics.player_body)
 
 		# Give player starting items
 		inv = @mgr.comp(@player, Inventory)

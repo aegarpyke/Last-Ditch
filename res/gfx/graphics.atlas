@@ -97,21 +97,21 @@ environ/window1
   index: -1
 female1/idle1
   rotate: false
-  xy: 744, 94
+  xy: 778, 94
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 female1/walk1
   rotate: false
-  xy: 948, 94
+  xy: 982, 94
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 female1/walk2
   rotate: false
-  xy: 242, 31
+  xy: 276, 31
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -265,21 +265,21 @@ items/syringe3
   index: -1
 male1/idle1
   rotate: false
-  xy: 778, 94
+  xy: 744, 94
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 male1/walk1
   rotate: false
-  xy: 982, 94
+  xy: 948, 94
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 male1/walk2
   rotate: false
-  xy: 276, 31
+  xy: 242, 31
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

@@ -53,7 +53,7 @@ class UIActionsSystem < System
 
     @object_button = TextButton.new(
       "Object", @skin, "actions_button")
-
+    
     @crafting_button.add_listener(
 
       Class.new(ClickListener) do

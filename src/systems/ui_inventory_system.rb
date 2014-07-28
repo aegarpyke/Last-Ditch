@@ -286,7 +286,7 @@ class UIInventorySystem < System
   def deactivate
 
     @active = false
-    @table.remove
+    
   end
 
 
