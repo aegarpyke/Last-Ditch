@@ -39,8 +39,10 @@ class UIStatusSystem < System
 
     @empty = Image.new(@mgr.atlas.find_region('environ/empty'))
 
-    @table.add(@name).width(246).height(14).padTop(4).padLeft(4).colspan(4).align(Align::left).row
-    @table.add(@occupation).height(11).colspan(4).padLeft(4).padBottom(18).align(Align::left).row
+    @table.add(@name).
+      width(246).height(14).padTop(4).padLeft(4).colspan(4).align(Align::left).row
+    @table.add(@occupation).
+      height(11).colspan(4).padLeft(4).padBottom(18).align(Align::left).row
 
     @table_male_model = Table.new(@skin)
 

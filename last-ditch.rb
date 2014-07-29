@@ -5,21 +5,20 @@ class LastDitch < ApplicationAdapter
 	def create
 
 		TexturePacker.process('res/gfx', 'res/gfx', 'graphics')
-
+    
 		@mgr = EntityManager.new
-
 		@batch = SpriteBatch.new
 		@debug = Box2DDebugRenderer.new
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 		@skin  = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
-
+    
 		@mgr.skin = @skin
 		@mgr.player = @player = @mgr.create_tagged_entity('player')
 		
 		@mgr.add_comp(@player, Type.new('player'))
 		@mgr.add_comp(@player, Position.new(40, 40))
-		@mgr.add_comp(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
 		@mgr.add_comp(@player, Rotation.new(0))
+		@mgr.add_comp(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
 		@mgr.add_comp(@player, Inventory.new(C::INVENTORY_SLOTS))
 		@mgr.add_comp(@player, Needs.new)
 		@mgr.add_comp(@player, Attributes.new)
@@ -152,6 +151,8 @@ class LastDitch < ApplicationAdapter
 		@map.update
 		@ui.update
 
+    puts @mgr.paused
+    
 		# @physics.world.clear_forces
 		# @physics.interpolate(alpha)
 

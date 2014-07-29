@@ -1,6 +1,6 @@
 class UISystem < System
 
-	attr_accessor :active, :toggle
+	attr_accessor :active, :toggle, :focus, :focus_actor
 	attr_accessor :player, :stage, :atlas
 	attr_accessor :base, :actions, :inventory, :equipment, :status
  
@@ -28,16 +28,18 @@ class UISystem < System
 		@inventory = UIInventorySystem.new(@mgr, @window)
 		@equipment = UIEquipSystem.new(@mgr, @window)
 		@status    = UIStatusSystem.new(@mgr, @window)
-
-		@focus = @actions.table
+   
+    @focus = :actions
+		@focus_actor = @actions.table
 
 		setup_buttons
 		
 		@window.add(@actions.table).width(680).height(432)
 		
 		switch_focus(:actions)
+    @active = false
 
-		if 1 == 1
+		if 1 == 0
 			@window.debug
 		end
 
@@ -134,47 +136,51 @@ class UISystem < System
 
     if focus == :actions
 
-    	@window.get_cell(@focus).set_actor(@actions.table)
-    	
-    	@focus = @actions.table
-			
+      @mgr.ui.actions.activate
+    	@window.get_cell(@focus_actor).set_actor(@actions.table)
+
       @actions_button.set_checked(true)
       @inventory_button.set_checked(false)
       @equipment_button.set_checked(false)
       @status_button.set_checked(false)
 
+    	@focus_actor = @actions.table
+
     elsif focus == :inventory
 
-			@window.get_cell(@focus).set_actor(@inventory.table)
-    	
-    	@focus = @inventory.table
+      @mgr.ui.inventory.activate 
+			@window.get_cell(@focus_actor).set_actor(@inventory.table)
 
       @actions_button.set_checked(false)
       @inventory_button.set_checked(true)
       @equipment_button.set_checked(false)
       @status_button.set_checked(false)
 
+    	@focus_actor = @inventory.table
+
     elsif focus == :equipment
-
-    	@window.get_cell(@focus).set_actor(@equipment.table)
+      
+      @mgr.ui.equipment.activate
+    	@window.get_cell(@focus_actor).set_actor(@equipment.table) 
     	
-    	@focus = @equipment.table
-
-    	@actions_button.set_checked(false)
+      @actions_button.set_checked(false)
       @inventory_button.set_checked(false)
       @equipment_button.set_checked(true)
       @status_button.set_checked(false)
 
+    	@focus_actor = @equipment.table
+
     elsif focus == :status
 
-    	@window.get_cell(@focus).set_actor(@status.table)
-    	
-    	@focus = @status.table
+      @mgr.ui.status.activate
+    	@window.get_cell(@focus_actor).set_actor(@status.table)
 
     	@actions_button.set_checked(false)
       @inventory_button.set_checked(false)
       @equipment_button.set_checked(false)
       @status_button.set_checked(true)
+    	
+    	@focus_actor = @status.table
 
     end
 
@@ -193,18 +199,14 @@ class UISystem < System
 	end
 
 
-	def activate
+	def activate(focus)
 
 		@active = true
-		@mgr.paused = true
-		@mgr.time.active = false
+    
+    @focus = focus
+    switch_focus(@focus)
 
-		@actions.activate
-		@inventory.activate
-		@equipment.activate
-		@status.activate
-
-		@stage.add_actor(@window)
+    @stage.add_actor(@window)
 
 	end
 
@@ -212,8 +214,6 @@ class UISystem < System
 	def deactivate
 
 		@active = false
-		@mgr.paused = false
-    @mgr.time.active = true
 
 		@actions.deactivate
 		@inventory.deactivate
@@ -230,20 +230,7 @@ class UISystem < System
 		@active = !@active
 
 		if @active
-
-			@actions.activate
-			@inventory.activate
-			@equipment.activate
-			@status.activate
-		
 		else
-
-			@mgr.paused = false
-			@actions.deactivate
-			@inventory.deactivate
-			@equipment.deactivate
-			@status.deactivate
-
 		end
 
 	end
@@ -257,6 +244,7 @@ class UISystem < System
 		Table.draw_debug(@stage)
 
 	end
+
 
 	def dispose
 

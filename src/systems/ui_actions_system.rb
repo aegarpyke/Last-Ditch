@@ -33,7 +33,7 @@ class UIActionsSystem < System
     setup_object_list
     setup_scrollpane
 
-    if 1 == 1
+    if 1 == 0
 
       @table.debug
       @actions_list_table.debug

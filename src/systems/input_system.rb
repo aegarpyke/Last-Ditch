@@ -37,9 +37,7 @@ class InputSystem < System
 						if @mgr.ui.active
 							@mgr.skill_test.score	
 						else
-							
 							@mgr.inventory.pickup_item(entity)
-
 						end
 
 					end
@@ -53,9 +51,7 @@ class InputSystem < System
 					else
 
 						if @mgr.ui.base.active
-
 							@mgr.ui.base.no_exit = true
-
 						end
 
 						if @mgr.ui.active
@@ -99,10 +95,10 @@ class InputSystem < System
 						@mgr.actions.cur_station = nil
 						
 						if @mgr.ui.active
-							@mgr.skill_test.deactivate
 							@mgr.ui.deactivate
+							@mgr.skill_test.deactivate
 						else
-							@mgr.ui.activate
+							@mgr.ui.activate(@mgr.ui.focus)
 						end
 
 					end

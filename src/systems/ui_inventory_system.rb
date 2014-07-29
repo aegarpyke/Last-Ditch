@@ -17,9 +17,7 @@ class UIInventorySystem < System
     setup
 
     if 1 == 0
-
       @table.debug
-
     end
 
   end
@@ -231,6 +229,7 @@ class UIInventorySystem < System
     false
 
   end
+
 
   def update
 
