@@ -639,10 +639,13 @@ class MapSystem < System
 			vel.spd = 0
 			vel.ang_spd = 0
 			
-			@mgr.paused = !@mgr.paused
+			@mgr.paused = true 
+      @mgr.time.active = false
+
 			@mgr.actions.cur_station = station_id
-			@mgr.ui.actions.activate
-			@mgr.ui.switch_focus(:actions)
+
+      @mgr.ui.activate(:actions)
+      @mgr.ui.actions.activate
 
 			return true
 

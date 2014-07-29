@@ -614,7 +614,6 @@ class UIActionsSystem < System
   def activate
 
     @active = true
-    @mgr.ui.active = true
 
     update_crafting_info
 

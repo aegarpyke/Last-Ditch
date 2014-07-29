@@ -299,6 +299,9 @@ class SkillTestSystem < System
           else
 
             @active = false
+            @mgr.paused = false
+            @mgr.time.active = true
+
             @mgr.ui.deactivate
           
           end

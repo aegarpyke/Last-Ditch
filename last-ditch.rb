@@ -151,8 +151,6 @@ class LastDitch < ApplicationAdapter
 		@map.update
 		@ui.update
 
-    puts @mgr.paused
-    
 		# @physics.world.clear_forces
 		# @physics.interpolate(alpha)
 

@@ -29,21 +29,34 @@ class UISystem < System
 		@equipment = UIEquipSystem.new(@mgr, @window)
 		@status    = UIStatusSystem.new(@mgr, @window)
    
-    @focus = :actions
-		@focus_actor = @actions.table
-
-		setup_buttons
-		
-		@window.add(@actions.table).width(680).height(432)
-		
-		switch_focus(:actions)
-    @active = false
+  	setup_buttons
+    setup_initial_state
 
 		if 1 == 0
 			@window.debug
 		end
 
 	end
+
+
+  def setup_initial_state
+
+    @focus = :actions
+		@focus_actor = @actions.table
+
+		@window.add(@actions.table).width(680).height(432)
+
+    @mgr.ui.actions.activate
+    @window.get_cell(@focus_actor).set_actor(@actions.table)
+
+    @actions_button.set_checked(true)
+    @inventory_button.set_checked(false)
+    @equipment_button.set_checked(false)
+    @status_button.set_checked(false)
+
+    @focus_actor = @actions.table
+
+  end
 
 
 	def setup_buttons

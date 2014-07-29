@@ -277,7 +277,6 @@ class UIInventorySystem < System
   def activate
 
     @active = true
-    @mgr.ui.active = true
 
   end
 

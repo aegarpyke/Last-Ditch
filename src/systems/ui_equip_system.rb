@@ -161,7 +161,6 @@ class UIEquipSystem < System
   def activate
 
     @active = true
-    @mgr.ui.active = true
 
   end
 

@@ -92,13 +92,19 @@ class InputSystem < System
 						vel.ang_spd = 0
 
 						@mgr.paused = !@mgr.paused
+            @mgr.time.active = !@mgr.time.active
+            
 						@mgr.actions.cur_station = nil
 						
 						if @mgr.ui.active
+
 							@mgr.ui.deactivate
 							@mgr.skill_test.deactivate
+
 						else
+
 							@mgr.ui.activate(@mgr.ui.focus)
+
 						end
 
 					end
@@ -112,14 +118,16 @@ class InputSystem < System
 					else
 
 						if @mgr.ui.active
-
+              
+              @mgr.paused = false
+              @mgr.time.active = true
 							@mgr.ui.deactivate
 
 						else
-
+              
 							@mgr.map.use_door(entity)    or
-							@mgr.map.use_station(entity)
-
+              @mgr.map.use_station(entity) 
+              
 						end
 
 					end
