@@ -29,17 +29,208 @@ class UIEquipSystem < System
     @table.set_size(250, 290)
     
     @l_head_box = SelectBox.new(@skin, "equipment")
+    @l_head_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('l_head', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @r_head_box = SelectBox.new(@skin, "equipment")
+    @r_head_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('r_head', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @l_arm_box  = SelectBox.new(@skin, "equipment")
+    @l_arm_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('l_arm', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @torso_box  = SelectBox.new(@skin, "equipment")
+    @torso_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('torso', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+ 
     @r_arm_box  = SelectBox.new(@skin, "equipment")
+    @r_arm_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('r_arm', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @l_hand_box = SelectBox.new(@skin, "equipment")
-    @belt_box   = SelectBox.new(@skin, "equipment")
+    @l_hand_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('l_hand', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
+    @belt_box = SelectBox.new(@skin, "equipment")
+    @belt_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('belt', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @r_hand_box = SelectBox.new(@skin, "equipment")
+    @r_hand_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('r_hand', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @l_leg_box  = SelectBox.new(@skin, "equipment")
+    @l_leg_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('l_leg', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @r_leg_box  = SelectBox.new(@skin, "equipment")
+    @r_leg_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('r_leg', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @l_foot_box = SelectBox.new(@skin, "equipment")
+    @l_foot_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('l_foot', actor.get_selection)
+          true
+        end
+
+      end.new(self))
+
     @r_foot_box = SelectBox.new(@skin, "equipment")
+    @r_foot_box.add_listener(
+
+      Class.new(ChangeListener) do
+
+        def initialize(equip)
+          super()
+          @equip = equip
+        end
+
+        def changed(event, actor)
+          @equip.set_equipment('r_foot', actor.get_selection)
+          true
+        end
+
+      end.new(self))
 
     @desc = Label.new(
       "This is a description of whatever it is that needs to be described. "\
@@ -91,11 +282,13 @@ class UIEquipSystem < System
     
     for item_id in inv.items
 
-      equipable = @mgr.comp(item_id, Equipable) and
-
-      Proc.new do
+      if equipable = @mgr.comp(item_id, Equipable)
 
         info = @mgr.comp(item_id, Info)
+
+        equip = @mgr.comp(@mgr.player, Equipment)
+
+        @mgr.equipment.equip(equip, item_id)
 
         if equipable.types.include?('l_head') ||
            equipable.types.include?('r_head')
@@ -145,9 +338,16 @@ class UIEquipSystem < System
         @l_foot_box.set_items(@foot_list)
         @r_foot_box.set_items(@foot_list)
 
-      end.call
+      end
       
     end
+
+  end
+
+
+  def set_equipment(type, slot_name)
+
+    puts type, slot_name
 
   end
 

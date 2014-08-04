@@ -115,7 +115,7 @@ handgun1:
 headset1:
   name: 'headset'
   desc: >
-    A simple, noninvasive temperment controler.
+    A simple, non-invasive temperment controller.
   usable: false
   equipable:
     - l_head

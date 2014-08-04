@@ -18,10 +18,14 @@ class MapSystem < System
 		@num_of_rooms, @num_of_items = 200, 3200
 		@rooms, @items, @doors, @stations = [], [], [], []
 
-		@solid = Array.new(@width) {|i| Array.new(@height) {|i| false }}
-		@sight = Array.new(@width) {|i| Array.new(@height) {|i| true }}
-		@rot   = Array.new(@width) {|i| Array.new(@height) {|i| 0.0}}
-		@tiles = Array.new(@width) {|i| Array.new(@height) {|i| @atlas.find_region('environ/floor1')}}
+		@solid = Array.new(@width) {|i| 
+      Array.new(@height) {|i| false }}
+		@sight = Array.new(@width) {|i| 
+      Array.new(@height) {|i| true }}
+		@rot   = Array.new(@width) {|i| 
+      Array.new(@height) {|i| 0.0}}
+		@tiles = Array.new(@width) {|i| 
+      Array.new(@height) {|i| @atlas.find_region('environ/floor1')}}
 
 		for x in 0...@width
 			for y in 0...@height
@@ -68,6 +72,7 @@ class MapSystem < System
 		end
 
 		degenerate_rooms = []
+
 		@rooms.each do |room|
 
 			if room.width < 5 || room.height < 5
@@ -126,7 +131,7 @@ class MapSystem < System
 
 				x = Random.rand(10.0...@width-10)
 				y = Random.rand(10.0...@height-10)
-				break if !@solid[x.to_i][y.to_i]
+				break if not @solid[x.to_i][y.to_i]
 			
 			end
 
@@ -316,7 +321,7 @@ class MapSystem < System
 		Proc.new do
 		
 			door.open = !door.open
-			change_door(door_id, door.open)
+			update_door(door_id, door.open)
 
 			return true
 
@@ -342,7 +347,7 @@ class MapSystem < System
 		Proc.new do
 
 			door.open = !door.open
-			change_door(door_id, door.open)
+			update_door(door_id, door.open)
 
 			return true
 
@@ -521,13 +526,13 @@ class MapSystem < System
 	end
 
 
-	def change_door(door_id, open)
+	def update_door(door_id, open)
 
 		pos    = @mgr.comp(door_id, Position)
 		rot    = @mgr.comp(door_id, Rotation)
-		render = @mgr.comp(door_id, Render)
 		size   = @mgr.comp(door_id, Size)
 		col    = @mgr.comp(door_id, Collision)
+		render = @mgr.comp(door_id, Render)
 
 		if open
 
@@ -537,16 +542,16 @@ class MapSystem < System
 
 		else
 
-			type = @mgr.comp(door_id, Type).type
+			type = @mgr.comp(door_id, Type)
 
-			body = @mgr.physics.create_body(
+			@mgr.physics.create_body(
 				pos.x, pos.y, 
 				size.width, size.height, 
 				false, rot.angle)
 
 			@mgr.add_comp(
 				door_id, 
-				Render.new(type, @atlas.find_region("environ/#{type}")))
+				Render.new(type, @atlas.find_region("environ/#{type.type}")))
 		
 		end
 

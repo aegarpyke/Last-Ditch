@@ -67,8 +67,8 @@ class InventorySystem < System
 		item.usable = false
 		item.condition = 0
 		info.desc = 
-			"This item is junk. It can only be used "\
-			"as scrap at this point."
+			'This item is junk. It can only be used '
+			'as scrap at this point.'
 
 	end
 
@@ -108,14 +108,15 @@ class InventorySystem < System
 		item.base_value = type_data['base_value']
 		item.condition -= item.decay_rate
 
-		@mgr.inventory.destroy_item(item_id) if item.condition < 0
+		destroy_item(item_id) if item.condition < 0
 		@mgr.ui.actions.update_crafting_info
 
 	end
 
 
-	def add_item(inv, item_id)
+	def add_item(inv, item_type)
 
+    item_id = create_inv_item(item_type)
 
 		for i in 0...inv.items.size
 
@@ -182,7 +183,7 @@ class InventorySystem < System
 			
 			end
 
-			@mgr.inventory.update_slots = true
+			@update_slots = true
 
 			return items_to_remove
 		
@@ -282,7 +283,8 @@ class InventorySystem < System
 		inv = @mgr.comp(entity, Inventory)
 
 		item_id = @mgr.map.get_near_item(pos.x, pos.y) and
-		add_item(inv, item_id)					               and
+    type = @mgr.comp(item_id, Type)                and
+		add_item(inv, type.type)				               and
 
 		Proc.new do
 
@@ -310,7 +312,8 @@ class InventorySystem < System
 		y = pos.y - C::WTB * (screen_y - C::HEIGHT / 2)
 
 		item_id = @mgr.map.get_item(x, y)     and		
-		add_item(inv, item_id) 								and
+    type = @mgr.comp(item_id, Type)       and
+		add_item(inv, type.type) 								and
 
 		Proc.new do
 

@@ -18,7 +18,6 @@ class UIBaseSystem < System
     @selection = nil
 
     setup
-
     activate
     
     if 1 == 0

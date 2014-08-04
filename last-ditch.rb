@@ -6,22 +6,62 @@ class LastDitch < ApplicationAdapter
 
 		TexturePacker.process('res/gfx', 'res/gfx', 'graphics')
     
-		@mgr = EntityManager.new
+		@timer = 0
+
 		@batch = SpriteBatch.new
+		@mgr   = EntityManager.new
 		@debug = Box2DDebugRenderer.new
 		@atlas = TextureAtlas.new(Gdx.files.internal('res/gfx/graphics.atlas'))
 		@skin  = Skin.new(Gdx.files.internal('cfg/uiskin.json'), @atlas)
     
+    setup_player
+    setup_drones
+
+		@mgr.atlas      = @atlas
+		@mgr.time       = @time       = TimeSystem.new
+		@mgr.input      = @input      = InputSystem.new(@mgr)
+
+		@mgr.actions    = @actions    = ActionsSystem.new(@mgr, @player)
+    @mgr.crafting   = @crafting   = CraftingSystem.new(@mgr)
+    @mgr.skill_test = @skill_test = SkillTestSystem.new(@mgr)
+    @mgr.inventory  = @inventory  = InventorySystem.new(@mgr, @atlas)
+		@mgr.equipment  = @equipment  = EquipmentSystem.new(@mgr)
+		@mgr.status     = @status     = StatusSystem.new(@mgr)
+
+    @mgr.ui         = @ui         = UISystem.new(@mgr, @atlas)
+    @mgr.inventory.inv_slots = @ui.inventory.slots
+
+		@mgr.ai         = @ai         = AISystem.new(@mgr)
+		@mgr.map        = @map        = MapSystem.new(@mgr, @player, @atlas)
+		@mgr.render     = @render     = RenderSystem.new(@mgr, @player, @atlas)
+		@mgr.physics    = @physics    = PhysicsSystem.new(@mgr, @player, @map)
+		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics)
+
+    give_player_basics
+    
+		@multiplexer = InputMultiplexer.new
+		@multiplexer.add_processor(@ui.stage)
+		@multiplexer.add_processor(@input.user_adapter)
+
+		Gdx.input.input_processor = @multiplexer
+		Gdx.gl.gl_clear_color(0, 0, 0, 1)
+
+	end
+
+
+  def setup_player
+
 		@mgr.skin = @skin
 		@mgr.player = @player = @mgr.create_tagged_entity('player')
 		
-		@mgr.add_comp(@player, Type.new('player'))
 		@mgr.add_comp(@player, Position.new(40, 40))
+		@mgr.add_comp(@player, Velocity.new(
+      0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
 		@mgr.add_comp(@player, Rotation.new(0))
-		@mgr.add_comp(@player, Velocity.new(0, 0, C::PLAYER_SPD, C::PLAYER_ROT_SPD))
-		@mgr.add_comp(@player, Inventory.new(C::INVENTORY_SLOTS))
-		@mgr.add_comp(@player, Needs.new)
+		@mgr.add_comp(@player, Type.new('player'))
+		inv = @mgr.add_comp(@player, Inventory.new(C::INVENTORY_SLOTS))
 		@mgr.add_comp(@player, Attributes.new)
+		@mgr.add_comp(@player, Needs.new)
 		@mgr.add_comp(@player, Skills.new)
 		@mgr.add_comp(@player, UserInput.new)
 		@mgr.add_comp(@player, Collision.new)
@@ -34,13 +74,18 @@ class LastDitch < ApplicationAdapter
 	                        'female1/walk2',
 	                        'female1/walk1',
 	                        'female1/idle1', 
-	                        "female1/walk1-f", 
-	                        "female1/walk2-f", 
-	                        "female1/walk1-f"]}))
+	                        'female1/walk1-f', 
+	                        'female1/walk2-f', 
+	                        'female1/walk1-f']}))
 		player_info = @mgr.add_comp(
 			@player, Info.new('Kadijah'))
 		player_info.occupation = 'Unemployed'
 		player_info.gender = 'female'
+
+	  end
+
+
+  def setup_drones
 
 		@drone1 = @mgr.create_tagged_entity('drone 1')
 		@mgr.add_comp(@drone1, Position.new(42, 42))
@@ -65,59 +110,25 @@ class LastDitch < ApplicationAdapter
 			0.3,
 			{'drone1/idle' => ['drone1/idle1',
 												 'drone1/idle2']}))
+  end
 
-		@timer = 0
-		@mgr.atlas = @atlas
 
-		@mgr.time       = @time       = TimeSystem.new
-		@mgr.input      = @input      = InputSystem.new(@mgr)
+  def give_player_basics
 
-		@mgr.actions    = @actions    = ActionsSystem.new(@mgr, @player)
-    @mgr.crafting   = @crafting   = CraftingSystem.new(@mgr)
-    @mgr.skill_test = @skill_test = SkillTestSystem.new(@mgr)
-    @mgr.inventory  = @inventory  = InventorySystem.new(@mgr, @atlas)
-		@mgr.equipment  = @equipment  = EquipmentSystem.new(@mgr)
-		@mgr.status     = @status     = StatusSystem.new(@mgr)
+    inv = @mgr.comp(@player, Inventory)
 
-    @mgr.ui         = @ui         = UISystem.new(@mgr, @atlas)
-    @mgr.inventory.inv_slots = @ui.inventory.slots
+    @inventory.add_item(inv, 'canister1_waste')
+    @inventory.add_item(inv, 'battery_empty')
+    @inventory.add_item(inv, 'canteen1_empty')
+    @inventory.add_item(inv, 'canister1_empty')
+    @inventory.add_item(inv, 'overgrowth1')
+    @inventory.add_item(inv, 'overgrowth1')
+    @inventory.add_item(inv, 'handgun1')
+    @inventory.add_item(inv, 'headset1')
 
-		@mgr.ai         = @ai         = AISystem.new(@mgr)
-		@mgr.map        = @map        = MapSystem.new(@mgr, @player, @atlas)
-		@mgr.render     = @render     = RenderSystem.new(@mgr, @player, @atlas)
-		@mgr.physics    = @physics    = PhysicsSystem.new(@mgr, @player, @map)
-		@mgr.lighting   = @lighting   = LightingSystem.new(@mgr, @map.cam, @physics)
+    @ui.equipment.setup_slots
 
-		# Give player starting items
-		inv = @mgr.comp(@player, Inventory)
-
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('canister1_waste'))
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('battery_empty'))
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('canteen1_empty'))
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('canister1_empty'))
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('overgrowth1'))
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('overgrowth1'))
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('handgun1'))
-		@inventory.add_item(
-			inv, @inventory.create_inv_item('headset1'))
-
-		@ui.equipment.setup_slots
-
-		@multiplexer = InputMultiplexer.new
-		@multiplexer.add_processor(@ui.stage)
-		@multiplexer.add_processor(@input.user_adapter)
-
-		Gdx.input.input_processor = @multiplexer
-		Gdx.gl.gl_clear_color(0, 0, 0, 1)
-
-	end
+  end
 
 
 	def update

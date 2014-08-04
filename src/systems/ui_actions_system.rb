@@ -18,28 +18,28 @@ class UIActionsSystem < System
     @recipe_check = false
     @num_of_craftables = 0
     @tot_num_of_craftables = 0
-
+    
     @table = Table.new
     @table.set_position(128, 342)
     @table.set_size(548, 254)
-
+    
     @actions_list_table = Table.new
     @actions_list_table.align(Align::left | Align::top)
-
+    
     setup_main_buttons
     setup_crafting_info
     setup_object_info
     setup_crafting_list
     setup_object_list
     setup_scrollpane
-
+    
     if 1 == 0
-
+      
       @table.debug
       @actions_list_table.debug
       @crafting_info_table.debug
       @object_info_table.debug
-
+    
     end
 
   end
@@ -123,17 +123,13 @@ class UIActionsSystem < System
       Class.new(ChangeListener) do
 
         def initialize(actions)
-
           super()
           @actions = actions
-        
         end
 
         def changed(event, actor)
-
           @actions.list_item_changed
           true
-
         end
 
       end.new(self))
