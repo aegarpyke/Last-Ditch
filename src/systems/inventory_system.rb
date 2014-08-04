@@ -209,15 +209,15 @@ class InventorySystem < System
 		item.base_value = type_data['base_value']
 		item.usable = type_data['usable']
 
-		equipable_types = []
+		equippable_types = []
 
-		if type_data['equipable']
+		if type_data['equippable']
 
-			for type in type_data['equipable']
-				equipable_types << type
+			for type in type_data['equippable']
+				equippable_types << type
 			end
 
-			@mgr.add_comp(item_id, Equipable.new(equipable_types))
+			@mgr.add_comp(item_id, Equippable.new(equippable_types))
 
 		end
 
@@ -252,15 +252,15 @@ class InventorySystem < System
 		item.base_value = type_data['base_value']
 		item.usable = type_data['usable']
 
-		equipable_types = []
+		equippable_types = []
 
-		if type_data['equipable']
+		if type_data['equippable']
 
-			for type in type_data['equipable']
-				equipable_types << type
+			for type in type_data['equippable']
+				equippable_types << type
 			end
 
-			@mgr.add_comp(item_id, Equipable.new(equipable_types))
+			@mgr.add_comp(item_id, Equippable.new(equippable_types))
 			
 		end
 

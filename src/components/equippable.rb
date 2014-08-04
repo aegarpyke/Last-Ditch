@@ -1,6 +1,6 @@
-class Equipable < Component
+class Equippable < Component
 
-  attr_accessor :type, :types
+  attr_accessor :slot, :types
 
   def initialize(types)
     
@@ -12,7 +12,8 @@ class Equipable < Component
       @types << type
     end
 
-    @type = @types[0]
+    @slot = @types[0]
+
   end
 
 end

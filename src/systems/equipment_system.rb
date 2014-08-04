@@ -8,11 +8,9 @@ class EquipmentSystem < System
 	end
 
 
-  def equip(equip, item_id)
+  def equip(equip, slot, item_id)
     
-    equipable = @mgr.comp(item_id, Equipable)
-
-    equip.set_slot('l_head', item_id)
+    equip.set_slot(slot, item_id)               
 
   end
 

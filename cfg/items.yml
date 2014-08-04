@@ -106,7 +106,7 @@ handgun1:
   desc: >
     This is a handgun that fires bursts of energy.
   usable: false
-  equipable: 
+  equippable: 
     - l_hand
     - r_hand
   weight: 0.36
@@ -117,7 +117,7 @@ headset1:
   desc: >
     A simple, non-invasive temperment controller.
   usable: false
-  equipable:
+  equippable:
     - l_head
     - r_head
   weight: 0.03

@@ -39,7 +39,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('l_head', actor.get_selection)
+          @equip.set_equipment('l_head', actor.get_selected_index)
           true
         end
 
@@ -56,7 +56,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('r_head', actor.get_selection)
+          @equip.set_equipment('r_head', actor.get_selected_index)
           true
         end
 
@@ -73,7 +73,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('l_arm', actor.get_selection)
+          @equip.set_equipment('l_arm', actor.get_selected_index)
           true
         end
 
@@ -90,7 +90,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('torso', actor.get_selection)
+          @equip.set_equipment('torso', actor.get_selected_index)
           true
         end
 
@@ -107,7 +107,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('r_arm', actor.get_selection)
+          @equip.set_equipment('r_arm', actor.get_selected_index)
           true
         end
 
@@ -124,7 +124,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('l_hand', actor.get_selection)
+          @equip.set_equipment('l_hand', actor.get_selected_index)
           true
         end
 
@@ -141,7 +141,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('belt', actor.get_selection)
+          @equip.set_equipment('belt', actor.get_selected_index)
           true
         end
 
@@ -158,7 +158,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('r_hand', actor.get_selection)
+          @equip.set_equipment('r_hand', actor.get_selected_index)
           true
         end
 
@@ -175,7 +175,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('l_leg', actor.get_selection)
+          @equip.set_equipment('l_leg', actor.get_selected_index)
           true
         end
 
@@ -192,7 +192,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('r_leg', actor.get_selection)
+          @equip.set_equipment('r_leg', actor.get_selected_index)
           true
         end
 
@@ -209,7 +209,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('l_foot', actor.get_selection)
+          @equip.set_equipment('l_foot', actor.get_selected_index)
           true
         end
 
@@ -226,7 +226,7 @@ class UIEquipSystem < System
         end
 
         def changed(event, actor)
-          @equip.set_equipment('r_foot', actor.get_selection)
+          @equip.set_equipment('r_foot', actor.get_selected_index)
           true
         end
 
@@ -262,81 +262,92 @@ class UIEquipSystem < System
 
   def setup_slots
 
+    @head_items  = []
+    @arm_items   = []
+    @torso_items = []
+    @hand_items  = []
+    @belt_items  = []
+    @leg_items   = []
+    @foot_items  = []
+ 
+    head_list  = GdxArray.new
+    arm_list   = GdxArray.new
+    torso_list = GdxArray.new
+    hand_list  = GdxArray.new
+    belt_list  = GdxArray.new
+    leg_list   = GdxArray.new
+    foot_list  = GdxArray.new
+    
+    head_list.add('none')
+    arm_list.add('none')
+    torso_list.add('none')
+    hand_list.add('none')
+    belt_list.add('none')
+    leg_list.add('none')
+    foot_list.add('none')
+    
     inv = @mgr.comp(@mgr.player, Inventory)
 
-    @head_list  = GdxArray.new
-    @arm_list   = GdxArray.new
-    @torso_list = GdxArray.new
-    @hand_list  = GdxArray.new
-    @belt_list  = GdxArray.new
-    @leg_list   = GdxArray.new
-    @foot_list  = GdxArray.new
-
-    @head_list.add('none')
-    @arm_list.add('none')
-    @torso_list.add('none')
-    @hand_list.add('none')
-    @belt_list.add('none')
-    @leg_list.add('none')
-    @foot_list.add('none')
-    
     for item_id in inv.items
 
-      if equipable = @mgr.comp(item_id, Equipable)
+      if equippable = @mgr.comp(item_id, Equippable)
 
         info = @mgr.comp(item_id, Info)
 
-        equip = @mgr.comp(@mgr.player, Equipment)
+        if equippable.types.include?('l_head') ||
+           equippable.types.include?('r_head')
 
-        @mgr.equipment.equip(equip, item_id)
+          @head_items << item_id
+          head_list.add(info.name)
 
-        if equipable.types.include?('l_head') ||
-           equipable.types.include?('r_head')
+        elsif equippable.types.include?('l_arm') ||
+              equippable.types.include?('r_arm')
 
-          @head_list.add(info.name)
+          @arm_items << item_id
+          arm_list.add(info.name)
 
-        elsif equipable.types.include?('l_arm') ||
-              equipable.types.include?('r_arm')
+        elsif equippable.types.include?('torso')
 
-          @arm_list.add(info.name)
+          @torso_items << item_id
+          torso_list.add(info.name)
 
-        elsif equipable.types.include?('torso')
+        elsif equippable.types.include?('l_hand') ||
+              equippable.types.include?('r_hand')
 
-          @torso_list.add(info.name)
+          @hand_items << item_id
+          hand_list.add(info.name)
 
-        elsif equipable.types.include?('l_hand') ||
-              equipable.types.include?('r_hand')
+        elsif equippable.types.include?('belt')
 
-          @hand_list.add(info.name)
+          @belt_items << item_id
+          belt_list.add(info.name)
 
-        elsif equipable.types.include?('belt')
+        elsif equippable.types.include?('l_leg') ||
+              equippable.types.include?('r_leg')
 
-          @belt_list.add(info.name)
+          @leg_items << item_id
+          leg_list.add(info.name)
 
-        elsif equipable.types.include?('l_leg') ||
-              equipable.types.include?('r_leg')
+        elsif equippable.types.include?('l_foot') ||
+              equippable.types.include?('r_foot')
 
-          @leg_list.add(info.name)
-
-        elsif equipable.types.include?('l_foot') ||
-              equipable.types.include?('r_foot')
-
-          @foot_list.add(info.name)
+          @foot_items << item_id
+          foot_list.add(info.name)
 
         end
 
-        @l_head_box.set_items(@head_list)
-        @r_head_box.set_items(@head_list)
-        @l_arm_box.set_items(@arm_list)
-        @torso_box.set_items(@torso_list)
-        @r_arm_box.set_items(@arm_list)
-        @l_hand_box.set_items(@hand_list)
-        @belt_box.set_items(@belt_list)
-        @r_hand_box.set_items(@hand_list)
-        @l_leg_box.set_items(@leg_list)
-        @r_leg_box.set_items(@leg_list)
-        @l_foot_box.set_items(@foot_list)
-        @r_foot_box.set_items(@foot_list)
+        @l_head_box.set_items(head_list)
+        @r_head_box.set_items(head_list)
+        @l_arm_box.set_items(arm_list)
+        @torso_box.set_items(torso_list)
+        @r_arm_box.set_items(arm_list)
+        @l_hand_box.set_items(hand_list)
+        @belt_box.set_items(belt_list)
+        @r_hand_box.set_items(hand_list)
+        @l_leg_box.set_items(leg_list)
+        @r_leg_box.set_items(leg_list)
+        @l_foot_box.set_items(foot_list)
+        @r_foot_box.set_items(foot_list)
 
       end
       
@@ -345,9 +356,56 @@ class UIEquipSystem < System
   end
 
 
-  def set_equipment(type, slot_name)
+  def set_equipment(slot, index)
 
-    puts type, slot_name
+    equip = @mgr.comp(@mgr.player, Equipment)
+
+    if index == 0
+
+      @mgr.equipment.equip(equip, slot, nil)
+
+    elsif slot == 'r_head' || slot == 'l_head'
+
+      @mgr.equipment.equip(equip, slot, @head_items[index - 1])
+
+    elsif slot == 'r_hand' || slot == 'l_hand'
+
+      @mgr.equipment.equip(equip, slot, @hand_items[index - 1])
+
+    elsif slot == 'r_arm' || slot == 'l_arm'
+
+      @mgr.equipment.equip(equip, slot, @arm_items[index - 1])
+
+    elsif slot == 'torso'
+
+      @mgr.equipment.equip(equip, slot, @torso[index - 1])
+
+    elsif slot == 'belt'
+
+      @mgr.equipment.equip(equip, slot, @belt_items[index - 1])
+
+    elsif slot == 'r_leg' || slot == 'l_leg'
+
+      @mgr.equipment.equip(equip, slot, @leg_items[index - 1])
+
+    elsif slot == 'r_foot' || slot == 'l_foot'
+
+      @mgr.equipment.equip(equip, slot, @foot_items[index - 1])
+
+    end
+
+    puts equip.r_head
+    puts equip.l_head
+    puts equip.r_arm
+    puts equip.l_arm
+    puts equip.torso
+    puts equip.r_hand
+    puts equip.l_hand
+    puts equip.belt
+    puts equip.r_leg
+    puts equip.l_leg
+    puts equip.l_foot
+    puts equip.r_foot
 
   end
 

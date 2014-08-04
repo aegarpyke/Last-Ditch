@@ -137,7 +137,7 @@ require_relative '../components/ingredients'
 require_relative '../components/requirements'
 require_relative '../components/resources'
 require_relative '../components/equipment'
-require_relative '../components/equipable'
+require_relative '../components/equippable'
 
 GdxArray = com.badlogic.gdx.utils.Array
 
