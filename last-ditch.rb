@@ -106,7 +106,6 @@ class LastDitch < ApplicationAdapter
       0.3,
       {'drone1/idle' => ['drone1/idle1',
                          'drone1/idle2']}))
-
     @drone2 = @mgr.create_tagged_entity('drone 2')
     @mgr.add_comp(@drone2, Position.new(44, 44))
     @mgr.add_comp(@drone2, Velocity.new(0, 0, 1.0, 1))
@@ -128,7 +127,6 @@ class LastDitch < ApplicationAdapter
     alpha = @timer / C::BOX_STEP
   
     [n, C::MAX_STEPS].min.times do
-
       @actions.update
       @crafting.update
       @inventory.update
@@ -137,14 +135,11 @@ class LastDitch < ApplicationAdapter
       @skill_test.update
 
       unless @mgr.paused
-        
         @time.update 
         @ai.update
         @render.update
         @physics.update
-      
       end
-
     end
     
     @map.update
@@ -159,8 +154,8 @@ class LastDitch < ApplicationAdapter
 
     @batch.begin
 
-      @map.render(@batch)
-      @render.render(@batch)
+    @map.render(@batch)
+    @render.render(@batch)
 
     @batch.end
 
