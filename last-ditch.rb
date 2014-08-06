@@ -46,6 +46,69 @@ class LastDitch < ApplicationAdapter
     Gdx.gl.gl_clear_color(0, 0, 0, 1)
   end
 
+  def update
+    @timer += Gdx.graphics.delta_time
+    n = (@timer / C::BOX_STEP).floor
+    @timer -= n * C::BOX_STEP if n > 0
+
+    alpha = @timer / C::BOX_STEP
+  
+    [n, C::MAX_STEPS].min.times do
+      @actions.update
+      @crafting.update
+      @inventory.update
+      @equipment.update
+      @status.update
+      @skill_test.update
+
+      unless @mgr.paused
+        @time.update 
+        @ai.update
+        @render.update
+        @physics.update
+      end
+    end
+    
+    @map.update
+    @ui.update
+  end
+
+  def render
+    update
+
+    Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
+    @batch.set_projection_matrix(@map.cam.combined)
+
+    # This is a comment
+    @batch.begin
+
+    @map.render(@batch)
+    @render.render(@batch)
+
+    @batch.end
+
+    @lighting.render
+    @ui.render
+    @skill_test.render(@batch)
+     
+    # @debug.render(@physics.world, @map.cam.combined)
+  end
+
+  def dispose
+    @batch.dispose
+    @time.dispose
+    @input.dispose
+    @ui.dispose
+    @actions.dispose
+    @inventory.dispose
+    @equipment.dispose
+    @status.dispose
+    @physics.dispose
+    @map.dispose
+    @render.dispose
+    @lighting.dispose
+  end
+
   def setup_player
     @mgr.skin = @skin
     @mgr.player = @player = @mgr.create_tagged_entity('player')
@@ -91,7 +154,7 @@ class LastDitch < ApplicationAdapter
     @inventory.add_item(inv, 'handgun1')
     @inventory.add_item(inv, 'headset')
 
-    @ui.equipment.setup_slots
+    @ui.equipment.setup_equipment_lists
   end
 
   def setup_drones
@@ -117,68 +180,6 @@ class LastDitch < ApplicationAdapter
       0.3,
       {'drone1/idle' => ['drone1/idle1',
                          'drone1/idle2']}))
-  end
-
-  def update
-    @timer += Gdx.graphics.delta_time
-    n = (@timer / C::BOX_STEP).floor
-    @timer -= n * C::BOX_STEP if n > 0
-
-    alpha = @timer / C::BOX_STEP
-  
-    [n, C::MAX_STEPS].min.times do
-      @actions.update
-      @crafting.update
-      @inventory.update
-      @equipment.update
-      @status.update
-      @skill_test.update
-
-      unless @mgr.paused
-        @time.update 
-        @ai.update
-        @render.update
-        @physics.update
-      end
-    end
-    
-    @map.update
-    @ui.update
-  end
-
-  def render
-    update
-
-    Gdx.gl.gl_clear(GL20::GL_COLOR_BUFFER_BIT)
-    @batch.set_projection_matrix(@map.cam.combined)
-
-    @batch.begin
-
-    @map.render(@batch)
-    @render.render(@batch)
-
-    @batch.end
-
-    @lighting.render
-    @ui.render
-    @skill_test.render(@batch)
-
-    # @debug.render(@physics.world, @map.cam.combined)
-  end
-
-  def dispose
-    @batch.dispose
-    @time.dispose
-    @input.dispose
-    @ui.dispose
-    @actions.dispose
-    @inventory.dispose
-    @equipment.dispose
-    @status.dispose
-    @physics.dispose
-    @map.dispose
-    @render.dispose
-    @lighting.dispose
   end
 
 end

@@ -216,7 +216,7 @@ class UIEquipSystem < System
     @table.add(@desc).padTop(6).colspan(3).width(240)
   end
 
-  def setup_slots
+  def setup_equipment_lists
     @head_items  = []
     @arm_items   = []
     @torso_items = []
@@ -251,6 +251,7 @@ class UIEquipSystem < System
         if !(types & ['l_head', 'r_head']).empty?
           @head_items << item_id
           head_list.add(info.name)
+          puts "Puttin on the head!"
         elsif !(types & ['l_arm', 'r_arm']).empty?
           @arm_items << item_id
           arm_list.add(info.name)
@@ -270,21 +271,21 @@ class UIEquipSystem < System
           @foot_items << item_id
           foot_list.add(info.name)
         end
-
-        @l_head_box.set_items(head_list)
-        @r_head_box.set_items(head_list)
-        @l_arm_box.set_items(arm_list)
-        @torso_box.set_items(torso_list)
-        @r_arm_box.set_items(arm_list)
-        @l_hand_box.set_items(hand_list)
-        @belt_box.set_items(belt_list)
-        @r_hand_box.set_items(hand_list)
-        @l_leg_box.set_items(leg_list)
-        @r_leg_box.set_items(leg_list)
-        @l_foot_box.set_items(foot_list)
-        @r_foot_box.set_items(foot_list)
       end
     end
+    
+    @l_head_box.set_items(head_list)
+    @r_head_box.set_items(head_list)
+    @l_arm_box.set_items(arm_list)
+    @torso_box.set_items(torso_list)
+    @r_arm_box.set_items(arm_list)
+    @l_hand_box.set_items(hand_list)
+    @belt_box.set_items(belt_list)
+    @r_hand_box.set_items(hand_list)
+    @l_leg_box.set_items(leg_list)
+    @r_leg_box.set_items(leg_list)
+    @l_foot_box.set_items(foot_list)
+    @r_foot_box.set_items(foot_list)
   end
 
   def set_equipment(slot, index)

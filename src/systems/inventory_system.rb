@@ -97,6 +97,8 @@ class InventorySystem < System
       if inv.items[i].nil?
         @update_slots = true
         inv.items[i] = item_id
+        @mgr.ui.equipment.setup_equipment_lists
+
         return item_id
       end
     end
@@ -110,6 +112,8 @@ class InventorySystem < System
     if index
       @update_slots = true
       inv.items[index] = nil
+      @mgr.ui.equipment.setup_equipment_lists
+
       return item_id
     end
 
@@ -255,8 +259,9 @@ class InventorySystem < System
     Proc.new do
       item = @mgr.comp(item_id, Item)
       inv.weight += item.weight
-      @mgr.ui.inventory.prev_selection = nil
+
       @mgr.map.remove_item(item_id)
+      @mgr.ui.inventory.prev_selection = nil
 
       return true
     end.call
