@@ -261,7 +261,7 @@ class UIEquipSystem < System
 
 
   def setup_slots
-
+    
     @head_items  = []
     @arm_items   = []
     @torso_items = []
@@ -362,50 +362,37 @@ class UIEquipSystem < System
 
     if index == 0
 
-      @mgr.equipment.equip(equip, slot, nil)
+      equip.set_slot(slot, nil)
 
     elsif slot == 'r_head' || slot == 'l_head'
 
-      @mgr.equipment.equip(equip, slot, @head_items[index - 1])
+      equip.set_slot(slot, @head_items[index - 1])
 
     elsif slot == 'r_hand' || slot == 'l_hand'
 
-      @mgr.equipment.equip(equip, slot, @hand_items[index - 1])
+      equip.set_slot(slot, @hand_items[index - 1])
 
     elsif slot == 'r_arm' || slot == 'l_arm'
 
-      @mgr.equipment.equip(equip, slot, @arm_items[index - 1])
+      equip.set_slot(slot, @arm_items[index - 1])
 
     elsif slot == 'torso'
 
-      @mgr.equipment.equip(equip, slot, @torso[index - 1])
+      equip.set_slot(slot, @torso[index - 1])
 
     elsif slot == 'belt'
 
-      @mgr.equipment.equip(equip, slot, @belt_items[index - 1])
+      equip.set_slot(slot, @belt_items[index - 1])
 
     elsif slot == 'r_leg' || slot == 'l_leg'
 
-      @mgr.equipment.equip(equip, slot, @leg_items[index - 1])
+      equip.set_slot(slot, @leg_items[index - 1])
 
     elsif slot == 'r_foot' || slot == 'l_foot'
 
-      @mgr.equipment.equip(equip, slot, @foot_items[index - 1])
+      equip.set_slot(slot, @foot_items[index - 1])
 
     end
-
-    puts equip.r_head
-    puts equip.l_head
-    puts equip.r_arm
-    puts equip.l_arm
-    puts equip.torso
-    puts equip.r_hand
-    puts equip.l_hand
-    puts equip.belt
-    puts equip.r_leg
-    puts equip.l_leg
-    puts equip.l_foot
-    puts equip.r_foot
 
   end
 

@@ -200,7 +200,7 @@ items/handgun1
   orig: 24, 24
   offset: 0, 0
   index: -1
-items/headset1
+items/headset
   rotate: false
   xy: 41, 18
   size: 24, 24

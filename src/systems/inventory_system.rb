@@ -194,6 +194,8 @@ class InventorySystem < System
 
 	def create_item(type_value, x=0, y=0)
 
+    puts type_value
+
 		item_id = @mgr.create_basic_entity
 		type_data = @item_data[type_value]
 
@@ -238,13 +240,15 @@ class InventorySystem < System
 
 		@update_slots = true
 
+    puts "create: %s" % type_value
+
 		item_id = @mgr.create_basic_entity
 		type_data = @item_data[type_value]
 
 		rot    = @mgr.add_comp(item_id, Rotation.new(0))
 		type   = @mgr.add_comp(item_id, Type.new(type_value))
-		info   = @mgr.add_comp(item_id, Info.new(type_data["name"]))
-		info.desc = type_data["desc"]
+		info   = @mgr.add_comp(item_id, Info.new(type_data['name']))
+		info.desc = type_data['desc']
 		
 		quality, condition = Random.rand(0.2..0.5), Random.rand(0.1..0.4)
 

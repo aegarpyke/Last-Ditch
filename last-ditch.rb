@@ -85,6 +85,24 @@ class LastDitch < ApplicationAdapter
 	  end
 
 
+  def give_player_basics
+
+    inv = @mgr.comp(@player, Inventory)
+
+    @inventory.add_item(inv, 'canister1_waste')
+    @inventory.add_item(inv, 'battery_empty')
+    @inventory.add_item(inv, 'canteen1_empty')
+    @inventory.add_item(inv, 'canister1_empty')
+    @inventory.add_item(inv, 'overgrowth1')
+    @inventory.add_item(inv, 'overgrowth1')
+    @inventory.add_item(inv, 'handgun1')
+    @inventory.add_item(inv, 'headset')
+
+    @ui.equipment.setup_slots
+
+  end
+
+
   def setup_drones
 
 		@drone1 = @mgr.create_tagged_entity('drone 1')
@@ -110,24 +128,6 @@ class LastDitch < ApplicationAdapter
 			0.3,
 			{'drone1/idle' => ['drone1/idle1',
 												 'drone1/idle2']}))
-  end
-
-
-  def give_player_basics
-
-    inv = @mgr.comp(@player, Inventory)
-
-    @inventory.add_item(inv, 'canister1_waste')
-    @inventory.add_item(inv, 'battery_empty')
-    @inventory.add_item(inv, 'canteen1_empty')
-    @inventory.add_item(inv, 'canister1_empty')
-    @inventory.add_item(inv, 'overgrowth1')
-    @inventory.add_item(inv, 'overgrowth1')
-    @inventory.add_item(inv, 'handgun1')
-    @inventory.add_item(inv, 'headset1')
-
-    @ui.equipment.setup_slots
-
   end
 
 
@@ -209,10 +209,6 @@ class LastDitch < ApplicationAdapter
 	end
 
 end
-
-##########
-# Launch #
-##########
 
 config = LwjglApplicationConfiguration.new
 config.title = C::TITLE
