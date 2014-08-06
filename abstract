@@ -3,44 +3,44 @@ LAST DITCH
 
 TODO
 
-	UI:
-		+ Add search field to actions list
-		+ Activating an item from the inventory will create a "use item" 
-			action of the same type, then when unpaused the action can be 
-			activated to start the actual process of using the item which 
-			will take a certain amount of actual gametime to complete.
-		+
-
-	Crafting:
-		+ Genetically engineer weeds into plants with useful properties
-		+ Add wires to allow player to transfer energy
-		+ Add bonuses for streaks in skill test
-		+
-
-	Environment:
-	  + The buildings were built in a highly modular fashion to allow the 
-	  	communities to to grow. After aquiring/developing the right 
-	  	technology the player will be able to reshape their surroundings.
-	  + 
-
-	Transplants:  
-		+ Conex, Conarch - Constitution
-  	+ Endex, Endarch - Endorphin
-  	+ Andex, Andarch - Androgen
-  	+ 
-
- 	Sound:
- 		+ Visualize sound in darkness only
- 		+ 
- 		
- 	Crimes:
- 		+ If a player kills anyone and interacts with their dead body, then 
- 			their DNA will be traced to the crime and they will become wanted for 
- 			murder.
- 		+ Stores have CC video that will identify any assailents.
+  UI:
+    + Add search field to actions list
+    + Activating an item from the inventory will create a "use item" 
+      action of the same type, then when unpaused the action can be 
+      activated to start the actual process of using the item which 
+      will take a certain amount of actual gametime to complete.
     +
 
- 		
+  Crafting:
+    + Genetically engineer weeds into plants with useful properties
+    + Add wires to allow player to transfer energy
+    + Add bonuses for streaks in skill test
+    +
+
+  Environment:
+    + The buildings were built in a highly modular fashion to allow the 
+      communities to to grow. After aquiring/developing the right 
+      technology the player will be able to reshape their surroundings.
+    + 
+
+  Transplants:  
+    + Conex, Conarch - Constitution
+    + Endex, Endarch - Endorphin
+    + Andex, Andarch - Androgen
+    + 
+
+  Sound:
+    + Visualize sound in darkness only
+    + 
+    
+  Crimes:
+    + If a player kills anyone and interacts with their dead body, then 
+      their DNA will be traced to the crime and they will become wanted for 
+      murder.
+    + Stores have CC video that will identify any assailents.
+    +
+
+    
 
 
 

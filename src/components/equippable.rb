@@ -15,17 +15,3 @@ class Equippable < Component
   end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-

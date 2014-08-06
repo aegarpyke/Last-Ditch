@@ -1,11 +1,11 @@
 class Door < Component
 
-	attr_accessor :open, :locked
+  attr_accessor :open, :locked
 
-	def initialize
-		super()
-		@open = false
-		@locked = false
-	end
+  def initialize
+    super()
+    @open = false
+    @locked = false
+  end
 
 end

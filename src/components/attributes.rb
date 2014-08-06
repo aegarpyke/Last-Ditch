@@ -2,8 +2,8 @@ class Attributes < Component
 
   attr_accessor :attributes
 
-	def initialize
-		super()
+  def initialize
+    super()
 
     @attributes = Hash.new
 
@@ -13,6 +13,6 @@ class Attributes < Component
     for attribute in attribute_list
       @attributes[attribute] = 0.01
     end
-	end
+  end
 
 end

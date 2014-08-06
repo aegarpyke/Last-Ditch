@@ -1,79 +1,79 @@
 class EntityManager
 
-	attr_accessor :skin, :player, :atlas, :paused
+  attr_accessor :skin, :player, :atlas, :paused
   attr_accessor :ai, :map, :ui, :input, :time
   attr_accessor :actions, :crafting, :skill_test
   attr_accessor :inventory, :equipment, :status
   attr_accessor :render, :physics, :lighting 
 
-	def initialize
+  def initialize
 
-		@paused = false
+    @paused = false
 
-		@ids_to_tags = Hash.new
-		@tags_to_ids = Hash.new
-		@component_stores = Hash.new
+    @ids_to_tags = Hash.new
+    @tags_to_ids = Hash.new
+    @component_stores = Hash.new
 
-	end
-
-
-	def create_basic_entity
-
-		java.util.UUID.randomUUID.to_s
-	
-	end
+  end
 
 
-	def create_tagged_entity(human_readable_tag)
+  def create_basic_entity
 
-		uuid = create_basic_entity
-
-		@ids_to_tags[uuid] = human_readable_tag
-
-		if @tags_to_ids.has_key?(human_readable_tag)
-			@tags_to_ids[human_readable_tag] << uuid
-		else
-			@tags_to_ids[human_readable_tag] = [uuid]
-		end
-
-		uuid
-
-	end
+    java.util.UUID.randomUUID.to_s
+  
+  end
 
 
-	def get_entity(tag)
-		@tags_to_ids[tag]
-	end
+  def create_tagged_entity(human_readable_tag)
+
+    uuid = create_basic_entity
+
+    @ids_to_tags[uuid] = human_readable_tag
+
+    if @tags_to_ids.has_key?(human_readable_tag)
+      @tags_to_ids[human_readable_tag] << uuid
+    else
+      @tags_to_ids[human_readable_tag] = [uuid]
+    end
+
+    uuid
+
+  end
 
 
-	def get_tag(entity)
-		@ids_to_tags[entity]
-	end
+  def get_entity(tag)
+    @tags_to_ids[tag]
+  end
 
 
-	def add_comp(entity, component)
+  def get_tag(entity)
+    @ids_to_tags[entity]
+  end
 
-		store = @component_stores[component.class]
 
-		if store.nil?
-			store = Hash.new
-			@component_stores[component.class] = store
-		end
+  def add_comp(entity, component)
 
-		if store.has_key?(entity)
+    store = @component_stores[component.class]
+
+    if store.nil?
+      store = Hash.new
+      @component_stores[component.class] = store
+    end
+
+    if store.has_key?(entity)
       unless store[entity].include?(component)
         store[entity] << component
       end
-		else
-			store[entity] = [component]
-		end
+    else
+      store[entity] = [component]
+    end
 
-		component
+    component
 
-	end
+  end
 
 
-	def remove_component(entity, component)
+  def remove_component(entity, component)
 
     store = @component_stores[component.class]
     return nil if store.nil?
@@ -115,95 +115,95 @@ class EntityManager
 
   def comp?(entity, component)
 
-		store = @component_stores[component.class]
+    store = @component_stores[component.class]
 
-		if store.nil?
-			return false
-		else
-			return store.has_key?(entity) && store[entity].include?(component)
-		end
+    if store.nil?
+      return false
+    else
+      return store.has_key?(entity) && store[entity].include?(component)
+    end
 
-	end
-
-
-	def comp_type?(entity, component_class)
-
-		store = @component_stores[component_class]
-
-		if store.nil?
-			return false
-		else
-			return store.has_key?(entity) && store[entity].size > 0
-		end
-
-	end
+  end
 
 
-	def comp(entity, component_class)
+  def comp_type?(entity, component_class)
 
-		store = @component_stores[component_class]
-		
-		return nil if store.nil?
+    store = @component_stores[component_class]
 
-		components = store[entity]
-		return nil if components.nil? || components.empty?
+    if store.nil?
+      return false
+    else
+      return store.has_key?(entity) && store[entity].size > 0
+    end
 
-		if components.size != 1
-			raise "Warning: #{entity} has #{components.size} #{component_class.to_s} components."
-		end
-
-		components.first
-
-	end
+  end
 
 
-	def comps(entity, component_class)
+  def comp(entity, component_class)
 
-		store = @component_stores[component_class]
+    store = @component_stores[component_class]
+    
+    return nil if store.nil?
 
-		return nil if store.nil?
+    components = store[entity]
+    return nil if components.nil? || components.empty?
 
-		components = store[entity]
-		return nil if components.nil? || components.empty?
+    if components.size != 1
+      raise "Warning: #{entity} has #{components.size} #{component_class.to_s} components."
+    end
 
-		components
-	
-	end
+    components.first
 
-
-	def entities_with(component_class)
-
-		store = @component_stores[component_class]
-
-		if store.nil?
-			return []
-		else
-			return store.keys
-		end
-	
-	end
+  end
 
 
-	def entities_with_components(component_classes)
+  def comps(entity, component_class)
 
-		entities = all_entities
-		
-		component_classes.each do |klass|
-			entities = entities & entities_with(klass)
-		end
+    store = @component_stores[component_class]
 
-		entities
-	
-	end
+    return nil if store.nil?
 
+    components = store[entity]
+    return nil if components.nil? || components.empty?
 
-	def all_entities
-		@ids_to_tags.keys
-	end
+    components
+  
+  end
 
 
-	def to_s
-		"Entity Manager {#{id}: #{all_entities.size} entities}"
-	end
+  def entities_with(component_class)
+
+    store = @component_stores[component_class]
+
+    if store.nil?
+      return []
+    else
+      return store.keys
+    end
+  
+  end
+
+
+  def entities_with_components(component_classes)
+
+    entities = all_entities
+    
+    component_classes.each do |klass|
+      entities = entities & entities_with(klass)
+    end
+
+    entities
+  
+  end
+
+
+  def all_entities
+    @ids_to_tags.keys
+  end
+
+
+  def to_s
+    "Entity Manager {#{id}: #{all_entities.size} entities}"
+  end
 
 end

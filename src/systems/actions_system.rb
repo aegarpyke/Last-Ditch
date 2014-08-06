@@ -2,18 +2,18 @@ class ActionsSystem < System
 
   attr_accessor :cur_station
 
-	def initialize(mgr, player)
-		super()
-		@mgr = mgr
+  def initialize(mgr, player)
+    super()
+    @mgr = mgr
     @player = player
-	end
+  end
 
-	def update
+  def update
 
-	end
+  end
 
-	def dispose
+  def dispose
 
-	end
+  end
 
 end

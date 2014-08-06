@@ -22,7 +22,7 @@ canteen1_water:
   usable: true
   weight: 0.6
   base_value: 0.07
-  
+
 canteen1_empty:
   name: canteen, empty
   desc: >

@@ -1,9 +1,9 @@
 class Skills < Component
 
-	attr_accessor :skills
+  attr_accessor :skills
 
-	def initialize
-		super()
+  def initialize
+    super()
 
     @skills = Hash.new
 
@@ -13,7 +13,7 @@ class Skills < Component
     for skill in skill_list
       @skills[skill] = 0.12
     end
-	end
+  end
 
   def get_level(skill)
     @skills[skill]
