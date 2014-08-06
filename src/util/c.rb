@@ -1,5 +1,4 @@
 module C
-
 	TITLE = 'Last Ditch'
 
 	BTW, WTB = 32.0, 32.0**-1
@@ -20,5 +19,4 @@ module C
 	BIT_WALL = 8
 	BIT_WINDOW = 16
 	BIT_ENTITY = 32
-
 end

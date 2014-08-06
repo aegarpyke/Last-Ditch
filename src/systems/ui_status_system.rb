@@ -3,7 +3,6 @@ class UIStatusSystem < System
   attr_accessor :active, :toggle, :table, :window
 
   def initialize(mgr, window)
-    
     super()
 
     @mgr = mgr
@@ -14,18 +13,13 @@ class UIStatusSystem < System
     setup
 
     if 1 == 0
-
       @table.debug
       @table_male_model.debug
       @table_female_model.debug
-
     end
-
   end
 
-
   def setup
-
     @table = Table.new
     @table.set_position(560, 44)
     @table.set_size(250, 290)
@@ -145,37 +139,26 @@ class UIStatusSystem < System
     @add_info.wrap = true
 
     @table.add(@add_info).width(246).padTop(4).padLeft(4)
-
   end
-
 
   def update
 
   end
 
-
   def activate
-
     @active = true
-
   end
-
 
   def deactivate
-
     @active = false
-
   end
 
-
   def toggle_active
-  
     @active = !@active
 
     if @active
     else
     end
-    
   end
 
 end

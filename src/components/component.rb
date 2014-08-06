@@ -1,4 +1,5 @@
 class Component
+
 	attr_reader :id
 
 	def initialize

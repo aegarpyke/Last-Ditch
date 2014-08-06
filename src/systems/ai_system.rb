@@ -1,15 +1,11 @@
 class AISystem < System
 
 	def initialize(mgr)
-
 		@mgr = mgr
 		@tick = 0
-
 	end
 
-
 	def update
-
 		if @tick < 80
 
 			@tick += 1
@@ -36,7 +32,6 @@ class AISystem < System
 			end
 			
 		end
-
 	end
 
 end

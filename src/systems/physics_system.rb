@@ -3,7 +3,6 @@ class PhysicsSystem < System
 	attr_accessor :world, :player_body, :bodies
 
 	def initialize(mgr, player, map)
-
 		@mgr = mgr
 		@map = map
 		@bodies = []
@@ -16,15 +15,11 @@ class PhysicsSystem < System
 		generate_tile_bodies
 		generate_door_bodies
 		generate_station_bodies
-
 	end
 
-
 	def generate_entity_bodies
-
 		entities = @mgr.entities_with_components([Animation, Collision])
 		entities.each do |entity|
-
 			pos = @mgr.comp(entity, Position)
 			anim = @mgr.comp(entity, Animation)
 			col = @mgr.comp(entity, Collision)
@@ -59,19 +54,13 @@ class PhysicsSystem < System
 			if entity == @player
 				@player_body = col.body
 			end
-
 		end
-
 	end
 
-
 	def generate_tile_bodies
-
 		for x in 0...@map.width
 			for y in 0...@map.height
-
 				if @map.solid[x][y]
-					
 					body_def = BodyDef.new
 					body_def.position.set(x + 0.5, y + 0.5)
 
@@ -90,20 +79,13 @@ class PhysicsSystem < System
 					body = @world.create_body(body_def)
 					body.create_fixture(fixture_def)
 					body.user_data = [x, y]
-
 				end
-
 			end
-			
 		end
-
 	end
 
-
 	def generate_door_bodies
-
 		@map.doors.each do |door|
-
 			pos    = @mgr.comp(door, Position)
 			rot    = @mgr.comp(door, Rotation)
 			render = @mgr.comp(door, Render)
@@ -115,16 +97,11 @@ class PhysicsSystem < System
 			col.body = create_body(
 				pos.x, pos.y,
 				w, h, false, rot.angle)
-
 		end
-
 	end
 
-
 	def generate_station_bodies
-
 		@map.stations.each do |station_id|
-
 			pos    = @mgr.comp(station_id, Position)
 			rot    = @mgr.comp(station_id, Rotation)
 			render = @mgr.comp(station_id, Render)
@@ -136,14 +113,10 @@ class PhysicsSystem < System
 			col.body = create_body(
 				pos.x, pos.y,
 				w, h, true, rot.angle)
-
 		end
-
 	end
 
-
 	def create_body(x, y, width, height, sight, angle)
-
 		body_def = BodyDef.new
 		body_def.position.set(x, y)
 
@@ -166,22 +139,15 @@ class PhysicsSystem < System
 		shape.dispose
 
 		body
-
 	end
-
 
 	def remove_body(body)
-
 		@world.destroy_body(body)
-
 	end
 
-
 	def update
-
 		entities = @mgr.entities_with(Velocity)
 		entities.each do |entity|
-
 			pos = @mgr.comp(entity, Position)
 			vel = @mgr.comp(entity, Velocity)
 			rot = @mgr.comp(entity, Rotation)
@@ -191,7 +157,6 @@ class PhysicsSystem < System
 			pos.py = pos.y
 
 			if vel.spd != 0
-
 				vel_vec = Vector2.new(
 					vel.spd * rot.x, 
 					vel.spd * rot.y)
@@ -200,7 +165,6 @@ class PhysicsSystem < System
 					vel_vec, 
 					col.body.world_center, 
 					true)
-
 			end
 
 			rot.p_angle = rot.angle
@@ -208,27 +172,21 @@ class PhysicsSystem < System
 			if vel.ang_spd != 0
 				rot.rotate(vel.ang_spd)
 			end
-
 		end
 
 		@world.step(C::BOX_STEP, C::BOX_VEL_ITER, C::BOX_POS_ITER)
 
 		entities = @mgr.entities_with(Velocity)
 		entities.each do |entity|
-
 			pos = @mgr.comp(entity, Position)
 			col = @mgr.comp(entity, Collision)
 
 			pos.x = col.body.getPosition.x
 			pos.y = col.body.getPosition.y
-
 		end
-
 	end
 
-
 	def interpolate(alpha)
-
 		pos = @mgr.comp(@player, Position)
 		rot = @mgr.comp(@player, Rotation)
 		col = @mgr.comp(@player, Collision)
@@ -236,14 +194,10 @@ class PhysicsSystem < System
 		pos.x = alpha * pos.px + (1 - alpha) * pos.x
 		pos.y = alpha * pos.py + (1 - alpha) * pos.y
 		rot.angle = alpha * rot.p_angle + (1 - alpha) * rot.angle
-
 	end
 
-
 	def dispose
-
 		@world.dispose
-
 	end
 
 end

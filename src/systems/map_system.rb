@@ -5,7 +5,6 @@ class MapSystem < System
 	attr_accessor :tiles, :solid, :sight, :rot
 
 	def initialize(mgr, player, atlas)
-
 		super()
 		@mgr = mgr
 		@atlas = atlas
@@ -29,15 +28,11 @@ class MapSystem < System
 
 		for x in 0...@width
 			for y in 0...@height
-
 				if x == 0 || y == 0 || x == @width-1 || y == @height-1
-					
 					@solid[x][y] = true
 					@sight[x][y] = true
 					@tiles[x][y] = @atlas.find_region('environ/empty')
-
 				end
-
 			end
 		end
 
@@ -47,22 +42,17 @@ class MapSystem < System
 		generate_stations
 
 		update
-
 	end
 
-
 	def generate_rooms
-		
 		x, y = 0, 0
 		@master = Room.new(10, 10, C::MAP_WIDTH - 10, C::MAP_HEIGHT - 10)
 
 		for i in 0...@num_of_rooms
-
 		  x = Random.rand(@master.x1...@master.x2)
 		  y = Random.rand(@master.y1...@master.y2)
 
 		  @rooms << Room.new(x, y, 1, 1)
-		
 		end
 
 		for i in 0...@iterations
@@ -74,77 +64,54 @@ class MapSystem < System
 		degenerate_rooms = []
 
 		@rooms.each do |room|
-
 			if room.width < 5 || room.height < 5
-
 				degenerate_rooms << room
-
 			else
-				
 				for x in room.x1...room.x2
 					for y in room.y1...room.y2
-
 						if x == room.x1 || x == room.x2-1
-
 							@solid[x][y] = true
 							@sight[x][y] = false
 							@rot[x][y]   = 0.0
 							@tiles[x][y] = @atlas.find_region('environ/wall1')
-
 						elsif y == room.y1 || y == room.y2-1
-
 							@solid[x][y] = true
 							@sight[x][y] = false
 							@rot[x][y]   = 0.0
 							@tiles[x][y] = @atlas.find_region('environ/wall1')
-
 						else
-
 							@solid[x][y] = false
 							@sight[x][y] = true
 							@rot[x][y]   = 0.0
 							@tiles[x][y] = @atlas.find_region('environ/floor2')
-
 						end
-
 					end
 				end
-
 			end
-
 		end
 
 		@rooms -= degenerate_rooms
-
 	end
 
-
 	def generate_items
-
 		item_data = YAML.load_file('cfg/items.yml')
 		item_list = item_data['item_list'] 
 		x, y = 0, 0
 
 		for i in 0...@num_of_items
-
 			loop do
-
 				x = Random.rand(10.0...@width-10)
 				y = Random.rand(10.0...@height-10)
 				break if not @solid[x.to_i][y.to_i]
-			
 			end
 
 			choice = item_list.sample
-
 			item_id = @mgr.inventory.create_item(choice, x, y)
 
 			@items << item_id
 
 			if choice == 'overgrowth1'
-
 				8.times do
-
 					xx, yy = 0, 0
 
 					loop do
@@ -155,22 +122,15 @@ class MapSystem < System
 					end
 
 					item_id = @mgr.inventory.create_item('ruffage1', xx, yy)
-					
+
 					@items << item_id 
-
 				end
-
 			end
-
 		end
-
 	end
 
-
 	def generate_doors
-
 		@rooms.each do |room|
-
 			x = Random.rand(room.x1 + 1...room.x2 - 2)
 
 			if Random.rand < 0.5
@@ -244,21 +204,15 @@ class MapSystem < System
 			@mgr.add_comp(door_id, Door.new)
 
 			@doors << door_id
-
 		end
-
 	end
 
-
 	def generate_stations
-
 		station_data = YAML.load_file('cfg/stations.yml')
 		station_list = station_data['stations']
 
 		@rooms.each do |room|
-
 			if room.x1 + 2 < room.x2 - 4 && room.y1 + 2 < room.y2 - 4
-
 				station_id = @mgr.create_basic_entity
 				station_type = station_list.sample
 
@@ -288,7 +242,6 @@ class MapSystem < System
 				resources = @mgr.add_comp(station_id, Resources.new)
 
 				case station_type
-
 					when 'purification_station'
 						resources.water = 2.0
 
@@ -297,20 +250,14 @@ class MapSystem < System
 
 					when 'incinerator'
 						resources.energy = 1.0
-
 				end
 
 				@stations << station_id
-
 			end
-
 		end
-
 	end
 
-
 	def use_door(entity)
-
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
@@ -328,12 +275,9 @@ class MapSystem < System
 		end.call
 
 		false
-
 	end
 
-
 	def use_door_at(entity, screen_x, screen_y)
-
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
@@ -345,30 +289,23 @@ class MapSystem < System
 		!door.locked                    and
 
 		Proc.new do
-
 			door.open = !door.open
 			update_door(door_id, door.open)
 
 			return true
-
 		end.call
 
 		false
-
 	end
-	
 
 	def get_item(x, y)
-
 		@mgr.render.nearby_entities.each do |entity|
 
 			pos = @mgr.comp(entity, Position)
 			dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 			
 			if dist_sqr < 1.4
-
 				if @items.include?(entity)
-					
 					rot    = @mgr.comp(entity, Rotation)
 					render = @mgr.comp(entity, Render)
 
@@ -386,20 +323,14 @@ class MapSystem < System
 					if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
 						return entity
 					end
-
 				end
-
 			end
-
 		end
 
 		nil
-
 	end
 
-
 	def remove_item(item_id)
-
 		pos    = @mgr.comp(item_id, Position)
 		render = @mgr.comp(item_id, Render)
 
@@ -408,16 +339,12 @@ class MapSystem < System
 
 		@items.delete(item_id)
 		@mgr.inventory.update_slots = true
-
 	end
-
 
 	def get_station(x, y)
-
 		@mgr.render.nearby_entities.each do |entity|
 
 			if @stations.include?(entity)
-
 				pos    = @mgr.comp(entity, Position)
 				render = @mgr.comp(entity, Render)
 				size   = @mgr.comp(entity, Size)
@@ -437,44 +364,30 @@ class MapSystem < System
 				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
 					return entity
 				end
-
 			end
-
 		end
 
 		nil
-
 	end
-
 
 	def get_near_station(x, y)
-
 		@mgr.render.nearby_entities.each do |entity|
-
 			if @stations.include?(entity)
-				
 				pos = @mgr.comp(entity, Position)
 				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 
 				if dist_sqr < 2.6
 					return entity
 				end
-
 			end
-
 		end
 
 		nil
-
 	end
 
-
 	def get_door(x, y)
-
 		@mgr.render.nearby_entities.each do |entity|
-
 			if @doors.include?(entity)
-
 				pos    = @mgr.comp(entity, Position)
 				render = @mgr.comp(entity, Render)
 				size   = @mgr.comp(entity, Size)
@@ -494,40 +407,28 @@ class MapSystem < System
 				if left <= rot_x && rot_x <= right && top <= rot_y && rot_y <= bottom
 					return entity
 				end
-
 			end
-
 		end
 
 		nil
-
 	end
 
-
 	def get_near_door(x, y)
-
 		@mgr.render.nearby_entities.each do |entity|
-
 			if @doors.include?(entity)
-				
 				pos = @mgr.comp(entity, Position)
 				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 
 				if dist_sqr < 2.6
 					return entity
 				end
-
 			end
-
 		end
 
 		nil
-
 	end
 
-
 	def update_door(door_id, open)
-
 		pos    = @mgr.comp(door_id, Position)
 		rot    = @mgr.comp(door_id, Rotation)
 		size   = @mgr.comp(door_id, Size)
@@ -535,13 +436,10 @@ class MapSystem < System
 		render = @mgr.comp(door_id, Render)
 
 		if open
-
 			render = @mgr.comp(door_id, Render)
 			@mgr.remove_component(door_id, render)
 			@mgr.physics.remove_body(col.body)
-
 		else
-
 			type = @mgr.comp(door_id, Type)
 
 			@mgr.physics.create_body(
@@ -552,36 +450,25 @@ class MapSystem < System
 			@mgr.add_comp(
 				door_id, 
 				Render.new(type, @atlas.find_region("environ/#{type.type}")))
-		
 		end
-
 	end
 
-
 	def get_near_item(x, y)
-
 		@mgr.render.nearby_entities.each do |entity|
-
 			if @items.include?(entity)
-				
 				pos = @mgr.comp(entity, Position)
 				dist_sqr = (pos.x - x)**2 + (pos.y - y)**2
 
 				if dist_sqr < 1.4
 					return entity
 				end
-
 			end
-
 		end
 
 		nil
-
 	end
 
-
 	def drop_item(entity)
-
 		pos = @mgr.comp(entity, Position)
 		rot = @mgr.comp(entity, Rotation)
 		inv = @mgr.comp(entity, Inventory)
@@ -591,7 +478,6 @@ class MapSystem < System
 		item_id = inv.items[index]														             and
 
 		Proc.new do
-
 			item_type = @mgr.comp(item_id, Type)
 
 			item_pos = Position.new(
@@ -622,16 +508,12 @@ class MapSystem < System
 			@mgr.ui.actions.update_crafting_info
 
 			return true
-
 		end.call
 
 		false
-
 	end
 
-
 	def use_station(entity)
-
 		pos = @mgr.comp(entity, Position)
 		inv = @mgr.comp(entity, Inventory)
 
@@ -639,7 +521,6 @@ class MapSystem < System
 		station = @mgr.comp(station_id, Station)    and
 
 		Proc.new do
-
 			vel = @mgr.comp(entity, Velocity)
 			vel.spd = 0
 			vel.ang_spd = 0
@@ -653,16 +534,12 @@ class MapSystem < System
       @mgr.ui.actions.activate
 
 			return true
-
 		end.call
 
 		false
-
 	end
 
-
 	def expand(test_room)
-
 		direction = Random.rand(4)
 
 		case direction
@@ -678,16 +555,12 @@ class MapSystem < System
 
 		check = false
 		@rooms.each do |room|
-
 			next if room == test_room
 
 			if intersects(room, test_room)
-
 				check = true
 				break
-
 			end
-
 		end
 
 		fix = check ? 2 : 1
@@ -702,17 +575,13 @@ class MapSystem < System
 			when 3
 				test_room.y2 -= fix
 		end
-
 	end
-
 
 	def intersects(r1, r2)
 		!(r1.x2 < r2.x1 || r2.x2 < r1.x1 || r1.y2 < r2.y1 || r2.y2 < r1.y1)
 	end
 
-
 	def update
-
 		@start_x = [@focus.x - 13, 0].max.to_i
 		@start_y = [@focus.y - 10, 0].max.to_i
 		@end_x   = [@focus.x + 13, C::MAP_WIDTH-1].min.to_i
@@ -720,15 +589,11 @@ class MapSystem < System
 
 		@cam.position.set(@focus.x * C::BTW, @focus.y * C::BTW, 0)
 		@cam.update
-		
 	end
 
-
 	def render(batch)
-
 		for x in @start_x..@end_x
 			for y in @start_y..@end_y
-
 				batch.draw(
 					@tiles[x][y],
 					x * C::BTW, y * C::BTW,
@@ -736,15 +601,11 @@ class MapSystem < System
 					C::BTW, C::BTW,
 					1, 1,
 					@rot[x][y])
-
 			end
 		end
-
 	end
 
-
 	def dispose
-
 
 	end
 

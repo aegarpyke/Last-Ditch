@@ -3,7 +3,6 @@ class TimeSystem < System
 	attr_accessor :active, :game_delta, :elapsed, :rate, :minute, :hour, :day, :month, :year
 
 	def initialize
-
 		super()
 		@game_delta = 0
 		@rate = 1.0
@@ -12,12 +11,9 @@ class TimeSystem < System
 
 		@hour, @minute = 0, 0
 		@day, @month, @year = 1, 1, 3127
-
 	end
-
 	
 	def time
-
 		if @hour < 10
 			if @minute < 10
 				return "0%d:0%d" % [@hour, @minute]
@@ -31,12 +27,9 @@ class TimeSystem < System
 				return "%d:%d" % [@hour, @minute]
 			end
 		end
-
 	end
 
-
 	def date
-
 		if @month < 10
 			if @day < 10
 				return "0%d.0%d.%d" % [@day, @month, @year]
@@ -50,14 +43,10 @@ class TimeSystem < System
 				return "%d.%d.%d" % [@day, @month, @year]
 			end
 		end
-
 	end
 
-
 	def update
-
 		if @active
-
 			@game_delta = @rate * C::BOX_STEP
 			@minute += @game_delta
 			@elapsed += @game_delta
@@ -77,15 +66,12 @@ class TimeSystem < System
 						if @month > 12
 							@month = 1
 							@year += 1
-						
 						end
 					end
 				end
 			end
 		end
-
 	end
-
 
 	def dispose
 

@@ -3,7 +3,6 @@ class Ingredients < Component
   attr_accessor :ingredients
 
   def initialize(ing_list)
-
     @ingredients = Hash.new
 
     for ingredient in ing_list
@@ -11,7 +10,6 @@ class Ingredients < Component
         @ingredients[type] = amt
       end
     end
-
   end
 
 end

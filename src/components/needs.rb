@@ -5,7 +5,6 @@ class Needs < Component
 	attr_accessor :energy, :energy_max, :energy_fatigue_rate, :energy_recovery_rate, :energy_usage_rate
 
 	def initialize
-	
 		super()
 
 		@hunger = 1.0
@@ -19,7 +18,6 @@ class Needs < Component
 		@energy_usage_rate = -0.005
 		@sanity = 1.0
 		@sanity_rate = -0.0000069
-
 	end
 
 end

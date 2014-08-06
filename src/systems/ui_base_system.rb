@@ -4,7 +4,6 @@ class UIBaseSystem < System
   attr_accessor :active, :toggle, :selection, :slots, :no_exit
 
   def initialize(mgr, stage)
-
     super()
 
     @mgr = mgr
@@ -21,18 +20,13 @@ class UIBaseSystem < System
     activate
     
     if 1 == 0
-      
       @table_info.debug
       @table_needs.debug
       @table_slots.debug
-
     end
-
   end
 
-
   def setup
-
     w, h = 62, 42
     @table_info = Table.new(@skin)
     @table_info.set_bounds(C::WIDTH - w, C::HEIGHT - h, w, h)
@@ -73,9 +67,7 @@ class UIBaseSystem < System
     @table_slots = Table.new(@skin)
     @table_slots.set_bounds(0, 0, C::WIDTH, 32)
     @table_slots.add_listener(
-
       Class.new(ClickListener) do
-
         def initialize(base)
           super()
           @base = base
@@ -85,17 +77,13 @@ class UIBaseSystem < System
           @base.exit_window
           true
         end
-
       end.new(self))
 
     for i in 1..C::BASE_SLOTS
-      
       @slots << ImageButton.new(@skin, "base_slot")
 
       @slots.last.add_listener(
-
         Class.new(ClickListener) do
-        
           def initialize(base, slot)
             super()
             @base = base
@@ -111,7 +99,6 @@ class UIBaseSystem < System
             @base.no_exit = true
             true
           end
-
         end.new(self, @slots.last))
 
       if i < 9
@@ -121,47 +108,32 @@ class UIBaseSystem < System
       else
         @table_slots.add(@slots.last).align(Align::right)
       end
-
     end
 
     @stage.add_actor(@table_info)
     @stage.add_actor(@table_needs)
     @stage.add_actor(@table_slots)
-
   end
 
-
   def exit_window
-
     if @no_exit
-          
       @no_exit = false
-
     else
-    
       if @selection
-          
         style = ImageButtonStyle.new(@selection.style)
         style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/base_slot'))
         @selection.style = style
 
         @selection = nil
-
       end 
-    
     end
-
   end
 
-
   def enter_slot(slot)
-
     if @selection
-
       style = ImageButtonStyle.new(@selection.style)
       style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/base_slot'))
       @selection.style = style
-
     end
 
     @selection = slot
@@ -169,14 +141,10 @@ class UIBaseSystem < System
     style = ImageButtonStyle.new(@selection.style)
     style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/base_selection'))
     @selection.style = style
-
   end
 
-
   def update
-
     if @active
-
       needs = @mgr.comp(@mgr.player, Needs)
       inv = @mgr.comp(@mgr.player, Inventory)
 
@@ -189,52 +157,37 @@ class UIBaseSystem < System
       @thirst.width = (needs.thirst * 100 + 4).to_i
       @energy.width = (needs.energy * 100 + 4).to_i
       @sanity.width = (needs.sanity * 100 + 4).to_i
-
     end
-
   end
 
-
   def activate
-
     @active = true
 
     @stage.add_actor(@table_info)
     @stage.add_actor(@table_needs)
     @stage.add_actor(@table_slots)
-
   end
 
-
   def deactivate
-
     @active = false
 
     @table_info.remove
     @table_needs.remove
     @table_slots.remove
-
   end
 
-
   def toggle_active
-    
     @active = !@active
 
     if @active
-      
       @stage.add_actor(@table_info)
       @stage.add_actor(@table_needs)
       @stage.add_actor(@table_slots)
-
     else
-
       @table_info.remove
       @table_needs.remove
       @table_slots.remove
-
     end
-    
   end
 
 end

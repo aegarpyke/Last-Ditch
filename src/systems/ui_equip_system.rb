@@ -3,7 +3,6 @@ class UIEquipSystem < System
   attr_accessor :active, :toggle, :window, :table
 
   def initialize(mgr, window)
-    
     super()
 
     @mgr = mgr
@@ -14,25 +13,18 @@ class UIEquipSystem < System
     setup
 
     if 1 == 0
-
       @table.debug
-
     end
-
   end
 
-
   def setup
-
     @table = Table.new
     @table.set_position(0, 44)
     @table.set_size(250, 290)
     
     @l_head_box = SelectBox.new(@skin, "equipment")
     @l_head_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -42,14 +34,11 @@ class UIEquipSystem < System
           @equip.set_equipment('l_head', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @r_head_box = SelectBox.new(@skin, "equipment")
     @r_head_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -59,14 +48,11 @@ class UIEquipSystem < System
           @equip.set_equipment('r_head', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @l_arm_box  = SelectBox.new(@skin, "equipment")
     @l_arm_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -76,14 +62,11 @@ class UIEquipSystem < System
           @equip.set_equipment('l_arm', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @torso_box  = SelectBox.new(@skin, "equipment")
     @torso_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -93,14 +76,11 @@ class UIEquipSystem < System
           @equip.set_equipment('torso', actor.get_selected_index)
           true
         end
-
       end.new(self))
  
     @r_arm_box  = SelectBox.new(@skin, "equipment")
     @r_arm_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -110,14 +90,11 @@ class UIEquipSystem < System
           @equip.set_equipment('r_arm', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @l_hand_box = SelectBox.new(@skin, "equipment")
     @l_hand_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -127,14 +104,11 @@ class UIEquipSystem < System
           @equip.set_equipment('l_hand', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @belt_box = SelectBox.new(@skin, "equipment")
     @belt_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -144,14 +118,11 @@ class UIEquipSystem < System
           @equip.set_equipment('belt', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @r_hand_box = SelectBox.new(@skin, "equipment")
     @r_hand_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -161,14 +132,11 @@ class UIEquipSystem < System
           @equip.set_equipment('r_hand', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @l_leg_box  = SelectBox.new(@skin, "equipment")
     @l_leg_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -178,14 +146,11 @@ class UIEquipSystem < System
           @equip.set_equipment('l_leg', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @r_leg_box  = SelectBox.new(@skin, "equipment")
     @r_leg_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -195,14 +160,11 @@ class UIEquipSystem < System
           @equip.set_equipment('r_leg', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @l_foot_box = SelectBox.new(@skin, "equipment")
     @l_foot_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -212,14 +174,11 @@ class UIEquipSystem < System
           @equip.set_equipment('l_foot', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @r_foot_box = SelectBox.new(@skin, "equipment")
     @r_foot_box.add_listener(
-
       Class.new(ChangeListener) do
-
         def initialize(equip)
           super()
           @equip = equip
@@ -229,7 +188,6 @@ class UIEquipSystem < System
           @equip.set_equipment('r_foot', actor.get_selected_index)
           true
         end
-
       end.new(self))
 
     @desc = Label.new(
@@ -256,12 +214,9 @@ class UIEquipSystem < System
     @table.add(@r_foot_box).width(equip_box_size).row
 
     @table.add(@desc).padTop(6).colspan(3).width(240)
-
   end
 
-
   def setup_slots
-    
     @head_items  = []
     @arm_items   = []
     @torso_items = []
@@ -289,51 +244,31 @@ class UIEquipSystem < System
     inv = @mgr.comp(@mgr.player, Inventory)
 
     for item_id in inv.items
-
       if equippable = @mgr.comp(item_id, Equippable)
-
+        types = equippable.types
         info = @mgr.comp(item_id, Info)
 
-        if equippable.types.include?('l_head') ||
-           equippable.types.include?('r_head')
-
+        if !(types & ['l_head', 'r_head']).empty?
           @head_items << item_id
           head_list.add(info.name)
-
-        elsif equippable.types.include?('l_arm') ||
-              equippable.types.include?('r_arm')
-
+        elsif !(types & ['l_arm', 'r_arm']).empty?
           @arm_items << item_id
           arm_list.add(info.name)
-
-        elsif equippable.types.include?('torso')
-
+        elsif !(types & ['torso']).empty?
           @torso_items << item_id
           torso_list.add(info.name)
-
-        elsif equippable.types.include?('l_hand') ||
-              equippable.types.include?('r_hand')
-
+        elsif !(types & ['l_hand', 'r_hand']).empty?
           @hand_items << item_id
           hand_list.add(info.name)
-
-        elsif equippable.types.include?('belt')
-
+        elsif !(types & ['belt']).empty?
           @belt_items << item_id
           belt_list.add(info.name)
-
-        elsif equippable.types.include?('l_leg') ||
-              equippable.types.include?('r_leg')
-
+        elsif !(types & ['l_leg', 'r_leg']).empty?
           @leg_items << item_id
           leg_list.add(info.name)
-
-        elsif equippable.types.include?('l_foot') ||
-              equippable.types.include?('r_foot')
-
+        elsif !(types & ['l_foot', 'r_foot']).empty?
           @foot_items << item_id
           foot_list.add(info.name)
-
         end
 
         @l_head_box.set_items(head_list)
@@ -348,83 +283,54 @@ class UIEquipSystem < System
         @r_leg_box.set_items(leg_list)
         @l_foot_box.set_items(foot_list)
         @r_foot_box.set_items(foot_list)
-
       end
-      
     end
-
   end
 
-
   def set_equipment(slot, index)
-
     equip = @mgr.comp(@mgr.player, Equipment)
 
     if index == 0
-
       equip.set_slot(slot, nil)
-
-    elsif slot == 'r_head' || slot == 'l_head'
-
-      equip.set_slot(slot, @head_items[index - 1])
-
-    elsif slot == 'r_hand' || slot == 'l_hand'
-
-      equip.set_slot(slot, @hand_items[index - 1])
-
-    elsif slot == 'r_arm' || slot == 'l_arm'
-
-      equip.set_slot(slot, @arm_items[index - 1])
-
-    elsif slot == 'torso'
-
-      equip.set_slot(slot, @torso[index - 1])
-
-    elsif slot == 'belt'
-
-      equip.set_slot(slot, @belt_items[index - 1])
-
-    elsif slot == 'r_leg' || slot == 'l_leg'
-
-      equip.set_slot(slot, @leg_items[index - 1])
-
-    elsif slot == 'r_foot' || slot == 'l_foot'
-
-      equip.set_slot(slot, @foot_items[index - 1])
-
+      return
     end
 
+    case slot
+      when 'r_head', 'l_head'
+        equip.set_slot(slot, @head_items[index - 1])
+      when 'r_hand', 'l_hand'
+        equip.set_slot(slot, @hand_items[index - 1])
+      when 'l_arm', 'r_arm'
+        equip.set_slot(slot, @arm_items[index - 1])
+      when 'torso'
+        equip.set_slot(slot, @torso[index - 1])
+      when 'belt'
+        equip.set_slot(slot, @belt_items[index - 1])
+      when 'r_leg', 'l_leg'
+        equip.set_slot(slot, @leg_items[index - 1])
+      when 'r_foot', 'l_foot'
+        equip.set_slot(slot, @foot_items[index - 1])
+    end
   end
-
 
   def update
 
-
   end
-
 
   def activate
-
     @active = true
-
   end
-
 
   def deactivate
-
     @active = false
-
   end
 
-
   def toggle_active
-  
     @active = !@active
 
     if @active
     else
     end
-    
   end
 
 end

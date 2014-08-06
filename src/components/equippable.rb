@@ -3,7 +3,6 @@ class Equippable < Component
   attr_accessor :slot, :types
 
   def initialize(types)
-    
     super()
 
     @types = []
@@ -13,7 +12,6 @@ class Equippable < Component
     end
 
     @slot = @types[0]
-
   end
 
 end

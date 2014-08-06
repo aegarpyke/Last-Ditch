@@ -4,7 +4,6 @@ class UIInventorySystem < System
   attr_accessor :selection, :prev_selection, :slots, :no_exit
 
   def initialize(mgr, window)
-    
     super()
 
     @mgr = mgr
@@ -19,12 +18,9 @@ class UIInventorySystem < System
     if 1 == 0
       @table.debug
     end
-
   end
 
-
   def setup
-
     @item_name        = Label.new("", @skin, "inventory")
     @item_desc        = Label.new("", @skin, "inventory")
     @item_value       = Label.new("", @skin, "inventory")
@@ -43,9 +39,7 @@ class UIInventorySystem < System
     @table.set_size(276, 236)
 
     @table.add_listener(
-      
       Class.new(ClickListener) do
-
         def initialize(inventory)
           super()
           @inventory = inventory
@@ -54,7 +48,6 @@ class UIInventorySystem < System
         def exit(event, x, y, pointer, to_actor)
           @inventory.exit_table
         end
-
       end.new(self))
 
     @table.add(@item_name).colspan(4).align(Align::left).padTop(4).height(12)
@@ -66,32 +59,26 @@ class UIInventorySystem < System
     @slots = []
 
     for i in 1..C::INVENTORY_SLOTS
-      
       @slots << ImageButton.new(@skin, "inv_slot")
       
       @slots.last.add_listener(
-
         Class.new(ClickListener) do
-        
           def initialize(inventory, slot)
             super()
             @inventory = inventory
             @slot = slot
           end
 
-
           def enter(event, x, y, pointer, from_actor)
             @inventory.enter_slot(@slot)
             true
           end
-
 
           def clicked(event, x, y)
             @inventory.no_exit = true
             @inventory.use_item
             true
           end
-
         end.new(self, @slots.last))
 
       if i % 8 == 0
@@ -99,20 +86,14 @@ class UIInventorySystem < System
       else
         @table.add(@slots.last).pad(0)
       end
-
     end
-
   end
 
-
   def enter_slot(slot)
-
     if @selection
-              
       style = ImageButtonStyle.new(@selection.style)
       style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/inv_slot'))
       @selection.style = style
-
     end
 
     @selection = slot
@@ -120,35 +101,23 @@ class UIInventorySystem < System
     style = ImageButtonStyle.new(@selection.style)
     style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/inv_selection'))
     @selection.style = style
-
   end
 
-
   def exit_table
-
     if @no_exit
-      
       @no_exit = false
-    
     else
-
       if @selection
-          
         style = ImageButtonStyle.new(@selection.style)
         style.up = TextureRegionDrawable.new(@mgr.atlas.find_region('ui/inv_slot'))
         @selection.style = style
 
         @selection = nil              
-
       end 
-
     end
-
   end
 
-
   def set_item_qual_cond(quality, condition)
-    
     unless quality == -1 && condition == -1
       @item_quality_dur.text = "Q-%d C-%d" % [(quality * 100).to_i, (condition * 100).to_i]
     else
@@ -156,52 +125,39 @@ class UIInventorySystem < System
     end
   end
 
-
   def set_item_value(value)
-
     unless value == -1
       @item_value.text = "$%.2f" % value
     else
       @item_value.text = ""
     end
-
   end
 
-
   def set_item_weight(weight)
-
     unless weight == -1
       @item_weight.text = " %.1fkg" % weight
     else
       @item_weight.text = ""
     end
-
   end
-
 
   def set_item_name(name)
     @item_name.text = name.capitalize
   end
 
-
   def set_item_desc(desc)
     @item_desc.text = desc
   end
 
-
   def reset_info
-
     set_item_name("")
     set_item_qual_cond(-1, -1)
     set_item_value(-1)
     set_item_weight(-1)
     set_item_desc("")
-
   end
 
-
   def use_item
-
     @selection                               and
     index = @slots.index(@selection)         and
     inv = @mgr.comp(@mgr.player, Inventory)  and
@@ -210,7 +166,6 @@ class UIInventorySystem < System
     item.usable                              and
 
     Proc.new do
-    
       type = @mgr.comp(item_id, Type)
       info = @mgr.comp(item_id, Info)
 
@@ -223,27 +178,19 @@ class UIInventorySystem < System
       set_item_weight(item.weight)
 
       true
-    
     end.call
 
     false
-
   end
 
-
   def update
-
     if @active
-
       if @selection != @prev_selection
-
         if @selection
-
           inv = @mgr.comp(@mgr.player, Inventory)
           index = @slots.index(@selection)
 
           if item_id = inv.items[index]
-
             item = @mgr.comp(item_id, Item)
             info = @mgr.comp(item_id, Info)
 
@@ -252,51 +199,32 @@ class UIInventorySystem < System
             set_item_value(item.value)
             set_item_weight(item.weight)
             set_item_desc(info.desc)
-
           else
-
             reset_info
-
           end
-
         else
-
           reset_info
-
         end
-
       end
 
       @prev_selection = @selection
-
     end
-
   end
-
 
   def activate
-
     @active = true
-
   end
-
 
   def deactivate
-
     @active = false
-    
   end
 
-
   def toggle_active
-  
     @active = !@active
 
     if @active
     else
     end
-    
   end
-
 
 end
