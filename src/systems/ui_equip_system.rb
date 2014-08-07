@@ -301,7 +301,7 @@ class UIEquipSystem < System
       when 'l_arm', 'r_arm'
         @mgr.equipment.equip(@mgr.player, slot, @arm_items[index - 1])
       when 'torso'
-        @mgr.equipment.equip(@mgr.player, slot, @torso[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @torso_items[index - 1])
       when 'belt'
         @mgr.equipment.equip(@mgr.player, slot, @belt_items[index - 1])
       when 'r_leg', 'l_leg'

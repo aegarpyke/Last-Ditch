@@ -13,15 +13,13 @@ class EquipmentSystem < System
 
     attributes = @mgr.comp(entity_id, Attributes)
 
-    if item_id
-      item_data = YAML.load_file('cfg/items.yml')
-      item_type = @mgr.comp(item_id, Type).type
+    item_data = YAML.load_file('cfg/items.yml')
+    item_type = @mgr.comp(item_id, Type).type
 
-      if stats = item_data[item_type]['stats']
-        for stat, value in stats
-          attributes.modifiers[stat] += value
-          @mgr.ui.status.update_attribute_list
-        end
+    if stats = item_data[item_type]['stats']
+      for stat, value in stats
+        attributes.modifiers[stat] += value
+        @mgr.ui.status.update_attribute_list
       end
     end
   end

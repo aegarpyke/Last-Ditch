@@ -11,6 +11,7 @@ item_list:
   - rations1_empty
   - handgun1
   - headset
+  - flak_light
   - scrap1
   - overgrowth1
   - ruffage1
@@ -110,8 +111,21 @@ handgun1:
     - l_hand
     - r_hand
   dmg: 1.0 
+  dmg_type: projectile
   weight: 0.36
   base_value: 0.54
+
+flak_light:
+  name: flak, light
+  desc: >
+    A very light flak jacket offering minimal protection.
+  usable: false
+  stats:
+    constitution: 0.4
+  equippable:
+    - torso
+  weight: 4.3
+  base_value: 0.94
 
 headset:
   name: headset
