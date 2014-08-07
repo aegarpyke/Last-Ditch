@@ -139,6 +139,32 @@ class UIStatusSystem < System
     @add_info.wrap = true
 
     @table.add(@add_info).width(246).padTop(4).padLeft(4)
+
+    @stats_table = Table.new
+    @attributes_table = Table.new
+    @skill_table = Table.new
+
+    update_attribute_list
+
+    @stats_table.add(@attributes_table)
+    @table.add(@stats_table).width(100).padTop(4).padLeft(4)
+  end
+
+  def update_attribute_list
+    @attributes_table.clear_children
+
+    attributes = @mgr.comp(@mgr.player, Attributes)
+
+    attribute_data = YAML.load_file('cfg/attributes.yml')
+    attribute_list = attribute_data['attribute_list']
+
+    for attribute in attribute_list
+      lvl = attributes.attributes[attribute] + attributes.modifiers[attribute]
+
+      label = Label.new(
+        "%s - %.2f" % [attribute.capitalize, lvl], @skin, "status")
+      @attributes_table.add(label).width(120).height(20).row
+    end
   end
 
   def update

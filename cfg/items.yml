@@ -109,6 +109,7 @@ handgun1:
   equippable: 
     - l_hand
     - r_hand
+  dmg: 1.0 
   weight: 0.36
   base_value: 0.54
 
@@ -117,6 +118,9 @@ headset:
   desc: >
     A simple, non-invasive temperment controller.
   usable: false
+  stats:
+    intelligence: 0.2
+    dexterity: 0.3
   equippable:
     - l_head
     - r_head

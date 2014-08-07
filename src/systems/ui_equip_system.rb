@@ -251,7 +251,6 @@ class UIEquipSystem < System
         if !(types & ['l_head', 'r_head']).empty?
           @head_items << item_id
           head_list.add(info.name)
-          puts "Puttin on the head!"
         elsif !(types & ['l_arm', 'r_arm']).empty?
           @arm_items << item_id
           arm_list.add(info.name)
@@ -289,28 +288,26 @@ class UIEquipSystem < System
   end
 
   def set_equipment(slot, index)
-    equip = @mgr.comp(@mgr.player, Equipment)
-
     if index == 0
-      equip.set_slot(slot, nil)
+      @mgr.equipment.dequip(@mgr.player, slot)
       return
     end
 
     case slot
       when 'r_head', 'l_head'
-        equip.set_slot(slot, @head_items[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @head_items[index - 1])
       when 'r_hand', 'l_hand'
-        equip.set_slot(slot, @hand_items[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @hand_items[index - 1])
       when 'l_arm', 'r_arm'
-        equip.set_slot(slot, @arm_items[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @arm_items[index - 1])
       when 'torso'
-        equip.set_slot(slot, @torso[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @torso[index - 1])
       when 'belt'
-        equip.set_slot(slot, @belt_items[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @belt_items[index - 1])
       when 'r_leg', 'l_leg'
-        equip.set_slot(slot, @leg_items[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @leg_items[index - 1])
       when 'r_foot', 'l_foot'
-        equip.set_slot(slot, @foot_items[index - 1])
+        @mgr.equipment.equip(@mgr.player, slot, @foot_items[index - 1])
     end
   end
 
