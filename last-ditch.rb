@@ -120,6 +120,7 @@ class LastDitch < ApplicationAdapter
     @mgr.add_comp(@player, Type.new('player'))
     inv = @mgr.add_comp(@player, Inventory.new(C::INVENTORY_SLOTS))
     @mgr.add_comp(@player, Attributes.new)
+    @mgr.add_comp(@player, Stats.new)
     @mgr.add_comp(@player, Needs.new)
     @mgr.add_comp(@player, Skills.new)
     @mgr.add_comp(@player, UserInput.new)
@@ -145,14 +146,14 @@ class LastDitch < ApplicationAdapter
   def give_player_basics
     inv = @mgr.comp(@player, Inventory)
 
-    @inventory.add_item(inv, 'canister1_waste')
-    @inventory.add_item(inv, 'battery_empty')
-    @inventory.add_item(inv, 'canteen1_empty')
-    @inventory.add_item(inv, 'canister1_empty')
-    @inventory.add_item(inv, 'overgrowth1')
-    @inventory.add_item(inv, 'overgrowth1')
-    @inventory.add_item(inv, 'handgun1')
-    @inventory.add_item(inv, 'headset')
+    @inventory.add_item_by_type(inv, 'canister1_waste')
+    @inventory.add_item_by_type(inv, 'battery_empty')
+    @inventory.add_item_by_type(inv, 'canteen1_empty')
+    @inventory.add_item_by_type(inv, 'canister1_empty')
+    @inventory.add_item_by_type(inv, 'overgrowth1')
+    @inventory.add_item_by_type(inv, 'overgrowth1')
+    @inventory.add_item_by_type(inv, 'handgun1')
+    @inventory.add_item_by_type(inv, 'headset')
 
     @ui.equipment.setup_equipment_lists
   end

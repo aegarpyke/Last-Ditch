@@ -90,7 +90,21 @@ class InventorySystem < System
     @mgr.ui.actions.update_crafting_info
   end
 
-  def add_item(inv, item_type)
+  def add_item(inv, item_id)
+    for i in 0...inv.items.size
+      if inv.items[i].nil?
+        @update_slots = true
+        inv.items[i] = item_id
+        @mgr.ui.equipment.setup_equipment_lists
+
+        return item_id
+      end
+    end
+
+    nil
+  end
+
+  def add_item_by_type(inv, item_type)
     item_id = create_inv_item(item_type)
 
     for i in 0...inv.items.size
@@ -230,7 +244,7 @@ class InventorySystem < System
 
     item_id = @mgr.map.get_near_item(pos.x, pos.y) and
     type = @mgr.comp(item_id, Type)                and
-    add_item(inv, type.type)                       and
+    add_item_by_type(inv, type.type)                       and
 
     Proc.new do
       item = @mgr.comp(item_id, Item)
@@ -254,7 +268,7 @@ class InventorySystem < System
 
     item_id = @mgr.map.get_item(x, y)     and   
     type = @mgr.comp(item_id, Type)       and
-    add_item(inv, type.type)              and
+    add_item_by_type(inv, type.type)              and
 
     Proc.new do
       item = @mgr.comp(item_id, Item)

@@ -11,6 +11,10 @@ TODO
       will take a certain amount of actual gametime to complete.
     +
 
+  Combat:
+    + Use loops of the skill test animations to create attack tests
+    +
+
   Crafting:
     + Genetically engineer weeds into plants with useful properties
     + Add wires to allow player to transfer energy

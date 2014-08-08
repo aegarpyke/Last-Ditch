@@ -139,7 +139,8 @@ class UIActionsSystem < System
       end.new(self))
 
     object_items = GdxArray.new
-    object_items.add("Fire")
+    object_items.add('fire')
+    object_items.add('pick lock')
 
     @object_list.set_items(object_items)
   end

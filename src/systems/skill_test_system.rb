@@ -163,7 +163,7 @@ class SkillTestSystem < System
       item.quality = averaged_quality * 1.3 * @final_score
       item.condition = averaged_condition
 
-      @mgr.inventory.add_item(inv, recipe_type.type)
+      @mgr.inventory.add_item_by_type(inv, recipe_type.type)
     end
   end
 

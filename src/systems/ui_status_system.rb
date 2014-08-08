@@ -10,7 +10,10 @@ class UIStatusSystem < System
     @active = false
     @window = window
 
-    setup
+    setup_main
+    setup_model
+    setup_stats
+    setup_attributes
 
     if 1 == 0
       @table.debug
@@ -19,7 +22,7 @@ class UIStatusSystem < System
     end
   end
 
-  def setup
+  def setup_main
     @table = Table.new
     @table.set_position(560, 44)
     @table.set_size(250, 290)
@@ -37,7 +40,9 @@ class UIStatusSystem < System
       width(246).height(14).padTop(4).padLeft(4).colspan(4).align(Align::left).row
     @table.add(@occupation).
       height(11).colspan(4).padLeft(4).padBottom(18).align(Align::left).row
+  end
 
+  def setup_model
     @table_male_model = Table.new(@skin)
 
     @male_l_head = Image.new(@mgr.atlas.find_region('model/male/l_head'))
@@ -129,25 +134,37 @@ class UIStatusSystem < System
     # @table.add(@table_male_model).width(180).height(150).align(Align::left).row
     @table.add(@table_female_model).width(180).height(150).align(Align::left).row
     
-    @add_info = Label.new(
-      "Additional Info\n"\
-      "Additional Info\n"\
-      "Additional Info\n"\
-      "Additional Info\n"\
-      "Additional Info",
-      @skin, "status")
-    @add_info.wrap = true
+  end
 
-    @table.add(@add_info).width(246).padTop(4).padLeft(4)
-
+  def setup_stats
     @stats_table = Table.new
+
+    @dmg_label = Label.new('Dmg:', @skin, 'status')
+    @armor_label = Label.new('Armor:', @skin, 'status')
+    @stats_table.add(@dmg_label).row
+    @stats_table.add(@armor_label)
+
+    update_stats_list
+
+    @table.add(@stats_table).width(246).padTop(4).padLeft(4)
+  end
+
+  def setup_attributes
+    @more_info_table = Table.new
     @attributes_table = Table.new
     @skill_table = Table.new
 
     update_attribute_list
 
-    @stats_table.add(@attributes_table)
-    @table.add(@stats_table).width(100).padTop(4).padLeft(4)
+    @more_info_table.add(@attributes_table)
+    @table.add(@more_info_table).width(100).padTop(4).padLeft(4)
+  end
+
+  def update_stats_list
+    stats_c = @mgr.comp(@mgr.player, Stats)
+
+    @dmg_label.text = "Dmg: %s" % stats_c.dmg
+    @armor_label.text = "Armor: %s" % stats_c.armor
   end
 
   def update_attribute_list

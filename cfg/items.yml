@@ -107,6 +107,8 @@ handgun1:
   desc: >
     This is a handgun that fires bursts of energy.
   usable: false
+  stats:
+    dmg: 1.0
   equippable: 
     - l_hand
     - r_hand
@@ -121,6 +123,8 @@ flak_light:
     A very light flak jacket offering minimal protection.
   usable: false
   stats:
+    armor: 0.25
+  attributes:
     constitution: 0.4
   equippable:
     - torso
@@ -132,7 +136,7 @@ headset:
   desc: >
     A simple, non-invasive temperment controller.
   usable: false
-  stats:
+  attributes:
     intelligence: 0.2
     dexterity: 0.3
   equippable:

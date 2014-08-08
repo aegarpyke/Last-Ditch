@@ -272,7 +272,81 @@ class UIEquipSystem < System
         end
       end
     end
+
+    equip_C = @mgr.comp(@mgr.player, Equipment)
+
+    if equip_C.r_head
+      info_C = @mgr.comp(equip_C.r_head, Info)
+      head_list.add(info_C.name)
+      @head_items << equip_C.r_head
+    end
+
+    if equip_C.l_head
+      info_C = @mgr.comp(equip_C.l_head, Info)
+      head_list.add(info_C.name)
+      @head_items << equip_C.l_head
+    end
+
+    if equip_C.l_hand
+      info_C = @mgr.comp(equip_C.l_hand, Info)
+      hand_list.add(info_C.name)
+      @hand_items << equip_C.l_hand
+    end
     
+    if equip_C.r_hand
+      info_C = @mgr.comp(equip_C.r_hand, Info)
+      hand_list.add(info_C.name)
+      @hand_items << equip_C.r_hand
+    end
+
+    if equip_C.torso
+      info_C = @mgr.comp(equip_C.torso, Info)
+      torso_list.add(info_C.name)
+      @torso_items << equip_C.torso
+    end
+    
+    if equip_C.belt
+      info_C = @mgr.comp(equip_C.belt, Info)
+      belt_list.add(info_C.name)
+      @belt_items << equip_C.belt
+    end
+
+    if equip_C.r_arm
+      info_C = @mgr.comp(equip_C.r_arm, Info)
+      arm_list.add(info_C.name)
+      @arm_items << equip_C.r_arm
+    end
+
+    if equip_C.l_arm
+      info_C = @mgr.comp(equip_C.l_arm, Info)
+      arm_list.add(info_C.name)
+      @arm_items << equip_C.l_arm
+    end
+
+    if equip_C.r_leg
+      info_C = @mgr.comp(equip_C.r_leg, Info)
+      leg_list.add(info_C.name)
+      @leg_items << equip_C.r_leg
+    end
+
+    if equip_C.l_leg
+      info_C = @mgr.comp(equip_C.l_leg, Info)
+      leg_list.add(info_C.name)
+      @leg_items << equip_C.l_leg
+    end
+
+    if equip_C.r_foot
+      info_C = @mgr.comp(equip_C.r_foot, Info)
+      foot_list.add(info_C.name)
+      @foot_items << equip_C.r_foot
+    end
+
+    if equip_C.l_foot
+      info_C = @mgr.comp(equip_C.l_foot, Info)
+      foot_list.add(info_C.name)
+      @foot_items << equip_C.l_foot
+    end
+   
     @l_head_box.set_items(head_list)
     @r_head_box.set_items(head_list)
     @l_arm_box.set_items(arm_list)
@@ -288,26 +362,37 @@ class UIEquipSystem < System
   end
 
   def set_equipment(slot, index)
+    inv = @mgr.comp(@mgr.player, Inventory)
+
     if index == 0
-      @mgr.equipment.dequip(@mgr.player, slot)
-      return
+      if item_id = @mgr.equipment.dequip(@mgr.player, slot)
+        @mgr.inventory.add_item(inv, item_id)
+        return
+      end
     end
 
     case slot
       when 'r_head', 'l_head'
         @mgr.equipment.equip(@mgr.player, slot, @head_items[index - 1])
+        @mgr.inventory.remove_item(inv, @head_items[index - 1])
       when 'r_hand', 'l_hand'
         @mgr.equipment.equip(@mgr.player, slot, @hand_items[index - 1])
+        @mgr.inventory.remove_item(inv, @hand_items[index - 1])
       when 'l_arm', 'r_arm'
         @mgr.equipment.equip(@mgr.player, slot, @arm_items[index - 1])
+        @mgr.inventory.remove_item(inv, @arm_items[index - 1])
       when 'torso'
         @mgr.equipment.equip(@mgr.player, slot, @torso_items[index - 1])
+        @mgr.inventory.remove_item(inv, @torso_items[index - 1])
       when 'belt'
         @mgr.equipment.equip(@mgr.player, slot, @belt_items[index - 1])
+        @mgr.inventory.remove_item(inv, @belt_items[index - 1])
       when 'r_leg', 'l_leg'
         @mgr.equipment.equip(@mgr.player, slot, @leg_items[index - 1])
+        @mgr.inventory.remove_item(inv, @leg_items[index - 1])
       when 'r_foot', 'l_foot'
         @mgr.equipment.equip(@mgr.player, slot, @foot_items[index - 1])
+        @mgr.inventory.remove_item(inv, @foot_items[index - 1])
     end
   end
 
